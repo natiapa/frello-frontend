@@ -32,7 +32,7 @@ export function AppHeader() {
           )}
         </section>
 
-        {!user && (
+        {/* {!user && (
           <section>
             <button className="login-btn" onClick={handleOpenAuth}>
               <Link to={"/auth/login"}>
@@ -46,21 +46,22 @@ export function AppHeader() {
               </Link>
             </button>
           </section>
-        )}
+        )} */}
 
-        {user && (
-          <section>
-            {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+        {/* {user && ( */}
+        <section>
+          {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 
-            <div
-              style={{ backgroundColor: "orange" }}
-              className="profile"
-              onClick={() => setShowUserModal(!showUserModal)}
-            >
-              <span>{user.fullname.charAt(0).toUpperCase()}</span>
-            </div>
-          </section>
-        )}
+          <div
+            style={{ backgroundColor: "orange" }}
+            className="profile"
+            onClick={() => setShowUserModal(!showUserModal)}
+          >
+            <span>U</span>
+            {/* <span>{user.fullname.charAt(0).toUpperCase()}</span> */}
+          </div>
+        </section>
+        {/* )} */}
         {showUserModal && (
           <UserModal
             showUserModal={showUserModal}
