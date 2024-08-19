@@ -15,6 +15,7 @@ import { userService } from "../services/user";
 
 import { BoardList } from "../cmps/BoardList";
 import { BoardFilter } from "../cmps/BoardFilter";
+import { SideBar } from "../cmps/Sidebar";
 
 export function BoardIndex() {
   const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter());
@@ -55,6 +56,8 @@ export function BoardIndex() {
 
   return (
     <main className="board-index">
+      <SideBar />
+
       <header>
         <h2>Boards</h2>
         <button onClick={onAddBoard}>Add a Board</button>
