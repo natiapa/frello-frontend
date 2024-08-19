@@ -51,7 +51,7 @@
       }
     }
 
-    & .signup-btn-container {
+    & .demo-btn-container {
       & button {
         font-family: inherit;
         text-decoration: none;
@@ -69,6 +69,18 @@
         @include for-wide-layout {
           font-size: 16px;
           width: fit-content;
+        }
+
+        &:hover {
+          background-color: $blue1;
+        }
+
+        & a {
+          text-decoration: none;
+
+          & span {
+            color: $white;
+          }
         }
       }
     }

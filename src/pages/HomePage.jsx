@@ -3,17 +3,18 @@ import { Link } from "react-router-dom";
 
 export function HomePage() {
   return (
-    // <section>
     <section className="home-page ">
       <section className="guest-home-page">
         <div className="text-container">
           <h1>Trello brings all your tasks, teammates, and tools together</h1>
           <p>Keep everything in the same place-even if your team isn’t.</p>
 
-          <div className="signup-btn-container">
-            <Link to="/workspace">
-              <button>Try demo - it's free!</button>
-            </Link>
+          <div className="demo-btn-container">
+            <button>
+              <Link to="/workspace">
+                <span>Try demo - it's free!</span>
+              </Link>
+            </button>
           </div>
         </div>
         <div className="homepage-img-container">
@@ -21,6 +22,5 @@ export function HomePage() {
         </div>
       </section>
     </section>
-    // </section>
   );
 }
