@@ -11,9 +11,7 @@ export function HomePage() {
           <p>Keep everything in the same place-even if your team isn’t.</p>
 
           <div className="signup-btn-container">
-            <Link to={"/auth/signup"}>
-              <button>Sign up - it's free!</button>
-            </Link>
+            <button>Try demo - it's free!</button>
           </div>
         </div>
         <div className="homepage-img-container">
