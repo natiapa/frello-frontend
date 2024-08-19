@@ -52,6 +52,13 @@
     }
 
     & .demo-btn-container {
+      & a {
+        text-decoration: none;
+
+        & span {
+          color: $white;
+        }
+      }
       & button {
         font-family: inherit;
         text-decoration: none;
@@ -73,14 +80,6 @@
 
         &:hover {
           background-color: $blue1;
-        }
-
-        & a {
-          text-decoration: none;
-
-          & span {
-            color: $white;
-          }
         }
       }
     }
