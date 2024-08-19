@@ -5,7 +5,7 @@ import { loadReviews, removeReview, getActionAddReview, getActionRemoveReview } 
 import { loadUsers } from '../store/actions/user.actions'
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_REMOVED } from '../services/socket.service'
+// import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_REMOVED } from '../services/socket.service'
 import { ReviewList } from '../cmps/ReviewList'
 import { ReviewEdit } from '../cmps/ReviewEdit'
 
@@ -19,20 +19,20 @@ export function ReviewIndex() {
 		loadReviews()
 		loadUsers()
 
-		socketService.on(SOCKET_EVENT_REVIEW_ADDED, review => {
-			console.log('GOT from socket', review)
-			dispatch(getActionAddReview(review))
-		})
+		// socketService.on(SOCKET_EVENT_REVIEW_ADDED, review => {
+		// 	console.log('GOT from socket', review)
+		// 	dispatch(getActionAddReview(review))
+		// })
 
-		socketService.on(SOCKET_EVENT_REVIEW_REMOVED, reviewId => {
-			console.log('GOT from socket', reviewId)
-			dispatch(getActionRemoveReview(reviewId))
-		})
+		// socketService.on(SOCKET_EVENT_REVIEW_REMOVED, reviewId => {
+		// 	console.log('GOT from socket', reviewId)
+		// 	dispatch(getActionRemoveReview(reviewId))
+		// })
 
-		return () => {
-            socketService.off(SOCKET_EVENT_REVIEW_ADDED)
-            socketService.off(SOCKET_EVENT_REVIEW_REMOVED)
-        }
+		// return () => {
+        //     socketService.off(SOCKET_EVENT_REVIEW_ADDED)
+        //     socketService.off(SOCKET_EVENT_REVIEW_REMOVED)
+        // }
 	}, [])
 
 	async function onRemoveReview(reviewId) {

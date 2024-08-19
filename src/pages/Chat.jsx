@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 
-import { socketService, SOCKET_EMIT_SEND_MSG, SOCKET_EVENT_ADD_MSG, SOCKET_EMIT_SET_TOPIC } from '../services/socket.service'
+// import { socketService, SOCKET_EMIT_SEND_MSG, SOCKET_EVENT_ADD_MSG, SOCKET_EMIT_SET_TOPIC } from '../services/socket.service'
 
 export function ChatApp() {
     const [msg, setMsg] = useState({ txt: '' })
@@ -14,15 +14,15 @@ export function ChatApp() {
     const botTimeoutRef = useRef()
 
     useEffect(() => {
-        socketService.on(SOCKET_EVENT_ADD_MSG, addMsg)
+        // socketService.on(SOCKET_EVENT_ADD_MSG, addMsg)
         return () => {
-            socketService.off(SOCKET_EVENT_ADD_MSG, addMsg)
+            // socketService.off(SOCKET_EVENT_ADD_MSG, addMsg)
             botTimeoutRef.current && clearTimeout(botTimeoutRef.current)
         }
     }, [])
 
     useEffect(() => {
-        socketService.emit(SOCKET_EMIT_SET_TOPIC, topic)
+        // socketService.emit(SOCKET_EMIT_SET_TOPIC, topic)
     }, [topic])
 
     function addMsg(newMsg) {
@@ -41,7 +41,7 @@ export function ChatApp() {
         ev.preventDefault()
         const from = loggedInUser?.fullname || 'Me'
         const newMsg = { from, txt: msg.txt }
-        socketService.emit(SOCKET_EMIT_SEND_MSG, newMsg)
+        // socketService.emit(SOCKET_EMIT_SEND_MSG, newMsg)
         if (isBotMode) sendBotResponse()
         // for now - we add the msg ourself
         // addMsg(newMsg)

@@ -22,7 +22,8 @@ function getDefaultFilter() {
     }
 }
 
-const service = VITE_LOCAL === 'true' ? local : remote
+// const service = VITE_LOCAL === 'true' ? local : remote
+const service = local 
 export const boardService = { getEmptyBoard, getDefaultFilter, ...service }
 
 // Easy access to this service from the dev tools console
