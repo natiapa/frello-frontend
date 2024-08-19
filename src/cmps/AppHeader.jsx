@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { UserModal } from "./UserModal.jsx";
+import { SearchBar } from "./SearchBar.jsx";
 
 export function AppHeader() {
   const [openForm, setOpenForm] = useState(false);
@@ -51,6 +52,12 @@ export function AppHeader() {
         {/* {user && ( */}
         <section>
           {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+          {/* <div>
+            <input />
+            <span class="material-symbols-outlined">search</span>
+          </div> */}
+
+          <SearchBar />
 
           <div
             style={{ backgroundColor: "orange" }}
