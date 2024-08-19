@@ -1,0 +1,38 @@
+.pop-up-modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 4em;
+  right: 5em;
+
+  width: fit-content;
+  padding: 1em 1em 1em 0.5em;
+  border-radius: 5px;
+
+  border: 1px solid $gray1;
+
+  background-color: $white;
+
+  & img {
+    width: 4em;
+  }
+
+  & section {
+    &.user-details {
+      display: flex;
+    }
+
+    & section {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  & section {
+    &.links {
+      & ul {
+        padding: 0;
+      }
+    }
+  }
+}
