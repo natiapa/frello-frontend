@@ -1,10 +1,6 @@
 .board-preview {
-    a {
-        color: $clr4;
-        padding: 0;
-    }    
-	p {
-		margin-block: 0 0.2rem;
-        font-size: .85em;
-	}
+  background-image: url("https://cdn.pixabay.com/photo/2017/11/29/18/54/leaf-2986837_1280.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
 }
