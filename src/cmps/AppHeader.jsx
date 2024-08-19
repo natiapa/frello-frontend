@@ -1,48 +1,71 @@
-import { Link, NavLink } from 'react-router-dom'
-import { useNavigate } from 'react-router'
-import { useSelector } from 'react-redux'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { logout } from '../store/actions/user.actions'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { UserModal } from "./UserModal.jsx";
 
 export function AppHeader() {
-	const user = useSelector(storeState => storeState.userModule.user)
-	const navigate = useNavigate()
+  const [openForm, setOpenForm] = useState(false);
+  const [showUserModal, setShowUserModal] = useState(false);
 
-	async function onLogout() {
-		try {
-			await logout()
-			navigate('/')
-			showSuccessMsg(`Bye now`)
-		} catch (err) {
-			showErrorMsg('Cannot logout')
-		}
-	}
+  const user = useSelector((state) => state.userModule.loggedInUser);
 
-	return (
-		<header className="app-header full">
-			<nav>
-				<NavLink to="/" className="logo">
-					E2E Demo
-				</NavLink>
-				<NavLink to="about">About</NavLink>
-				<NavLink to="board">Boards</NavLink>
-				<NavLink to="chat">Chat</NavLink>
-				<NavLink to="review">Review</NavLink>
+  function handleOpenAuth() {
+    setOpenForm(!openForm);
+  }
 
-                {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+  return (
+    <>
+      <header className="app-header">
+        <section>
+          <span className="material-symbols-outlined menu">apps</span>
+          <Link to={user ? "/workspace" : "/"}>
+            <img
+              style={{ width: "5em" }}
+              src="https://1000logos.net/wp-content/uploads/2021/05/Trello-logo.png"
+            />
+          </Link>
 
-				{!user && <NavLink to="login" className="login-link">Login</NavLink>}
-				{user && (
-					<div className="user-info">
-						<Link to={`user/${user._id}`}>
-							{/* {user.imgUrl && <img src={user.imgUrl} />} */}
-							{user.fullname}
-						</Link>
-						{/* <span className="score">{user.score?.toLocaleString()}</span> */}
-						<button onClick={onLogout}>logout</button>
-					</div>
-				)}
-			</nav>
-		</header>
-	)
+          {user && (
+            <button className="create-btn">
+              <span>Create</span>
+            </button>
+          )}
+        </section>
+
+        {!user && (
+          <section>
+            <button className="login-btn" onClick={handleOpenAuth}>
+              <Link to={"/auth/login"}>
+                <span>Login</span>
+              </Link>
+            </button>
+
+            <button className="signup-btn" onClick={handleOpenAuth}>
+              <Link to={"/auth/signup"}>
+                <span>Get Trello for free</span>
+              </Link>
+            </button>
+          </section>
+        )}
+
+        {user && (
+          <section>
+            <div
+              style={{ backgroundColor: "orange" }}
+              className="profile"
+              onClick={() => setShowUserModal(!showUserModal)}
+            >
+              <span>{user.fullname.charAt(0).toUpperCase()}</span>
+            </div>
+          </section>
+        )}
+        {showUserModal && (
+          <UserModal
+            showUserModal={showUserModal}
+            setShowUserModal={setShowUserModal}
+          />
+        )}
+      </header>
+    </>
+  );
 }
