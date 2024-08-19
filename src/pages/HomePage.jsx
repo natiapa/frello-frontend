@@ -9,11 +9,9 @@ export function HomePage() {
           <h1>Trello brings all your tasks, teammates, and tools together</h1>
           <p>Keep everything in the same place-even if your team isn’t.</p>
 
-          <div className="demo-btn-container">
-            <Link to="/workspace">
-              <button>
-                <span>Try demo - it's free!</span>
-              </button>
+          <div className="signup-btn-container">
+            <Link to="board">
+              <button>Try demo - it's free!</button>
             </Link>
           </div>
         </div>

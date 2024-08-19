@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { userService } from '../services/user'
 import { BoardPreview } from './BoardPreview'
 
@@ -16,10 +17,11 @@ export function BoardList({ boards, onRemoveBoard, onUpdateBoard }) {
             {boards.map(board =>
                 <li key={board._id}>
                     <BoardPreview board={board}/>
-                    {shouldShowActionBtns(board) && <div className="actions">
+                    <Link to={`/board/${board._id}`}>Board</Link>
+                    {/* {shouldShowActionBtns(board) && <div className="actions">
                         <button onClick={() => onUpdateBoard(board)}>Edit</button>
                         <button onClick={() => onRemoveBoard(board._id)}>x</button>
-                    </div>}
+                    </div>} */}
                 </li>)
             }
         </ul>

@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { UserModal } from "./UserModal.jsx";
 import { SearchBar } from "./SearchBar.jsx";
 
+import { useParams } from "react-router-dom";
+
 export function AppHeader() {
   const [openForm, setOpenForm] = useState(false);
   const [showUserModal, setShowUserModal] = useState(false);
@@ -16,7 +18,7 @@ export function AppHeader() {
 
   return (
     <>
-      <header className="app-header">
+      <header className="app-header full">
         <section>
           <span className="material-symbols-outlined menu">apps</span>
           <Link to={user ? "/workspace" : "/"}>
