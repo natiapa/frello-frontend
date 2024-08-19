@@ -10,10 +10,8 @@ export function HomePage() {
           <p>Keep everything in the same place-even if your team isn’t.</p>
 
           <div className="demo-btn-container">
-            <Link to="/workspace">
-              <button>
-                <span>Try demo - it's free!</span>
-              </button>
+            <Link to="board">
+              <button>Try demo - it's free!</button>
             </Link>
           </div>
         </div>

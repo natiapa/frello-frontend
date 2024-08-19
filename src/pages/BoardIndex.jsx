@@ -35,7 +35,7 @@ export function BoardIndex() {
 
   async function onAddBoard() {
     const board = boardService.getEmptyBoard();
-    board.vendor = prompt("Vendor?");
+    board.title = prompt("Title?");
     try {
       const savedBoard = await addBoard(board);
       showSuccessMsg(`Board added (id: ${savedBoard._id})`);
@@ -45,13 +45,9 @@ export function BoardIndex() {
   }
 
   async function onUpdateBoard(board) {
-    const speed = +prompt("New speed?", board.speed);
-    if (speed === 0 || speed === board.speed) return;
-
-    const boardToSave = { ...board, speed };
     try {
       const savedBoard = await updateBoard(boardToSave);
-      showSuccessMsg(`Board updated, new speed: ${savedBoard.speed}`);
+      showSuccessMsg("Board updated");
     } catch (err) {
       showErrorMsg("Cannot update board");
     }
@@ -61,11 +57,9 @@ export function BoardIndex() {
     <main className="board-index">
       <header>
         <h2>Boards</h2>
-        {userService.getLoggedinUser() && (
-          <button onClick={onAddBoard}>Add a Board</button>
-        )}
+        <button onClick={onAddBoard}>Add a Board</button>
       </header>
-      <BoardFilter filterBy={filterBy} setFilterBy={setFilterBy} />
+      {/* <BoardFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
       <BoardList
         boards={boards}
         onRemoveBoard={onRemoveBoard}
