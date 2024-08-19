@@ -27,7 +27,12 @@ export function BoardDetails() {
   }
 
   return (
-    <section className="board-details">
+    <section
+      className="board-details"
+      style={{
+        backgroundImage: `url(${board?.style?.backgroundImage})`,
+      }}
+    >
       <Link to="/board">Back to list</Link>
       <h1>Board Details</h1>
 

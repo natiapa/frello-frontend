@@ -4,7 +4,7 @@ export function GroupList({ groups }) {
   return (
     <div className="group-list">
       {groups.map((group) => (
-        <GroupPreview tasks={group.tasks} />
+        <GroupPreview group={group} key={group.id} />
       ))}
     </div>
   );
