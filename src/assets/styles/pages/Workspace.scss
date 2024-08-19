@@ -1,0 +1,16 @@
+@mixin flexCenter() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.workspace {
+  & .new-board {
+    @include flexCenter();
+    width: 10em;
+    height: 6em;
+    padding: 1em;
+    border: 1px solid black;
+    cursor: pointer;
+  }
+}
