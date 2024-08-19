@@ -1,0 +1,130 @@
+.guest-home-page {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+
+  background: url("//images.ctfassets.net/rz1oowkt5gyp/7lTGeXbBRNRLaVk2MdBjtJ/99c266ed4cb8cc63bd0c388071f01ff6/white-wave-bg.svg")
+      center bottom 50px / 100% 14.6% no-repeat scroll padding-box border-box,
+    linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto
+      repeat scroll padding-box border-box rgb(82, 67, 170);
+
+  & .text-container {
+    flex: 0 0 auto;
+    color: #fff;
+    margin-inline: auto;
+
+    @include for-mobile-layout {
+      text-align: center;
+    }
+
+    @include for-narrow-layout {
+      max-width: 1100px;
+    }
+
+    @include for-wide-layout {
+      text-align: start;
+    }
+
+    & h1 {
+      line-height: 1.25;
+      font-size: 38px;
+      margin-block-end: 8px;
+      font-family: charlie-semibold;
+      letter-spacing: -2.7px;
+
+      @include for-normal-layout {
+        font-size: 48px;
+      }
+    }
+
+    & p {
+      font-size: 18px;
+      line-height: normal;
+      letter-spacing: normal;
+      font-weight: 400;
+
+      @include for-normal-layout {
+        font-size: 20px;
+        line-height: 1.5;
+      }
+    }
+
+    & .signup-btn-container {
+      & button {
+        font-family: inherit;
+        text-decoration: none;
+        margin: 0;
+        height: 49.99px;
+        background-color: $blue4;
+        padding: 11.2px 16px 12.8px;
+        border: 1px solid $blue1;
+        border-radius: 4.8px;
+        font-size: 20px;
+        transition: 0.2s ease-in-out;
+        color: inherit;
+        cursor: pointer;
+
+        @include for-wide-layout {
+          font-size: 16px;
+          width: fit-content;
+        }
+      }
+    }
+
+    @include for-narrow-layout {
+      max-width: 720px;
+    }
+
+    @include for-wide-layout {
+      padding: 91px 7px;
+      max-width: 500px;
+    }
+  }
+
+  & .homepage-img-container {
+    display: flex;
+    margin-inline: auto;
+
+    & img {
+      max-width: 100%;
+      margin-inline: auto;
+
+      @include for-wide-layout {
+        height: auto;
+        scale: 1.5;
+        height: 60%;
+        max-width: 528px;
+        margin-block-start: 5em;
+      }
+    }
+
+    @include for-mobile-layout {
+      display: none;
+    }
+
+    @include for-narrow-layout {
+      max-width: 80%;
+      padding-block-start: 3em;
+    }
+
+    @include for-normal-layout {
+      max-width: 65%;
+      padding-block-start: 1em;
+    }
+
+    @include for-wide-layout {
+      padding-block-start: 12em;
+    }
+  }
+
+  @include for-mobile-layout {
+    padding-block-start: 15em;
+  }
+
+  @include for-wide-layout {
+    flex-direction: row;
+    padding-inline: 8em;
+  }
+}

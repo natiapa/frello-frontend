@@ -1,61 +1,86 @@
+@mixin flexCenter($justifyContent) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: center;
+}
+
+@mixin btn() {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
 .app-header {
-    display: flex;
-    min-height: 3.5rem;
+  @include flexCenter(space-between);
+  border-bottom: 1px solid $gray1;
+  padding: 0 1em;
+  height: 50px;
 
-    background-color: $clr4;
-    padding: rem(10px) 1rem;
-    
-    nav {
-        display: flex;
-        width: 100%;
-        align-items: center;
-        gap: 1em;
-        
-        font-size: .8em;
+  & section {
+    &:first-of-type {
+      @include flexCenter(space-between);
 
-        .active {
-            color: $clr1;
+      & > * {
+        margin-inline-end: 0.8em;
+      }
+
+      & .menu {
+        @include btn();
+      }
+
+      & a {
+        @include flexCenter(center);
+
+        & img {
+          width: 5em;
         }
+      }
 
-        .logo {
-            font-size: 1.4em;
-            font-weight: bold;
-            margin-inline-end: 2em;
-        }
-
-        .login-link {
-            margin-inline-start: auto;
-        }
-
-        button {
-            margin-inline-end: 0;
-        }
+      & .create-btn {
+        @include btn();
+        width: 65px;
+        height: 32px;
+        color: $white;
+        background-color: $blue1;
+      }
     }
+  }
 
-    .user-info {
-        display: flex;
-        align-items: center;
-        margin-inline-start: auto;
+  & section {
+    &:nth-of-type(2) {
+      @include flexCenter(center);
+      height: 100%;
+      & .login-btn {
+        @include btn();
+        background-color: transparent;
+        font-size: 17px;
+      }
 
-        color: $clr1;
+      & .signup-btn {
+        @include btn();
+        background-color: $blue1;
+        height: 100%;
+        font-size: 17px;
+        border-radius: 0;
+        color: $white;
+      }
 
-        .score {
-            padding: 8px;
-            background-color: $clr2;
-            border-radius: 50%;
-            margin: 10px;
+      & .profile {
+        @include flexCenter(center);
+        width: 2em;
+        height: 2em;
+        padding: 1em;
+        border-radius: 50%;
+        color: $white;
+        cursor: pointer;
 
-            color: $clr6;
+        & span {
+          @include flexCenter(center);
+          padding-block-start: 3px;
+          height: 2em;
+          width: 2em;
         }
-
-        img {
-            width: 32px;
-            aspect-ratio: 1;
-            border-radius: 50%;
-        }
-        
-        .btn-link {
-            color: $clr2;
-        }
+      }
     }
+  }
 }
