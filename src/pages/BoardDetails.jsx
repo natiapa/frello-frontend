@@ -11,9 +11,9 @@ export function BoardDetails() {
 
   const {boardId} = useParams()
   const board = useSelector(storeState => storeState.boardModule.board)
-
   useEffect(() => {
     loadBoard(boardId)
+    console.log('board:', board)
   }, [boardId])
 
   async function onAddBoardMsg(boardId) {
@@ -31,8 +31,7 @@ export function BoardDetails() {
       <Link to="/board">Back to list</Link>
       <h1>Board Details</h1>
       {board && <div>
-        <h3>{board.vendor}</h3>
-        <h4>${board.price}</h4>
+        <h3>{board.title}</h3>
         <pre> {JSON.stringify(board, null, 2)} </pre>
       </div>
       }

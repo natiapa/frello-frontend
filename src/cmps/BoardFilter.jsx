@@ -26,7 +26,7 @@ export function BoardFilter({ filterBy, setFilterBy }) {
     }
 
     function clearFilter() {
-        setFilterToEdit({ ...filterToEdit, txt: '', minSpeed: '', maxPrice: '' })
+        setFilterToEdit({ ...filterToEdit, txt: '' })
     }
     
     function clearSort() {
@@ -43,37 +43,20 @@ export function BoardFilter({ filterBy, setFilterBy }) {
                 onChange={handleChange}
                 required
             />
-            <input
-                type="number"
-                min="0"
-                name="minSpeed"
-                value={filterToEdit.minSpeed}
-                placeholder="min. speed"
-                onChange={handleChange}
-                required
-            />
+          
             <button 
                 className="btn-clear" 
                 onClick={clearFilter}>Clear</button>
             <h3>Sort:</h3>
             <div className="sort-field">
+               
                 <label>
-                    <span>Speed</span>
+                    <span>Title</span>
                     <input
                         type="radio"
                         name="sortField"
-                        value="speed"
-                        checked={filterToEdit.sortField === 'speed'}
-                        onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    <span>Vendor</span>
-                    <input
-                        type="radio"
-                        name="sortField"
-                        value="vendor"
-                        checked={filterToEdit.sortField === 'vendor'}            
+                        value="title"
+                        checked={filterToEdit.sortField === 'title'}            
                         onChange={handleChange}
                     />
                 </label>
