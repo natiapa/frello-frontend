@@ -22,11 +22,11 @@ import { TaskDetails } from './cmps/TaskDetails.jsx'
 
 export function RootCmp() {
     return (
-        <div className="main-container">
+        <div className="main-layout">
             <AppHeader />
             <UserMsg />
 
-            <main>
+            <main className="main-container">
                 <Routes>
                     <Route path="" element={<HomePage />} />
                     <Route path="about" element={<AboutUs />}>
@@ -34,7 +34,7 @@ export function RootCmp() {
                         <Route path="vision" element={<AboutVision />} />
                     </Route>
                     <Route path="board" element={<BoardIndex />} />
-                    <Route path="board/:boardId" element={<BoardDetails />} >
+                    <Route path="board/:boardId" element={<BoardDetails />}>
                         {/* <Route path="/:groupId/:taskId" element={<TaskDetails />} /> */}
                     </Route>
                     <Route path="user/:id" element={<UserDetails />} />

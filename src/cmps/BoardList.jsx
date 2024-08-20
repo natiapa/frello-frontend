@@ -13,15 +13,15 @@ export function BoardList({ boards, onRemoveBoard, onUpdateBoard }) {
     }
 
     return <section>
-        <ul className="list">
+        <ul className="board-list">
             {boards.map(board =>
                 <li key={board._id}>
                     <BoardPreview board={board}/>
-                    <Link to={`/board/${board._id}`}>Board</Link>
-                    {/* {shouldShowActionBtns(board) && <div className="actions">
+                    <Link to={`/board/${board._id}`}>{board.title}</Link>
+                    <div className="actions">
                         <button onClick={() => onUpdateBoard(board)}>Edit</button>
                         <button onClick={() => onRemoveBoard(board._id)}>x</button>
-                    </div>} */}
+                    </div>
                 </li>)
             }
         </ul>

@@ -7,8 +7,7 @@ import { boardService as remote } from './board.service.remote'
 
 function getEmptyBoard() {
 	return {
-		vendor: makeId(),
-		speed: getRandomIntInclusive(80, 240),
+		title: '',
 		msgs: [],
 	}
 }

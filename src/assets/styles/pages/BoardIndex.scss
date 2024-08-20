@@ -1,18 +1,10 @@
 .board-index {
-    header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        padding-block: .3em;
-    }
-
-    h2 {
-        margin: 0;
-        font-size: 1.3em;
-    }
+    grid-column: 3;
+    display: grid;
 
     button {
         margin-inline-end: 0;
+        padding: .3em .5em;
+        background-color: $blue4;
     }
 }

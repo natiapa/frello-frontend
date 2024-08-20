@@ -1,21 +1,23 @@
 .board-list {
+    grid-column: 3;
+    grid-row: -1;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: .5em;
 
     li {
         display: grid;
-        grid-template-columns: max-content auto;
         padding: .5em;
-        background-color: $clr2;
+        background-color: $blue2;
 
-        color: $clr6;
+        color: $white;
 
         .actions {
             justify-self: end;
 
             button {
                 padding: .3em .5em;
+                background-color: $blue4;
             }
         }
     }
