@@ -1,5 +1,6 @@
 .task-list {
   & li {
+    display: flex;
     & button {
       color: black;
     }
