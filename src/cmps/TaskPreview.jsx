@@ -2,53 +2,22 @@ import * as React from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-// import { TaskDetails } from "./TaskDetails";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { TaskDetails } from "./TaskDetails";
 
-export function TaskPreview({ task }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+export function TaskPreview({ task, group }) {
+  const boardId = useSelector(storeState => storeState.boardModule.board._id)
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-
+  console.log({task,group})
   return (
     <>
-      <div className="task-preview">
-        <Button
-          aria-describedby={task.id}
-          variant="contained"
-          onClick={handleClick}
-        >
-          <span>{task.title}</span>
-        </Button>
+      <div className="task-preview"> 
+      
+          <Link to={`/board/${boardId}/${group.id}/${task.id}`}><span>{task.title}</span></Link>
+        
       </div>
 
-      {/* <TaskDetails
-        task={task}
-        id={id}
-        handleClose={handleClose}
-        anchorEl={anchorEl}
-      /> */}
-
-      <Popover
-        id={task.id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        // anchorOrigin={{
-        //   vertical: "center",
-        //   horizontal: "center",
-        // }}
-      >
-        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
-      </Popover>
     </>
   );
 }
