@@ -1,6 +1,7 @@
 .task-list {
   & li {
     display: flex;
+    margin-block-end: 1em;
     & button {
       color: black;
     }
