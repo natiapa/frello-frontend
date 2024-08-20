@@ -17,146 +17,146 @@ async function query(filterBy = { txt: '' }) {
     var boards = await storageService.query(STORAGE_KEY)
 
     if (!boards || !boards.length) {
-    boards = {
-        _id: 'b101',
-        title: 'Robot dev proj',
-        isStarred: false,
-        archivedAt: 1589983468418,
-        createdBy: {
-            id: 'u101',
-            fullname: 'Abi Abambi',
-            imgUrl: 'http://some-img',
-        },
-        style: {
-            backgroundImage: '',
-            backgroundColor: '#61bd4f',
-        },
-        labels: [
-            {
-                id: 'l101',
-                title: 'Done',
-                color: '#61bd4f',
-            },
-            {
-                id: 'l102',
-                title: 'Progress',
-                color: '#61bd33',
-            },
-        ],
-        members: [
-            {
+        boards = {
+            _id: 'b101',
+            title: 'Robot dev proj',
+            isStarred: false,
+            archivedAt: 1589983468418,
+            createdBy: {
                 id: 'u101',
-                fullname: 'Tal Taltal',
-                imgUrl: 'https://www.google.com',
+                fullname: 'Abi Abambi',
+                imgUrl: 'http://some-img',
             },
-            {
-                id: 'u102',
-                fullname: 'Josh Ga',
-                imgUrl: 'https://www.google.com',
+            style: {
+                backgroundImage: 'https://cdn.pixabay.com/photo/2017/11/29/18/54/leaf-2986837_1280.jpg',
+                backgroundColor: '#61bd4f',
             },
-        ],
-        groups: [
-            {
-                id: 'g101',
-                title: 'Group 1',
-                archivedAt: 1589983468418,
-                tasks: [
-                    {
-                        id: 'c101',
-                        title: 'Replace logo',
-                        labels: [],
-                        members: [],
-                        attachments: [],
-                        comments: [],
-                        cover: '',
-                        dueDate: '',
-                    },
-                    {
-                        id: 'c102',
-                        title: 'Add Samples',
-                    },
-                ],
-                style: {},
-            },
-            {
-                id: 'g102',
-                title: 'Group 2',
-                tasks: [
-                    {
-                        id: 'c103',
-                        title: 'Do that',
-                        archivedAt: 1589983468418,
-                    },
-                    {
-                        id: 'c104',
-                        title: 'Help me',
-                        status: 'inProgress',
-                        priority: 'high',
-                        dueDate: '2024-09-24',
-                        description: 'description',
-                        comments: [
-                            {
-                                id: 'ZdPnm',
-                                title: 'also @yaronb please CR this',
-                                createdAt: 1590999817436,
-                                byMember: {
-                                    id: 'u101',
-                                    fullname: 'Tal Tarablus',
-                                    imgUrl: '',
-                                },
-                            },
-                        ],
-                        checklists: [
-                            {
-                                id: 'YEhmF',
-                                title: 'Checklist',
-                                todos: [
-                                    {
-                                        id: '212jX',
-                                        title: 'To Do 1',
-                                        isDone: false,
-                                    },
-                                ],
-                            },
-                        ],
-                        memberIds: ['u101'],
-                        labelIds: ['l101', 'l102'],
-                        byMember: {
-                            id: 'u101',
-                            fullname: 'Tal Tarablus',
-                            imgUrl: '',
-                        },
-                        style: {
-                            backgroundColor: '#26de81',
-                        },
-                    },
-                ],
-                style: {},
-            },
-        ],
-        activities: [
-            {
-                id: 'a101',
-                title: 'Changed Color',
-                createdAt: 154514,
-                byMember: {
+            labels: [
+                {
+                    id: 'l101',
+                    title: 'Done',
+                    color: '#61bd4f',
+                },
+                {
+                    id: 'l102',
+                    title: 'Progress',
+                    color: '#61bd33',
+                },
+            ],
+            members: [
+                {
                     id: 'u101',
-                    fullname: 'Abi Abambi',
-                    imgUrl: 'http://some-img',
+                    fullname: 'Tal Taltal',
+                    imgUrl: 'https://www.google.com',
                 },
-                group: {
+                {
+                    id: 'u102',
+                    fullname: 'Josh Ga',
+                    imgUrl: 'https://www.google.com',
+                },
+            ],
+            groups: [
+                {
                     id: 'g101',
-                    title: 'Urgent Stuff',
+                    title: 'Group 1',
+                    archivedAt: 1589983468418,
+                    tasks: [
+                        {
+                            id: 'c101',
+                            title: 'Replace logo',
+                            labels: [],
+                            members: [],
+                            attachments: [],
+                            comments: [],
+                            cover: '',
+                            dueDate: '',
+                        },
+                        {
+                            id: 'c102',
+                            title: 'Add Samples',
+                        },
+                    ],
+                    style: {},
                 },
-                task: {
-                    id: 'c101',
-                    title: 'Replace Logo',
+                {
+                    id: 'g102',
+                    title: 'Group 2',
+                    tasks: [
+                        {
+                            id: 'c103',
+                            title: 'Do that',
+                            archivedAt: 1589983468418,
+                        },
+                        {
+                            id: 'c104',
+                            title: 'Help me',
+                            status: 'inProgress',
+                            priority: 'high',
+                            dueDate: '2024-09-24',
+                            description: 'description',
+                            comments: [
+                                {
+                                    id: 'ZdPnm',
+                                    title: 'also @yaronb please CR this',
+                                    createdAt: 1590999817436,
+                                    byMember: {
+                                        id: 'u101',
+                                        fullname: 'Tal Tarablus',
+                                        imgUrl: '',
+                                    },
+                                },
+                            ],
+                            checklists: [
+                                {
+                                    id: 'YEhmF',
+                                    title: 'Checklist',
+                                    todos: [
+                                        {
+                                            id: '212jX',
+                                            title: 'To Do 1',
+                                            isDone: false,
+                                        },
+                                    ],
+                                },
+                            ],
+                            memberIds: ['u101'],
+                            labelIds: ['l101', 'l102'],
+                            byMember: {
+                                id: 'u101',
+                                fullname: 'Tal Tarablus',
+                                imgUrl: '',
+                            },
+                            style: {
+                                backgroundColor: '#26de81',
+                            },
+                        },
+                    ],
+                    style: {},
                 },
-            },
-        ],
-    }
+            ],
+            activities: [
+                {
+                    id: 'a101',
+                    title: 'Changed Color',
+                    createdAt: 154514,
+                    byMember: {
+                        id: 'u101',
+                        fullname: 'Abi Abambi',
+                        imgUrl: 'http://some-img',
+                    },
+                    group: {
+                        id: 'g101',
+                        title: 'Urgent Stuff',
+                    },
+                    task: {
+                        id: 'c101',
+                        title: 'Replace Logo',
+                    },
+                },
+            ],
+        }
 
-    await storageService.post(STORAGE_KEY, boards)
+        await storageService.post(STORAGE_KEY, boards)
     }
     // const { txt, sortField, sortDir } = filterBy
 

@@ -66,7 +66,7 @@ const board = {
 		imgUrl: 'http://some-img',
 	},
 	style: {
-		backgroundImage: '',
+		backgroundImage: 'https://cdn.pixabay.com/photo/2017/11/29/18/54/leaf-2986837_1280.jpg',
 		backgroundColor: '#61bd4f',
 	},
 	labels: [
@@ -103,12 +103,12 @@ const board = {
 
 					id: 'c101',
 					title: 'Replace logo',
-					labels:[],
-					members:[],
-					attachments:[],	
-					comments:[],
-					cover:'',
-					dueDate:'',
+					labels: [],
+					members: [],
+					attachments: [],
+					comments: [],
+					cover: '',
+					dueDate: '',
 				},
 				{
 					id: 'c102',
@@ -195,7 +195,7 @@ const board = {
 		},
 	],
 
-	
+
 }
 
 const user = {
