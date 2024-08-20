@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export function SideBar() {
   return (
-    <nav className="sidebar">
+    <nav className="sidebar-nav">
       <ul>
         <li>
           <svg

@@ -1,16 +1,22 @@
 .board-list {
     grid-column: 3;
-    grid-row: -1;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, 177px);
     gap: .5em;
+    height: 89.5vh;
+    header{
+        grid-row: 1;
+    }
 
     li {
+        grid-row: 2/5;
         display: grid;
+        width: 177px;
+        height: 80px;
         padding: .5em;
         background-color: $blue2;
-
         color: $white;
+        cursor: pointer;
 
         .actions {
             justify-self: end;
@@ -21,4 +27,8 @@
             }
         }
     }
+    .new-board{
+        background-color: $new-board-bg-color;
+        color: black;
+     }
 }
