@@ -42,10 +42,10 @@ export function TaskPreview({ task }) {
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
-        anchorOrigin={{
-          vertical: "center",
-          horizontal: "center",
-        }}
+        // anchorOrigin={{
+        //   vertical: "center",
+        //   horizontal: "center",
+        // }}
       >
         <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
       </Popover>
