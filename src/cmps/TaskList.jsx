@@ -6,7 +6,6 @@ export function TaskList({ tasks }) {
       {tasks.map((task) => (
         <li key={task.id}>
           <TaskPreview task={task} />
-          <button>X</button>
         </li>
       ))}
     </ul>
