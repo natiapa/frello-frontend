@@ -106,6 +106,16 @@ function getCmdAddBoardMsg(msg) {
     }
 }
 
+export async function removeTask(taskId) {
+    try {
+        await boardService.removeTask(taskId)
+        // store.dispatch(getCmdRemoveTask(boardId))
+    } catch (err) {
+        console.log('Cannot remove board', err)
+        throw err
+    }
+}
+
 // unitTestActions()
 async function unitTestActions() {
     await loadBoards()

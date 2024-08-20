@@ -10,6 +10,7 @@ export const boardService = {
     save,
     remove,
     addBoardMsg,
+    removeTask,
 }
 window.cs = boardService
 
@@ -187,10 +188,10 @@ async function remove(boardId) {
 async function save(board) {
     var savedBoard
     if (board._id) {
-       
+
         savedBoard = await storageService.put(STORAGE_KEY, board)
     } else {
-       
+
         savedBoard = await storageService.post(STORAGE_KEY, board)
     }
     return savedBoard
@@ -210,3 +211,4 @@ async function addBoardMsg(boardId, txt) {
 
     return msg
 }
+

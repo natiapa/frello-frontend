@@ -2,10 +2,13 @@ import { TaskPreview } from "./TaskPreview";
 
 export function TaskList({ tasks }) {
   return (
-    <div className="task-list">
+    <ul className="task-list">
       {tasks.map((task) => (
-        <TaskPreview task={task} key={task.id} />
+        <li key={task.id}>
+          <TaskPreview task={task} />
+          <button>X</button>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
