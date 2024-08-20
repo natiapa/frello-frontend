@@ -8,6 +8,7 @@ import { loadBoard, addBoardMsg } from "../store/actions/board.actions";
 
 import { GroupList } from "../cmps/GroupList";
 import { SideBar } from "../cmps/Sidebar";
+import { BoardHeader } from "../cmps/BoardHeader";
 
 export function BoardDetails() {
   const { boardId } = useParams();
@@ -34,7 +35,8 @@ export function BoardDetails() {
         backgroundImage: `url(${board?.style?.backgroundImage})`,
       }}
     >
-        <SideBar />
+      <BoardHeader />
+      {/* <SideBar /> */}
       <Link to="/board">Back to list</Link>
       <h1>Board Details</h1>
 
