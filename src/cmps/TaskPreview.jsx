@@ -2,6 +2,7 @@ import * as React from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+// import { TaskDetails } from "./TaskDetails";
 
 export function TaskPreview({ task }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -28,6 +29,13 @@ export function TaskPreview({ task }) {
           <span>{task.title}</span>
         </Button>
       </div>
+
+      {/* <TaskDetails
+        task={task}
+        id={id}
+        handleClose={handleClose}
+        anchorEl={anchorEl}
+      /> */}
 
       <Popover
         id={task.id}
