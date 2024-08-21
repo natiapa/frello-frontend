@@ -4,13 +4,16 @@ import { useSelector } from "react-redux";
 import { UserModal } from "./UserModal.jsx";
 import { SearchBar } from "./SearchBar.jsx";
 
-export function AppHeader({ bgColor }) {
+export function AppHeader({ bgColor, borderBottom }) {
   const [showUserModal, setShowUserModal] = useState(false);
 
   const user = useSelector((storeState) => storeState.userModule.user);
 
   return (
-    <header className="app-header full" style={{ backgroundColor: bgColor }}>
+    <header
+      className="app-header full"
+      style={{ backgroundColor: bgColor, borderBottom: borderBottom }}
+    >
       <section>
         <span className="material-symbols-outlined menu">apps</span>
         <Link to={user ? "/workspace" : "/"}>

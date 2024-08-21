@@ -5,7 +5,7 @@ import { AppHeader } from "../cmps/AppHeader";
 export function HomePage() {
   return (
     <>
-      <AppHeader />
+      <AppHeader borderBottom="1px solid #ddd" />
 
       <section className="home-page ">
         <section className="guest-home-page">
