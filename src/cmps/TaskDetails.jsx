@@ -3,7 +3,11 @@ import { useNavigate } from "react-router";
 import { LabelList } from "./LabelList";
 
 export function TaskDetails({ boardId, task }) {
-  const navigate = useNavigate();
+  
+  const [isEditing, setIsEditing] = useState(false)
+  const navigate = useNavigate()
+ 
+
   console.log("task:", task);
   function onCloseForm() {
     navigate(`/board/${boardId}`);
@@ -32,21 +36,17 @@ export function TaskDetails({ boardId, task }) {
               </svg>
             </span>
           </button>
-          <h1>{task.title}</h1>
-          {/* <ul>
-            <h3>Labels:</h3>
-            {task.labels.map((label, idx) => (
-              <li key={idx}>{label}</li>
-            ))}
-          </ul> */}
-          <ul>
+          <h1 onClick={() => setIsEditing(true)}>{task.title}</h1>
+        
+        
           <h3>Labels:</h3> 
           <LabelList labels={task.labels}/>
             <h3>Members:</h3>
             {task.members.map((member, idx) => (
               <li key={idx}>{member}</li>
             ))}
-          </ul>
+        
+
           <div className="description">
             <h3>Description:</h3>
             <textarea>{task.description}</textarea>
