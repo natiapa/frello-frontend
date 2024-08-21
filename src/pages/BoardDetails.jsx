@@ -12,6 +12,7 @@ import { BoardHeader } from "../cmps/BoardHeader";
 import { Outlet } from "react-router-dom";
 import { TaskDetails } from "../cmps/TaskDetails";
 import { BoardSideBar } from "../cmps/BoardSideBar";
+import { AppHeader } from "../cmps/AppHeader";
 
 import { FastAverageColor } from "fast-average-color";
 
@@ -57,24 +58,27 @@ export function BoardDetails() {
   if (taskId && !task) return;
 
   return (
-    <section
-      className="board-details"
-      style={{
-        backgroundImage: `url(${board?.style?.backgroundImage})`,
-      }}
-    >
-      <BoardHeader bgColor={headerBgColor} />
+    <>
+      <section
+        className="board-details"
+        style={{
+          backgroundImage: `url(${board?.style?.backgroundImage})`,
+        }}
+      >
+        <AppHeader bgColor={headerBgColor} />
+        <BoardHeader bgColor={headerBgColor} />
 
-      {board && <BoardSideBar board={board} bgColor={headerBgColor} />}
-      {board && <GroupList groups={board.groups} />}
-      {taskId && <TaskDetails boardId={boardId} task={task} />}
+        {board && <BoardSideBar board={board} bgColor={headerBgColor} />}
+        {board && <GroupList groups={board.groups} />}
+        {taskId && <TaskDetails boardId={boardId} task={task} />}
 
-      {/* <button
+        {/* <button
                 onClick={() => {
                     onAddBoardMsg(board._id)
                 }}>
                 Add board msg
             </button> */}
-    </section>
+      </section>
+    </>
   );
 }

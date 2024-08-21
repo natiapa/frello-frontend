@@ -1,7 +1,9 @@
 .board-details {
   grid-column: 1/-1;
+  gap: 1px;
   display: grid;
   grid-template-columns: 20% 80%;
+  grid-template-rows: 50px auto;
   background-size: cover;
   background-position: center;
   height: 100vh;

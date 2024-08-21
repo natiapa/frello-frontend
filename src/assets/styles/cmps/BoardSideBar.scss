@@ -1,33 +1,30 @@
 .board-side-bar {
-    grid-column: 1;
-    grid-row: 2/150;
-    display: grid;
-    justify-items: center;
-    background-color: green;
-    font-size: .9rem;
+  grid-column: 1;
+  grid-row: 2/150;
+  display: grid;
+  justify-items: center;
+  font-size: 0.9rem;
 
-    border-top: 1px solid gray;
-    border-right: 1px solid gray;
-    opacity: 0.9;
+  border-top: 1px solid gray;
+  border-right: 1px solid gray;
+  opacity: 0.9;
 
-    ul {
-        list-style-type: none;
-        padding: 0;
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+
+    li {
+      display: grid;
+      justify-items: center;
+      align-self: center;
+      padding: 0.1rem;
+      width: 100%;
+      background-color: gray;
+      p {
         margin: 0;
-        width: 100%;
-
-        li {
-            display: grid;
-            justify-items: center;
-            align-self: center;
-            padding: .1rem;
-            width: 100%;
-            background-color: gray;
-            p{
-                margin: 0;
-            }
-
-        }
+      }
     }
-
+  }
 }
