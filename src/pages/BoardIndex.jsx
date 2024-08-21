@@ -59,7 +59,7 @@ export function BoardIndex() {
 
   return (
     <>
-      <AppHeader />
+      <AppHeader borderBottom="1px solid #ddd" />
       <section className="board-index">
         <SideBar />
 
