@@ -6,26 +6,11 @@ import { useEffect, useState } from "react";
 
 export function TaskPreview({ groupId, task }) {
   const { taskId } = useParams();
-
   const boardId = useSelector((storeState) => storeState.boardModule.board._id);
-  const [currTask, setCurrTask] = useState("");
-  console.log(task);
-  // console.log(groupId);
-
-  // const chosenTask = task.find((task) => task.id === taskId);
-
-  // useEffect(() => {
-
-  //   setCurrTask(chosenTask);
-  // }, [taskId]);
-
-  console.log(taskId);
-  // console.log(currTask);
 
   return (
     <div>
-      {taskId && <TaskDetails />}
-      <Link to={`/board/${boardId}/${groupId}/${task.id}`}></Link>
+      <Link to={`/board/${boardId}/${groupId}/${task.id}`}>{task.title}</Link>
     </div>
   );
 }

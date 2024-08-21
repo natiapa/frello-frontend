@@ -1,8 +1,16 @@
 export function TaskDetails({ task }) {
-  // const { title, members, labels } = task;
   return (
-    <div className="task-details">
-      {/* <h1>{title}</h1>
+    <div>
+      <h1 style={{ backgroundColor: "red", position: "fixed", zIndex: "10" }}>
+        {task.title}
+      </h1>
+    </div>
+  );
+}
+
+// <div className="task-details">
+{
+  /* <h1>{title}</h1>
       <ul>
         {members?.map((member) => {
           <li key={member.id}>{member.fullname}</li>;
@@ -12,9 +20,10 @@ export function TaskDetails({ task }) {
         {labels?.map((labels) => {
           <li key={labels.title}>{labels}</li>;
         })}
-      </ul> */}
-    </div>
-  );
+      </ul> */
+}
+{
+  /* </div> */
 }
 
 {

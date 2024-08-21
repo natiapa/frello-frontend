@@ -14,6 +14,9 @@ import { TaskDetails } from "../cmps/TaskDetails";
 
 export function BoardDetails() {
   const { boardId } = useParams();
+  const { taskId } = useParams();
+  const { groupId } = useParams();
+
   const board = useSelector((storeState) => storeState.boardModule.board);
 
   useEffect(() => {
@@ -30,6 +33,10 @@ export function BoardDetails() {
     }
   }
 
+  const group = board?.groups?.find((group) => group.id === groupId);
+
+  const task = group?.tasks?.find((task) => task.id === taskId);
+
   return (
     <section
       className="board-details"
@@ -37,7 +44,7 @@ export function BoardDetails() {
         backgroundImage: `url(${board?.style?.backgroundImage})`,
       }}
     >
-      {/* {taskId && <TaskDetails board={board} />} */}
+      {taskId && <TaskDetails task={task} />}
 
       <BoardHeader />
       {/* <SideBar /> */}
