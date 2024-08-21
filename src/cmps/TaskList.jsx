@@ -2,7 +2,6 @@ import { TaskPreview } from "./TaskPreview";
 
 export function TaskList({ group }) {
   const { tasks } = group;
-  console.log(tasks);
 
   return (
     <ul className="task-list">
