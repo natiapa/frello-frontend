@@ -1,11 +1,16 @@
-import { useRef, useEffect } from "react";
-import { useNavigate } from "react-router";
-import { LabelList } from "./LabelList";
+import { useState } from "react"
+import { useNavigate } from "react-router"
+import { LabelList } from "./LabelList"
+import { EditTaskTitle } from "./EditTaskTitle"
 
-export function TaskDetails({ boardId, task }) {
-  
+
+
+export function TaskDetails({ boardId, task, loadBoard }) {
+
+  const [title, setTitle] = useState(task.title)
   const [isEditing, setIsEditing] = useState(false)
   const navigate = useNavigate()
+
  
 
   console.log("task:", task);
@@ -36,16 +41,17 @@ export function TaskDetails({ boardId, task }) {
               </svg>
             </span>
           </button>
-          <h1 onClick={() => setIsEditing(true)}>{task.title}</h1>
-        
-        
-          <h3>Labels:</h3> 
-          <LabelList labels={task.labels}/>
-            <h3>Members:</h3>
-            {task.members.map((member, idx) => (
-              <li key={idx}>{member}</li>
-            ))}
-        
+
+          <h1 onClick={() => setIsEditing(true)}>{title}</h1>
+          {isEditing && <EditTaskTitle title={title} setTitle={setTitle} setIsEditing={setIsEditing} />}
+
+          <h3>Labels:</h3>
+          <LabelList labels={task.labels} />
+          <h3>Members:</h3>
+          {task.members.map((member, idx) => (
+            <li key={idx}>{member}</li>
+          ))}
+
 
           <div className="description">
             <h3>Description:</h3>

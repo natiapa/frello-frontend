@@ -69,7 +69,7 @@ export function BoardDetails() {
 
         {board && <BoardSideBar board={board} bgColor={headerBgColor} />}
         {board && <GroupList groups={board.groups} />}
-        {taskId && <TaskDetails boardId={boardId} task={task} />}
+        {taskId && <TaskDetails boardId={boardId} task={task} loadBoard={loadBoard}/>}
 
         {/* <button
                 onClick={() => {
