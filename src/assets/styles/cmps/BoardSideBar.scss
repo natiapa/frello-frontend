@@ -8,6 +8,7 @@
   border-top: 1px solid gray;
   border-right: 1px solid gray;
   opacity: 0.9;
+  backdrop-filter: blur(8px);
 
   ul {
     list-style-type: none;
