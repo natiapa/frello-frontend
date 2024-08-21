@@ -1,11 +1,14 @@
 import { TaskPreview } from "./TaskPreview";
 
-export function TaskList({ tasks, group }) {
+export function TaskList({ group }) {
+  const { tasks } = group;
+  console.log(tasks);
+
   return (
     <ul className="task-list">
       {tasks.map((task) => (
         <li key={task.id}>
-          <TaskPreview task={task} group={group} />
+          <TaskPreview groupId={group.id} task={task} />
         </li>
       ))}
     </ul>

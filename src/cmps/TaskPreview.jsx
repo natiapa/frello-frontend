@@ -1,22 +1,13 @@
-import * as React from "react";
-import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { TaskDetails } from "./TaskDetails";
+import { useParams } from "react-router-dom";
 
-export function TaskPreview({ task, group }) {
-  const boardId = useSelector((storeState) => storeState.boardModule.board._id);
+export function TaskPreview({ groupId, task }) {
+  console.log(task);
+  console.log(groupId);
 
-  console.log({ task, group });
   return (
-    <>
-      <div className="task-preview">
-        <Link to={`/board/${boardId}/${group.id}/${task.id}`}>
-          <span>{task.title}</span>
-        </Link>
-      </div>
-    </>
+    <div>
+      <h1>kkkkk</h1>
+    </div>
   );
 }

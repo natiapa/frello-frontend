@@ -10,6 +10,7 @@ import { GroupList } from "../cmps/GroupList";
 import { SideBar } from "../cmps/Sidebar";
 import { BoardHeader } from "../cmps/BoardHeader";
 import { Outlet } from "react-router-dom";
+import { TaskDetails } from "../cmps/TaskDetails";
 
 export function BoardDetails() {
   const { boardId } = useParams();
@@ -17,7 +18,7 @@ export function BoardDetails() {
 
   useEffect(() => {
     loadBoard(boardId);
-    console.log("board:", board);
+    // console.log("board:", board);
   }, [boardId]);
 
   async function onAddBoardMsg(boardId) {
@@ -36,12 +37,12 @@ export function BoardDetails() {
         backgroundImage: `url(${board?.style?.backgroundImage})`,
       }}
     >
+      {/* {taskId && <TaskDetails board={board} />} */}
+
       <BoardHeader />
       {/* <SideBar /> */}
       <Link to="/board">Back to list</Link>
       <h1>Board Details</h1>
-
-      <Outlet />
 
       {board && <GroupList groups={board.groups} />}
       {board && (

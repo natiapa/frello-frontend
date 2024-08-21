@@ -1,7 +1,8 @@
 import { GroupPreview } from "./GroupPreview";
 
 export function GroupList({ groups }) {
-  if (!groups) return <div>Loading...</div>
+  if (!groups) return <div>Loading...</div>;
+
   return (
     <div className="group-list">
       {groups.map((group) => (
