@@ -7,17 +7,16 @@ import { useSelector } from "react-redux";
 import { TaskDetails } from "./TaskDetails";
 
 export function TaskPreview({ task, group }) {
-  const boardId = useSelector(storeState => storeState.boardModule.board._id)
+  const boardId = useSelector((storeState) => storeState.boardModule.board._id);
 
-  console.log({task,group})
+  console.log({ task, group });
   return (
     <>
-      <div className="task-preview"> 
-      
-          <Link to={`/board/${boardId}/${group.id}/${task.id}`}><span>{task.title}</span></Link>
-        
+      <div className="task-preview">
+        <Link to={`/board/${boardId}/${group.id}/${task.id}`}>
+          <span>{task.title}</span>
+        </Link>
       </div>
-
     </>
   );
 }

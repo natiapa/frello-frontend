@@ -9,6 +9,7 @@ import { loadBoard, addBoardMsg } from "../store/actions/board.actions";
 import { GroupList } from "../cmps/GroupList";
 import { SideBar } from "../cmps/Sidebar";
 import { BoardHeader } from "../cmps/BoardHeader";
+import { Outlet } from "react-router-dom";
 
 export function BoardDetails() {
   const { boardId } = useParams();
@@ -39,6 +40,8 @@ export function BoardDetails() {
       {/* <SideBar /> */}
       <Link to="/board">Back to list</Link>
       <h1>Board Details</h1>
+
+      <Outlet />
 
       {board && <GroupList groups={board.groups} />}
       {board && (
