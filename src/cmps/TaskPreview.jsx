@@ -5,7 +5,6 @@ import { TaskDetails } from "./TaskDetails";
 import { useEffect, useState } from "react";
 
 export function TaskPreview({ groupId, task }) {
-  const { taskId } = useParams();
   const boardId = useSelector((storeState) => storeState.boardModule.board._id);
 
   return (

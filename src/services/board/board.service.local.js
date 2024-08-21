@@ -10,7 +10,6 @@ export const boardService = {
     save,
     remove,
     addBoardMsg,
-
 }
 window.cs = boardService
 
@@ -65,75 +64,47 @@ async function query(filterBy = { txt: '' }) {
                         {
                             id: 'c101',
                             title: 'Replace logo',
-                            labels: [],
-                            members: [],
-                            attachments: [],
-                            comments: [],
-                            cover: '',
-                            dueDate: '',
+                            labels: ['Design', 'High Priority'],
+                            members: ['John Doe', 'Jane Smith'],
+                            attachments: ['logo_v1.png', 'logo_v2.png'],
+                            comments: ['Please update the logo with the latest version', 'Make sure to use the correct color scheme'],
+                            cover: 'cover_logo.png',
+                            dueDate: '2024-09-01',
                         },
                         {
                             id: 'c102',
-                            title: 'Add Samples',
+                            title: 'Update website content',
+                            labels: ['Content', 'Medium Priority'],
+                            members: ['Alice Johnson', 'Bob Brown'],
+                            attachments: ['homepage_draft.docx', 'about_us_update.docx'],
+                            comments: ['Content needs to be SEO optimized', 'Check for grammatical errors before finalizing'],
+                            cover: 'cover_content.png',
+                            dueDate: '2024-08-25',
                         },
-                    ],
-                    style: {},
-                },
-                {
-                    id: 'g102',
-                    title: 'Group 2',
-                    tasks: [
                         {
                             id: 'c103',
-                            title: 'Do that',
-                            archivedAt: 1589983468418,
+                            title: 'Bug fix in checkout process',
+                            labels: ['Bug', 'Urgent'],
+                            members: ['Michael Green', 'Sarah Lee'],
+                            attachments: ['bug_report_checkout.pdf'],
+                            comments: ['Checkout process fails under certain conditions', 'Issue reported by multiple users'],
+                            cover: 'cover_bug.png',
+                            dueDate: '2024-08-22',
                         },
                         {
                             id: 'c104',
-                            title: 'Help me',
-                            status: 'inProgress',
-                            priority: 'high',
-                            dueDate: '2024-09-24',
-                            description: 'description',
-                            comments: [
-                                {
-                                    id: 'ZdPnm',
-                                    title: 'also @yaronb please CR this',
-                                    createdAt: 1590999817436,
-                                    byMember: {
-                                        id: 'u101',
-                                        fullname: 'Tal Tarablus',
-                                        imgUrl: '',
-                                    },
-                                },
-                            ],
-                            checklists: [
-                                {
-                                    id: 'YEhmF',
-                                    title: 'Checklist',
-                                    todos: [
-                                        {
-                                            id: '212jX',
-                                            title: 'To Do 1',
-                                            isDone: false,
-                                        },
-                                    ],
-                                },
-                            ],
-                            memberIds: ['u101'],
-                            labelIds: ['l101', 'l102'],
-                            byMember: {
-                                id: 'u101',
-                                fullname: 'Tal Tarablus',
-                                imgUrl: '',
-                            },
-                            style: {
-                                backgroundColor: '#26de81',
-                            },
+                            title: 'Create marketing campaign',
+                            labels: ['Marketing', 'Low Priority'],
+                            members: ['Emily White', 'David Black'],
+                            attachments: ['campaign_brief.pdf', 'ad_samples.png'],
+                            comments: ['Focus on social media platforms', 'Consider influencer partnerships'],
+                            cover: 'cover_marketing.png',
+                            dueDate: '2024-09-10',
                         },
                     ],
                     style: {},
                 },
+               
             ],
             activities: [
                 {
@@ -188,10 +159,8 @@ async function remove(boardId) {
 async function save(board) {
     var savedBoard
     if (board._id) {
-
         savedBoard = await storageService.put(STORAGE_KEY, board)
     } else {
-
         savedBoard = await storageService.post(STORAGE_KEY, board)
     }
     return savedBoard
@@ -211,4 +180,3 @@ async function addBoardMsg(boardId, txt) {
 
     return msg
 }
-

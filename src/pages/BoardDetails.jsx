@@ -1,81 +1,78 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service";
-import { loadBoard, addBoardMsg } from "../store/actions/board.actions";
+import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
+import { loadBoard, addBoardMsg } from '../store/actions/board.actions'
 
-import { GroupList } from "../cmps/GroupList";
-import { SideBar } from "../cmps/Sidebar";
-import { BoardHeader } from "../cmps/BoardHeader";
-import { Outlet } from "react-router-dom";
-import { TaskDetails } from "../cmps/TaskDetails";
+import { GroupList } from '../cmps/GroupList'
+import { SideBar } from '../cmps/Sidebar'
+import { BoardHeader } from '../cmps/BoardHeader'
+import { Outlet } from 'react-router-dom'
+import { TaskDetails } from '../cmps/TaskDetails'
 
 export function BoardDetails() {
-  const { boardId } = useParams();
-  const { taskId } = useParams();
-  const { groupId } = useParams();
+    const { boardId } = useParams()
+    const { taskId } = useParams()
+    const { groupId } = useParams()
 
-  const [isTaskDetailsOpen, setIsTaskDetailsOpen] = useState(false);
-  const board = useSelector((storeState) => storeState.boardModule.board);
+    const [isTaskDetailsOpen, setIsTaskDetailsOpen] = useState(false)
+    const board = useSelector(storeState => storeState.boardModule.board)
 
-  useEffect(() => {
-    loadBoard(boardId);
-    // console.log("board:", board);
-  }, [boardId]);
+    useEffect(() => {
+        loadBoard(boardId)
+        // console.log("board:", board);
+    }, [boardId])
 
-  function openTaskDetails() {
-    setIsTaskDetailsOpen(!isTaskDetailsOpen);
-  }
-
-  async function onAddBoardMsg(boardId) {
-    try {
-      await addBoardMsg(boardId, "bla bla " + parseInt(Math.random() * 10));
-      showSuccessMsg(`Board msg added`);
-    } catch (err) {
-      showErrorMsg("Cannot add board msg");
+    function openTaskDetails() {
+        setIsTaskDetailsOpen(!isTaskDetailsOpen)
     }
-  }
 
-  const group = board?.groups?.find((group) => group.id === groupId);
+    async function onAddBoardMsg(boardId) {
+        try {
+            await addBoardMsg(boardId, 'bla bla ' + parseInt(Math.random() * 10))
+            showSuccessMsg(`Board msg added`)
+        } catch (err) {
+            showErrorMsg('Cannot add board msg')
+        }
+    }
 
-  const task = group?.tasks?.find((task) => task.id === taskId);
+    const group = board?.groups?.find(group => group.id === groupId)
 
-  return (
-    <section
-      className="board-details"
-      style={{
-        backgroundImage: `url(${board?.style?.backgroundImage})`,
-      }}
-    >
-      {taskId && (
-        <TaskDetails
-          boardId={boardId}
-          task={task}
-          // openTaskDetails={openTaskDetails}
-        />
-      )}
+    const task = group?.tasks?.find(task => task.id === taskId)
 
-      <BoardHeader />
-      {/* <SideBar /> */}
-      <Link to="/board">Back to list</Link>
-      <h1>Board Details</h1>
+    return (
+        <section
+            className="board-details"
+            style={{
+                backgroundImage: `url(${board?.style?.backgroundImage})`,
+            }}>
+            {taskId && (
+                <TaskDetails
+                    boardId={boardId}
+                    task={task}
+                />
+            )}
 
-      {board && <GroupList groups={board.groups} />}
-      {board && (
-        <div>
-          <h3>{board.title}</h3>
-          <pre> {JSON.stringify(board, null, 2)} </pre>
-        </div>
-      )}
-      <button
-        onClick={() => {
-          onAddBoardMsg(board._id);
-        }}
-      >
-        Add board msg
-      </button>
-    </section>
-  );
+            <BoardHeader />
+            {/* <SideBar /> */}
+            <Link to="/board">Back to list</Link>
+            <h1>Board Details</h1>
+
+            {board && <GroupList groups={board.groups} />}
+            {/* {board && (
+                <div>
+                    <h3>{board.title}</h3>
+                    <pre> {JSON.stringify(board, null, 2)} </pre>
+                </div>
+            )} */}
+            <button
+                onClick={() => {
+                    onAddBoardMsg(board._id)
+                }}>
+                Add board msg
+            </button>
+        </section>
+    )
 }
