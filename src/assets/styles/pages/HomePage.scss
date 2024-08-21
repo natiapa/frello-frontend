@@ -3,7 +3,8 @@
   flex-direction: column;
   text-align: center;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
+  margin-inline: auto;
 
   background: url("//images.ctfassets.net/rz1oowkt5gyp/7lTGeXbBRNRLaVk2MdBjtJ/99c266ed4cb8cc63bd0c388071f01ff6/white-wave-bg.svg")
       center bottom 50px / 100% 14.6% no-repeat scroll padding-box border-box,

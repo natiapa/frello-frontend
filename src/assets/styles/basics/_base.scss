@@ -4,11 +4,10 @@
 
 html {
   line-height: 1.6;
-  // color: $clr2;
+  overflow-y: hidden;
 }
 
 body {
-  // max-width: 1024px;
   margin: 0 auto;
 
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
