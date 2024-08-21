@@ -8,6 +8,13 @@
 
   background-color: lightblue;
   z-index: 3;
+  & button {
+    background-color: transparent;
+
+    & span {
+      color: #000;
+    }
+  }
 }
 
 .overlay {

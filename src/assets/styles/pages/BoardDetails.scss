@@ -2,7 +2,7 @@
   grid-column: 1/-1;
   gap: 1px;
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: auto 1fr;
   grid-template-rows: 50px auto;
   background-size: cover;
   background-position: center;
