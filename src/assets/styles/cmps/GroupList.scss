@@ -1,3 +1,7 @@
 .group-list {
-  display: flex;
+  grid-column: 2;
+ 
+  display: grid;
+  width: max-content;
+ 
 }

@@ -11,23 +11,18 @@ import { SideBar } from '../cmps/Sidebar'
 import { BoardHeader } from '../cmps/BoardHeader'
 import { Outlet } from 'react-router-dom'
 import { TaskDetails } from '../cmps/TaskDetails'
+import { BoardSideBar } from '../cmps/BoardSideBar'
 
 export function BoardDetails() {
     const { boardId } = useParams()
     const { taskId } = useParams()
     const { groupId } = useParams()
 
-    const [isTaskDetailsOpen, setIsTaskDetailsOpen] = useState(false)
     const board = useSelector(storeState => storeState.boardModule.board)
 
     useEffect(() => {
         loadBoard(boardId)
-        // console.log("board:", board);
     }, [boardId])
-
-    function openTaskDetails() {
-        setIsTaskDetailsOpen(!isTaskDetailsOpen)
-    }
 
     async function onAddBoardMsg(boardId) {
         try {
@@ -48,31 +43,19 @@ export function BoardDetails() {
             style={{
                 backgroundImage: `url(${board?.style?.backgroundImage})`,
             }}>
-            {taskId && (
-                <TaskDetails
-                    boardId={boardId}
-                    task={task}
-                />
-            )}
-
             <BoardHeader />
-            {/* <SideBar /> */}
-            <Link to="/board">Back to list</Link>
-            <h1>Board Details</h1>
 
+            
+            {board && <BoardSideBar board={board} />}
             {board && <GroupList groups={board.groups} />}
-            {/* {board && (
-                <div>
-                    <h3>{board.title}</h3>
-                    <pre> {JSON.stringify(board, null, 2)} </pre>
-                </div>
-            )} */}
-            <button
+            {taskId && <TaskDetails boardId={boardId} task={task} />}
+
+            {/* <button
                 onClick={() => {
                     onAddBoardMsg(board._id)
                 }}>
                 Add board msg
-            </button>
+            </button> */}
         </section>
     )
 }
