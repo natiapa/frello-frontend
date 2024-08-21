@@ -19,9 +19,11 @@ export function LabelList({ labels }) {
             console.log(labelItem)
             if (labelItem) {
                 return (
-                    <div key={index} style={{ color: labelItem.color }}>
-                        {labelItem.label}
-                    </div>
+                    <div 
+                    key={index} 
+                    className="label-square" 
+                    style={{ backgroundColor: labelItem.color }}
+                  ></div>
                 )
             }
         })
