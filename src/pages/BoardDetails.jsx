@@ -6,21 +6,21 @@ import { Link } from "react-router-dom";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service";
 import { loadBoard, addBoardMsg } from "../store/actions/board.actions";
 
-import { GroupList } from '../cmps/GroupList'
-import { SideBar } from '../cmps/Sidebar'
-import { BoardHeader } from '../cmps/BoardHeader'
-import { Outlet } from 'react-router-dom'
-import { TaskDetails } from '../cmps/TaskDetails'
-import { BoardSideBar } from '../cmps/BoardSideBar'
+import { GroupList } from "../cmps/GroupList";
+import { SideBar } from "../cmps/Sidebar";
+import { BoardHeader } from "../cmps/BoardHeader";
+import { Outlet } from "react-router-dom";
+import { TaskDetails } from "../cmps/TaskDetails";
+import { BoardSideBar } from "../cmps/BoardSideBar";
 
 export function BoardDetails() {
   const { boardId, groupId, taskId } = useParams();
 
-    const board = useSelector(storeState => storeState.boardModule.board)
+  const board = useSelector((storeState) => storeState.boardModule.board);
 
-    useEffect(() => {
-        loadBoard(boardId)
-    }, [boardId])
+  useEffect(() => {
+    loadBoard(boardId);
+  }, [boardId]);
 
   async function onAddBoardMsg(boardId) {
     try {
@@ -35,25 +35,27 @@ export function BoardDetails() {
 
   const task = group?.tasks?.find((task) => task.id === taskId);
 
-    return (
-        <section
-            className="board-details"
-            style={{
-                backgroundImage: `url(${board?.style?.backgroundImage})`,
-            }}>
-            <BoardHeader />
+  if (taskId && !task) return;
 
-            
-            {board && <BoardSideBar board={board} />}
-            {board && <GroupList groups={board.groups} />}
-            {taskId && <TaskDetails boardId={boardId} task={task} />}
+  return (
+    <section
+      className="board-details"
+      style={{
+        backgroundImage: `url(${board?.style?.backgroundImage})`,
+      }}
+    >
+      <BoardHeader />
 
-            {/* <button
+      {board && <BoardSideBar board={board} />}
+      {board && <GroupList groups={board.groups} />}
+      {taskId && <TaskDetails boardId={boardId} task={task} />}
+
+      {/* <button
                 onClick={() => {
                     onAddBoardMsg(board._id)
                 }}>
                 Add board msg
             </button> */}
-        </section>
-    )
+    </section>
+  );
 }
