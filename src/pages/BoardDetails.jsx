@@ -14,9 +14,8 @@ import { TaskDetails } from "../cmps/TaskDetails";
 import { BoardSideBar } from "../cmps/BoardSideBar";
 
 export function BoardDetails() {
-  const { boardId, groupId, taskId } = useParams();
-
-  const board = useSelector((storeState) => storeState.boardModule.board);
+  const board = useSelector((storeState) => storeState.boardModule.board)
+  const { boardId, groupId, taskId } = useParams()
 
   useEffect(() => {
     loadBoard(boardId);
@@ -32,7 +31,6 @@ export function BoardDetails() {
   }
 
   const group = board?.groups?.find((group) => group.id === groupId);
-
   const task = group?.tasks?.find((task) => task.id === taskId);
 
   if (taskId && !task) return;
