@@ -4,17 +4,10 @@ import { useSelector } from "react-redux";
 import { UserModal } from "./UserModal.jsx";
 import { SearchBar } from "./SearchBar.jsx";
 
-import { useParams } from "react-router-dom";
-
 export function AppHeader() {
-  // const [openForm, setOpenForm] = useState(false);
   const [showUserModal, setShowUserModal] = useState(false);
 
   const user = useSelector((storeState) => storeState.userModule.user);
-
-  // function handleOpenAuth() {
-  //   setOpenForm(!openForm);
-  // }
 
   return (
     <>
