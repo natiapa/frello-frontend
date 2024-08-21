@@ -13,14 +13,33 @@ import { Outlet } from "react-router-dom";
 import { TaskDetails } from "../cmps/TaskDetails";
 import { BoardSideBar } from "../cmps/BoardSideBar";
 
+import { FastAverageColor } from "fast-average-color";
+
 export function BoardDetails() {
   const { boardId, groupId, taskId } = useParams();
+  const [headerBgColor, setHeaderBgColor] = useState();
 
   const board = useSelector((storeState) => storeState.boardModule.board);
 
   useEffect(() => {
     loadBoard(boardId);
   }, [boardId]);
+
+  useEffect(() => {
+    async function calculateBgColor() {
+      if (board?.style?.backgroundImage) {
+        const fac = new FastAverageColor();
+        try {
+          const color = await fac.getColorAsync(board.style.backgroundImage);
+          setHeaderBgColor(color.hex);
+          console.log(color.hex);
+        } catch (error) {
+          console.error("Failed to calculate background color:", error);
+        }
+      }
+    }
+    calculateBgColor();
+  }, [board?.style?.backgroundImage]);
 
   async function onAddBoardMsg(boardId) {
     try {
@@ -44,9 +63,9 @@ export function BoardDetails() {
         backgroundImage: `url(${board?.style?.backgroundImage})`,
       }}
     >
-      <BoardHeader />
+      <BoardHeader bgColor={headerBgColor} />
 
-      {board && <BoardSideBar board={board} />}
+      {board && <BoardSideBar board={board} bgColor={headerBgColor} />}
       {board && <GroupList groups={board.groups} />}
       {taskId && <TaskDetails boardId={boardId} task={task} />}
 
