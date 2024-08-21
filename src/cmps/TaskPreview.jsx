@@ -9,5 +9,5 @@ export function TaskPreview({ groupId, task }) {
     <div>
       <h1>kkkkk</h1>
     </div>
-  );
+  )
 }
