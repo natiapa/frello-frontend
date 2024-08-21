@@ -1,7 +1,6 @@
 .task-list {
-  & li {
-    display: flex;
-    margin-block-end: 1em;
+  li {
+    background-color: $bg-color-task-list;
     & button {
       color: black;
     }
