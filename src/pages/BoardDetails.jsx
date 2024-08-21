@@ -52,7 +52,6 @@ export function BoardDetails() {
   }
 
   const group = board?.groups?.find((group) => group.id === groupId);
-
   const task = group?.tasks?.find((task) => task.id === taskId);
 
   if (taskId && !task) return;

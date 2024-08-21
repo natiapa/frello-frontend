@@ -64,7 +64,7 @@ async function query(filterBy = { txt: '' }) {
                         {
                             id: 'c101',
                             title: 'Replace logo',
-                            labels: ['Design', 'High Priority'],
+                            labels: ['Urgent', 'Low Priority'],
                             members: ['John Doe', 'Jane Smith'],
                             attachments: ['logo_v1.png', 'logo_v2.png'],
                             comments: ['Please update the logo with the latest version', 'Make sure to use the correct color scheme'],
@@ -74,7 +74,7 @@ async function query(filterBy = { txt: '' }) {
                         {
                             id: 'c102',
                             title: 'Update website content',
-                            labels: ['Content', 'Medium Priority'],
+                            labels: ['On Hold', 'In Progress'],
                             members: ['Alice Johnson', 'Bob Brown'],
                             attachments: ['homepage_draft.docx', 'about_us_update.docx'],
                             comments: ['Content needs to be SEO optimized', 'Check for grammatical errors before finalizing'],
@@ -84,7 +84,7 @@ async function query(filterBy = { txt: '' }) {
                         {
                             id: 'c103',
                             title: 'Bug fix in checkout process',
-                            labels: ['Bug', 'Urgent'],
+                            labels: ['Important', 'Urgent'],
                             members: ['Michael Green', 'Sarah Lee'],
                             attachments: ['bug_report_checkout.pdf'],
                             comments: ['Checkout process fails under certain conditions', 'Issue reported by multiple users'],
@@ -94,7 +94,7 @@ async function query(filterBy = { txt: '' }) {
                         {
                             id: 'c104',
                             title: 'Create marketing campaign',
-                            labels: ['Marketing', 'Low Priority'],
+                            labels: ['Completed', 'Low Priority'],
                             members: ['Emily White', 'David Black'],
                             attachments: ['campaign_brief.pdf', 'ad_samples.png'],
                             comments: ['Focus on social media platforms', 'Consider influencer partnerships'],
