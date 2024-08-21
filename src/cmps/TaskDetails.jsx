@@ -1,12 +1,10 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { LabelList } from "./LabelList";
 
 export function TaskDetails({ boardId, task }) {
-  
-  const [isEditing, setIsEditing] = useState(false)
-  const navigate = useNavigate()
- 
+  const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
 
   console.log("task:", task);
   function onCloseForm() {
@@ -37,15 +35,13 @@ export function TaskDetails({ boardId, task }) {
             </span>
           </button>
           <h1 onClick={() => setIsEditing(true)}>{task.title}</h1>
-        
-        
-          <h3>Labels:</h3> 
-          <LabelList labels={task.labels}/>
-            <h3>Members:</h3>
-            {task.members.map((member, idx) => (
-              <li key={idx}>{member}</li>
-            ))}
-        
+
+          <h3>Labels:</h3>
+          <LabelList labels={task.labels} />
+          <h3>Members:</h3>
+          {task.members.map((member, idx) => (
+            <li key={idx}>{member}</li>
+          ))}
 
           <div className="description">
             <h3>Description:</h3>
