@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -17,12 +17,17 @@ export function BoardDetails() {
   const { taskId } = useParams();
   const { groupId } = useParams();
 
+  const [isTaskDetailsOpen, setIsTaskDetailsOpen] = useState(false);
   const board = useSelector((storeState) => storeState.boardModule.board);
 
   useEffect(() => {
     loadBoard(boardId);
     // console.log("board:", board);
   }, [boardId]);
+
+  function openTaskDetails() {
+    setIsTaskDetailsOpen(!isTaskDetailsOpen);
+  }
 
   async function onAddBoardMsg(boardId) {
     try {
@@ -44,7 +49,13 @@ export function BoardDetails() {
         backgroundImage: `url(${board?.style?.backgroundImage})`,
       }}
     >
-      {taskId && <TaskDetails task={task} />}
+      {taskId && (
+        <TaskDetails
+          boardId={boardId}
+          task={task}
+          // openTaskDetails={openTaskDetails}
+        />
+      )}
 
       <BoardHeader />
       {/* <SideBar /> */}
