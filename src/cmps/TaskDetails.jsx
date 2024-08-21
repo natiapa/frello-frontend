@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { LabelList } from "./LabelList";
 
 export function TaskDetails({ boardId, task }) {
   const navigate = useNavigate();
@@ -32,13 +33,15 @@ export function TaskDetails({ boardId, task }) {
             </span>
           </button>
           <h1>{task.title}</h1>
-          <ul>
+          {/* <ul>
             <h3>Labels:</h3>
             {task.labels.map((label, idx) => (
               <li key={idx}>{label}</li>
             ))}
-          </ul>
+          </ul> */}
           <ul>
+          <h3>Labels:</h3> 
+          <LabelList labels={task.labels}/>
             <h3>Members:</h3>
             {task.members.map((member, idx) => (
               <li key={idx}>{member}</li>
