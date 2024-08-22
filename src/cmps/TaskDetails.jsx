@@ -1,23 +1,30 @@
 import { useEffect, useRef, useState } from "react";
-import { json, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import { LabelList } from "./LabelList";
 import { EditTaskTitle } from "./EditTaskTitle";
+import { useSelector } from "react-redux";
 
 import svgIcon from "./SvgIcon";
 
 export function TaskDetails() {
   const dialogRef = useRef(null);
   const params = useParams();
+  const { groupId, taskId } = params;
+
+  const board = useSelector((storeState) => storeState.boardModule.board);
+  const group = board?.groups?.find((group) => group.id === groupId);
+  const task = group?.tasks?.find((task) => task.id === taskId);
 
   console.log(params);
 
   const navigate = useNavigate();
 
-  // useEffect(()=>{
-  //   if
-  //   dialogRef.current.showModal()
-  // },[])
+  useEffect(() => {
+    if (dialogRef.current) {
+      dialogRef.current.showModal();
+    }
+  }, [params]);
 
   // useEffect(() => {
   //   if (title !== task.title) {
@@ -43,14 +50,19 @@ export function TaskDetails() {
   //   }
   // }, [title])
 
-  function onCloseForm() {
-    navigate(`/board/${board._id}`);
+  function onCloseDialog() {
+    navigate(`/board/${params.boardId}`);
+    if (dialogRef.current) {
+      dialogRef.current.close();
+    }
   }
 
   return (
     <>
-      <dialog ref={dialogRef}>
-        <h1>{JSON.stringify(params)}</h1>
+      <div className="overlay" onClick={onCloseDialog}></div>
+      <dialog className="task-details" ref={dialogRef} tabIndex="-1">
+        <button onClick={onCloseDialog}>x</button>
+        <h1>{task.title || ""}</h1>
       </dialog>
       {/* <div className="overlay" onClick={onCloseForm}></div>
       <div className="task-details">
