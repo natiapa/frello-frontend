@@ -1,21 +1,44 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
+
 import { LabelList } from "./LabelList"
 import { EditTaskTitle } from "./EditTaskTitle"
 
 
-
-export function TaskDetails({ boardId, task, loadBoard }) {
+export function TaskDetails({ board, group, task, onUpdateBoard }) {
 
   const [title, setTitle] = useState(task.title)
   const [isEditing, setIsEditing] = useState(false)
   const navigate = useNavigate()
 
- 
+
+  useEffect(() => {
+    if (title !== task.title) {
+
+      const updatedTask = { ...task, title }
+
+      const updateGrope = {
+        ...group,
+        tasks: group.tasks.map(tsk =>
+          tsk.id === task.id ? updatedTask : tsk
+        )
+      }
+
+      const updateBoard = {
+        ...board,
+        groups: board.groups.map(grp =>
+          grp.id === group.id ? updateGrope : grp
+        )
+      }
+      console.log(updateBoard)
+
+      onUpdateBoard(updateBoard)
+    }
+  }, [title])
 
 
   function onCloseForm() {
-    navigate(`/board/${boardId}`);
+    navigate(`/board/${board._id}`)
   }
 
   return (
