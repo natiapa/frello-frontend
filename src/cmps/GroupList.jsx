@@ -1,46 +1,37 @@
-import { useEffect, useState } from "react";
-import { GroupPreview } from "./GroupPreview";
-import { boardService } from "../services/board";
+import { useEffect, useState } from 'react'
+import { GroupPreview } from './GroupPreview'
+import { boardService } from '../services/board'
+import { useSelector } from 'react-redux'
+import { updateBoard } from '../store/actions/board.actions'
+import { on } from 'ws'
 
 export function GroupList({ groups }) {
-  const [isAddingGroup, setIsAddingGroup] = useState(false);
-  // useEffect(() => {
-  //   boardService.updateBoard();
-  // }, [groups]);
+    const [isNewGroup, setIsNewGroup] = useState(false)
+    const [newGroup, setNewGroup] = useState({})
+    const currBoard = useSelector(state => state.boardModule.board)
 
-  function handleChange(ev) {
-    const { value } = ev.target;
-    console.log(value);
-  }
+    useEffect(() => {
+        setNewGroup(boardService.getEmptyGroup())
+        setIsNewGroup(true)
+    }, [!isNewGroup])
 
-  function addList() {}
+    function onAddGroup() {
+        const updatedBoard = { ...currBoard }
+        updatedBoard.groups.push(newGroup)
+        updateBoard(updatedBoard)
+        setIsNewGroup(false)
+    }
 
-  if (!groups) return <div>Loading...</div>;
-  return (
-    <div className="group-list">
-      {groups.map((group) => (
-        <GroupPreview group={group} key={group.id} />
-      ))}
-      <div className="add-group-preview">
-        {isAddingGroup && (
-          <div>
-            <input onChange={(ev) => handleChange(ev)} />
-            <button style={{ color: "black", display: "flex" }}>
-              Add list
-            </button>
-          </div>
-        )}
-        {!isAddingGroup && (
-          <button
-            style={{ color: "black" }}
-            className="add-group"
-            onClick={() => setIsAddingGroup(!isAddingGroup)}
-          >
-            Add Group +
-          </button>
-        )}
-        {/* {isAddingGroup && <GroupPreview group={{}} />} */}
-      </div>
-    </div>
-  );
+    if (!groups) return <div>Loading...</div>
+    return (
+        <div className="group-list">
+            {groups.map(group => (
+                <GroupPreview group={group} key={group.id} />
+            ))}
+            <div className="add-group-preview">
+                {isNewGroup && <GroupPreview group={newGroup} key={newGroup.id}/>}
+                <button onClick={onAddGroup}>Add Group</button>
+            </div>
+        </div>
+    )
 }

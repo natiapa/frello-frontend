@@ -9,7 +9,7 @@ export function TaskPreview({ groupId, task }) {
 
   return (
     <div>
-      <Link to={`/board/${boardId}/${groupId}/${task.id}`}>{task.title}</Link>
+      <Link to={`/board/${boardId}/${groupId}/${task.id}`}>{task.title || 'New'}</Link>
     </div>
   );
 }

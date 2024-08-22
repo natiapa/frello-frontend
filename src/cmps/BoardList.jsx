@@ -11,12 +11,13 @@ export function BoardList({ boards, onAddBoard, onRemoveBoard, onUpdateBoard }) 
         return board.owner?._id === user._id
     }
 
+    
     return (
         <ul className="board-list">
             <header>
                 <h2>Demo boards</h2>
             </header>
-            {boards.map(board => (
+            {boards && boards.length && boards.map(board => (
                 <li key={board._id}>
                     <BoardPreview board={board} />
                     <Link to={`/board/${board._id}`}>{board.title}</Link>

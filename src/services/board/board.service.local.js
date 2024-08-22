@@ -10,7 +10,8 @@ export const boardService = {
     save,
     remove,
     addBoardMsg,
-    updateBoard
+    updateBoard,
+    getEmptyGroup,
 }
 window.cs = boardService
 
@@ -692,8 +693,7 @@ async function query(filterBy = { txt: '' }) {
                         },
                     ],
                     style: {},
-                }
-
+                },
             ],
             activities: [
                 {
@@ -770,42 +770,46 @@ async function addBoardMsg(boardId, txt) {
     return msg
 }
 
-function updateBoard(board, groupId, taskId, { key, value }, activity) {
-
+function updateBoard(board, groupId, taskId, { key, value }, activity = '') {
     const gIdx = board.groups?.findIndex(group => group.id === groupId)
     const tIdx = board.groups[gIdx]?.tasks.findIndex(task => task.id === taskId)
 
     if (tIdx) {
-        board.groups[gIdx].tasks[tIdx][key] = value;
-
-    }
-    else if (gIdx && !tIdx) {
-        board.groups[gIdx][key] = value;
+        board.groups[gIdx].tasks[tIdx][key] = value
+    } else if (gIdx && !tIdx) {
+        board.groups[gIdx][key] = value
     } else {
-
-        board[key] = value;
+        board[key] = value
     }
 
     if (activity) {
-        activity = addActivity(activity);
+        activity = addActivity(activity)
     }
 
-    save(board);
-    return board;
+    save(board)
+    return board
     // Code to update the board
 }
 
 function addActivity(txt) {
-    return activity = {
+    return (activity = {
         id: utilService.makeId(),
         txt,
         createdAt: Date.now(),
         byMember: {
             _id: 'u101',
             fullname: 'Abi Abambi',
-            imgUrl: 'http://some-img'
+            imgUrl: 'http://some-img',
         },
-        type: 'add-task'
-    }
+        type: 'add-task',
+    })
+}
 
+function getEmptyGroup() {
+    return {
+        id: makeId(),
+        title: '',
+        tasks: [{ id: makeId(), title: '', labels: [], members: [], attachments: [], comments: [], cover: '', dueDate: '' }],
+        style: {},
+    }
 }
