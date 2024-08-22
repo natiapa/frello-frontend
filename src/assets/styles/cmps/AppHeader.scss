@@ -12,10 +12,8 @@
 
 .app-header {
   @include flexCenter(space-between);
-  // border-bottom: 1px solid $gray1;
   padding: 0 1em;
   height: 50px;
-  // margin-block-end: 5px;
   grid-column: 1/-1;
 
   & section {
@@ -28,13 +26,15 @@
 
       & .menu {
         @include btn();
+        margin-block-start: 4px;
       }
 
       & a {
         @include flexCenter(center);
 
-        & img {
-          width: 5em;
+        & .logo {
+          width: 75px;
+          margin-block-start: 3px;
         }
       }
 
