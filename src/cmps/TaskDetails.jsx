@@ -13,7 +13,7 @@ export function TaskDetails({ boardId, task, loadBoard }) {
 
  
 
-  console.log("task:", task);
+
   function onCloseForm() {
     navigate(`/board/${boardId}`);
   }

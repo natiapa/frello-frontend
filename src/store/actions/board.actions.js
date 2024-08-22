@@ -5,7 +5,6 @@ import { ADD_BOARD, REMOVE_BOARD, SET_BOARDS, SET_BOARD, UPDATE_BOARD, ADD_BOARD
 export async function loadBoards(filterBy) {
     try {
         const boards = await boardService.query(filterBy)
-        console.log('boards:', boards)
         store.dispatch(getCmdSetBoards(boards))
     } catch (err) {
         console.log('Cannot load boards', err)
@@ -16,7 +15,6 @@ export async function loadBoards(filterBy) {
 export async function loadBoard(boardId) {
     try {
         const board = await boardService.getById(boardId)
-        console.log('board:', board)
         store.dispatch(getCmdSetBoard(board))
     } catch (err) {
         console.log('Cannot load board', err)

@@ -33,7 +33,7 @@ export function BoardDetails() {
         try {
           const color = await fac.getColorAsync(board.style.backgroundImage);
           setHeaderBgColor(color.hex);
-          console.log(color.hex);
+       
         } catch (error) {
           console.error("Failed to calculate background color:", error);
         }

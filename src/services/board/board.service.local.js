@@ -31,18 +31,6 @@ async function query(filterBy = { txt: '' }) {
                 backgroundImage: 'https://cdn.pixabay.com/photo/2017/11/29/18/54/leaf-2986837_1280.jpg',
                 backgroundColor: '#61bd4f',
             },
-            labels: [
-                {
-                    id: 'l101',
-                    title: 'Done',
-                    color: '#61bd4f',
-                },
-                {
-                    id: 'l102',
-                    title: 'Progress',
-                    color: '#61bd33',
-                },
-            ],
             members: [
                 {
                     id: 'u101',
