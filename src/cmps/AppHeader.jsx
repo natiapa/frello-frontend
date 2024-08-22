@@ -55,7 +55,7 @@ export function AppHeader({ bgColor, borderBottom }) {
             <span class="material-symbols-outlined">search</span>
           </div> */}
 
-        <SearchBar />
+        {/* <SearchBar /> */}
 
         <div
           style={{ backgroundColor: "orange" }}
