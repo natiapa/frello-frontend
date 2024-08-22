@@ -18,6 +18,7 @@ export function AppHeader({ bgColor, borderBottom }) {
         <span className="material-symbols-outlined menu">apps</span>
         <Link to={user ? "/workspace" : "/"}>
           <img
+            className="logo"
             style={{ width: "5em" }}
             src="https://1000logos.net/wp-content/uploads/2021/05/Trello-logo.png"
           />
