@@ -1,15 +1,17 @@
 .task-details {
   position: fixed;
 
-  top: 25vh;
-  left: 40vw;
-  padding: 0.5rem;
-  border-radius: 20px;
+  // top: 25vh;
+  // left: 40vw;
+  // padding: 0.5rem;
+  // border-radius: 20px;
 
-  background-color: lightblue;
+  // background-color: lightblue;
   z-index: 3;
+  
   & button {
     background-color: transparent;
+    color: #000;
 
     & span {
       color: #000;
@@ -22,5 +24,5 @@
   inset: 0;
   background-color: #000;
   opacity: 0.7;
-  z-index: 2;
+  z-index: 5;
 }

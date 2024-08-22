@@ -1,62 +1,71 @@
-import { useEffect, useRef, useState } from "react"
-import { json, useNavigate ,useParams } from "react-router"
+import { useEffect, useRef, useState } from 'react'
+import { useNavigate, useParams } from 'react-router'
 
-import { LabelList } from "./LabelList"
-import { EditTaskTitle } from "./EditTaskTitle"
-
+import { LabelList } from './LabelList'
+import { EditTaskTitle } from './EditTaskTitle'
+import { useSelector } from 'react-redux'
 
 export function TaskDetails() {
-
-
-  const dialogRef = useRef(null)
+    const dialogRef = useRef(null)
     const params = useParams()
+    const { groupId, taskId } = params
 
-  console.log(params);
-  
-  const navigate = useNavigate()
-
-  // useEffect(()=>{
-  //   if
-  //   dialogRef.current.showModal()
-  // },[])
-
-  // useEffect(() => {
-  //   if (title !== task.title) {
-
-  //     const updatedTask = { ...task, title }
-
-  //     const updateGrope = {
-  //       ...group,
-  //       tasks: group.tasks.map(tsk =>
-  //         tsk.id === task.id ? updatedTask : tsk
-  //       )
-  //     }
-
-  //     const updateBoard = {
-  //       ...board,
-  //       groups: board.groups.map(grp =>
-  //         grp.id === group.id ? updateGrope : grp
-  //       )
-  //     }
-  //     console.log(updateBoard)
-
-  //     onUpdateBoard(updateBoard)
-  //   }
-  // }, [title])
+    const board = useSelector(storeState => storeState.boardModule.board)
+    const group = board?.groups?.find(group => group.id === groupId)
+    const task = group?.tasks?.find(task => task.id === taskId)
 
 
-  function onCloseForm() {
-    navigate(`/board/${board._id}`)
-  }
+    console.log(params)
 
-  return (
-    <>
+    const navigate = useNavigate()
 
+    
 
-    <dialog ref={dialogRef}>
-       <h1>{JSON.stringify(params)}</h1>
-    </dialog>
-      {/* <div className="overlay" onClick={onCloseForm}></div>
+    useEffect(() => {
+        if (dialogRef.current) {
+            dialogRef.current.showModal()
+        }
+    }, [params])
+
+    // useEffect(() => {
+    //   if (title !== task.title) {
+
+    //     const updatedTask = { ...task, title }
+
+    //     const updateGrope = {
+    //       ...group,
+    //       tasks: group.tasks.map(tsk =>
+    //         tsk.id === task.id ? updatedTask : tsk
+    //       )
+    //     }
+
+    //     const updateBoard = {
+    //       ...board,
+    //       groups: board.groups.map(grp =>
+    //         grp.id === group.id ? updateGrope : grp
+    //       )
+    //     }
+    //     console.log(updateBoard)
+
+    //     onUpdateBoard(updateBoard)
+    //   }
+    // }, [title])
+
+    function onCloseDialog() {
+        navigate(`/board/${params.boardId}`)
+        if (dialogRef.current) {
+            dialogRef.current.close()
+        }
+    }
+
+    return (
+        <>
+            <div className="overlay" onClick={onCloseDialog}></div>
+            <dialog className="task-details" ref={dialogRef} tabIndex="-1">
+                <button onClick={onCloseDialog}>x</button>
+                <h1>{task.title || ''}</h1>
+            </dialog>
+            {/* <div className="overlay" onClick={onCloseForm}></div>
       <div className="task-details">
         <form onSubmit={onCloseForm}>
           <button>
@@ -94,6 +103,6 @@ export function TaskDetails() {
           </div>
         </form>
       </div> */}
-    </>
-  );
+        </>
+    )
 }
