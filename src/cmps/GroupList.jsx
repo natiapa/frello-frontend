@@ -13,7 +13,7 @@ export function GroupList({ groups }) {
     useEffect(() => {
         setNewGroup(boardService.getEmptyGroup())
         setIsNewGroup(true)
-    }, [!isNewGroup])
+    }, [isNewGroup])
 
     function onAddGroup() {
         const updatedBoard = { ...currBoard }

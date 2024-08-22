@@ -38,7 +38,7 @@ export function TaskDetails() {
       {/* <div className="overlay" onClick={onCloseDialog}></div> */}
       <dialog className="task-details" ref={dialogRef} tabIndex="-1">
         <button onClick={onCloseDialog}>x</button>
-        <h1>{task.title || ""}</h1>
+        {task?.title && <h1>{task.title || ""}</h1>}
       </dialog>
     </>
   );
