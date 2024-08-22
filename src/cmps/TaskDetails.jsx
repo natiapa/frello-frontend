@@ -1,40 +1,48 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router"
+import { useEffect, useRef, useState } from "react"
+import { json, useNavigate ,useParams } from "react-router"
 
 import { LabelList } from "./LabelList"
 import { EditTaskTitle } from "./EditTaskTitle"
 
 
-export function TaskDetails({ board, group, task, onUpdateBoard }) {
+export function TaskDetails() {
 
-  const [title, setTitle] = useState(task.title)
-  const [isEditing, setIsEditing] = useState(false)
+
+  const dialogRef = useRef(null)
+    const params = useParams()
+
+  console.log(params);
+  
   const navigate = useNavigate()
 
+  // useEffect(()=>{
+  //   if
+  //   dialogRef.current.showModal()
+  // },[])
 
-  useEffect(() => {
-    if (title !== task.title) {
+  // useEffect(() => {
+  //   if (title !== task.title) {
 
-      const updatedTask = { ...task, title }
+  //     const updatedTask = { ...task, title }
 
-      const updateGrope = {
-        ...group,
-        tasks: group.tasks.map(tsk =>
-          tsk.id === task.id ? updatedTask : tsk
-        )
-      }
+  //     const updateGrope = {
+  //       ...group,
+  //       tasks: group.tasks.map(tsk =>
+  //         tsk.id === task.id ? updatedTask : tsk
+  //       )
+  //     }
 
-      const updateBoard = {
-        ...board,
-        groups: board.groups.map(grp =>
-          grp.id === group.id ? updateGrope : grp
-        )
-      }
-      console.log(updateBoard)
+  //     const updateBoard = {
+  //       ...board,
+  //       groups: board.groups.map(grp =>
+  //         grp.id === group.id ? updateGrope : grp
+  //       )
+  //     }
+  //     console.log(updateBoard)
 
-      onUpdateBoard(updateBoard)
-    }
-  }, [title])
+  //     onUpdateBoard(updateBoard)
+  //   }
+  // }, [title])
 
 
   function onCloseForm() {
@@ -43,7 +51,12 @@ export function TaskDetails({ board, group, task, onUpdateBoard }) {
 
   return (
     <>
-      <div className="overlay" onClick={onCloseForm}></div>
+
+
+    <dialog ref={dialogRef}>
+       <h1>{JSON.stringify(params)}</h1>
+    </dialog>
+      {/* <div className="overlay" onClick={onCloseForm}></div>
       <div className="task-details">
         <form onSubmit={onCloseForm}>
           <button>
@@ -64,7 +77,6 @@ export function TaskDetails({ board, group, task, onUpdateBoard }) {
               </svg>
             </span>
           </button>
-
           <h1 onClick={() => setIsEditing(true)}>{title}</h1>
           {isEditing && <EditTaskTitle title={title} setTitle={setTitle} setIsEditing={setIsEditing} />}
 
@@ -81,7 +93,7 @@ export function TaskDetails({ board, group, task, onUpdateBoard }) {
             <textarea>{task.description}</textarea>
           </div>
         </form>
-      </div>
+      </div> */}
     </>
   );
 }

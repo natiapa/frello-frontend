@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link ,Outlet } from "react-router-dom"
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
 import { loadBoard, addBoardMsg } from "../store/actions/board.actions"
@@ -9,10 +9,9 @@ import { loadBoard, addBoardMsg } from "../store/actions/board.actions"
 import { GroupList } from "../cmps/GroupList"
 import { SideBar } from "../cmps/Sidebar"
 import { BoardHeader } from "../cmps/BoardHeader"
-import { Outlet } from "react-router-dom"
-import { TaskDetails } from "../cmps/TaskDetails"
+// import { Outlet } from "react-router-dom"
 import { BoardSideBar } from "../cmps/BoardSideBar"
-import { AppHeader } from "../cmps/AppHeader"
+import { AppHeader } from "../cmps/AppHeader"        
 
 import { FastAverageColor } from "fast-average-color"
 
@@ -23,7 +22,7 @@ import {
 
 
 export function BoardDetails() {
-  const { boardId, groupId, taskId } = useParams()
+  const { boardId } = useParams()
   const [headerBgColor, setHeaderBgColor] = useState()
 
   const board = useSelector((storeState) => storeState.boardModule.board)
@@ -51,8 +50,7 @@ export function BoardDetails() {
   async function onUpdateBoard(newBoard) {
     try {
       await updateBoard(newBoard)
-      loadBoard(boardId)
-
+      loadBoard(boardId)//***check if there is other way.***
       // showSuccessMsg("Board U");
     } catch (err) {
       showErrorMsg("Cannot update board")
@@ -69,10 +67,10 @@ export function BoardDetails() {
     }
   }
 
-  const group = board?.groups?.find((group) => group.id === groupId);
-  const task = group?.tasks?.find((task) => task.id === taskId);
+  // const group = board?.groups?.find((group) => group.id === groupId);
+  // const task = group?.tasks?.find((task) => task.id === taskId);
 
-  if (taskId && !task) return;
+  // if (taskId && !task) return;
 
   return (
     <>
@@ -87,7 +85,7 @@ export function BoardDetails() {
 
         {board && <BoardSideBar board={board} bgColor={headerBgColor} />}
         {board && <GroupList groups={board.groups} />}
-        {taskId && <TaskDetails board={board} group={group} task={task} onUpdateBoard={onUpdateBoard} />}
+        {/* {taskId && <TaskDetails board={board} group={group} task={task} onUpdateBoard={onUpdateBoard} />} */}
 
         {/* <button
                 onClick={() => {
@@ -95,6 +93,8 @@ export function BoardDetails() {
                 }}>
                 Add board msg
             </button> */}
+
+          <Outlet/>
       </section>
     </>
   );
