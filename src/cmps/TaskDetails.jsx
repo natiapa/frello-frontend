@@ -59,11 +59,12 @@ export function TaskDetails() {
 
   return (
     <>
-      <div className="overlay" onClick={onCloseDialog}></div>
+      {/* <div className="overlay" onClick={onCloseDialog}></div> */}
       <dialog className="task-details" ref={dialogRef} tabIndex="-1">
         <button onClick={onCloseDialog}>x</button>
         <h1>{task.title || ""}</h1>
       </dialog>
+    
       {/* <div className="overlay" onClick={onCloseForm}></div>
       <div className="task-details">
         <form onSubmit={onCloseForm}>

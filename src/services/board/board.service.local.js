@@ -10,6 +10,7 @@ export const boardService = {
     save,
     remove,
     addBoardMsg,
+    updateBoard
 }
 window.cs = boardService
 

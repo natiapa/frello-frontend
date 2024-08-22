@@ -7,6 +7,11 @@
   // border-radius: 20px;
 
   // background-color: lightblue;
+  
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  
   z-index: 3;
   
   & button {
