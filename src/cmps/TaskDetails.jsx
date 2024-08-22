@@ -26,30 +26,6 @@ export function TaskDetails() {
     }
   }, [params]);
 
-  // useEffect(() => {
-  //   if (title !== task.title) {
-
-  //     const updatedTask = { ...task, title }
-
-  //     const updateGrope = {
-  //       ...group,
-  //       tasks: group.tasks.map(tsk =>
-  //         tsk.id === task.id ? updatedTask : tsk
-  //       )
-  //     }
-
-  //     const updateBoard = {
-  //       ...board,
-  //       groups: board.groups.map(grp =>
-  //         grp.id === group.id ? updateGrope : grp
-  //       )
-  //     }
-  //     console.log(updateBoard)
-
-  //     onUpdateBoard(updateBoard)
-  //   }
-  // }, [title])
-
   function onCloseDialog() {
     navigate(`/board/${params.boardId}`);
     if (dialogRef.current) {
@@ -64,8 +40,36 @@ export function TaskDetails() {
         <button onClick={onCloseDialog}>x</button>
         <h1>{task.title || ""}</h1>
       </dialog>
-    
-      {/* <div className="overlay" onClick={onCloseForm}></div>
+    </>
+  );
+}
+
+// useEffect(() => {
+//   if (title !== task.title) {
+
+//     const updatedTask = { ...task, title }
+
+//     const updateGrope = {
+//       ...group,
+//       tasks: group.tasks.map(tsk =>
+//         tsk.id === task.id ? updatedTask : tsk
+//       )
+//     }
+
+//     const updateBoard = {
+//       ...board,
+//       groups: board.groups.map(grp =>
+//         grp.id === group.id ? updateGrope : grp
+//       )
+//     }
+//     console.log(updateBoard)
+
+//     onUpdateBoard(updateBoard)
+//   }
+// }, [title])
+
+{
+  /* <div className="overlay" onClick={onCloseForm}></div>
       <div className="task-details">
         <form onSubmit={onCloseForm}>
           <button>
@@ -102,7 +106,5 @@ export function TaskDetails() {
             <textarea>{task.description}</textarea>
           </div>
         </form>
-      </div> */}
-    </>
-  );
+      </div> */
 }
