@@ -1,19 +1,18 @@
-import { useEffect, useRef, useState } from "react"
-import { json, useNavigate ,useParams } from "react-router"
+import { useEffect, useRef, useState } from "react";
+import { json, useNavigate, useParams } from "react-router";
 
-import { LabelList } from "./LabelList"
-import { EditTaskTitle } from "./EditTaskTitle"
+import { LabelList } from "./LabelList";
+import { EditTaskTitle } from "./EditTaskTitle";
 
+import svgIcon from "./SvgIcon";
 
 export function TaskDetails() {
-
-
-  const dialogRef = useRef(null)
-    const params = useParams()
+  const dialogRef = useRef(null);
+  const params = useParams();
 
   console.log(params);
-  
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
 
   // useEffect(()=>{
   //   if
@@ -44,18 +43,15 @@ export function TaskDetails() {
   //   }
   // }, [title])
 
-
   function onCloseForm() {
-    navigate(`/board/${board._id}`)
+    navigate(`/board/${board._id}`);
   }
 
   return (
     <>
-
-
-    <dialog ref={dialogRef}>
-       <h1>{JSON.stringify(params)}</h1>
-    </dialog>
+      <dialog ref={dialogRef}>
+        <h1>{JSON.stringify(params)}</h1>
+      </dialog>
       {/* <div className="overlay" onClick={onCloseForm}></div>
       <div className="task-details">
         <form onSubmit={onCloseForm}>
