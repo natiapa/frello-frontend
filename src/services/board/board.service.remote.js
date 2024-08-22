@@ -5,7 +5,8 @@ export const boardService = {
     getById,
     save,
     remove,
-    addBoardMsg
+    addBoardMsg,
+    updateBoard
 }
 
 async function query(filterBy = { txt: '', price: 0 }) {
@@ -30,6 +31,49 @@ async function save(board) {
 }
 
 async function addBoardMsg(boardId, txt) {
-    const savedMsg = await httpService.post(`board/${boardId}/msg`, {txt})
+    const savedMsg = await httpService.post(`board/${boardId}/msg`, { txt })
     return savedMsg
+}
+
+
+
+
+function updateBoard(board, groupId, taskId, { key, value }, activity) {
+
+    const gIdx = board.groups?.findIndex(group => group.id === groupId)
+    const tIdx = board.groups[gIdx]?.tasks.findIndex(task => task.id === taskId)
+
+    if (tIdx) {
+        board.groups[gIdx].tasks[tIdx][key] = value;
+
+    }
+    else if (gIdx && !tIdx) {
+        board.groups[gIdx][key] = value;
+    } else {
+
+        board[key] = value;
+    }
+
+    if (activity) {
+        activity = addActivity(activity);
+    }
+
+    save(board);
+    return board;
+    // Code to update the board
+}
+
+function addActivity(txt) {
+    return activity = {
+        id: utilService.makeId(),
+        txt,
+        createdAt: Date.now(),
+        byMember: {
+            _id: 'u101',
+            fullname: 'Abi Abambi',
+            imgUrl: 'http://some-img'
+        },
+        type: 'add-task'
+    }
+
 }
