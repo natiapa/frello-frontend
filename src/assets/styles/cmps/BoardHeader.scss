@@ -5,20 +5,17 @@
   backdrop-filter: blur(8px);
   background: rgba(255, 255, 255, 0.5);
   color: var(--ds-text);
-  height: 64px;
-  padding: 0 16px;
-  display: flex;
+  // height: 64px;
+  padding: 12px 10px 12px 16px;
+  font-size: 14px;
+    display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
-  width: 100%;
-  //   z-index: 2;
-  // border-bottom: 1px solid #e2e4e6;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(8px);
 
   .board-header-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     color: #172b4d;
   }
@@ -29,8 +26,8 @@
   }
 
   .board-header-icon {
-    font-size: 24px;
+    font-size: 14px;
+    padding: 6px 12px 6px 8px;
     color: #5e6c84;
-    margin-left: 16px;
   }
 }

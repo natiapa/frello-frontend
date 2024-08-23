@@ -17,16 +17,23 @@
     margin: 0;
     width: 100%;
 
-    li {
+    li:first-child {
+      text-align: center;
+      font-size: 20px;
+      padding: 12px;
+      border-bottom: 1px solid gray;
+      background-color: inherit;
+    }
+
+     li:not(:first-child) {
       display: grid;
       justify-items: center;
       align-self: center;
       padding: 0.1rem;
       width: 100%;
+      font-size: 14px;
       background-color: gray;
-      p {
-        margin: 0;
-      }
     }
   }
+  
 }

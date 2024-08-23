@@ -16,7 +16,7 @@ export function AppHeader({ bgColor, borderBottom }) {
     >
       <section>
         <span className="material-symbols-outlined menu">apps</span>
-        <Link to={user ? "/workspace" : "/"}>
+        <Link to="/board">
           <img
             className="logo"
             style={{ width: "5em" }}
