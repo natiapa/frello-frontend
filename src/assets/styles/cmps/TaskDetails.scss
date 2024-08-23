@@ -1,33 +1,33 @@
 .task-details {
-  position: fixed;
+  display: flex;
+  padding: 0;
 
-  // top: 25vh;
-  // left: 40vw;
-  // padding: 0.5rem;
-  // border-radius: 20px;
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    pointer-events: all;
+  }
 
-  // background-color: lightblue;
-  
-    &::backdrop {
-      background-color: rgba(0, 0, 0, 0.5);
+  form {
+    h1 {
+      margin: 0;
     }
-  
-  z-index: 3;
-  
-  & button {
-    background-color: transparent;
-    color: #000;
 
-    & span {
+    button {
+      background-color: transparent;
       color: #000;
+
+      span {
+        color: #000;
+      }
     }
   }
 }
 
-.overlay {
-  position: fixed;
-  inset: 0;
-  background-color: #000;
-  opacity: 0.7;
-  z-index: 5;
-}
+// .overlay {
+//   position: fixed;
+//   inset: 0;
+//   background-color: #000;
+//   opacity: 0.7;
+//   z-index: 5;
+// }

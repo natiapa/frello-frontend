@@ -8,20 +8,19 @@ import { useSelector } from 'react-redux'
 import svgIcon from './SvgIcon'
 
 export function TaskDetails() {
-    const dialogRef = useRef(null)
-    const params = useParams()
-    const { groupId, taskId } = params
+   
 
-    const board = useSelector(storeState => storeState.boardModule.board)
-    const group = board?.groups?.find(group => group.id === groupId)
-    const task = group?.tasks?.find(task => task.id === taskId)
+  const dialogRef = useRef(null);
+  const params = useParams();
+  const { boardId, groupId, taskId } = params;
 
-    const [isEditing, setIsEditing] = useState(false)
-    const [elementToEdit, setElementToEdit] = useState(null)
+  const board = useSelector((storeState) => storeState.boardModule.board);
+  const group = board?.groups?.find((group) => group.id === groupId);
+  const task = group?.tasks?.find((task) => task.id === taskId);
 
-    console.log(params)
+  // console.log(params);
 
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
     useEffect(() => {
         if (dialogRef.current) {
@@ -34,6 +33,10 @@ export function TaskDetails() {
         if (dialogRef.current) {
             dialogRef.current.close()
         }
+  function onCloseDialog() {
+    navigate(`/board/${boardId}`);
+    if (dialogRef.current) {
+      dialogRef.current.close();
     }
     function onEdit(ev) {
         const dataName = ev.currentTarget.getAttribute('data-name')
@@ -41,6 +44,13 @@ export function TaskDetails() {
         setElementToEdit(dataName)
         setIsEditing(true)
     }
+  }
+
+  function handleDialogClick(ev) {
+    if (ev.target === dialogRef.current) {
+      onCloseDialog();
+    }
+  }
 
     return (
         <>
@@ -62,6 +72,19 @@ export function TaskDetails() {
             </dialog>
         </>
     )
+  return (
+    <dialog
+      className="task-details"
+      ref={dialogRef}
+      method="dialog"
+      onClick={handleDialogClick}
+    >
+      <form>
+        <button onClick={onCloseDialog}>x</button>
+        {task?.title && <h1>{task.title || ""}</h1>}
+      </form>
+    </dialog>
+  );
 }
 
 // useEffect(() => {
