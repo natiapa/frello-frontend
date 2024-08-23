@@ -40,19 +40,17 @@ export function TaskDetails() {
   }
 
   return (
-    <>
-      <dialog
-        className="task-details"
-        ref={dialogRef}
-        method="dialog"
-        onClick={handleDialogClick}
-      >
-        <form method="dialog">
-          <button onClick={onCloseDialog}>x</button>
-          {task?.title && <h1>{task.title || ""}</h1>}
-        </form>
-      </dialog>
-    </>
+    <dialog
+      className="task-details"
+      ref={dialogRef}
+      method="dialog"
+      onClick={handleDialogClick}
+    >
+      <form method="dialog">
+        <button onClick={onCloseDialog}>x</button>
+        {task?.title && <h1>{task.title || ""}</h1>}
+      </form>
+    </dialog>
   );
 }
 
