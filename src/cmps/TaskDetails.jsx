@@ -10,13 +10,13 @@ import svgIcon from "./SvgIcon";
 export function TaskDetails() {
   const dialogRef = useRef(null);
   const params = useParams();
-  const { groupId, taskId } = params;
+  const { boardId, groupId, taskId } = params;
 
   const board = useSelector((storeState) => storeState.boardModule.board);
   const group = board?.groups?.find((group) => group.id === groupId);
   const task = group?.tasks?.find((task) => task.id === taskId);
 
-  console.log(params);
+  // console.log(params);
 
   const navigate = useNavigate();
 
@@ -27,16 +27,25 @@ export function TaskDetails() {
   }, [params]);
 
   function onCloseDialog() {
-    navigate(`/board/${params.boardId}`);
+    navigate(`/board/${boardId}`);
     if (dialogRef.current) {
       dialogRef.current.close();
     }
   }
 
+  function handleDialogClick(event) {
+    if (event.target === dialogRef.current) {
+      onCloseDialog();
+    }
+  }
+
   return (
     <>
-      {/* <div className="overlay" onClick={onCloseDialog}></div> */}
-      <dialog className="task-details" ref={dialogRef} tabIndex="-1">
+      <dialog
+        className="task-details"
+        ref={dialogRef}
+        onClick={handleDialogClick}
+      >
         <button onClick={onCloseDialog}>x</button>
         {task?.title && <h1>{task.title || ""}</h1>}
       </dialog>
