@@ -33,8 +33,8 @@ export function TaskDetails() {
     }
   }
 
-  function handleDialogClick(event) {
-    if (event.target === dialogRef.current) {
+  function handleDialogClick(ev) {
+    if (ev.target === dialogRef.current) {
       onCloseDialog();
     }
   }
