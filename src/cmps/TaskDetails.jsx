@@ -6,21 +6,24 @@ import { Edit } from './Edit'
 import { useSelector } from 'react-redux'
 
 import svgIcon from './SvgIcon'
+import { boardService } from '../services/board/board.service.local'
+import { updateBoard } from '../store/actions/board.actions'
 
 export function TaskDetails() {
-   
+    const dialogRef = useRef(null)
+    const params = useParams()
+    const { boardId, groupId, taskId } = params
 
-  const dialogRef = useRef(null);
-  const params = useParams();
-  const { boardId, groupId, taskId } = params;
+    const board = useSelector(storeState => storeState.boardModule.board)
+    const group = board?.groups?.find(group => group.id === groupId)
+    const task = group?.tasks?.find(task => task.id === taskId)
 
-  const board = useSelector((storeState) => storeState.boardModule.board);
-  const group = board?.groups?.find((group) => group.id === groupId);
-  const task = group?.tasks?.find((task) => task.id === taskId);
+    const [isEditing, setIsEditing] = useState(false)
+    const [elementToEdit, setElementToEdit] = useState('')
 
-  // console.log(params);
+    // console.log(params);
 
-  const navigate = useNavigate();
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (dialogRef.current) {
@@ -28,64 +31,60 @@ export function TaskDetails() {
         }
     }, [params])
 
+    function onUpdatedTask(name, value) {
+        boardService.updateBoard(board, groupId, taskId, { key:name, value:value })
+
+        updateBoard(board)
+    }
     function onCloseDialog() {
-        navigate(`/board/${params.boardId}`)
+        navigate(`/board/${boardId}`)
         if (dialogRef.current) {
             dialogRef.current.close()
         }
-  function onCloseDialog() {
-    navigate(`/board/${boardId}`);
-    if (dialogRef.current) {
-      dialogRef.current.close();
     }
+
     function onEdit(ev) {
         const dataName = ev.currentTarget.getAttribute('data-name')
         console.log(dataName)
         setElementToEdit(dataName)
         setIsEditing(true)
     }
-  }
 
-  function handleDialogClick(ev) {
-    if (ev.target === dialogRef.current) {
-      onCloseDialog();
+    function handleDialogClick(ev) {
+        if (ev.target === dialogRef.current) {
+            onCloseDialog()
+        }
     }
-  }
 
     return (
         <>
             {/* <div className="overlay" onClick={onCloseDialog}></div> */}
-            <dialog className="task-details" ref={dialogRef} tabIndex="-1">
+            <dialog className="task-details" ref={dialogRef} method="dialog" onClick={handleDialogClick}>
                 <button onClick={onCloseDialog}>x</button>
                 {!isEditing && task?.title && (
                     <h1 data-name="title" onClick={onEdit}>
                         {task.title || ''}
                     </h1>
                 )}
-                {isEditing && (
-                    <Edit
-                        task={task}
-                        elementToEdit={elementToEdit}
-                        setIsEditing={setIsEditing}
-                    />
-                )}
+                {isEditing && <Edit task={task} onUpdatedTask={onUpdatedTask} elementToEdit={elementToEdit} setIsEditing={setIsEditing} />}
             </dialog>
         </>
     )
-  return (
-    <dialog
-      className="task-details"
-      ref={dialogRef}
-      method="dialog"
-      onClick={handleDialogClick}
-    >
-      <form>
-        <button onClick={onCloseDialog}>x</button>
-        {task?.title && <h1>{task.title || ""}</h1>}
-      </form>
-    </dialog>
-  );
 }
+//   return (
+//     <dialog
+//       className="task-details"
+//       ref={dialogRef}
+//       method="dialog"
+//       onClick={handleDialogClick}
+//     >
+//       <form>
+//         <button onClick={onCloseDialog}>x</button>
+//         {task?.title && <h1>{task.title || ""}</h1>}
+//       </form>
+//     </dialog>
+//   );
+// }
 
 // useEffect(() => {
 //   if (title !== task.title) {
@@ -111,8 +110,7 @@ export function TaskDetails() {
 //   }
 // }, [title])
 
-{
-    /* <div className="overlay" onClick={onCloseForm}></div>
+/* <div className="overlay" onClick={onCloseForm}></div>
       <div className="task-details">
         <form onSubmit={onCloseForm}>
           <button>
@@ -150,4 +148,3 @@ export function TaskDetails() {
           </div>
         </form>
       </div> */
-}
