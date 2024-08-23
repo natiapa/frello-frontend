@@ -1,10 +1,11 @@
-export function EditTaskTitle({ title, setTitle, setIsEditing }) {
+export function Edit({ task,elementToEdit, setIsEditing }) {
 
     function handleBlur() {
         setIsEditing(false)
     }
-    function handleChange(ev) {
-        setTitle(ev.target.value)
+    function handleChange({target}) {
+        const { value,name } = target
+        task[name] = value
     }
 
     // function handleKeyDown (ev){
@@ -15,7 +16,8 @@ export function EditTaskTitle({ title, setTitle, setIsEditing }) {
         <div>
             <input
                 type="text"
-                value={title}
+                name={elementToEdit}
+                
                 onChange={handleChange}
                 onBlur={handleBlur}
                 // onKeyDown={handleKeyDown}

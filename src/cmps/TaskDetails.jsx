@@ -1,47 +1,67 @@
-import { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useEffect, useRef, useState } from 'react'
+import { useNavigate, useParams } from 'react-router'
 
-import { LabelList } from "./LabelList";
-import { EditTaskTitle } from "./EditTaskTitle";
-import { useSelector } from "react-redux";
+import { LabelList } from './LabelList'
+import { Edit } from './Edit'
+import { useSelector } from 'react-redux'
 
-import svgIcon from "./SvgIcon";
+import svgIcon from './SvgIcon'
 
 export function TaskDetails() {
-  const dialogRef = useRef(null);
-  const params = useParams();
-  const { groupId, taskId } = params;
+    const dialogRef = useRef(null)
+    const params = useParams()
+    const { groupId, taskId } = params
 
-  const board = useSelector((storeState) => storeState.boardModule.board);
-  const group = board?.groups?.find((group) => group.id === groupId);
-  const task = group?.tasks?.find((task) => task.id === taskId);
+    const board = useSelector(storeState => storeState.boardModule.board)
+    const group = board?.groups?.find(group => group.id === groupId)
+    const task = group?.tasks?.find(task => task.id === taskId)
 
-  console.log(params);
+    const [isEditing, setIsEditing] = useState(false)
+    const [elementToEdit, setElementToEdit] = useState(null)
 
-  const navigate = useNavigate();
+    console.log(params)
 
-  useEffect(() => {
-    if (dialogRef.current) {
-      dialogRef.current.showModal();
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (dialogRef.current) {
+            dialogRef.current.showModal()
+        }
+    }, [params])
+
+    function onCloseDialog() {
+        navigate(`/board/${params.boardId}`)
+        if (dialogRef.current) {
+            dialogRef.current.close()
+        }
     }
-  }, [params]);
-
-  function onCloseDialog() {
-    navigate(`/board/${params.boardId}`);
-    if (dialogRef.current) {
-      dialogRef.current.close();
+    function onEdit(ev) {
+        const dataName = ev.currentTarget.getAttribute('data-name')
+        console.log(dataName)
+        setElementToEdit(dataName)
+        setIsEditing(true)
     }
-  }
 
-  return (
-    <>
-      {/* <div className="overlay" onClick={onCloseDialog}></div> */}
-      <dialog className="task-details" ref={dialogRef} tabIndex="-1">
-        <button onClick={onCloseDialog}>x</button>
-        {task?.title && <h1>{task.title || ""}</h1>}
-      </dialog>
-    </>
-  );
+    return (
+        <>
+            {/* <div className="overlay" onClick={onCloseDialog}></div> */}
+            <dialog className="task-details" ref={dialogRef} tabIndex="-1">
+                <button onClick={onCloseDialog}>x</button>
+                {!isEditing && task?.title && (
+                    <h1 data-name="title" onClick={onEdit}>
+                        {task.title || ''}
+                    </h1>
+                )}
+                {isEditing && (
+                    <Edit
+                        task={task}
+                        elementToEdit={elementToEdit}
+                        setIsEditing={setIsEditing}
+                    />
+                )}
+            </dialog>
+        </>
+    )
 }
 
 // useEffect(() => {
@@ -69,7 +89,7 @@ export function TaskDetails() {
 // }, [title])
 
 {
-  /* <div className="overlay" onClick={onCloseForm}></div>
+    /* <div className="overlay" onClick={onCloseForm}></div>
       <div className="task-details">
         <form onSubmit={onCloseForm}>
           <button>
