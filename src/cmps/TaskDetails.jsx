@@ -46,7 +46,7 @@ export function TaskDetails() {
       method="dialog"
       onClick={handleDialogClick}
     >
-      <form method="dialog">
+      <form>
         <button onClick={onCloseDialog}>x</button>
         {task?.title && <h1>{task.title || ""}</h1>}
       </form>
