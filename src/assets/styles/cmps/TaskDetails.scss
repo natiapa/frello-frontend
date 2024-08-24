@@ -18,7 +18,7 @@
     color: #333;
   }
 
-  input[type='text'] {
+  input[type="text"] {
     width: 100%;
     padding: 10px;
     font-size: 1rem;
@@ -30,6 +30,14 @@
       border-color: #0079bf;
       outline: none;
     }
+  }
+
+  .close-btn {
+    color: black;
+  }
+
+  .delete-btn {
+    color: black;
   }
 
   // button {
@@ -73,12 +81,7 @@
 //   z-index: 999;
 // }
 
-
-
-// 
-
-
-
+//
 
 // .overlay {
 //   position: fixed;

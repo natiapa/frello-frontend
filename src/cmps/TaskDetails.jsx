@@ -79,7 +79,9 @@ export function TaskDetails() {
         onClick={handleDialogClick}
       >
         <form>
-          <button onClick={onCloseDialog}>x</button>
+          <button className="close-btn" onClick={onCloseDialog}>
+            x
+          </button>
 
           {currElementToEdit !== "title" && (
             <h1 data-name="title" onClick={onEdit}>
