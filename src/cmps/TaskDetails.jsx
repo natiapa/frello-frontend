@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 
 import { EditTask } from './EditTask'
+import { LabelList } from './LabelList'
 import { useSelector } from 'react-redux'
 
 import { boardService } from '../services/board/board.service.local'
 import { updateBoard } from '../store/actions/board.actions'
 
 export function TaskDetails() {
-  const [isEditing, setIsEditing] = useState(false)
+  // const [isEditing, setIsEditing] = useState(false)
   const [currElementToEdit, setCurrElementToEdit] = useState('')
 
   const dialogRef = useRef(null)
@@ -29,8 +30,8 @@ export function TaskDetails() {
 
   async function onUpdatedTask(name, value) {
     try {
-    boardService.updateBoard(board, groupId, taskId, { key: name, value: value })
-    await updateBoard(board)
+      boardService.updateBoard(board, groupId, taskId, { key: name, value: value })
+      await updateBoard(board)
     } catch (error) {
       console.error('Failed to update the board:', error)
     }
@@ -47,7 +48,7 @@ export function TaskDetails() {
     const dataName = ev.currentTarget.getAttribute('data-name')
     // console.log(dataName)
     setCurrElementToEdit(dataName)
-    setIsEditing(true)
+    // setIsEditing(true)
   }
 
   function handleDialogClick(ev) {
@@ -60,16 +61,91 @@ export function TaskDetails() {
     <>
       <dialog className="task-details" ref={dialogRef} method="dialog" onClick={handleDialogClick}>
         <button onClick={onCloseDialog}>x</button>
-        {!isEditing && task?.title && (
+     
+        
+        {currElementToEdit !== 'title' && (
           <h1 data-name="title" onClick={onEdit}>
-            {task.title || ''}
+            {task?.title || 'Untitled Task'}
           </h1>
         )}
-        {isEditing && <EditTask task={task} onUpdatedTask={onUpdatedTask} currElementToEdit={currElementToEdit} setIsEditing={setIsEditing} />}
+        {currElementToEdit === 'title' && (
+          <EditTask
+            task={task}
+            onUpdatedTask={onUpdatedTask}
+            currElementToEdit={currElementToEdit}
+            setCurrElementToEdit={setCurrElementToEdit}
+          />
+        )}
+       
+        <LabelList labels={task.labels} />
+
+        {currElementToEdit !== 'description' && (
+          <p
+            className="editable-description"
+            data-name="description"
+            onClick={onEdit}
+          >
+            {task?.description || 'Add a more detailed description...'}
+          </p>
+        )}
+        {currElementToEdit === 'description' && (
+          <EditTask
+            task={task}
+            onUpdatedTask={onUpdatedTask}
+            currElementToEdit={currElementToEdit}
+            setCurrElementToEdit={setCurrElementToEdit}
+          />
+        )}
+        
       </dialog>
     </>
   )
+  
 }
+
+
+// return (
+//   <>
+//     <dialog className="task-details" ref={dialogRef} method="dialog" onClick={handleDialogClick}>
+//       <button onClick={onCloseDialog}>x</button>
+//       {!currElementToEdit && task?.title && (
+//         <h1
+//           data-name="title"
+//           onClick={onEdit}
+//         >
+//           {task.title || ''}
+//         </h1>
+//       )}
+//       {currElementToEdit === 'title' && (
+//         <EditTask task={task}
+//           onUpdatedTask={onUpdatedTask}
+//           currElementToEdit={currElementToEdit}
+//           setCurrElementToEdit={setCurrElementToEdit}
+//         />
+//       )}
+//       <LabelList labels={task.labels} />
+//       {!currElementToEdit && task?.description && (
+//         <p
+//           className="editable-description"
+//           data-name="description"
+//           onClick={onEdit}
+//         >
+//           {task.description || ''}
+//         </p>
+//       )}
+//       {currElementToEdit === 'description' && (
+//         <EditTask
+//           task={task}
+//           onUpdatedTask={onUpdatedTask}
+//           currElementToEdit={currElementToEdit}
+//           setCurrElementToEdit={setCurrElementToEdit}
+//         />
+//       )}
+
+//     </dialog>
+//   </>
+// )
+// }
 //   return (
 //     <dialog
 //       className="task-details"

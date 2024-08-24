@@ -48,6 +48,20 @@
   }
 }
 
+.editable-description {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  cursor: text;
+  min-height: 40px;
+  white-space: pre-wrap;
+}
+
+.editable-description:hover {
+  background-color: #eaeaea;
+}
+
 // body::before {
 //   content: '';
 //   position: fixed;
