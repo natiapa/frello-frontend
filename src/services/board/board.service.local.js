@@ -773,8 +773,8 @@ async function addBoardMsg(boardId, txt) {
 function updateBoard(board, groupId, taskId, { key, value }, activity = '') {
     const gIdx = board.groups?.findIndex(group => group.id === groupId)
     const tIdx = board.groups[gIdx]?.tasks.findIndex(task => task.id === taskId)
-    console.log('gIdx:', gIdx)
-    console.log('tIdx:', tIdx)
+    // console.log('gIdx:', gIdx)
+    // console.log('tIdx:', tIdx)
 
     if (tIdx >= 0) {
         board.groups[gIdx].tasks[tIdx][key] = value

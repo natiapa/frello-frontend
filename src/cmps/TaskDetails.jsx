@@ -1,75 +1,74 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 
-import { LabelList } from './LabelList'
-import { Edit } from './Edit'
+import { EditTask } from './EditTask'
 import { useSelector } from 'react-redux'
 
-import svgIcon from './SvgIcon'
 import { boardService } from '../services/board/board.service.local'
 import { updateBoard } from '../store/actions/board.actions'
 
 export function TaskDetails() {
-    const dialogRef = useRef(null)
-    const params = useParams()
-    const { boardId, groupId, taskId } = params
+  const [isEditing, setIsEditing] = useState(false)
+  const [currElementToEdit, setCurrElementToEdit] = useState('')
 
-    const board = useSelector(storeState => storeState.boardModule.board)
-    const group = board?.groups?.find(group => group.id === groupId)
-    const task = group?.tasks?.find(task => task.id === taskId)
+  const dialogRef = useRef(null)
+  const params = useParams()
+  const navigate = useNavigate()
 
-    const [isEditing, setIsEditing] = useState(false)
-    const [elementToEdit, setElementToEdit] = useState('')
+  const { boardId, groupId, taskId } = params
 
-    // console.log(params);
+  const board = useSelector(storeState => storeState.boardModule.board)
+  const group = board?.groups?.find(group => group.id === groupId)
+  const task = group?.tasks?.find(task => task.id === taskId)
 
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        if (dialogRef.current) {
-            dialogRef.current.showModal()
-        }
-    }, [params])
-
-    function onUpdatedTask(name, value) {
-        boardService.updateBoard(board, groupId, taskId, { key:name, value:value })
-
-        updateBoard(board)
+  useEffect(() => {
+    if (dialogRef.current) {
+      dialogRef.current.showModal()
     }
-    function onCloseDialog() {
-        navigate(`/board/${boardId}`)
-        if (dialogRef.current) {
-            dialogRef.current.close()
-        }
-    }
+  }, [params])
 
-    function onEdit(ev) {
-        const dataName = ev.currentTarget.getAttribute('data-name')
-        console.log(dataName)
-        setElementToEdit(dataName)
-        setIsEditing(true)
+  async function onUpdatedTask(name, value) {
+    try {
+    boardService.updateBoard(board, groupId, taskId, { key: name, value: value })
+    await updateBoard(board)
+    } catch (error) {
+      console.error('Failed to update the board:', error)
     }
+  }
 
-    function handleDialogClick(ev) {
-        if (ev.target === dialogRef.current) {
-            onCloseDialog()
-        }
+  function onCloseDialog() {
+    navigate(`/board/${boardId}`)
+    if (dialogRef.current) {
+      dialogRef.current.close()
     }
+  }
 
-    return (
-        <>
-            {/* <div className="overlay" onClick={onCloseDialog}></div> */}
-            <dialog className="task-details" ref={dialogRef} method="dialog" onClick={handleDialogClick}>
-                <button onClick={onCloseDialog}>x</button>
-                {!isEditing && task?.title && (
-                    <h1 data-name="title" onClick={onEdit}>
-                        {task.title || ''}
-                    </h1>
-                )}
-                {isEditing && <Edit task={task} onUpdatedTask={onUpdatedTask} elementToEdit={elementToEdit} setIsEditing={setIsEditing} />}
-            </dialog>
-        </>
-    )
+  function onEdit(ev) {
+    const dataName = ev.currentTarget.getAttribute('data-name')
+    // console.log(dataName)
+    setCurrElementToEdit(dataName)
+    setIsEditing(true)
+  }
+
+  function handleDialogClick(ev) {
+    if (ev.target === dialogRef.current) {
+      onCloseDialog()
+    }
+  }
+
+  return (
+    <>
+      <dialog className="task-details" ref={dialogRef} method="dialog" onClick={handleDialogClick}>
+        <button onClick={onCloseDialog}>x</button>
+        {!isEditing && task?.title && (
+          <h1 data-name="title" onClick={onEdit}>
+            {task.title || ''}
+          </h1>
+        )}
+        {isEditing && <EditTask task={task} onUpdatedTask={onUpdatedTask} currElementToEdit={currElementToEdit} setIsEditing={setIsEditing} />}
+      </dialog>
+    </>
+  )
 }
 //   return (
 //     <dialog
