@@ -66,6 +66,7 @@ export function TaskDetails() {
       key: "deleteTask",
       value: null,
     });
+    navigate(`/board/${boardId}`);
   }
 
   if (!task) return;
