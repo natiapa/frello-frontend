@@ -1,108 +1,128 @@
-import { useEffect, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 
-import { EditTask } from './EditTask'
-import { LabelList } from './LabelList'
-import { useSelector } from 'react-redux'
+import { EditTask } from "./EditTask";
+import { LabelList } from "./LabelList";
+import { useSelector } from "react-redux";
 
-import { boardService } from '../services/board/board.service.local'
-import { updateBoard } from '../store/actions/board.actions'
+import { boardService } from "../services/board/board.service.local";
+import { updateBoard } from "../store/actions/board.actions";
 
 export function TaskDetails() {
   // const [isEditing, setIsEditing] = useState(false)
-  const [currElementToEdit, setCurrElementToEdit] = useState('')
+  const [currElementToEdit, setCurrElementToEdit] = useState("");
 
-  const dialogRef = useRef(null)
-  const params = useParams()
-  const navigate = useNavigate()
+  const dialogRef = useRef(null);
+  const params = useParams();
+  const navigate = useNavigate();
 
-  const { boardId, groupId, taskId } = params
+  const { boardId, groupId, taskId } = params;
 
-  const board = useSelector(storeState => storeState.boardModule.board)
-  const group = board?.groups?.find(group => group.id === groupId)
-  const task = group?.tasks?.find(task => task.id === taskId)
+  const board = useSelector((storeState) => storeState.boardModule.board);
+  const group = board?.groups?.find((group) => group.id === groupId);
+  const task = group?.tasks?.find((task) => task.id === taskId);
 
   useEffect(() => {
     if (dialogRef.current) {
-      dialogRef.current.showModal()
+      dialogRef.current.showModal();
     }
-  }, [params])
+  }, [params]);
 
   async function onUpdatedTask(name, value) {
     try {
-      boardService.updateBoard(board, groupId, taskId, { key: name, value: value })
-      await updateBoard(board)
+      boardService.updateBoard(board, groupId, taskId, {
+        key: name,
+        value: value,
+      });
+      await updateBoard(board);
     } catch (error) {
-      console.error('Failed to update the board:', error)
+      console.error("Failed to update the board:", error);
     }
   }
 
   function onCloseDialog() {
-    navigate(`/board/${boardId}`)
+    navigate(`/board/${boardId}`);
     if (dialogRef.current) {
-      dialogRef.current.close()
+      dialogRef.current.close();
     }
   }
 
   function onEdit(ev) {
-    const dataName = ev.currentTarget.getAttribute('data-name')
+    const dataName = ev.currentTarget.getAttribute("data-name");
     // console.log(dataName)
-    setCurrElementToEdit(dataName)
+    setCurrElementToEdit(dataName);
     // setIsEditing(true)
   }
 
   function handleDialogClick(ev) {
     if (ev.target === dialogRef.current) {
-      onCloseDialog()
+      onCloseDialog();
     }
   }
 
+  function deleteTask(ev) {
+    ev.preventDefault();
+    boardService.updateBoard(board, groupId, taskId, {
+      key: "deleteTask",
+      value: null,
+    });
+  }
+
+  if (!task) return;
+
   return (
     <>
-      <dialog className="task-details" ref={dialogRef} method="dialog" onClick={handleDialogClick}>
-        <button onClick={onCloseDialog}>x</button>
-     
-        
-        {currElementToEdit !== 'title' && (
-          <h1 data-name="title" onClick={onEdit}>
-            {task?.title || 'Untitled Task'}
-          </h1>
-        )}
-        {currElementToEdit === 'title' && (
-          <EditTask
-            task={task}
-            onUpdatedTask={onUpdatedTask}
-            currElementToEdit={currElementToEdit}
-            setCurrElementToEdit={setCurrElementToEdit}
-          />
-        )}
-       
-        <LabelList labels={task.labels} />
+      <dialog
+        className="task-details"
+        ref={dialogRef}
+        method="dialog"
+        onClick={handleDialogClick}
+      >
+        <form>
+          <button onClick={onCloseDialog}>x</button>
 
-        {currElementToEdit !== 'description' && (
-          <p
-            className="editable-description"
-            data-name="description"
-            onClick={onEdit}
-          >
-            {task?.description || 'Add a more detailed description...'}
-          </p>
-        )}
-        {currElementToEdit === 'description' && (
-          <EditTask
-            task={task}
-            onUpdatedTask={onUpdatedTask}
-            currElementToEdit={currElementToEdit}
-            setCurrElementToEdit={setCurrElementToEdit}
-          />
-        )}
-        
+          {currElementToEdit !== "title" && (
+            <h1 data-name="title" onClick={onEdit}>
+              {task?.title || "Untitled Task"}
+            </h1>
+          )}
+          {currElementToEdit === "title" && (
+            <EditTask
+              task={task}
+              onUpdatedTask={onUpdatedTask}
+              currElementToEdit={currElementToEdit}
+              setCurrElementToEdit={setCurrElementToEdit}
+            />
+          )}
+
+          <LabelList labels={task.labels} />
+
+          {currElementToEdit !== "description" && (
+            <p
+              className="editable-description"
+              data-name="description"
+              onClick={onEdit}
+            >
+              {task?.description || "Add a more detailed description..."}
+            </p>
+          )}
+          {currElementToEdit === "description" && (
+            <EditTask
+              task={task}
+              onUpdatedTask={onUpdatedTask}
+              currElementToEdit={currElementToEdit}
+              setCurrElementToEdit={setCurrElementToEdit}
+            />
+          )}
+
+          <button className="delete-btn" onClick={deleteTask}>
+            Delete task
+          </button>
+        </form>
       </dialog>
     </>
-  )
-  
+  );
 }
-
 
 // return (
 //   <>
