@@ -845,7 +845,12 @@ function updateBoard(board, groupId, taskId, { key, value }, activity = '') {
             board.groups[gIdx].tasks[tIdx][key] = value;
         }
     } else if (gIdx >= 0 && tIdx < 0) {
-        board.groups[gIdx][key] = value
+        if (key === 'deleteGroup') {
+            board.groups.splice(gIdx, 1);
+        }
+        else {
+            board.groups[gIdx][key] = value
+        }
     } else {
         board[key] = value
         console.log('mama:', board.groups[gIdx].tasks[tIdx][key])

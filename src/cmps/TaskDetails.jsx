@@ -30,11 +30,16 @@ export function TaskDetails() {
 
   async function onUpdatedTask(name, value) {
     try {
-      boardService.updateBoard(board, groupId, taskId, {
-        key: name,
-        value: value,
-      });
-      await updateBoard(board);
+      const updatedBoard = await boardService.updateBoard(
+        board,
+        groupId,
+        taskId,
+        {
+          key: name,
+          value: value,
+        }
+      );
+      await updateBoard(updatedBoard);
     } catch (error) {
       console.error("Failed to update the board:", error);
     }
