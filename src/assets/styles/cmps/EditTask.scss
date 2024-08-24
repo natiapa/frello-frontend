@@ -1,12 +1,33 @@
 .edit-task-description {
     display: grid;
-    .save-description-button {
-        background-color: #0c66e4;
-        color: white;
-        border-radius: 3px;
-        padding: 6px 12px;
-        width: max-content;
-        margin: 0;
-        margin-top: 10px;
+
+    .description-buttons {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: start;
+        gap: 5px;
+
+        button {
+            width: max-content;
+            margin: 0;
+            margin-top: 5px;
+            padding: 6px 12px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        .save-description {
+            background-color: #0c66e4;
+            color: white;
+        }
+
+        .cancel-description {
+            background-color: inherit;
+            color: black;
+
+            &:hover {
+                background-color: #091e4224;
+            }
+        }
     }
 }
