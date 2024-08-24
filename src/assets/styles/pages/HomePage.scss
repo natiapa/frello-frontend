@@ -11,7 +11,7 @@
     linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto
       repeat scroll padding-box border-box rgb(82, 67, 170);
 
-  & .text-container {
+  .text-container {
     flex: 0 0 auto;
     color: #fff;
     margin-inline: auto;
@@ -28,7 +28,7 @@
       text-align: start;
     }
 
-    & h1 {
+    h1 {
       line-height: 1.25;
       font-size: 38px;
       margin-block-end: 8px;
@@ -40,7 +40,7 @@
       }
     }
 
-    & p {
+    p {
       font-size: 18px;
       line-height: normal;
       letter-spacing: normal;
@@ -52,15 +52,15 @@
       }
     }
 
-    & .demo-btn-container {
-      & a {
+    .demo-btn-container {
+      a {
         text-decoration: none;
 
-        & span {
+        span {
           color: $white;
         }
       }
-      & button {
+      button {
         font-family: inherit;
         text-decoration: none;
         margin: 0;
@@ -95,11 +95,11 @@
     }
   }
 
-  & .homepage-img-container {
+  .homepage-img-container {
     display: flex;
     margin-inline: auto;
 
-    & img {
+    img {
       max-width: 100%;
       margin-inline: auto;
 
