@@ -1,9 +1,12 @@
 .edit-task-description {
-    display: flex;
-    flex-direction: column;
-}
-
-.save-description-button {
-    margin-top: 10px; 
-    align-self: flex-start; 
+    display: grid;
+    .save-description-button {
+        background-color: #0c66e4;
+        color: white;
+        border-radius: 3px;
+        padding: 6px 12px;
+        width: max-content;
+        margin: 0;
+        margin-top: 10px;
+    }
 }
