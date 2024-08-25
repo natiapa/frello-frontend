@@ -56,7 +56,45 @@ async function query(filterBy = { txt: '' }) {
                             title: 'Design wireframes',
                             labels: ['Urgent', 'In Progress'],
                             description: '',
-                            checklist: [],
+                            checklists: [
+                                {
+                                    id: 'chk101',
+                                    title: 'Design Process',
+                                    items: [
+                                        {
+                                            id: 'item101',
+                                            text: 'Gather requirements from the team',
+                                            isChecked: true,
+                                        },
+                                        {
+                                            id: 'item102',
+                                            text: 'Create wireframe sketches',
+                                            isChecked: false,
+                                        },
+                                        {
+                                            id: 'item103',
+                                            text: 'Design high-fidelity mockups',
+                                            isChecked: false,
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'chk102',
+                                    title: 'Review Process',
+                                    items: [
+                                        {
+                                            id: 'item201',
+                                            text: 'Review mockups with the team',
+                                            isChecked: false,
+                                        },
+                                        {
+                                            id: 'item202',
+                                            text: 'Make adjustments based on feedback',
+                                            isChecked: false,
+                                        }
+                                    ]
+                                }
+                            ],
                             members: ['John Doe', 'Jane Smith'],
                             attachments: ['wireframes_v1.png', 'wireframes_v2.png'],
                             comments: ['Create wireframes for the new Trello feature', 'Incorporate feedback from the last review'],
