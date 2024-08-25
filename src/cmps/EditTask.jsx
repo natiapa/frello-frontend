@@ -19,22 +19,38 @@ export function EditTask({ task, currElementToEdit, onUpdatedTask, setCurrElemen
 
     return (
         <div>
-            {currElementToEdit === 'title' ? (
-                <input type="text" name={currElementToEdit} value={value} onChange={ev => setValue(ev.target.value)} onBlur={handleBlur} autoFocus />
-            ) : currElementToEdit === 'description' ? (
+            {currElementToEdit === 'title' && (
+                <input
+                    type="text"
+                    name={currElementToEdit}
+                    value={value}
+                    onChange={(ev) => setValue(ev.target.value)}
+                    onBlur={handleBlur}
+                    autoFocus
+                />
+            )}
+
+            {currElementToEdit === 'description' && (
                 <div className="edit-task-description">
-                    <textarea name={currElementToEdit} value={value} placeholder="Add a more detailed description..." onChange={ev => setValue(ev.target.value)} autoFocus rows={5} cols={40} />
+                    <textarea
+                        name={currElementToEdit}
+                        value={value}
+                        placeholder="Add a more detailed description..."
+                        onChange={(ev) => setValue(ev.target.value)}
+                        autoFocus
+                        rows={5}
+                        cols={40}
+                    />
                     <div className="description-buttons">
-                        <button onClick={handleSave} className='save-description'>
+                        <button onClick={handleSave} className="save-description">
                             Save
                         </button>
-                        <button onClick={() => setCurrElementToEdit('')} className='cancel-description'>
+                        <button onClick={() => setCurrElementToEdit('')} className="cancel-description">
                             Cancel
                         </button>
                     </div>
                 </div>
-            ) :
-                null}
+            )}
         </div>
     )
 }
