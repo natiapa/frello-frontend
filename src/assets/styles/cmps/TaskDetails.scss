@@ -1,86 +1,96 @@
 .task-details {
-  // position: fixed;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
-  // display: flex;
-  // justify-content: center;
-  width: 400px;
-  background-color: #fff;
-  border-radius: 8px;
-  border: none;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  // margin: 0;
-  // padding: 20px;
-  // z-index: 1000;
+  display: grid;
+  grid-template-columns: 1fr max-content;
 
-  &::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
+  dialog {
+    display: grid;
+    grid-template-rows: 1fr max-content;
+    width: 400px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 
-  form {
-    width: 100%;
-    height: 100%;
-  }
 
-  h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    cursor: pointer;
-    color: #333;
-  }
-
-  input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 10px;
-
-    &:focus {
-      border-color: #0079bf;
-      outline: none;
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0.5);
     }
+
+    form {
+      width: 100%;
+      height: 100%;
+      grid-column: 1;
+
+
+      header {
+        display: inline;
+        grid-column: 1 / -1;
+        grid-row: 1;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #333;
+        cursor: pointer;
+      }
+    }
+
+    
+
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 10px;
+
+      &:focus {
+        border-color: #0079bf;
+        outline: none;
+      }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: black;
+    }
+
+    .delete-btn {
+      color: black;
+    }
+
+    // button {
+    //   position: absolute;
+    //   top: 15px;
+    //   right: 15px;
+    //   background: none;
+    //   border: none;
+    //   font-size: 1.2rem;
+    //   cursor: pointer;
+    //   color: #aaa;
+
+    //   &:hover {
+    //     color: #000;
+    //   }
+    // }
   }
 
-  .close-btn {
-    color: black;
+  .editable-description {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: text;
+    min-height: 40px;
+    white-space: pre-wrap;
   }
 
-  .delete-btn {
-    color: black;
+  .editable-description:hover {
+    background-color: #eaeaea;
   }
-
-  // button {
-  //   position: absolute;
-  //   top: 15px;
-  //   right: 15px;
-  //   background: none;
-  //   border: none;
-  //   font-size: 1.2rem;
-  //   cursor: pointer;
-  //   color: #aaa;
-
-  //   &:hover {
-  //     color: #000;
-  //   }
-  // }
-}
-
-.editable-description {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  cursor: text;
-  min-height: 40px;
-  white-space: pre-wrap;
-}
-
-.editable-description:hover {
-  background-color: #eaeaea;
 }
 
 // body::before {

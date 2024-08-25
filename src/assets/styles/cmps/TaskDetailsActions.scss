@@ -1,0 +1,19 @@
+.actions {
+    display: grid;
+    align-self: start;
+    grid-row: 2/-1;
+    grid-column: 2;
+    font-size: $font-size-task-details-actions;
+
+    article {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      justify-content: center;
+      background-color: $bg-color-article-actions;
+      cursor: pointer;
+
+      p {
+        margin: 0 0 0 8px;
+      }
+    }
+  }
