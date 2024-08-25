@@ -4,8 +4,8 @@ export function BoardHeader({ bgColor }) {
       <div className="board-header-title">Trello</div>
       <div className="board-header-actions"></div>
 
-      <div className="board-header-icon">🔍</div>
-      <div className="board-header-icon">➕</div>
+      {/* <div className="board-header-icon">🔍</div>
+      <div className="board-header-icon">➕</div> */}
     </div>
   );
 }

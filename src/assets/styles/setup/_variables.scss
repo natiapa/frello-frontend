@@ -20,12 +20,18 @@ $gray4: #333;
 
 $new-board-bg-color: #80808024;
 $bg-color-task-list: #f1f2f4;
-$color-task-list-a:#172b4d;
-$color-task-preview:#172b4d;
-$bg-color-task-preview:#ffffff;
+$color-task-list-a: #172b4d;
+$color-task-preview: #172b4d;
+$bg-color-task-preview: #ffffff;
 
+$font-size-groups-headers: 14px;
 
-// Breakpoints
+$ds-shadow-raised: 0px 1px 1px #091E4240, 0px 0px 1px #091E424F;
+
+$box-shadow-group-preview:rgba(9, 30, 66, 0.25) 0px 1px 1px 0px, rgba(9, 30, 66, 0.31) 0px 0px 1px 0px;
+$box-shadow-task-preview: var(--ds-shadow-raised, 0px 1px 1px #091e4240, 0px 0px 1px #091e424f);
+$box-shadow-task-preview-hover: rgb(67 122 216) 0px 1px 1px 0px, rgb(67 122 216) 0px 0px 1px 0px;
+ // Breakpoints
 $mobile-breakpoint: 460px;
 $narrow-breakpoint: 720px;
 $normal-breakpoint: 960px;
