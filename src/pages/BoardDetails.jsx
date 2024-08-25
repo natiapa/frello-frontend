@@ -66,7 +66,6 @@ export function BoardDetails() {
     // const task = group?.tasks?.find((task) => task.id === taskId);
 
     // if (taskId && !task) return;
-
     return (
         <>
             <section
@@ -75,7 +74,7 @@ export function BoardDetails() {
                     backgroundImage: `url(${board?.style?.backgroundImage})`,
                 }}>
                 <AppHeader bgColor={bgColor} />
-                <BoardHeader bgColor={bgColor} />
+                {board?.members && board.members.length && <BoardHeader members={board.members} bgColor={bgColor} />}
 
                 {board && <BoardSideBar board={board} bgColor={bgColor} />}
                 {board && <GroupList groups={board.groups} />}

@@ -35,6 +35,10 @@ export function randomPastTime() {
     return Date.now() - pastTime
 }
 
+export function getRandomColor() {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16)
+}
+
 export function debounce(func, timeout = 300) {
     let timer
     return (...args) => {

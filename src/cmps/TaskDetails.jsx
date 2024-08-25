@@ -12,6 +12,7 @@ import { CgList } from 'react-icons/cg'
 import { BiCheckbox } from 'react-icons/bi'
 import { IoMdCheckboxOutline } from 'react-icons/io'
 import { TaskDetailsActions } from './TaskDetailsActions'
+import { MemberList } from './MemberList'
 
 export function TaskDetails() {
     const [currElementToEdit, setCurrElementToEdit] = useState('')
@@ -25,7 +26,7 @@ export function TaskDetails() {
     const board = useSelector(storeState => storeState.boardModule.board)
     const group = board?.groups?.find(group => group.id === groupId)
     const task = group?.tasks?.find(task => task.id === taskId)
-
+    
     useEffect(() => {
         if (dialogRef.current) {
             dialogRef.current.showModal()
@@ -71,7 +72,6 @@ export function TaskDetails() {
         })
         navigate(`/board/${boardId}`)
     }
-
     if (!task) return
     return (
         <section className="task-details">
@@ -88,6 +88,7 @@ export function TaskDetails() {
                         x
                     </button>
 
+                    {task.members && <MemberList members={task.members} />}
                     <LabelList labels={task.labels} />
 
                     {!currElementToEdit || currElementToEdit !== 'description' ? (
