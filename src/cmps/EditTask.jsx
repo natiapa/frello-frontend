@@ -14,7 +14,7 @@ export function EditTask({ task, currElementToEdit, onUpdatedTask, setCurrElemen
     function handleBlur() {
         if (currElementToEdit === 'title') {
             onUpdatedTask(currElementToEdit, value)
-            setCurrElementToEdit('') 
+            setCurrElementToEdit('')
         }
     }
 
@@ -43,7 +43,8 @@ export function EditTask({ task, currElementToEdit, onUpdatedTask, setCurrElemen
                     />
                     <button onClick={handleSave} className="save-description-button">Save</button>
                 </div>
-            ) : null}
+            ) :
+                null}
         </div>
 
 
