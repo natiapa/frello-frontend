@@ -897,9 +897,20 @@ function updateBoard(board, groupId, taskId, { key, value }, activity = '') {
     // console.log('tIdx:', tIdx)
 
     if (tIdx >= 0) {
-        board.groups[gIdx].tasks[tIdx][key] = value
+        // board.groups[gIdx].tasks[tIdx][key] = value
+        if (key === 'deleteTask') {
+            // Remove the task from the tasks array
+            board.groups[gIdx].tasks.splice(tIdx, 1);
+        } else {
+            board.groups[gIdx].tasks[tIdx][key] = value;
+        }
     } else if (gIdx >= 0 && tIdx < 0) {
-        board.groups[gIdx][key] = value
+        if (key === 'deleteGroup') {
+            board.groups.splice(gIdx, 1);
+        }
+        else {
+            board.groups[gIdx][key] = value
+        }
     } else {
         board[key] = value
         console.log('mama:', board.groups[gIdx].tasks[tIdx][key])

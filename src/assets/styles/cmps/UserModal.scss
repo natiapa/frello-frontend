@@ -14,24 +14,24 @@
   background-color: $white;
   z-index: 1;
 
-  & img {
+  img {
     width: 4em;
   }
 
-  & section {
-    &.user-details {
+  section {
+    .user-details {
       display: flex;
     }
 
-    & section {
+    section {
       display: flex;
       flex-direction: column;
     }
   }
 
-  & section {
-    &.links {
-      & ul {
+  section {
+    .links {
+      ul {
         padding: 0;
       }
     }
