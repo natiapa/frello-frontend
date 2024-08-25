@@ -66,7 +66,10 @@ export function TaskChecklist({ checklists, onUpdatedTask }) {
                                     checked={item.isChecked}
                                     onChange={(ev) => handleChecklistItem(ev, checklist.id, item.id)}
                                 />
-                                {item.text}
+                                   <span style={{ textDecoration: item.isChecked ? 'line-through' : 'none' }}>
+                                   {item.text}
+                                   </span>
+                            
                             </li>
                         ))}
                     </ul>
