@@ -1,6 +1,11 @@
 .task-preview {
+  margin: 0 4px;
+  padding: 8px 12px 4px;
+  border-radius: 8px;
+
+  background-color: $bg-color-task-preview;
+  color:  $color-task-preview;
   cursor: pointer;
   &:hover {
-    background-color: grey;
   }
 }

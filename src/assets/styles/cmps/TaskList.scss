@@ -1,4 +1,10 @@
 .task-list {
+  display: grid;
+  gap: 8px;
+  a{
+    text-decoration: none;
+    color: $color-task-list-a;
+  }
   li {
     background-color: $bg-color-task-list;
     button {
