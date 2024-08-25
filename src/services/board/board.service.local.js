@@ -12,6 +12,7 @@ export const boardService = {
     addBoardMsg,
     updateBoard,
     getEmptyGroup,
+    getEmptyItem
 }
 window.cs = boardService
 
@@ -983,5 +984,13 @@ function getEmptyGroup() {
         title: '',
         tasks: [{ id: makeId(), title: '', labels: [], members: [], attachments: [], comments: [], cover: '', dueDate: '' }],
         style: {},
+    }
+}
+
+function getEmptyItem(){
+    return {
+        id: makeId(),
+        text: '',
+        isChecked: false
     }
 }
