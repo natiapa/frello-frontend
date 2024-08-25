@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { useSelector } from "react-redux";
 
 import { EditTask } from "./EditTask";
 import { LabelList } from "./LabelList";
-import { useSelector } from "react-redux";
+import { TaskChecklist } from "./TaskChecklist";
 
 import { boardService } from "../services/board/board.service.local";
 import { updateBoard } from "../store/actions/board.actions";
@@ -29,7 +30,7 @@ export function TaskDetails() {
 
   async function onUpdatedTask(name, value) {
     try {
-      const updatedBoard = await boardService.updateBoard(
+      const updatedBoard = boardService.updateBoard(
         board,
         groupId,
         taskId,
@@ -37,10 +38,10 @@ export function TaskDetails() {
           key: name,
           value: value,
         }
-      );
-      await updateBoard(updatedBoard);
+      )
+      await updateBoard(updatedBoard)
     } catch (error) {
-      console.error("Failed to update the board:", error);
+      console.error("Failed to update the board:", error)
     }
   }
 
@@ -72,7 +73,9 @@ export function TaskDetails() {
     navigate(`/board/${boardId}`);
   }
 
-  if (!task) return;
+
+
+  if (!task) return
   return (
     <>
       <dialog
@@ -117,6 +120,11 @@ export function TaskDetails() {
           )}
           
           <button className="delete-btn" onClick={deleteTask}>Delete task</button>
+
+          {task?.checklists && task.checklists.length > 0 &&(
+            <TaskChecklist checklists={task.checklists} onUpdatedTask={onUpdatedTask}/>
+          )
+          }
         </form>
       </dialog>
     </>
