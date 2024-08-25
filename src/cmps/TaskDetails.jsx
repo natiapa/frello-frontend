@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { useSelector } from "react-redux";
 
 import { EditTask } from "./EditTask";
 import { LabelList } from "./LabelList";
-import { useSelector } from "react-redux";
+import { TaskChecklist } from "./TaskChecklist";
 
 import { boardService } from "../services/board/board.service.local";
 import { updateBoard } from "../store/actions/board.actions";
 
 export function TaskDetails() {
-  // const [isEditing, setIsEditing] = useState(false)
   const [currElementToEdit, setCurrElementToEdit] = useState("");
 
   const dialogRef = useRef(null);
@@ -30,7 +30,7 @@ export function TaskDetails() {
 
   async function onUpdatedTask(name, value) {
     try {
-      const updatedBoard = await boardService.updateBoard(
+      const updatedBoard = boardService.updateBoard(
         board,
         groupId,
         taskId,
@@ -38,10 +38,10 @@ export function TaskDetails() {
           key: name,
           value: value,
         }
-      );
-      await updateBoard(updatedBoard);
+      )
+      await updateBoard(updatedBoard)
     } catch (error) {
-      console.error("Failed to update the board:", error);
+      console.error("Failed to update the board:", error)
     }
   }
 
@@ -56,7 +56,6 @@ export function TaskDetails() {
     const dataName = ev.currentTarget.getAttribute("data-name");
     // console.log(dataName)
     setCurrElementToEdit(dataName);
-    // setIsEditing(true)
   }
 
   function handleDialogClick(ev) {
@@ -74,8 +73,9 @@ export function TaskDetails() {
     navigate(`/board/${boardId}`);
   }
 
-  if (!task) return;
 
+
+  if (!task) return
   return (
     <>
       <dialog
@@ -85,16 +85,13 @@ export function TaskDetails() {
         onClick={handleDialogClick}
       >
         <form>
-          <button className="close-btn" onClick={onCloseDialog}>
-            x
-          </button>
-
-          {currElementToEdit !== "title" && (
+          <button className="close-btn" onClick={onCloseDialog}>x</button>
+          
+          {!currElementToEdit || currElementToEdit !== "title" ? (
             <h1 data-name="title" onClick={onEdit}>
               {task?.title || "Untitled Task"}
             </h1>
-          )}
-          {currElementToEdit === "title" && (
+          ) : (
             <EditTask
               task={task}
               onUpdatedTask={onUpdatedTask}
@@ -102,10 +99,10 @@ export function TaskDetails() {
               setCurrElementToEdit={setCurrElementToEdit}
             />
           )}
-
+  
           <LabelList labels={task.labels} />
-
-          {currElementToEdit !== "description" && (
+  
+          {!currElementToEdit || currElementToEdit !== "description" ? (
             <p
               className="editable-description"
               data-name="description"
@@ -113,8 +110,7 @@ export function TaskDetails() {
             >
               {task?.description || "Add a more detailed description..."}
             </p>
-          )}
-          {currElementToEdit === "description" && (
+          ) : (
             <EditTask
               task={task}
               onUpdatedTask={onUpdatedTask}
@@ -122,59 +118,23 @@ export function TaskDetails() {
               setCurrElementToEdit={setCurrElementToEdit}
             />
           )}
+          
+          <button className="delete-btn" onClick={deleteTask}>Delete task</button>
 
-          <button className="delete-btn" onClick={deleteTask}>
-            Delete task
-          </button>
+          {task?.checklists && task.checklists.length > 0 &&(
+            <TaskChecklist checklists={task.checklists} onUpdatedTask={onUpdatedTask}/>
+          )
+          }
         </form>
       </dialog>
     </>
-  );
-}
+  )
+  
 
+  
+}
 // return (
 //   <>
-//     <dialog className="task-details" ref={dialogRef} method="dialog" onClick={handleDialogClick}>
-//       <button onClick={onCloseDialog}>x</button>
-//       {!currElementToEdit && task?.title && (
-//         <h1
-//           data-name="title"
-//           onClick={onEdit}
-//         >
-//           {task.title || ''}
-//         </h1>
-//       )}
-//       {currElementToEdit === 'title' && (
-//         <EditTask task={task}
-//           onUpdatedTask={onUpdatedTask}
-//           currElementToEdit={currElementToEdit}
-//           setCurrElementToEdit={setCurrElementToEdit}
-//         />
-//       )}
-//       <LabelList labels={task.labels} />
-//       {!currElementToEdit && task?.description && (
-//         <p
-//           className="editable-description"
-//           data-name="description"
-//           onClick={onEdit}
-//         >
-//           {task.description || ''}
-//         </p>
-//       )}
-//       {currElementToEdit === 'description' && (
-//         <EditTask
-//           task={task}
-//           onUpdatedTask={onUpdatedTask}
-//           currElementToEdit={currElementToEdit}
-//           setCurrElementToEdit={setCurrElementToEdit}
-//         />
-//       )}
-
-//     </dialog>
-//   </>
-// )
-// }
-//   return (
 //     <dialog
 //       className="task-details"
 //       ref={dialogRef}
@@ -182,72 +142,49 @@ export function TaskDetails() {
 //       onClick={handleDialogClick}
 //     >
 //       <form>
-//         <button onClick={onCloseDialog}>x</button>
-//         {task?.title && <h1>{task.title || ""}</h1>}
+//         <button className="close-btn" onClick={onCloseDialog}>
+//           x
+//         </button>
+
+//         {currElementToEdit !== "title" && (
+//           <h1 data-name="title" onClick={onEdit}>
+//             {task?.title || "Untitled Task"}
+//           </h1>
+//         )}
+//         {currElementToEdit === "title" && (
+//           <EditTask
+//             task={task}
+//             onUpdatedTask={onUpdatedTask}
+//             currElementToEdit={currElementToEdit}
+//             setCurrElementToEdit={setCurrElementToEdit}
+//           />
+//         )}
+
+//         <LabelList labels={task.labels} />
+
+//         {currElementToEdit !== "description" && (
+//           <p
+//             className="editable-description"
+//             data-name="description"
+//             onClick={onEdit}
+//           >
+//             {task?.description || "Add a more detailed description..."}
+//           </p>
+//         )}
+//         {currElementToEdit === "description" && (
+//           <EditTask
+//             task={task}
+//             onUpdatedTask={onUpdatedTask}
+//             currElementToEdit={currElementToEdit}
+//             setCurrElementToEdit={setCurrElementToEdit}
+//           />
+//         )}
+//         <button className="delete-btn" onClick={deleteTask}>
+//           Delete task
+//         </button>
+        
 //       </form>
 //     </dialog>
-//   );
-// }
+//   </>
+// );
 
-// useEffect(() => {
-//   if (title !== task.title) {
-
-//     const updatedTask = { ...task, title }
-
-//     const updateGrope = {
-//       ...group,
-//       tasks: group.tasks.map(tsk =>
-//         tsk.id === task.id ? updatedTask : tsk
-//       )
-//     }
-
-//     const updateBoard = {
-//       ...board,
-//       groups: board.groups.map(grp =>
-//         grp.id === group.id ? updateGrope : grp
-//       )
-//     }
-//     console.log(updateBoard)
-
-//     onUpdateBoard(updateBoard)
-//   }
-// }, [title])
-
-/* <div className="overlay" onClick={onCloseForm}></div>
-      <div className="task-details">
-        <form onSubmit={onCloseForm}>
-          <button>
-            <span>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="m4 4 8 8m-8 0 8-8"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeWidth="1.5"
-                ></path>
-              </svg>
-            </span>
-          </button>
-          <h1 onClick={() => setIsEditing(true)}>{title}</h1>
-          {isEditing && <EditTaskTitle title={title} setTitle={setTitle} setIsEditing={setIsEditing} />}
-
-          <h3>Labels:</h3>
-          <LabelList labels={task.labels} />
-          <h3>Members:</h3>
-          {task.members.map((member, idx) => (
-            <li key={idx}>{member}</li>
-          ))}
-
-
-          <div className="description">
-            <h3>Description:</h3>
-            <textarea>{task.description}</textarea>
-          </div>
-        </form>
-      </div> */
