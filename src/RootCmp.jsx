@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router";
 
 import { HomePage } from "./pages/HomePage";
@@ -20,11 +20,38 @@ import { Login } from "./pages/Login.jsx";
 import { Signup } from "./pages/Signup.jsx";
 import { TaskDetails } from "./cmps/TaskDetails.jsx";
 
+import { eventBus } from "./services/event-bus.service.js";
+
 export function RootCmp() {
+
+  const [preview, setPreview] = useState({})
+
+
+  useEffect(() => {
+    eventBus.on('show-task', onPreviewToShow)
+  }, [])
+
+  function onPreviewToShow(data) {
+
+    setPreview({
+      position: 'absolute', // Ensure that the dialog can be positioned
+      left: `${data.left}px`,
+      top: `${data.top}px`,
+      width: `${data.width}px`,
+      height: `${data.height }px`,
+   } )
+
+  }
+
+
   return (
     <div className="main-layout">
       {/* <AppHeader /> */}
       <UserMsg />
+
+      <dialog open style={{...preview}}>
+        <button>save</button>
+      </dialog>
 
       <main className="main-container">
         <Routes>
