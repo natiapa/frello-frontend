@@ -40,7 +40,7 @@ export function BoardDetails() {
 
   useEffect(() => {
     loadBoard(boardId);
-  }, [board]);
+  }, [boardId]);
 
   useEffect(() => {
     calculateBgColor();

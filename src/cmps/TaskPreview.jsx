@@ -7,7 +7,7 @@ import { eventBus } from "../services/event-bus.service";
 import { FiEdit2 } from "react-icons/fi";
 import { LabelList } from "./LabelList";
 import { MemberList } from "./MemberList";
-import { IoMdCheckboxOutline } from 'react-icons/io'
+import { IoMdCheckboxOutline } from "react-icons/io";
 
 export function TaskPreview({ groupId, task }) {
   const boardId = useSelector((storeState) => storeState.boardModule.board._id);
@@ -21,24 +21,24 @@ export function TaskPreview({ groupId, task }) {
   //   eventBus.emit("show-task", previewData);
   // }
   function getChecklists() {
-    const checklists = task.checklists
-    if (!checklists) return 0
-    let counter = 0
-    checklists.forEach(checklist => {
-        counter += checklist.items.length
-    })
-    return counter
-}
+    const checklists = task.checklists;
+    if (!checklists) return 0;
+    let counter = 0;
+    checklists.forEach((checklist) => {
+      counter += checklist.items.length;
+    });
+    return counter;
+  }
 
-function getIsChecked() {
-    const checklists = task.checklists
-    if (!checklists) return 0
-    let counter = 0
-    checklists.forEach(checklist => {
-        counter += checklist.items.filter(item => item.isChecked).length
-    })
-    return counter
-}
+  function getIsChecked() {
+    const checklists = task.checklists;
+    if (!checklists) return 0;
+    let counter = 0;
+    checklists.forEach((checklist) => {
+      counter += checklist.items.filter((item) => item.isChecked).length;
+    });
+    return counter;
+  }
 
   function handleClick(ev) {
     ev.preventDefault();
@@ -67,6 +67,12 @@ function getIsChecked() {
         <span>{task.title || "New"}</span>
 
         <div className="details">
+          {task.checklists && task.checklists.length > 0 && (
+            <div className="checklists">
+              <IoMdCheckboxOutline />
+              {`${getIsChecked()}/${getChecklists()}`}
+            </div>
+          )}
           <ul className="members">
             <MemberList members={task.members} />
           </ul>

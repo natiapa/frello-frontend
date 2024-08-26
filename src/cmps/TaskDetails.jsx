@@ -6,14 +6,14 @@ import { EditTask } from "./EditTask";
 import { LabelList } from "./LabelList";
 import { TaskChecklist } from "./TaskChecklist";
 
-import { updateBoard } from '../store/actions/board.actions'
-import { CgList } from 'react-icons/cg'
-import { BiCheckbox } from 'react-icons/bi'
-import { IoMdCheckboxOutline } from 'react-icons/io'
-import { TaskDetailsActions } from './TaskDetailsActions'
-import { MemberList } from './MemberList'
-import { Dialog } from '@mui/material'
-import { boardService } from '../services/board'
+import { updateBoard } from "../store/actions/board.actions";
+import { CgList } from "react-icons/cg";
+import { BiCheckbox } from "react-icons/bi";
+import { IoMdCheckboxOutline } from "react-icons/io";
+import { TaskDetailsActions } from "./TaskDetailsActions";
+import { MemberList } from "./MemberList";
+import { Dialog } from "@mui/material";
+import { boardService } from "../services/board";
 
 export function TaskDetails() {
   const [currElToEdit, setCurrElementToEdit] = useState("");
@@ -32,7 +32,7 @@ export function TaskDetails() {
     if (dialogRef.current) {
       dialogRef.current.showModal();
     }
-  }, [params, board]);
+  }, [params]);
 
   async function onUpdatedTask(name, value) {
     try {
@@ -64,33 +64,39 @@ export function TaskDetails() {
     }
   }
 
-    function deleteTask(ev) {
-        ev.preventDefault()
-        boardService.updateBoard(board, groupId, taskId, {
-            key: 'deleteTask',
-            value: null,
-        })
-    }
-    if (!task) return
+  function deleteTask(ev) {
+    ev.preventDefault();
+    boardService.updateBoard(board, groupId, taskId, {
+      key: "deleteTask",
+      value: null,
+    });
+    navigate(`board/${boardId}`);
+  }
+  if (!task) return;
 
-    // if (!task) return null
+  // if (!task) return null
 
-    return (
-        <section className="task-details">
-            <dialog ref={dialogRef} method="dialog" onClick={handleDialogClick}>
-                <form>
-                    {currElToEdit !== 'title' ? (
-                        <header data-name="title" onClick={onEdit}>
-                            {task?.title || 'Untitled Task'}
-                        </header>
-                    ) : (
-                        <EditTask task={task} onUpdatedTask={onUpdatedTask} currElToEdit={currElToEdit} setCurrElToEdit={setCurrElementToEdit} />
-                    )}
-                    <button className="close-btn" onClick={onCloseDialog}>
-                        x
-                    </button>
-                    <ul className="member-list">
-                        <p className="header-member-list">Members</p>
+  return (
+    <section className="task-details">
+      <dialog ref={dialogRef} method="dialog" onClick={handleDialogClick}>
+        <form>
+          {currElToEdit !== "title" ? (
+            <header data-name="title" onClick={onEdit}>
+              {task?.title || "Untitled Task"}
+            </header>
+          ) : (
+            <EditTask
+              task={task}
+              onUpdatedTask={onUpdatedTask}
+              currElToEdit={currElToEdit}
+              setCurrElToEdit={setCurrElementToEdit}
+            />
+          )}
+          <button className="close-btn" onClick={onCloseDialog}>
+            x
+          </button>
+          <ul className="member-list">
+            <p className="header-member-list">Members</p>
 
             {task.members && <MemberList members={task.members} />}
           </ul>
