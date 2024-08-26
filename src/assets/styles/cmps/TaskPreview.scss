@@ -1,15 +1,41 @@
 .task-preview {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr max-content;
   margin: 0 4px;
   padding: 8px 12px 4px;
   border-radius: 8px;
   border: 1.6px solid transparent;
   background-color: $bg-color-task-preview;
-  color:  $color-task-preview;
+  color: $color-task-preview;
   box-shadow: $box-shadow-task-preview;
-
   cursor: pointer;
+
+  .edit-btn {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: inherit;
+  }
+
+
   &:hover {
-    // box-shadow: $box-shadow-task-preview-hover;
     border: 1.6px solid $blue1;
+
+    .edit-btn {
+      display: block;
+    }
+  }
+
+  .details {
+    position: relative;
+    grid-row: 2;
+    .members {
+     
+      display: grid;
+      grid-template-columns: max-content max-content;
+      justify-content: end;
+    }
   }
 }

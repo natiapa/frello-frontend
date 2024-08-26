@@ -49,9 +49,9 @@ export function RootCmp() {
       {/* <AppHeader /> */}
       <UserMsg />
 
-      <dialog open style={{...preview}}>
+      {/* <dialog open style={{...preview}}>
         <button>save</button>
-      </dialog>
+      </dialog> */}
 
       <main className="main-container">
         <Routes>

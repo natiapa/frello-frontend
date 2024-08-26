@@ -5,8 +5,8 @@ export function MemberList({ members }) {
         <section className="member-list">
             <p className='header-member-list'>Members</p>
             {members.map(member => (
-                <article key={member} style={{ backgroundColor: getRandomColor() }}>
-                    {member[0]}
+                <article key={member.fullname} style={{ backgroundColor: member.color }}>
+                    {member.fullname[0].toUpperCase()}
                 </article>
             ))}
         </section>
