@@ -31,7 +31,7 @@ async function query(filterBy = { txt: '' }) {
                 imgUrl: 'http://some-img',
             },
             style: {
-                backgroundImage: 'https://cdn.pixabay.com/photo/2017/11/29/18/54/leaf-2986837_1280.jpg',
+                backgroundImage: "https://cdn.pixabay.com/photo/2024/07/05/22/30/penguin-8875750_1280.jpg",
                 backgroundColor: '#61bd4f',
             },
             members: [
@@ -987,7 +987,7 @@ function getEmptyGroup() {
     }
 }
 
-function getEmptyItem(){
+function getEmptyItem() {
     return {
         id: makeId(),
         text: '',
