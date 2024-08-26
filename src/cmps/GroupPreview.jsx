@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { boardService } from "../services/board/board.service.local";
+import { boardService } from "../services/board";
 import { updateBoard } from "../store/actions/board.actions";
 
 import { TaskList } from "./TaskList";

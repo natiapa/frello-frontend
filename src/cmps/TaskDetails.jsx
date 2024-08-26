@@ -6,7 +6,6 @@ import { EditTask } from "./EditTask";
 import { LabelList } from "./LabelList";
 import { TaskChecklist } from "./TaskChecklist";
 
-import { boardService } from "../services/board/board.service.local";
 import { updateBoard } from "../store/actions/board.actions";
 import { CgList } from "react-icons/cg";
 import { BiCheckbox } from "react-icons/bi";
@@ -14,6 +13,7 @@ import { IoMdCheckboxOutline } from "react-icons/io";
 import { TaskDetailsActions } from "./TaskDetailsActions";
 import { MemberList } from "./MemberList";
 import { Dialog } from "@mui/material";
+import { boardService } from "../services/board";
 
 export function TaskDetails() {
   const [currElToEdit, setCurrElementToEdit] = useState("");
@@ -36,10 +36,15 @@ export function TaskDetails() {
 
   async function onUpdatedTask(name, value) {
     try {
-      const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
-        key: name,
-        value: value,
-      });
+      const updatedBoard = boardServicedService.updateBoard(
+        board,
+        groupId,
+        taskId,
+        {
+          key: name,
+          value: value,
+        }
+      );
       await updateBoard(updatedBoard);
     } catch (error) {
       console.error("Failed to update the board:", error);
