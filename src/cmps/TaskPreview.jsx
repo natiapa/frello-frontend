@@ -8,8 +8,10 @@ export function TaskPreview({ groupId, task }) {
   const boardId = useSelector((storeState) => storeState.boardModule.board._id);
 
   return (
-    <div className="task-preview">
-      <Link to={`/board/${boardId}/${groupId}/${task.id}`}>{task.title || 'New'}</Link>
-    </div>
+    <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
+      <div className="task-preview">
+        <span>{task.title || "New"}</span>
+      </div>
+    </Link>
   );
 }
