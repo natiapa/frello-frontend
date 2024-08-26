@@ -32,7 +32,7 @@ export function TaskDetails() {
     if (dialogRef.current) {
       dialogRef.current.showModal();
     }
-  }, [params]);
+  }, [params, board]);
 
   async function onUpdatedTask(name, value) {
     try {
@@ -70,8 +70,8 @@ export function TaskDetails() {
       key: "deleteTask",
       value: null,
     });
-    navigate(`/board/${boardId}`);
   }
+
   if (!task) return;
 
   // if (!task) return null

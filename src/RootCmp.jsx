@@ -27,94 +27,11 @@ import { Provider } from "react-redux";
 import { store } from "./store/store.js";
 
 export function RootCmp() {
-  const [preview, setPreview] = useState({});
-  const [currElToEdit, setCurrElToEdit] = useState("");
-  const [task, setTask] = useState("");
-
-  const [value, setValue] = useState("");
-
-  const dialogRef = useRef(null);
-
-  useEffect(() => {
-    eventBus.on("show-task", onPreviewToShow);
-  }, []);
-
-  function onPreviewToShow(data) {
-    console.log(data);
-    setPreview({
-      position: "absolute", // Ensure that the dialog can be positioned
-      left: `${data.left}px`,
-      top: `${data.top}px`,
-      width: `${data.width}px`,
-      height: `${data.height}px`,
-      zIndex: "1000",
-    });
-
-    setTask(data.task);
-    setCurrElToEdit(data.dataName);
-    setValue(data.task.title);
-
-    if (dialogRef.current) {
-      dialogRef.current.showModal();
-    }
-  }
-
-  function onCloseDialog() {
-    // navigate(`/board/${boardId}`);
-    if (dialogRef.current) {
-      dialogRef.current.close();
-    }
-  }
-
-  function handleDialogClick(ev) {
-    if (ev.target === dialogRef.current) {
-      onCloseDialog();
-    }
-  }
-
-  async function onUpdatedTask(name, value) {
-    try {
-      const updatedBoard = boardService.updateBoard(board, group.id, task.id, {
-        key: name,
-        value: value,
-      });
-      await updateBoard(updatedBoard);
-    } catch (error) {
-      console.error("Failed to update the board:", error);
-    }
-  }
-
-  function handleSave(ev) {
-    ev.preventDefault();
-    if (currElToEdit === "title") {
-      onUpdatedTask(currElToEdit, value);
-      onCloseDialog();
-    }
-  }
-
   return (
     <Provider store={store}>
       <div className="main-layout">
         {/* <AppHeader /> */}
         <UserMsg />
-
-        <dialog
-          className="task-preview-modal"
-          style={{ ...preview }}
-          ref={dialogRef}
-          method="dialog"
-          onClick={handleDialogClick}
-        >
-          <form style={{ height: "100%" }} onSubmit={handleSave}>
-            <input
-              type="text"
-              value={value || ""}
-              onChange={(ev) => setValue(ev.target.value)}
-            />
-
-            <button type="submit">save</button>
-          </form>
-        </dialog>
 
         <main className="main-container">
           <Routes>

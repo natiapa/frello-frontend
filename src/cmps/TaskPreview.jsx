@@ -10,18 +10,34 @@ import { MemberList } from "./MemberList";
 
 export function TaskPreview({ groupId, task }) {
   const boardId = useSelector((storeState) => storeState.boardModule.board._id);
+  const board = useSelector((storeState) => storeState.boardModule.board);
+  const group = board?.groups?.find((group) => group.id === groupId);
+  // const task = group?.tasks?.find((task) => task.id === taskId);
+
+  // function handleClick(ev) {
+  //   ev.preventDefault();
+  //   const previewData = ev.target.parentNode.getBoundingClientRect();
+  //   eventBus.emit("show-task", previewData);
+  // }
 
   function handleClick(ev) {
     ev.preventDefault();
-    const previewData = ev.target.parentNode.getBoundingClientRect();
+    const dataName = ev.currentTarget.getAttribute("data-name");
+    const elData = ev.target.parentNode.getBoundingClientRect();
+    const previewData = { elData, group, task, dataName };
     eventBus.emit("show-task", previewData);
   }
-  console.log("task", task);
+  // console.log("task", task);
 
   return (
     <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
       <div className="task-preview">
-        <button className="edit-btn" onClick={(e) => handleClick(e)}>
+        <button
+          data-name="title"
+          className="edit-btn"
+          onClick={(e) => handleClick(e)}
+          style={{ backgroundColor: "grey" }}
+        >
           <FiEdit2 />
         </button>
         <div className="labels">
