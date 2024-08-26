@@ -4,20 +4,18 @@ import { IoMdCheckboxOutline } from "react-icons/io";
 
 export function TaskDetailsActions() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState("checklist");
+  const [anchorEl, setAnchorEl] = useState(null);
 
   function handleClick(ev) {
     setIsModalOpen((isOpen) => !isOpen);
-    const dataName = ev.currentTarget.getAttribute("data-name");
-    setAnchorEl(dataName);
-    console.log(anchorEl);
+    setAnchorEl(ev.currentTarget);
   }
   return (
     <section className="actions">
       <button
         data-name="checklists"
         className="checklist"
-        aria-describedby="1"
+        aria-describedby={anchorEl}
         onClick={handleClick}
       >
         <span className="icon">
@@ -33,14 +31,15 @@ export function TaskDetailsActions() {
           )} */}
 
         <Popover
-          id="1"
+          id={anchorEl}
           open={isModalOpen}
           anchorEl={anchorEl}
           //   onClose={handleClose}
-          //   anchorOrigin={{
-          //     vertical: "bottom",
-          //     horizontal: "left",
-          //   }}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          disablePortal
           //   sx={{ zIndex: 100000000, position: "fixed" }}
         >
           <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
