@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { boardService } from "../services/board/board.service.local"
+import { ProgressBar } from "./ProgressBar"
 
 export function TaskChecklist({ checklists, onUpdatedTask }) {
     const [checklistsState, setChecklists] = useState(checklists)
@@ -58,6 +59,7 @@ export function TaskChecklist({ checklists, onUpdatedTask }) {
             {checklistsState.map(checklist => (
                 <div key={checklist.id} className="task-checklist">
                     <h4>{checklist.title}</h4>
+                    <ProgressBar items={checklist.items}/>
                     <ul>
                         {checklist.items.map(item => (
                             <li key={item.id}>
