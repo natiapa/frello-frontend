@@ -13,10 +13,7 @@ import { BiCheckbox } from 'react-icons/bi'
 import { IoMdCheckboxOutline } from 'react-icons/io'
 import { TaskDetailsActions } from './TaskDetailsActions'
 import { MemberList } from './MemberList'
-// import { CgList } from 'react-icons/cg'
-// import { BiCheckbox } from 'react-icons/bi'
-// import { IoMdCheckboxOutline } from 'react-icons/io'
-// import { TaskDetailsActions } from './TaskDetailsActions'
+
 
 export function TaskDetails() {
     const [currElementToEdit, setCurrElementToEdit] = useState('')
@@ -27,10 +24,7 @@ export function TaskDetails() {
 
     const { boardId, groupId, taskId } = params
 
-    const board = useSelector(storeState => storeState.boardModule.board)
-    const group = board?.groups?.find(group => group.id === groupId)
-    const task = group?.tasks?.find(task => task.id === taskId)
-    
+
     const board = useSelector((storeState) => storeState.boardModule.board)
     const group = board?.groups?.find((group) => group.id === groupId)
     const task = group?.tasks?.find((task) => task.id === taskId)
