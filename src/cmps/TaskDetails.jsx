@@ -46,16 +46,16 @@ export function TaskDetails() {
     }
   }
 
+  function onEdit(ev) {
+    const dataName = ev.currentTarget.getAttribute("data-name");
+    setCurrElementToEdit(dataName);
+  }
+
   function onCloseDialog() {
     navigate(`/board/${boardId}`);
     if (dialogRef.current) {
       dialogRef.current.close();
     }
-  }
-
-  function onEdit(ev) {
-    const dataName = ev.currentTarget.getAttribute("data-name");
-    setCurrElementToEdit(dataName);
   }
 
   function handleDialogClick(ev) {
