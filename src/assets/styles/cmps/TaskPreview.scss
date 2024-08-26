@@ -45,7 +45,19 @@
 
   .details {
     position: relative;
-    grid-row: 3;
+    grid-row: -1;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+
+    .checklists{
+      display: grid;
+      grid-auto-flow: column;
+      gap: 4px;
+      justify-content: end;
+      align-items: center;
+      font-size: 12px;
+    }
 
     .members {
       display: grid;
