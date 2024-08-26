@@ -17,7 +17,10 @@
     background-color: $blue2;
     color: $white;
     cursor: pointer;
-
+    a {
+      grid-row: 1;
+      height: max-content;
+    }
     .actions {
       justify-self: end;
 
