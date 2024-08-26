@@ -1,19 +1,23 @@
 .actions {
+  display: grid;
+  align-self: start;
+  grid-row: 2/-1;
+  grid-column: 2;
+  font-size: $font-size-task-details-actions;
+
+  .checklist {
     display: grid;
-    align-self: start;
-    grid-row: 2/-1;
-    grid-column: 2;
-    font-size: $font-size-task-details-actions;
+    grid-template-columns: max-content 1fr;
+    justify-content: center;
+    background-color: $bg-color-article-actions;
+    cursor: pointer;
 
-    article {
-      display: grid;
-      grid-template-columns: max-content 1fr;
-      justify-content: center;
-      background-color: $bg-color-article-actions;
-      cursor: pointer;
+    p {
+      margin: 0 0 0 8px;
+    }
 
-      p {
-        margin: 0 0 0 8px;
-      }
+    .checklist-modal {
+      z-index: 10000000000000000000;
     }
   }
+}

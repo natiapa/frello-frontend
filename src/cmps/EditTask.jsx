@@ -1,56 +1,64 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-export function EditTask({ task, currElementToEdit, onUpdatedTask, setCurrElementToEdit }) {
-    const [value, setValue] = useState(task[currElementToEdit])
+export function EditTask({
+  task,
+  currElToEdit,
+  onUpdatedTask,
+  setCurrElementToEdit,
+}) {
+  const [value, setValue] = useState(task[currElToEdit]);
 
-    function handleSave() {
-        if (currElementToEdit === 'description') {
-            onUpdatedTask(currElementToEdit, value)
-            setCurrElementToEdit('')
-        }
+  function handleSave() {
+    if (currElToEdit === "description") {
+      onUpdatedTask(currElToEdit, value);
+      setCurrElementToEdit("");
     }
+  }
 
-    function handleBlur() {
-        if (currElementToEdit === 'title') {
-            onUpdatedTask(currElementToEdit, value)
-            setCurrElementToEdit('')
-        }
+  function handleBlur() {
+    if (currElToEdit === "title") {
+      onUpdatedTask(currElToEdit, value);
+      setCurrElementToEdit("");
     }
+  }
 
-    return (
-        <div>
-            {currElementToEdit === 'title' && (
-                <input
-                    type="text"
-                    name={currElementToEdit}
-                    value={value}
-                    onChange={(ev) => setValue(ev.target.value)}
-                    onBlur={handleBlur}
-                    autoFocus
-                />
-            )}
+  return (
+    <div>
+      {currElToEdit === "title" && (
+        <input
+          type="text"
+          name={currElToEdit}
+          value={value}
+          onChange={(ev) => setValue(ev.target.value)}
+          onBlur={handleBlur}
+          autoFocus
+        />
+      )}
 
-            {currElementToEdit === 'description' && (
-                <div className="edit-task-description">
-                    <textarea
-                        name={currElementToEdit}
-                        value={value}
-                        placeholder="Add a more detailed description..."
-                        onChange={(ev) => setValue(ev.target.value)}
-                        autoFocus
-                        rows={5}
-                        cols={40}
-                    />
-                    <div className="description-buttons">
-                        <button onClick={handleSave} className="save-description">
-                            Save
-                        </button>
-                        <button onClick={() => setCurrElementToEdit('')} className="cancel-description">
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            )}
+      {currElToEdit === "description" && (
+        <div className="edit-task-description">
+          <textarea
+            name={currElToEdit}
+            value={value}
+            placeholder="Add a more detailed description..."
+            onChange={(ev) => setValue(ev.target.value)}
+            autoFocus
+            rows={5}
+            cols={40}
+          />
+          <div className="description-buttons">
+            <button onClick={handleSave} className="save-description">
+              Save
+            </button>
+            <button
+              onClick={() => setCurrElementToEdit("")}
+              className="cancel-description"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
-    )
+      )}
+    </div>
+  );
 }
