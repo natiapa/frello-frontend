@@ -4,21 +4,21 @@ export function EditTask({
   task,
   currElToEdit,
   onUpdatedTask,
-  setCurrElementToEdit,
+  setCurrElToEdit,
 }) {
   const [value, setValue] = useState(task[currElToEdit]);
 
   function handleSave() {
     if (currElToEdit === "description") {
       onUpdatedTask(currElToEdit, value);
-      setCurrElementToEdit("");
+      setCurrElToEdit("");
     }
   }
 
   function handleBlur() {
     if (currElToEdit === "title") {
       onUpdatedTask(currElToEdit, value);
-      setCurrElementToEdit("");
+      setCurrElToEdit("");
     }
   }
 
@@ -51,7 +51,7 @@ export function EditTask({
               Save
             </button>
             <button
-              onClick={() => setCurrElementToEdit("")}
+              onClick={() => setCurrElToEdit("")}
               className="cancel-description"
             >
               Cancel

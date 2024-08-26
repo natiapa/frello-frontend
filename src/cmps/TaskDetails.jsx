@@ -36,15 +36,10 @@ export function TaskDetails() {
 
   async function onUpdatedTask(name, value) {
     try {
-      const updatedBoard = boardServicedService.updateBoard(
-        board,
-        groupId,
-        taskId,
-        {
-          key: name,
-          value: value,
-        }
-      );
+      const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
+        key: name,
+        value: value,
+      });
       await updateBoard(updatedBoard);
     } catch (error) {
       console.error("Failed to update the board:", error);
