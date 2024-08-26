@@ -95,8 +95,11 @@ export function TaskDetails() {
           <button className="close-btn" onClick={onCloseDialog}>
             x
           </button>
+          <ul className="member-list">
+            <p className="header-member-list">Members</p>
 
-          {task.members && <MemberList members={task.members} />}
+            {task.members && <MemberList members={task.members} />}
+          </ul>
           <LabelList labels={task.labels} />
 
           {currElToEdit !== "description" ? (

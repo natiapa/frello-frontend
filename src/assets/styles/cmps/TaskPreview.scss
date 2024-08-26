@@ -1,7 +1,7 @@
 .task-preview {
   position: relative;
   display: grid;
-  grid-template-rows: 1fr max-content;
+  grid-template-rows: max-content 1fr max-content;
   margin: 0 4px;
   padding: 8px 12px 4px;
   border-radius: 8px;
@@ -11,6 +11,22 @@
   box-shadow: $box-shadow-task-preview;
   cursor: pointer;
 
+  .labels {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    gap: 4px;
+    margin: 0 0 4px;
+    .label-square {
+      margin: 0;
+      height: 8px;
+    }
+  }
+
+  span {
+    grid-row: 2;
+  }
+
   .edit-btn {
     display: none;
     position: absolute;
@@ -18,7 +34,6 @@
     right: 0;
     background-color: inherit;
   }
-
 
   &:hover {
     border: 1.6px solid $blue1;
@@ -30,12 +45,23 @@
 
   .details {
     position: relative;
-    grid-row: 2;
+    grid-row: 3;
+
     .members {
-     
       display: grid;
       grid-template-columns: max-content max-content;
       justify-content: end;
+      gap: 4px;
+
+      li {
+        display: grid;
+        align-content: center;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        color: white;
+      }
     }
   }
 }
