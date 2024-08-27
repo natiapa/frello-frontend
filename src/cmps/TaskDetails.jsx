@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
-import { useSelector } from 'react-redux'
-import { EditTask } from './EditTask'
-import { LabelList } from './LabelList'
-import { TaskChecklist } from './TaskChecklist'
-import { updateBoard } from '../store/actions/board.actions'
-import { TaskDetailsActions } from './TaskDetailsActions'
-import { MemberList } from './MemberList'
-import { boardService } from '../services/board'
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { useSelector } from "react-redux";
+import { EditTask } from "./EditTask";
+import { LabelList } from "./LabelList";
+import { TaskChecklist } from "./TaskChecklist";
+import { updateBoard } from "../store/actions/board.actions";
+import { TaskDetailsActions } from "./TaskDetailsActions";
+import { MemberList } from "./MemberList";
+import { boardService } from "../services/board";
 
 export function TaskDetails() {
   const [currElToEdit, setCurrElementToEdit] = useState("");
@@ -63,12 +63,12 @@ export function TaskDetails() {
     boardService.updateBoard(board, groupId, taskId, {
       key: "deleteTask",
       value: null,
-    });
+    })
     navigate(`board/${boardId}`);
   }
-  if (!task) return;
 
-  // if (!task) return null
+
+  if (!task) return;
 
   return (
     <section className="task-details">
@@ -121,6 +121,9 @@ export function TaskDetails() {
             <TaskChecklist
               checklists={task.checklists}
               onUpdatedTask={onUpdatedTask}
+              task={task}
+              groupId={groupId}
+              boardId={boardId}
             />
           )}
         </form>

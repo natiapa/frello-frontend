@@ -1,11 +1,19 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { boardService } from "../services/board";
-import { ProgressBar } from "./ProgressBar";
+import { Checklist } from "./Checklist";
 
-export function TaskChecklist({ checklists, onUpdatedTask }) {
-  const [checklistsState, setChecklistsState] = useState(checklists);
-  const [isAddingItem, setIsAddingItem] = useState(null);
+export function TaskChecklist({
+  checklists,
+  onUpdatedTask,
+  task,
+  groupId,
+  boardId,
+}) {
+  const [checklistsState, setChecklistsState] = useState(checklists || []);
+  const [isAddingItem, setIsAddingItem] = useState(null)
   const [newItem, setNewItem] = useState("");
+  const navigate = useNavigate();
 
   function handleChecklistItem({ target }, checklistId, itemId) {
     const isChecked = target.checked;
@@ -28,6 +36,7 @@ export function TaskChecklist({ checklists, onUpdatedTask }) {
   function onAddItem(checklistId) {
     setIsAddingItem(checklistId);
   }
+
   function onCloseItem() {
     setIsAddingItem(null);
     setNewItem("");
@@ -56,51 +65,31 @@ export function TaskChecklist({ checklists, onUpdatedTask }) {
     setNewItem("");
   }
 
+  function onRemoveChecklist(checklistId) {
+    const updatedChecklists = task.checklists.filter(
+      (checklist) => checklist.id !== checklistId
+    );
+    setChecklistsState(updatedChecklists);
+    onUpdatedTask("checklists", updatedChecklists);
+    navigate(`/board/${boardId}/${groupId}/${task.id}`);
+  }
+
   return (
     <div className="task-checklists">
       {checklistsState.map((checklist) => (
-        <div key={checklist.id} className="task-checklist">
-          <h4>{checklist.title}</h4>
-          <ProgressBar items={checklist.items} />
-          <ul>
-            {checklist.items.map((item) => (
-              <li key={item.id}>
-                <input
-                  type="checkbox"
-                  checked={item.isChecked}
-                  onChange={(ev) =>
-                    handleChecklistItem(ev, checklist.id, item.id)
-                  }
-                />
-                <span
-                  style={{
-                    textDecoration: item.isChecked ? "line-through" : "none",
-                  }}
-                >
-                  {item.text}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <div>
-            {isAddingItem === checklist.id ? (
-              <div>
-                <input
-                  type="text"
-                  placeholder="Enter new item"
-                  value={newItem}
-                  onChange={(ev) => setNewItem(ev.target.value)}
-                />
-                <button onClick={onSaveItem}>Save</button>
-                <button onClick={onCloseItem}>cancel</button>
-              </div>
-            ) : (
-              <button onClick={() => onAddItem(checklist.id)}>
-                Add an item
-              </button>
-            )}
-          </div>
-        </div>
+        <Checklist
+
+          key={checklist.id}
+          checklist={checklist}
+          handleChecklistItem={handleChecklistItem}
+          onRemoveChecklist={onRemoveChecklist}
+          onAddItem={onAddItem}
+          isAddingItem={isAddingItem}
+          newItem={newItem}
+          setNewItem={setNewItem}
+          onSaveItem={onSaveItem}
+          onCloseItem={onCloseItem}
+        />
       ))}
     </div>
   );

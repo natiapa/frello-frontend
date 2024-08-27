@@ -9,6 +9,7 @@ export const boardService = {
     getById,
     save,
     remove,
+
     addBoardMsg,
     updateBoard,
     getEmptyGroup,
@@ -107,7 +108,66 @@ async function query(filterBy = { txt: '' }) {
                             title: 'Create design mockups',
                             labels: ['Review', 'Important'],
                             description: '',
-                            checklists: [],
+                            checklists: [
+                                {
+                                    id: 'chk10656',
+                                    title: 'Design Process',
+                                    items: [
+                                        {
+                                            id: 'item101',
+                                            text: 'Gather requirements from the team',
+                                            isChecked: true,
+                                        },
+                                        {
+                                            id: 'item102',
+                                            text: 'Create wireframe sketches',
+                                            isChecked: false,
+                                        },
+                                        {
+                                            id: 'item103',
+                                            text: 'Design high-fidelity mockups',
+                                            isChecked: false,
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'chk106252222256',
+                                    title: 'Design Process',
+                                    items: [
+                                        {
+                                            id: 'item101',
+                                            text: 'Gather requirements from the team',
+                                            isChecked: true,
+                                        },
+                                        {
+                                            id: 'item102',
+                                            text: 'Create wireframe sketches',
+                                            isChecked: false,
+                                        },
+                                        {
+                                            id: 'item103',
+                                            text: 'Design high-fidelity mockups',
+                                            isChecked: false,
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'chk1022525',
+                                    title: 'Review Process',
+                                    items: [
+                                        {
+                                            id: 'item201',
+                                            text: 'Review mockups with the team',
+                                            isChecked: false,
+                                        },
+                                        {
+                                            id: 'item202',
+                                            text: 'Make adjustments based on feedback',
+                                            isChecked: false,
+                                        }
+                                    ]
+                                }
+                            ],
                             members: [{fullname:'John Doe', color:getRandomColor()}, {fullname:'Jane Smith',color:getRandomColor()}],
                             attachments: ['mockup_v1.png'],
                             comments: ['Design high-fidelity mockups for the app', 'Align design with the wireframes'],
@@ -119,7 +179,45 @@ async function query(filterBy = { txt: '' }) {
                             title: 'Design logo',
                             labels: ['Low Priority', 'Completed'],
                             description: '',
-                            checklists: [],
+                            checklists: [
+                                {
+                                    id: 'chk10136352',
+                                    title: 'Design Process',
+                                    items: [
+                                        {
+                                            id: 'item101',
+                                            text: 'Gather requirements from the team',
+                                            isChecked: true,
+                                        },
+                                        {
+                                            id: 'item102',
+                                            text: 'Create wireframe sketches',
+                                            isChecked: false,
+                                        },
+                                        {
+                                            id: 'item103',
+                                            text: 'Design high-fidelity mockups',
+                                            isChecked: false,
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'chk333102',
+                                    title: 'Review Process',
+                                    items: [
+                                        {
+                                            id: 'item201',
+                                            text: 'Review mockups with the team',
+                                            isChecked: false,
+                                        },
+                                        {
+                                            id: 'item202',
+                                            text: 'Make adjustments based on feedback',
+                                            isChecked: false,
+                                        }
+                                    ]
+                                }
+                            ],
                             members: [{fullname:'John Doe', color:getRandomColor()}, {fullname:'Jane Smith',color:getRandomColor()}],
                             attachments: ['logo_v1.png'],
                             comments: ['Design a logo for the Trello project', 'Ensure it aligns with the brand identity'],
@@ -940,12 +1038,17 @@ function updateBoard(board, groupId, taskId, { key, value }, activity = '') {
         if (key === 'deleteTask') {
             // Remove the task from the tasks array
             board.groups[gIdx].tasks.splice(tIdx, 1);
-        } else {
-            board.groups[gIdx].tasks[tIdx][key] = value;
+        }else if (key === 'checklists') {
+            console.log(value)
+            board.groups[gIdx].tasks[tIdx].checklists = value;
         }
+        else {
+            board.groups[gIdx].tasks[tIdx][key] = value
+        }
+         
     } else if (gIdx >= 0 && tIdx < 0) {
         if (key === 'deleteGroup') {
-            board.groups.splice(gIdx, 1);
+            board.groups.splice(gIdx, 1)
         }
         else {
             board.groups[gIdx][key] = value
