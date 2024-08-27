@@ -29,10 +29,9 @@ export function BoardDetails() {
   const [preview, setPreview] = useState({});
   const [currElToEdit, setCurrElToEdit] = useState("title");
   const [value, setValue] = useState("");
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const board = useSelector((storeState) => storeState.boardModule.board);
-
-  const dialogRef = useRef(null);
 
   useEffect(() => {
     eventBus.on("show-task", onPreviewToShow);
@@ -40,7 +39,9 @@ export function BoardDetails() {
 
   useEffect(() => {
     loadBoard(boardId);
-  }, [boardId]);
+    if (!preview?.length) return;
+    setPreview(preview);
+  }, [boardId, preview]);
 
   useEffect(() => {
     calculateBgColor();
@@ -79,35 +80,21 @@ export function BoardDetails() {
 
   function onPreviewToShow(data) {
     console.log(data);
+
     setPreview({
-      position: "absolute", // Ensure that the dialog can be positioned
-      left: `${data.left}px`,
-      top: `${data.top}px`,
-      width: `${data.width}px`,
-      height: `${data.height}px`,
+      position: "absolute",
+      left: `${data.elData.left}px`,
+      top: `${data.elData.top}px`,
+      width: `${data.elData.width}px`,
+      height: `${data.elData.height}px`,
       zIndex: "1000",
     });
+    setIsOpenModal((isOpenModal) => !isOpenModal);
 
     setCurrElToEdit(data.dataName);
     setCurrGroup(data.group);
     setCurrTask(data.task);
     setValue(data.task.title);
-
-    if (dialogRef.current) {
-      dialogRef.current.showModal();
-    }
-  }
-
-  function onCloseDialog() {
-    if (dialogRef.current) {
-      dialogRef.current.close();
-    }
-  }
-
-  function handleDialogClick(ev) {
-    if (ev.target === dialogRef.current) {
-      onCloseDialog();
-    }
   }
 
   async function onUpdated(name, value) {
@@ -129,30 +116,15 @@ export function BoardDetails() {
     }
   }
 
-  // function handleSave(ev) {
-  //   ev.preventDefault();
-  //   console.log(ev);
-  //   console.log(currElToEdit);
-  //   if (currElToEdit === "title") {
-  //     onUpdated(currElToEdit, value);
-  //     onCloseDialog();
-  //     console.log(board);
-  //   }
-  // }
-
   async function handleSave(ev) {
     ev.preventDefault();
 
     if (currElToEdit === "title") {
-      try {
-        await onUpdated(currElToEdit, value);
-        onCloseDialog();
-      } catch (err) {
-        console.error(err);
-      }
+      onUpdated(currElToEdit, value);
+      setIsOpenModal((isOpenModal) => !isOpenModal);
     }
   }
-
+  console.log(preview);
   if (!board) return;
 
   return (
@@ -163,23 +135,28 @@ export function BoardDetails() {
           backgroundImage: `url(${board?.style?.backgroundImage})`,
         }}
       >
-        <dialog
-          className="task-preview-modal"
-          style={{ ...preview }}
-          ref={dialogRef}
-          method="dialog"
-          onClick={handleDialogClick}
-        >
-          <form style={{ height: "100%" }} onSubmit={handleSave}>
-            <input
-              type="text"
-              value={value || ""}
-              onChange={(ev) => setValue(ev.target.value)}
-            />
+        {isOpenModal && (
+          <section>
+            <div
+              onClick={handleSave}
+              className="task-preview-modal-overlay"
+            ></div>
+            <div
+              className="task-preview-modal"
+              style={{ ...preview }}
+              method="dialog"
+            >
+              <form style={{ height: "100%" }} onSubmit={handleSave}>
+                <textarea
+                  value={value || ""}
+                  onChange={(ev) => setValue(ev.target.value)}
+                />
 
-            <button type="submit">save</button>
-          </form>
-        </dialog>
+                <button type="submit">save</button>
+              </form>
+            </div>
+          </section>
+        )}
 
         <AppHeader bgColor={bgColor} />
         {board?.members && board.members.length && (

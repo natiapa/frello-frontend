@@ -10,6 +10,8 @@
   color: $color-task-preview;
   box-shadow: $box-shadow-task-preview;
   cursor: pointer;
+  max-width: 256px;
+  word-break: break-all;
 
   .labels {
     display: grid;
@@ -50,7 +52,7 @@
     grid-auto-flow: column;
     align-items: center;
 
-    .checklists{
+    .checklists {
       display: grid;
       grid-auto-flow: column;
       gap: 4px;

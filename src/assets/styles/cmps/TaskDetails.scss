@@ -1,6 +1,7 @@
 .task-details {
   display: grid;
   grid-template-columns: 1fr max-content;
+  word-break: break-all;
 
   dialog {
     display: grid;

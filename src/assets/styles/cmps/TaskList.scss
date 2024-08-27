@@ -4,6 +4,7 @@
   max-height: 72vh;
   padding: 0 0 8px;
   overflow: auto;
+  overflow-x: hidden;
   scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
   // -webkit-transform: translate3d(0, 0, 0);
