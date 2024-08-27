@@ -1,0 +1,26 @@
+.edit-task-modal-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  ul {
+    li {
+      display: flex;
+      margin: 1em;
+      .label-color {
+        width: 212px;
+        height: 32px;
+      }
+
+      input {
+        margin: 10px;
+      }
+
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+      }
+    }
+  }
+}
