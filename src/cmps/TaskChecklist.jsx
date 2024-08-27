@@ -10,27 +10,53 @@ export function TaskChecklist({
   groupId,
   boardId,
 }) {
-  const [checklistsState, setChecklistsState] = useState(checklists || []);
+  const [checklistsState, setChecklistsState] = useState(checklists || [])
   const [isAddingItem, setIsAddingItem] = useState(null)
-  const [newItem, setNewItem] = useState("");
-  const navigate = useNavigate();
+  const [hideCheckedItems, setHideCheckedItems] = useState(false)
+  const [newItem, setNewItem] = useState("")
+  const navigate = useNavigate()
 
-  function handleChecklistItem({ target }, checklistId, itemId) {
+  // function handleChecklistItem({ target }, checklistId, itemId,editedText) {
+  //   const isChecked = target.checked;
+
+  //   const updatedChecklists = checklistsState.map((checklist) =>
+  //     checklist.id === checklistId
+  //       ? {
+  //           ...checklist,
+  //           items: checklist.items.map((item) =>
+  //             item.id === itemId ? { ...item, isChecked } : item
+  //           ),
+  //         }
+  //       : checklist
+
+  //   )
+  //   setChecklistsState(updatedChecklists)
+  //   onUpdated("checklists", updatedChecklists)
+  // }
+  function handleChecklistItem({ target }, checklistId, itemId, editedText) {
     const isChecked = target.checked;
-
+  
     const updatedChecklists = checklistsState.map((checklist) =>
       checklist.id === checklistId
         ? {
             ...checklist,
             items: checklist.items.map((item) =>
-              item.id === itemId ? { ...item, isChecked } : item
+              item.id === itemId
+                ? { ...item, isChecked, text: editedText?.trim() ? editedText : item.text }
+                : item
             ),
           }
         : checklist
-    );
-
+    )
+  
     setChecklistsState(updatedChecklists);
     onUpdated("checklists", updatedChecklists);
+  }
+  
+
+
+  function handleHideItems() {
+    setHideCheckedItems(!hideCheckedItems)
   }
 
   function onAddItem(checklistId) {
@@ -39,7 +65,7 @@ export function TaskChecklist({
 
   function onCloseItem() {
     setIsAddingItem(null);
-    setNewItem("")
+    setNewItem("");
   }
 
   function onSaveItem() {
@@ -54,10 +80,10 @@ export function TaskChecklist({
               text: newItem,
             },
           ],
-        }
+        };
       }
       return checklist;
-    });
+    })
 
     setChecklistsState(updatedChecklists);
     onUpdated("checklists", updatedChecklists);
@@ -80,14 +106,17 @@ export function TaskChecklist({
         <Checklist
           key={checklist.id}
           checklist={checklist}
+          handleHideItems={handleHideItems}
           handleChecklistItem={handleChecklistItem}
           onRemoveChecklist={onRemoveChecklist}
           onAddItem={onAddItem}
           isAddingItem={isAddingItem}
+          hideCheckedItems={hideCheckedItems}
           newItem={newItem}
           setNewItem={setNewItem}
           onSaveItem={onSaveItem}
           onCloseItem={onCloseItem}
+    
         />
       ))}
     </div>
