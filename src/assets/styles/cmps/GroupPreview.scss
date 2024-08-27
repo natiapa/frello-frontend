@@ -1,7 +1,7 @@
 .group-preview {
   background-color: white;
   margin: 1em;
-  padding: 1em;
+  padding: 0 4px;
   width: 284px;
   height: max-content;
   border-radius: 12px;
@@ -13,12 +13,14 @@
   .header-and-actions{
     display: grid;
     grid-template-columns: 1fr max-content;
-  }
-  h3 {
-    margin: 0 4px;
-  }
-
-  button {
-    margin: 4px 0;
+    padding: 8px 8px 0;
+    h3 {
+      margin: 0 4px;
+      padding: 6px 8px 6px 12px;
+    }
+  
+    button {
+      margin: 4px 0;
+    }
   }
 }
