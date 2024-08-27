@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
-import { useSelector } from 'react-redux'
-import { Edit } from './Edit'
-import { LabelList } from './LabelList'
-import { TaskChecklist } from './TaskChecklist'
-import { updateBoard } from '../store/actions/board.actions'
-import { TaskDetailsActions } from './TaskDetailsActions'
-import { MemberList } from './MemberList'
-import { boardService } from '../services/board'
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { useSelector } from "react-redux";
+import { Edit } from "./Edit";
+import { LabelList } from "./LabelList";
+import { TaskChecklist } from "./TaskChecklist";
+import { updateBoard } from "../store/actions/board.actions";
+import { TaskDetailsActions } from "./TaskDetailsActions";
+import { MemberList } from "./MemberList";
+import { boardService } from "../services/board";
 
 export function TaskDetails() {
   const [currElToEdit, setCurrElToEdit] = useState("");
@@ -58,13 +58,18 @@ export function TaskDetails() {
     }
   }
 
-  function deleteTask(ev) {
+  async function deleteTask(ev) {
     ev.preventDefault();
-    boardService.updateBoard(board, groupId, taskId, {
-      key: "deleteTask",
-      value: null,
-    });
-    navigate(`board/${boardId}`);
+    try {
+      const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
+        key: "deleteTask",
+        value: null,
+      });
+      await updateBoard(updatedBoard);
+      navigate(`/board/${boardId}`);
+    } catch (error) {
+      console.error("Failed to delete task:", error);
+    }
   }
   if (!task) return;
 
@@ -118,10 +123,7 @@ export function TaskDetails() {
           </button>
 
           {task?.checklists && task.checklists.length > 0 && (
-            <TaskChecklist
-              checklists={task.checklists}
-              onUpdated={onUpdated}
-            />
+            <TaskChecklist checklists={task.checklists} onUpdated={onUpdated} />
           )}
         </form>
         <TaskDetailsActions />
