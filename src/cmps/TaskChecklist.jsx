@@ -2,7 +2,7 @@ import { useState } from "react";
 import { boardService } from "../services/board";
 import { ProgressBar } from "./ProgressBar";
 
-export function TaskChecklist({ checklists, onUpdatedTask }) {
+export function TaskChecklist({ checklists, onUpdated }) {
   const [checklistsState, setChecklistsState] = useState(checklists);
   const [isAddingItem, setIsAddingItem] = useState(null);
   const [newItem, setNewItem] = useState("");
@@ -22,7 +22,7 @@ export function TaskChecklist({ checklists, onUpdatedTask }) {
     );
 
     setChecklistsState(updatedChecklists);
-    onUpdatedTask("checklists", updatedChecklists);
+    onUpdated("checklists", updatedChecklists);
   }
 
   function onAddItem(checklistId) {
@@ -51,7 +51,7 @@ export function TaskChecklist({ checklists, onUpdatedTask }) {
     });
 
     setChecklistsState(updatedChecklists);
-    onUpdatedTask("checklists", updatedChecklists);
+    onUpdated("checklists", updatedChecklists);
     setIsAddingItem(null);
     setNewItem("");
   }

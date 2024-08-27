@@ -21,7 +21,7 @@ import { Signup } from "./pages/Signup.jsx";
 import { TaskDetails } from "./cmps/TaskDetails.jsx";
 
 import { eventBus } from "./services/event-bus.service.js";
-import { EditTask } from "./cmps/EditTask.jsx";
+import { Edit } from "./cmps/Edit.jsx";
 import { updateBoard } from "./store/actions/board.actions.js";
 import { Provider } from "react-redux";
 import { store } from "./store/store.js";

@@ -110,7 +110,7 @@ export function BoardDetails() {
     }
   }
 
-  async function onUpdatedTask(name, value) {
+  async function onUpdated(name, value) {
     try {
       const updatedBoard = boardService.updateBoard(
         board,
@@ -133,7 +133,7 @@ export function BoardDetails() {
     console.log(ev);
     // console.log(currElToEdit);
     if (currElToEdit === "title") {
-      onUpdatedTask(currElToEdit, value);
+      onUpdated(currElToEdit, value);
       onCloseDialog();
       console.log(board);
     }
