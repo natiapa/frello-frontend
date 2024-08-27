@@ -1,23 +1,23 @@
 import { useState } from "react";
 
-export function EditTask({
+export function Edit({
   task,
   currElToEdit,
-  onUpdatedTask,
+  onUpdated,
   setCurrElToEdit,
 }) {
   const [value, setValue] = useState(task[currElToEdit]);
 
   function handleSave() {
     if (currElToEdit === "description") {
-      onUpdatedTask(currElToEdit, value);
+      onUpdated(currElToEdit, value);
       setCurrElToEdit("");
     }
   }
 
   function handleBlur() {
     if (currElToEdit === "title") {
-      onUpdatedTask(currElToEdit, value);
+      onUpdated(currElToEdit, value);
       setCurrElToEdit("");
     }
   }

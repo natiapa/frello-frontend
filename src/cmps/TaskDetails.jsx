@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useSelector } from "react-redux";
-import { EditTask } from "./EditTask";
+import { Edit } from "./Edit";
 import { LabelList } from "./LabelList";
 import { TaskChecklist } from "./TaskChecklist";
 import { updateBoard } from "../store/actions/board.actions";
@@ -10,7 +10,7 @@ import { MemberList } from "./MemberList";
 import { boardService } from "../services/board";
 
 export function TaskDetails() {
-  const [currElToEdit, setCurrElementToEdit] = useState("");
+  const [currElToEdit, setCurrElToEdit] = useState("");
 
   const dialogRef = useRef(null);
   const params = useParams();
@@ -28,7 +28,7 @@ export function TaskDetails() {
     }
   }, [params]);
 
-  async function onUpdatedTask(name, value) {
+  async function onUpdated(name, value) {
     try {
       const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
         key: name,
@@ -42,7 +42,7 @@ export function TaskDetails() {
 
   function onEdit(ev) {
     const dataName = ev.currentTarget.getAttribute("data-name");
-    setCurrElementToEdit(dataName);
+    setCurrElToEdit(dataName);
   }
 
   function onCloseDialog() {
@@ -58,13 +58,19 @@ export function TaskDetails() {
     }
   }
 
-  function deleteTask(ev) {
+  async function deleteTask(ev) {
     ev.preventDefault();
-    boardService.updateBoard(board, groupId, taskId, {
-      key: "deleteTask",
-      value: null,
-    })
-    navigate(`board/${boardId}`);
+    try {
+      const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
+        key: "deleteTask",
+        value: null,
+      });
+      await updateBoard(updatedBoard);
+      navigate(`/board/${boardId}`);
+    } catch (error) {
+      console.error("Failed to delete task:", error);
+    }
+
   }
 
 
@@ -79,11 +85,11 @@ export function TaskDetails() {
               {task?.title || "Untitled Task"}
             </header>
           ) : (
-            <EditTask
+            <Edit
               task={task}
-              onUpdatedTask={onUpdatedTask}
+              onUpdated={onUpdated}
               currElToEdit={currElToEdit}
-              setCurrElToEdit={setCurrElementToEdit}
+              setCurrElToEdit={setCurrElToEdit}
             />
           )}
           <button className="close-btn" onClick={onCloseDialog}>
@@ -105,11 +111,11 @@ export function TaskDetails() {
               {task?.description || "Add a more detailed description..."}
             </p>
           ) : (
-            <EditTask
+            <Edit
               task={task}
-              onUpdatedTask={onUpdatedTask}
+              onUpdated={onUpdated}
               currElToEdit={currElToEdit}
-              setCurrElToEdit={setCurrElementToEdit}
+              setCurrElToEdit={setCurrElToEdit}
             />
           )}
 
@@ -120,11 +126,12 @@ export function TaskDetails() {
           {task?.checklists && task.checklists.length > 0 && (
             <TaskChecklist
               checklists={task.checklists}
-              onUpdatedTask={onUpdatedTask}
+              onUpdated={onUpdated}
               task={task}
               groupId={groupId}
               boardId={boardId}
             />
+       
           )}
         </form>
         <TaskDetailsActions />

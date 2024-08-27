@@ -58,24 +58,24 @@ export function BoardDetails() {
     }
   }
 
-  async function onUpdateBoard(newBoard) {
-    try {
-      await updateBoard(newBoard);
-      loadBoard(boardId); //***check if there is other way.***
-      // showSuccessMsg("Board U");
-    } catch (err) {
-      showErrorMsg("Cannot update board");
-    }
-  }
+  // async function onUpdateBoard(newBoard) {
+  //   try {
+  //     await updateBoard(newBoard);
+  //     loadBoard(boardId); //***check if there is other way.***
+  //     // showSuccessMsg("Board U");
+  //   } catch (err) {
+  //     showErrorMsg("Cannot update board");
+  //   }
+  // }
 
-  async function onAddBoardMsg(boardId) {
-    try {
-      await addBoardMsg(boardId, "bla bla " + parseInt(Math.random() * 10));
-      showSuccessMsg(`Board msg added`);
-    } catch (err) {
-      showErrorMsg("Cannot add board msg");
-    }
-  }
+  // async function onAddBoardMsg(boardId) {
+  //   try {
+  //     await addBoardMsg(boardId, "bla bla " + parseInt(Math.random() * 10));
+  //     showSuccessMsg(`Board msg added`);
+  //   } catch (err) {
+  //     showErrorMsg("Cannot add board msg");
+  //   }
+  // }
 
   function onPreviewToShow(data) {
     console.log(data);
@@ -110,7 +110,7 @@ export function BoardDetails() {
     }
   }
 
-  async function onUpdatedTask(name, value) {
+  async function onUpdated(name, value) {
     try {
       const updatedBoard = boardService.updateBoard(
         board,
@@ -122,22 +122,38 @@ export function BoardDetails() {
         }
       );
       await updateBoard(updatedBoard);
-      console.log(currTask);
+      await loadBoard(boardId);
+      // console.log(currTask);
     } catch (error) {
       console.error("Failed to update the board:", error);
     }
   }
 
-  function handleSave(ev) {
+  // function handleSave(ev) {
+  //   ev.preventDefault();
+  //   console.log(ev);
+  //   console.log(currElToEdit);
+  //   if (currElToEdit === "title") {
+  //     onUpdated(currElToEdit, value);
+  //     onCloseDialog();
+  //     console.log(board);
+  //   }
+  // }
+
+  async function handleSave(ev) {
     ev.preventDefault();
-    console.log(ev);
-    // console.log(currElToEdit);
+
     if (currElToEdit === "title") {
-      onUpdatedTask(currElToEdit, value);
-      onCloseDialog();
-      console.log(board);
+      try {
+        await onUpdated(currElToEdit, value);
+        onCloseDialog();
+      } catch (err) {
+        console.error(err);
+      }
     }
   }
+
+  if (!board) return;
 
   return (
     <>

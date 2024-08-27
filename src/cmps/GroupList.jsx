@@ -3,19 +3,19 @@ import { GroupPreview } from './GroupPreview'
 import { boardService } from '../services/board'
 import { useSelector } from 'react-redux'
 import { updateBoard } from '../store/actions/board.actions'
-import { on } from 'ws'
 
 export function GroupList({ groups }) {
     const [isNewGroup, setIsNewGroup] = useState(false)
-    const [newGroup, setNewGroup] = useState({})
+    const [newGroup, setNewGroup] = useState(boardService.getEmptyGroup())
     const currBoard = useSelector(state => state.boardModule.board)
 
     useEffect(() => {
+        console.log('groups:', groups)
+    }, [groups?.length])
+    
+    function onAddGroup() {
         setNewGroup(boardService.getEmptyGroup())
         setIsNewGroup(true)
-    }, [isNewGroup])
-
-    function onAddGroup() {
         const updatedBoard = { ...currBoard }
         updatedBoard.groups.push(newGroup)
         updateBoard(updatedBoard)
@@ -30,7 +30,7 @@ export function GroupList({ groups }) {
             ))}
             <div className="add-group-preview">
                 {isNewGroup && <GroupPreview group={newGroup} key={newGroup.id}/>}
-                <button onClick={onAddGroup}>Add Group</button>
+                <button className='add-group-btn' onClick={onAddGroup}><span className='header-btn'>+ Add another list</span></button>
             </div>
         </div>
     )

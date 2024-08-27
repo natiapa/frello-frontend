@@ -1,12 +1,22 @@
 .task-list {
   display: grid;
   gap: 8px;
-  a{
+  max-height: 72vh;
+  padding: 0 0 8px;
+  overflow: auto;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  // -webkit-transform: translate3d(0, 0, 0);
+  scrollbar-color: rgba(9, 30, 66, 0.14) rgba(9, 30, 66, 0.06);
+
+  a {
     text-decoration: none;
     color: $color-task-list-a;
   }
+
   li {
     background-color: $bg-color-task-list;
+
     button {
       color: black;
     }

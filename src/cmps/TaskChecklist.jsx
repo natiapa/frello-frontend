@@ -30,7 +30,7 @@ export function TaskChecklist({
     );
 
     setChecklistsState(updatedChecklists);
-    onUpdatedTask("checklists", updatedChecklists);
+    onUpdated("checklists", updatedChecklists);
   }
 
   function onAddItem(checklistId) {
@@ -60,7 +60,7 @@ export function TaskChecklist({
     });
 
     setChecklistsState(updatedChecklists);
-    onUpdatedTask("checklists", updatedChecklists);
+    onUpdated("checklists", updatedChecklists);
     setIsAddingItem(null);
     setNewItem("");
   }
