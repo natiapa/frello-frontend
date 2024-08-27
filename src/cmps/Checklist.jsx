@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ChecklistItem } from "./ChecklistItem";
 import { ProgressBar } from "./ProgressBar";
 
@@ -14,6 +13,7 @@ export function Checklist({
   setNewItem,
   onSaveItem,
   onCloseItem,
+
 }) {
   return (
     <div className="task-checklist">
@@ -21,14 +21,15 @@ export function Checklist({
       <button type="button" onClick={() => onRemoveChecklist(checklist.id)}>
         Delete
       </button>
-      <button type="button" onClick={handleHideItems}>
-        {hideCheckedItems ? "Show checked items" : "Hide checked items"}
-      </button>
-
+      {checklist.items.some((item) => item.isChecked) && (
+        <button type="button" onClick={handleHideItems}>
+          {hideCheckedItems ? "Show checked items" : "Hide checked items"}
+        </button>
+      )}
       <ProgressBar items={checklist.items} />
       <ul>
         {checklist.items
-          .filter((item) => !hideCheckedItems || !item.isChecked) 
+          .filter((item) => !hideCheckedItems || !item.isChecked)
           .map((item) => (
             <ChecklistItem
               key={item.id}

@@ -10,29 +10,50 @@ export function TaskChecklist({
   groupId,
   boardId,
 }) {
-  const [checklistsState, setChecklistsState] = useState(checklists || []);
-  const [isAddingItem, setIsAddingItem] = useState(null);
-  const [hideCheckedItems, setHideCheckedItems] = useState(false);
-  const [newItem, setNewItem] = useState("");
-  const navigate = useNavigate();
+  const [checklistsState, setChecklistsState] = useState(checklists || [])
+  const [isAddingItem, setIsAddingItem] = useState(null)
+  const [hideCheckedItems, setHideCheckedItems] = useState(false)
+  const [newItem, setNewItem] = useState("")
+  const navigate = useNavigate()
 
-  function handleChecklistItem({ target }, checklistId, itemId) {
+  // function handleChecklistItem({ target }, checklistId, itemId,editedText) {
+  //   const isChecked = target.checked;
+
+  //   const updatedChecklists = checklistsState.map((checklist) =>
+  //     checklist.id === checklistId
+  //       ? {
+  //           ...checklist,
+  //           items: checklist.items.map((item) =>
+  //             item.id === itemId ? { ...item, isChecked } : item
+  //           ),
+  //         }
+  //       : checklist
+
+  //   )
+  //   setChecklistsState(updatedChecklists)
+  //   onUpdated("checklists", updatedChecklists)
+  // }
+  function handleChecklistItem({ target }, checklistId, itemId, editedText) {
     const isChecked = target.checked;
-
+  
     const updatedChecklists = checklistsState.map((checklist) =>
       checklist.id === checklistId
         ? {
             ...checklist,
             items: checklist.items.map((item) =>
-              item.id === itemId ? { ...item, isChecked } : item
+              item.id === itemId
+                ? { ...item, isChecked, text: editedText?.trim() ? editedText : item.text }
+                : item
             ),
           }
         : checklist
-
     )
-    setChecklistsState(updatedChecklists)
-    onUpdated("checklists", updatedChecklists)
+  
+    setChecklistsState(updatedChecklists);
+    onUpdated("checklists", updatedChecklists);
   }
+  
+
 
   function handleHideItems() {
     setHideCheckedItems(!hideCheckedItems)
@@ -62,7 +83,7 @@ export function TaskChecklist({
         };
       }
       return checklist;
-    });
+    })
 
     setChecklistsState(updatedChecklists);
     onUpdated("checklists", updatedChecklists);
@@ -85,8 +106,8 @@ export function TaskChecklist({
         <Checklist
           key={checklist.id}
           checklist={checklist}
-          handleChecklistItem={handleChecklistItem}
           handleHideItems={handleHideItems}
+          handleChecklistItem={handleChecklistItem}
           onRemoveChecklist={onRemoveChecklist}
           onAddItem={onAddItem}
           isAddingItem={isAddingItem}
@@ -95,6 +116,7 @@ export function TaskChecklist({
           setNewItem={setNewItem}
           onSaveItem={onSaveItem}
           onCloseItem={onCloseItem}
+    
         />
       ))}
     </div>
