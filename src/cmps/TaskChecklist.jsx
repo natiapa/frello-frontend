@@ -5,7 +5,7 @@ import { Checklist } from "./Checklist";
 
 export function TaskChecklist({
   checklists,
-  onUpdatedTask,
+  onUpdated,
   task,
   groupId,
   boardId,
@@ -70,7 +70,7 @@ export function TaskChecklist({
       (checklist) => checklist.id !== checklistId
     );
     setChecklistsState(updatedChecklists);
-    onUpdatedTask("checklists", updatedChecklists);
+    onUpdated("checklists", updatedChecklists);
     navigate(`/board/${boardId}/${groupId}/${task.id}`);
   }
 
