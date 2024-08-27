@@ -43,11 +43,10 @@ export function TaskPreview({ groupId, task }) {
   function handleClick(ev) {
     ev.preventDefault();
     const dataName = ev.currentTarget.getAttribute("data-name");
-    const elData = ev.target.parentNode.getBoundingClientRect();
+    const elData = ev.target.closest(".task-preview").getBoundingClientRect();
     const previewData = { elData, group, task, dataName };
     eventBus.emit("show-task", previewData);
   }
-  // console.log("task", task);
 
   return (
     <Link to={`/board/${boardId}/${groupId}/${task.id}`}>
