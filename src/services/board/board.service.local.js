@@ -1038,11 +1038,7 @@ function updateBoard(board, groupId, taskId, { key, value }, activity = '') {
         if (key === 'deleteTask') {
             // Remove the task from the tasks array
             board.groups[gIdx].tasks.splice(tIdx, 1);
-        }else if (key === 'checklists') {
-            console.log(value)
-            board.groups[gIdx].tasks[tIdx].checklists = value;
-        }
-        else {
+        }  else {
             board.groups[gIdx].tasks[tIdx][key] = value
         }
          

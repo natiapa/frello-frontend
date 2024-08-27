@@ -73,7 +73,6 @@ export function TaskDetails() {
 
   }
 
-
   if (!task) return;
 
   return (

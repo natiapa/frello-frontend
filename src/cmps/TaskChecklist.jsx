@@ -39,7 +39,7 @@ export function TaskChecklist({
 
   function onCloseItem() {
     setIsAddingItem(null);
-    setNewItem("");
+    setNewItem("")
   }
 
   function onSaveItem() {
@@ -54,7 +54,7 @@ export function TaskChecklist({
               text: newItem,
             },
           ],
-        };
+        }
       }
       return checklist;
     });
@@ -78,7 +78,6 @@ export function TaskChecklist({
     <div className="task-checklists">
       {checklistsState.map((checklist) => (
         <Checklist
-
           key={checklist.id}
           checklist={checklist}
           handleChecklistItem={handleChecklistItem}
