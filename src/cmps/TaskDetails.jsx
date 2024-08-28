@@ -138,6 +138,7 @@ export function TaskDetails() {
           task={task}
           selectedLabels={selectedLabels}
           setSelectedLabels={setSelectedLabels}
+          onUpdated={onUpdated}
         />
       </dialog>
     </section>

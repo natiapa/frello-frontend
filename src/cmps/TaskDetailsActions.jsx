@@ -19,6 +19,8 @@ export function TaskDetailsActions({
   setIsTaskPrevModalOpen,
   selectedLabels,
   setSelectedLabels,
+  onUpdated,
+  
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isSmallModalOpen, setIsSmallModalOpen] = useState(false);
@@ -30,6 +32,7 @@ export function TaskDetailsActions({
     taskId: taskParams,
   } = useParams();
   const [modalOpenByName, setModalOpenByName] = useState(null);
+console.log(task)
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
@@ -114,54 +117,8 @@ export function TaskDetailsActions({
               },
             }}
           >
-            <Typography sx={{ p: 2 }} onClick={handlePopoverClick}></Typography>
-
-            <EditChecklist
-              groupId={groupId}
-              taskId={taskId}
-              task={task}
-              setIsSmallModalOpen={setIsSmallModalOpen}
-              handlePopoverClick={handlePopoverClick}
-            />
-          </Popover>
-        )}
-      </button>
-
-      <button
-        data-name="due-date"
-        className="due-date action-btn"
-        aria-describedby="5"
-        onClick={handleClick}
-      >
-        <div>
-        <span className="icon">
-          <LuClock5 />
-          <span> Dates </span>
-        </span>
-        </div>
-
-        {modalOpenByName === "due-date" && (
-          <Popover
-            id={anchorEl}
-            open={isSmallModalOpen}
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-            disablePortal
-            // disableEnforceFocus
-            // disableAutoFocus
-            PaperProps={{
-              sx: {
-                width: '400px', 
-                height: '600px', 
-                padding: '20px',
-              },
-            }}
-          >
             <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
-              <DueDatePicker task={task} taskId={taskId}/>
+              <DueDatePicker task={task} taskId={taskId} onUpdated={onUpdated}/>
             </Typography>
           </Popover>
         )}

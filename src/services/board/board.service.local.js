@@ -316,7 +316,7 @@ function _createBoards() {
                         attachments: ['wireframes_v1.png', 'wireframes_v2.png'],
                         comments: ['Create wireframes for the new Trello feature', 'Incorporate feedback from the last review'],
                         cover: 'cover_wireframes.png',
-                        dueDate: '2024-09-01',
+                        dueDate: '',
                     },
                     {
                         id: 'c102',
@@ -443,7 +443,7 @@ function _createBoards() {
                         attachments: ['logo_v1.png'],
                         comments: ['Design a logo for the Trello project', 'Ensure it aligns with the brand identity'],
                         cover: 'cover_logo.png',
-                        dueDate: '2024-09-10',
+                        dueDate: '',
                     },
                     {
                         id: 'c104',
@@ -458,7 +458,7 @@ function _createBoards() {
                         attachments: ['color_scheme_v1.png'],
                         comments: ['Develop a color scheme for the app', 'Use brand colors as a base'],
                         cover: 'cover_color_scheme.png',
-                        dueDate: '2024-09-15',
+                        dueDate: '',
                     },
                     {
                         id: 'c105',
