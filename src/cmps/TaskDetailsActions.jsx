@@ -22,6 +22,12 @@ export function TaskDetailsActions({
   const [isSmallModalOpen, setIsSmallModalOpen] = useState(false);
   const [modalOpenById, setModalOpenById] = useState(null);
 
+  const {
+    boardId: boardParams,
+    groupId: groupParams,
+    taskId: taskParams,
+  } = useParams();
+
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
     setIsSmallModalOpen((isOpen) => !isOpen);
@@ -66,17 +72,19 @@ export function TaskDetailsActions({
         )}
       </button>
 
-      <Link
-        to={`/board/${boardId}/${groupId}/${taskId}`}
-        onClick={() => setIsTaskPrevModalOpen(false)}
-      >
-        <button className="open-card action-btn">
-          <span>
-            <CgCreditCard />
-            <span>open card</span>
-          </span>
-        </button>
-      </Link>
+      {!taskParams && (
+        <Link
+          to={`/board/${boardId}/${groupId}/${taskId}`}
+          onClick={() => setIsTaskPrevModalOpen(false)}
+        >
+          <button className="open-card action-btn">
+            <span>
+              <CgCreditCard />
+              <span>open card</span>
+            </span>
+          </button>
+        </Link>
+      )}
 
       <button
         aria-describedby="2"
