@@ -71,10 +71,12 @@ export function TaskDetailsActions({
         aria-describedby="5"
         onClick={handleClick}
       >
+        <div>
         <span className="icon">
           <LuClock5 />
           <span> Dates </span>
         </span>
+        </div>
 
         {modalOpenByName === "due-date" && (
           <Popover
@@ -97,7 +99,7 @@ export function TaskDetailsActions({
             }}
           >
             <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
-              <DueDatePicker />
+              <DueDatePicker task={task} taskId={taskId}/>
             </Typography>
           </Popover>
         )}

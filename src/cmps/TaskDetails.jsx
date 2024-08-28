@@ -17,17 +17,17 @@ export function TaskDetails() {
   const params = useParams();
   const navigate = useNavigate();
 
-  const { boardId, groupId, taskId } = params
+  const { boardId, groupId, taskId } = params;
 
-  const board = useSelector((storeState) => storeState.boardModule.board)
-  const group = board?.groups?.find((group) => group.id === groupId)
-  const task = group?.tasks?.find((task) => task.id === taskId)
+  const board = useSelector((storeState) => storeState.boardModule.board);
+  const group = board?.groups?.find((group) => group.id === groupId);
+  const task = group?.tasks?.find((task) => task.id === taskId);
 
   useEffect(() => {
     if (dialogRef.current) {
       dialogRef.current.showModal();
     }
-  }, [params])
+  }, [params]);
 
   async function onUpdated(name, value) {
     try {
@@ -37,7 +37,7 @@ export function TaskDetails() {
       });
       await updateBoard(updatedBoard);
     } catch (error) {
-      console.error("Failed to update the board:", error)
+      console.error("Failed to update the board:", error);
     }
   }
 
@@ -47,9 +47,9 @@ export function TaskDetails() {
   }
 
   function onCloseDialog() {
-    navigate(`/board/${boardId}`)
+    navigate(`/board/${boardId}`);
     if (dialogRef.current) {
-      dialogRef.current.close()
+      dialogRef.current.close();
     }
   }
 
@@ -66,12 +66,11 @@ export function TaskDetails() {
         key: "deleteTask",
         value: null,
       });
-      await updateBoard(updatedBoard)
-      navigate(`/board/${boardId}`)
+      await updateBoard(updatedBoard);
+      navigate(`/board/${boardId}`);
     } catch (error) {
-      console.error("Failed to delete task:", error)
+      console.error("Failed to delete task:", error);
     }
-
   }
 
   if (!task) return;
@@ -131,12 +130,16 @@ export function TaskDetails() {
               groupId={groupId}
               boardId={boardId}
             />
-       
           )}
         </form>
-    
-        <TaskDetailsActions />
+
+        <TaskDetailsActions
+          boardId={boardId}
+          groupId={groupId}
+          taskId={task}
+          task={task}
+        />
       </dialog>
     </section>
-  )
+  );
 }

@@ -9,11 +9,11 @@ export const boardService = {
     getById,
     save,
     remove,
-
     addBoardMsg,
     updateBoard,
     getEmptyGroup,
-    getEmptyItem
+    getEmptyItem,
+    getEmptyDueDate,
 }
 window.cs = boardService
 
@@ -102,14 +102,14 @@ async function query(filterBy = { txt: '' }) {
                             comments: ['Create wireframes for the new Trello feature', 'Incorporate feedback from the last review'],
                             cover: 'cover_wireframes.png',
                             dueDate: {
-                                date: '2024-09-01',         // התאריך המדויק
-                                time: '15:00',              // השעה המדויקת (אם ישנה)
-                                isComplete: false,          // מציין אם המשימה הושלמה בזמן או לא
-                                reminder: '1h',             // זמן לפני המועד שבו יש לשלוח תזכורת (לדוגמה, '1h' - שעה לפני)
-                                createdAt: 1627991023000,   // תאריך יצירת ה-dueDate
-                                completedAt: null,          // תאריך ושעה של השלמת המשימה, אם היא הושלמה
-                                isOverdue: false            // מציין אם התאריך כבר עבר מבלי שהמשימה הושלמה
-                              },
+                                date: '2024-09-01',
+                                time: '15:00',
+                                isComplete: false,
+                                reminder: '1h',
+                                createdAt: Date.now(),
+                                completedAt: null,
+                                isOverdue: false
+                            },
                         },
                         {
                             id: 'c102',
@@ -1099,5 +1099,17 @@ function getEmptyItem() {
         id: makeId(),
         text: '',
         isChecked: false
+    }
+}
+
+function getEmptyDueDate(){
+    return {
+        date: '',
+        time: '',
+        isComplete: false,
+        reminder: '',
+        createdAt: Date.now(),
+        completedAt: null,
+        isOverdue: false
     }
 }
