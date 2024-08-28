@@ -5,8 +5,14 @@ import { useSelector } from "react-redux";
 import { updateBoard } from "../store/actions/board.actions";
 // import { loadBoard, addBoardMsg } from "../store/actions/board.actions";
 
-export function EditLables({ task, groupId, handlePopoverClick }) {
-  const [selectedLabels, setSelectedLabels] = useState([]);
+export function EditLables({
+  task,
+  groupId,
+  handlePopoverClick,
+  selectedLabels,
+  setSelectedLabels,
+}) {
+  // const [selectedLabels, setSelectedLabels] = useState([]);
   const board = useSelector((storeState) => storeState.boardModule.board);
 
   const labelsList = [
@@ -20,8 +26,13 @@ export function EditLables({ task, groupId, handlePopoverClick }) {
   ];
 
   useEffect(() => {
-    setSelectedLabels(task.labels || []);
-  }, [task.labels]);
+    setSelectedLabels(task.labels);
+  }, [board]);
+
+  useEffect(() => {
+    if (!selectedLabels) return;
+    onUpdateBoard();
+  }, [selectedLabels, board]);
 
   function handleLabelChange(label) {
     setSelectedLabels((prevSelected) =>
@@ -29,12 +40,17 @@ export function EditLables({ task, groupId, handlePopoverClick }) {
         ? prevSelected.filter((l) => l !== label)
         : [...prevSelected, label]
     );
+  }
+
+  function onUpdateBoard() {
     const updatedBoard = boardService.updateBoard(board, groupId, task.id, {
       key: "labels",
       value: selectedLabels,
     });
     updateBoard(updatedBoard);
   }
+
+  console.log(selectedLabels);
 
   return (
     <div className="edit-task-modal-content" onClick={handlePopoverClick}>

@@ -15,6 +15,9 @@ export function TaskDetailsActions({
   task,
   taskPrevModalData,
   setIsTaskPrevModalOpen,
+  selectedLabels,
+  setSelectedLabels,
+  handleSave,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isSmallModalOpen, setIsSmallModalOpen] = useState(false);
@@ -102,10 +105,15 @@ export function TaskDetailsActions({
               groupId={groupId}
               task={task}
               handlePopoverClick={handlePopoverClick}
+              selectedLabels={selectedLabels}
+              setSelectedLabels={setSelectedLabels}
             />
           </Popover>
         )}
       </button>
     </section>
   );
+}
+
+{
 }
