@@ -50,7 +50,7 @@ export function EditLables({
     updateBoard(updatedBoard);
   }
 
-  console.log(selectedLabels);
+  // console.log(selectedLabels);
 
   return (
     <div className="edit-task-modal-content" onClick={handlePopoverClick}>

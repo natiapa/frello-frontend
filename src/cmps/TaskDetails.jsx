@@ -10,18 +10,16 @@ import { MemberList } from "./MemberList";
 import { boardService } from "../services/board";
 
 export function TaskDetails() {
-  const [currElToEdit, setCurrElToEdit] = useState("");
-  const [selectedLabels, setSelectedLabels] = useState([]);
-
   const dialogRef = useRef(null);
   const params = useParams();
   const navigate = useNavigate();
-
   const { boardId, groupId, taskId } = params;
-
   const board = useSelector((storeState) => storeState.boardModule.board);
   const group = board?.groups?.find((group) => group.id === groupId);
   const task = group?.tasks?.find((task) => task.id === taskId);
+
+  const [currElToEdit, setCurrElToEdit] = useState("");
+  const [selectedLabels, setSelectedLabels] = useState(task.labels);
 
   useEffect(() => {
     if (dialogRef.current) {
