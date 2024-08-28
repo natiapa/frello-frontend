@@ -33,7 +33,7 @@ export function BoardDetails() {
   const [currElToEdit, setCurrElToEdit] = useState("title");
   const [value, setValue] = useState("");
   const [isTaskPrevModalOpen, setIsTaskPrevModalOpen] = useState(false);
-  const [taskPrevModalData, setTaskPrevModalData] = useState("");
+  const [taskPrevActionsModalData, setTaskPrevActionsModalData] = useState("");
   const [selectedLabels, setSelectedLabels] = useState([]);
 
   const board = useSelector((storeState) => storeState.boardModule.board);
@@ -93,7 +93,7 @@ export function BoardDetails() {
       zIndex: "1000",
     });
 
-    setTaskPrevModalData({
+    setTaskPrevActionsModalData({
       position: "fixed",
       left: `${data.elData.left + 260}px`,
       top: `${data.elData.top}px`,
@@ -177,13 +177,13 @@ export function BoardDetails() {
               </form>
             </div>
 
-            {taskPrevModalData && (
+            {taskPrevActionsModalData && (
               <TaskDetailsActions
                 boardId={boardId}
                 groupId={currGroup.id}
                 taskId={currTask.id}
                 task={currTask}
-                taskPrevModalData={taskPrevModalData}
+                taskPrevActionsModalData={taskPrevActionsModalData}
                 setIsTaskPrevModalOpen={setIsTaskPrevModalOpen}
                 selectedLabels={selectedLabels}
                 setSelectedLabels={setSelectedLabels}

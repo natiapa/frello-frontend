@@ -137,7 +137,7 @@ export function TaskDetails() {
           groupId={group.id}
           taskId={task.id}
           task={task}
-          // taskPrevModalData={taskPrevModalData}
+          // taskPrevActionsModalData={taskPrevActionsModalData}
           // setIsTaskPrevModalOpen={setIsTaskPrevModalOpen}
           selectedLabels={selectedLabels}
           setSelectedLabels={setSelectedLabels}

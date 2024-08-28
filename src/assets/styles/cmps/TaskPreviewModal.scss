@@ -9,7 +9,6 @@
   background-color: $bg-color-task-preview;
   color: $color-task-preview;
   box-shadow: $box-shadow-task-preview;
-  min-height: auto;
 
   .labels {
     display: grid;
@@ -23,14 +22,15 @@
     }
   }
   form {
-    height: 100%;
+    grid-row: 2;
+    max-width: 232px;
 
     textarea {
       grid-row: 2;
       height: 100%;
       width: 100%;
       color: #172b4d;
-      word-break: break-all;
+      // word-break: break-all;
       line-height: 1.6;
       border: none;
       font-size: 14px;

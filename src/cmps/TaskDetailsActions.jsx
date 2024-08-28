@@ -13,7 +13,7 @@ export function TaskDetailsActions({
   groupId,
   taskId,
   task,
-  taskPrevModalData,
+  taskPrevActionsModalData,
   setIsTaskPrevModalOpen,
   selectedLabels,
   setSelectedLabels,
@@ -34,7 +34,7 @@ export function TaskDetailsActions({
   }
 
   return (
-    <section className="actions" style={{ ...taskPrevModalData }}>
+    <section className="actions" style={{ ...taskPrevActionsModalData }}>
       <button
         data-name="checklists"
         className="checklist action-btn"
