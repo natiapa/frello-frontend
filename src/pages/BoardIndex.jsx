@@ -29,7 +29,9 @@ export function BoardIndex() {
     loadBoards(filterBy);
   }, [filterBy]);
 
-  async function onRemoveBoard(boardId) {
+  async function onRemoveBoard(ev, boardId) {
+    ev.preventDefault();
+    ev.stopPropagation();
     try {
       await removeBoard(boardId);
       showSuccessMsg("Board removed");

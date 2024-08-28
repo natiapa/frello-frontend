@@ -10,7 +10,7 @@ export function BoardList({
   boards,
   onAddBoard,
   onRemoveBoard,
-  onUpdateBoard,
+  // onUpdateBoard,
 }) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -61,10 +61,13 @@ export function BoardList({
           >
             <li key={board._id}>
               {/* <BoardPreview board={board} /> */}
-              {board.title}
+              <span>{board.title}</span>
+
               <div className="actions">
-                <button onClick={() => onUpdateBoard(board)}>Edit</button>
-                <button onClick={() => onRemoveBoard(board._id)}>x</button>
+                {/* <button onClick={() => onUpdateBoard(board)}>Edit</button> */}
+                <button onClick={(ev) => onRemoveBoard(ev, board._id)}>
+                  x
+                </button>
               </div>
             </li>
           </Link>
