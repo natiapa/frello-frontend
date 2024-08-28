@@ -49,8 +49,8 @@ export function TaskDetailsActions({
       >
         <span className="icon">
           <IoMdCheckboxOutline />
-          <span>Checklist </span>
         </span>
+          <p>Checklist </p>
 
         {modalOpenByName === "checklists" && (
           <Popover
@@ -84,12 +84,12 @@ export function TaskDetailsActions({
         aria-describedby="5"
         onClick={handleClick}
       >
-        <div>
-          <span className="icon">
-            <LuClock5 />
-            <span> Dates </span>
-          </span>
-        </div>
+       
+        <span className="icon">
+          <LuClock5 />
+        </span>
+          <p> Dates </p>
+       
 
         {modalOpenByName === "due-date" && (
           <Popover
@@ -130,12 +130,12 @@ export function TaskDetailsActions({
         aria-describedby="5"
         onClick={handleClick}
       >
-        <div>
-          <span className="icon">
-            <LuClock5 />
-            <span> Dates </span>
-          </span>
-        </div>
+      
+        <span className="icon">
+          <LuClock5 />
+        </span>
+          <p> Dates </p>
+        
 
         {modalOpenByName === "due-date" && (
           <Popover
@@ -190,8 +190,8 @@ export function TaskDetailsActions({
       >
         <span>
           <TiTag />
-          <span>Edit Labels</span>
         </span>
+          <p>Edit Labels</p>
 
         {modalOpenByName === "labels" && (
           <Popover
