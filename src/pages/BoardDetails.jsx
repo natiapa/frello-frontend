@@ -173,7 +173,9 @@ export function BoardDetails() {
                   onChange={(ev) => setValue(ev.target.value)}
                 />
 
-                <button type="submit">save</button>
+                <button className="save-btn" type="submit">
+                  <span>Save</span>
+                </button>
               </form>
             </div>
 
