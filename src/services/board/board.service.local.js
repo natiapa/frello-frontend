@@ -170,11 +170,13 @@ function _createBoards() {
                 id: 'u101',
                 fullname: 'Tal Taltal',
                 imgUrl: 'https://www.google.com',
+                color: '#61bd4f',
             },
             {
                 id: 'u102',
                 fullname: 'Josh Ga',
                 imgUrl: 'https://www.google.com',
+                color: '#f2d600',
             },
         ],
         groups: [
