@@ -7,6 +7,7 @@ import { TiTag } from "react-icons/ti";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { EditLables } from "./EditLabels";
+import { EditChecklist } from "./EditChecklist";
 
 export function TaskDetailsActions({
   boardId,
@@ -44,7 +45,7 @@ export function TaskDetailsActions({
       <button
         data-name="checklists"
         className="checklist action-btn"
-        // aria-describedby="1"
+        aria-describedby="1"
         onClick={handleClick}
       >
         <span className="icon">
@@ -65,9 +66,15 @@ export function TaskDetailsActions({
             // disableEnforceFocus
             // disableAutoFocus
           >
-            <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
-              CHECKLIST
-            </Typography>
+            <Typography sx={{ p: 2 }} onClick={handlePopoverClick}></Typography>
+
+            <EditChecklist
+              groupId={groupId}
+              taskId={taskId}
+              task={task}
+              setIsSmallModalOpen={setIsSmallModalOpen}
+              handlePopoverClick={handlePopoverClick}
+            />
           </Popover>
         )}
       </button>
@@ -87,7 +94,7 @@ export function TaskDetailsActions({
       )}
 
       <button
-        // aria-describedby="2"
+        aria-describedby="2"
         data-name="labels"
         className="edit-labels action-btn"
         onClick={handleClick}

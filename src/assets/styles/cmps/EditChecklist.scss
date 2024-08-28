@@ -1,0 +1,25 @@
+.edit-checklist {
+    display: grid;
+    gap: 15px;
+    padding: 12px;
+
+    label {
+        display: grid;
+        input{
+            padding: 8px 12px;
+        }
+    }
+
+    .edit-checklist-btn {
+        width: max-content;
+        height: max-content;
+        margin-top: 4px;
+        padding: 6px 24px;
+        border-radius: 4px;
+        background-color: #0c66e4;
+        color: #ffffff;
+    }
+
+
+
+}

@@ -14,6 +14,7 @@ export const boardService = {
     updateBoard,
     getEmptyGroup,
     getEmptyTask,
+    getEmptyChecklist,
     getEmptyItem,
     getEmptyBoard,
 }
@@ -163,6 +164,14 @@ function getEmptyTask() {
         comments: [],
         cover: '',
         dueDate: '',
+    }
+}
+
+function getEmptyChecklist() {
+    return {
+        id: makeId(),
+        title: '',
+        items: [getEmptyItem()],
     }
 }
 
