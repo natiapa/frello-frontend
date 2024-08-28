@@ -57,7 +57,9 @@ export function BoardIndex() {
     }
   }
 
-  async function onUpdateBoard(board) {
+  async function onUpdateBoard(ev, board) {
+    ev.preventDefault();
+    ev.stopPropagation();
     const title = prompt(board.title);
     board.title = title;
     try {

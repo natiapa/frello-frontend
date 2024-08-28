@@ -51,18 +51,23 @@ export function BoardList({
       </header>
       {boards &&
         boards.length &&
-        boards.map((board) => (
-          <li
-            key={board._id}
-            style={{ backgroundImage: `url(${board?.style?.backgroundImage})` }}
+        boards.map((board, idx) => (
+          <Link
+            to={`/board/${board._id}`}
+            key={idx}
+            style={{
+              backgroundImage: `url(${board?.style?.backgroundImage})`,
+            }}
           >
-            <BoardPreview board={board} />
-            <Link to={`/board/${board._id}`}>{board.title}</Link>
-            <div className="actions">
-              <button onClick={() => onUpdateBoard(board)}>Edit</button>
-              <button onClick={() => onRemoveBoard(board._id)}>x</button>
-            </div>
-          </li>
+            <li key={board._id}>
+              {/* <BoardPreview board={board} /> */}
+              {board.title}
+              <div className="actions">
+                <button onClick={() => onUpdateBoard(board)}>Edit</button>
+                <button onClick={() => onRemoveBoard(board._id)}>x</button>
+              </div>
+            </li>
+          </Link>
         ))}
       <button
         aria-describedby="7"
