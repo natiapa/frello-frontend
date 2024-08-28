@@ -17,11 +17,13 @@ import { BoardList } from "../cmps/BoardList";
 import { BoardFilter } from "../cmps/BoardFilter";
 import { SideBar } from "../cmps/Sidebar";
 import { AppHeader } from "../cmps/AppHeader";
+import { useNavigate } from "react-router";
 
 export function BoardIndex() {
   const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter());
   const boards = useSelector((storeState) => storeState.boardModule.boards);
   console.log(boards);
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadBoards(filterBy);
@@ -49,6 +51,7 @@ export function BoardIndex() {
     try {
       const savedBoard = await addBoard(boardToSave);
       showSuccessMsg(`Board added (id: ${savedBoard._id})`);
+      navigate(`/board/${savedBoard._id}`);
     } catch (err) {
       showErrorMsg("Cannot add board");
     }
