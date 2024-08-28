@@ -30,9 +30,11 @@
       }
     }
   }
-  .new-board {
+  .new-board-btn {
     background-color: $new-board-bg-color;
     color: black;
     cursor: pointer;
+    width: 190px;
+    height: 96px;
   }
 }

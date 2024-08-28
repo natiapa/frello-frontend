@@ -12,8 +12,14 @@ export function BoardList({
   onUpdateBoard,
 }) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [modalOpenByName, setModalOpenByName] = useState(null);
 
   function handleClick(ev) {
+    const currDataName = ev.currentTarget.getAttribute("data-name");
+
+    setAnchorEl(ev.currentTarget);
+    setModalOpenByName(currDataName);
     setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
   }
 
@@ -28,6 +34,12 @@ export function BoardList({
   function handleStartBoard(board) {
     console.log(board);
     onAddBoard(board);
+  }
+
+  function handleClosePopover() {
+    setIsPopoverOpen(false);
+    setAnchorEl(null);
+    setModalOpenByName(null);
   }
 
   return (
@@ -48,16 +60,27 @@ export function BoardList({
           </li>
         ))}
       <button
+        aria-describedby="7"
         data-name="add-board"
-        className="new-board"
-        // onClick={() => onAddBoard()}
+        className="new-board-btn"
         onClick={handleClick}
-        style={{ width: "200px", height: "200px" }}
       >
         Create new board
       </button>
-      {isPopoverOpen && (
-        <CreateBoardModal handleStartBoard={handleStartBoard} />
+      {modalOpenByName === "add-board" && (
+        <Popover
+          id={anchorEl}
+          open={isPopoverOpen}
+          onClose={handleClosePopover}
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          disablePortal
+        >
+          <CreateBoardModal handleStartBoard={handleStartBoard} />
+        </Popover>
       )}
     </ul>
   );

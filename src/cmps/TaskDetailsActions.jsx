@@ -22,14 +22,9 @@ export function TaskDetailsActions({
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isSmallModalOpen, setIsSmallModalOpen] = useState(false);
-  const [modalOpenById, setModalOpenById] = useState(null);
-
-  const {
-    boardId: boardParams,
-    groupId: groupParams,
-    taskId: taskParams,
-  } = useParams();
   const [modalOpenByName, setModalOpenByName] = useState(null);
+
+  const { taskId: taskParams } = useParams();
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
@@ -88,10 +83,10 @@ export function TaskDetailsActions({
         onClick={handleClick}
       >
         <div>
-        <span className="icon">
-          <LuClock5 />
-          <span> Dates </span>
-        </span>
+          <span className="icon">
+            <LuClock5 />
+            <span> Dates </span>
+          </span>
         </div>
 
         {modalOpenByName === "due-date" && (
@@ -108,9 +103,9 @@ export function TaskDetailsActions({
             // disableAutoFocus
             PaperProps={{
               sx: {
-                width: '400px', 
-                height: '600px', 
-                padding: '20px',
+                width: "400px",
+                height: "600px",
+                padding: "20px",
               },
             }}
           >
@@ -134,10 +129,10 @@ export function TaskDetailsActions({
         onClick={handleClick}
       >
         <div>
-        <span className="icon">
-          <LuClock5 />
-          <span> Dates </span>
-        </span>
+          <span className="icon">
+            <LuClock5 />
+            <span> Dates </span>
+          </span>
         </div>
 
         {modalOpenByName === "due-date" && (
@@ -154,14 +149,14 @@ export function TaskDetailsActions({
             // disableAutoFocus
             PaperProps={{
               sx: {
-                width: '400px', 
-                height: '600px', 
-                padding: '20px',
+                width: "400px",
+                height: "600px",
+                padding: "20px",
               },
             }}
           >
             <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
-              <DueDatePicker task={task} taskId={taskId}/>
+              <DueDatePicker task={task} taskId={taskId} />
             </Typography>
           </Popover>
         )}
