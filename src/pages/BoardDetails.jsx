@@ -26,7 +26,9 @@ import { boardService } from "../services/board";
 
 export function BoardDetails() {
   const { boardId } = useParams();
-  const [bgColor, setbgColor] = useState();
+  const board = useSelector((storeState) => storeState.boardModule.board);
+
+  const [bgColor, setbgColor] = useState("");
   const [currGroup, setCurrGroup] = useState("");
   const [currTask, setCurrTask] = useState("");
   const [preview, setPreview] = useState({});
@@ -35,8 +37,6 @@ export function BoardDetails() {
   const [isTaskPrevModalOpen, setIsTaskPrevModalOpen] = useState(false);
   const [taskPrevActionsModalData, setTaskPrevActionsModalData] = useState("");
   const [selectedLabels, setSelectedLabels] = useState([]);
-
-  const board = useSelector((storeState) => storeState.boardModule.board);
 
   useEffect(() => {
     eventBus.on("show-task", onPreviewToShow);
@@ -50,14 +50,17 @@ export function BoardDetails() {
 
   useEffect(() => {
     calculateBgColor();
-  }, [board?.style?.backgroundImage]);
+  }, [board?.style?.backgroundImage, bgColor]);
 
   async function calculateBgColor() {
-    if (board?.style?.backgroundImage) {
+    const bgImage = await board?.style?.backgroundImage;
+
+    if (bgImage) {
       const fac = new FastAverageColor();
       try {
         const color = await fac.getColorAsync(board.style.backgroundImage);
         setbgColor(color.hex);
+        console.log(color);
       } catch (error) {
         console.error("Failed to calculate background color:", error);
       }
@@ -195,9 +198,9 @@ export function BoardDetails() {
         )}
 
         <AppHeader bgColor={bgColor} />
-        {board?.members && board.members.length && (
-          <BoardHeader members={board.members} bgColor={bgColor} />
-        )}
+        {/* {board?.members && board.members.length && ( */}
+        <BoardHeader members={board?.members} bgColor={bgColor} />
+        {/* )} */}
 
         {board && <BoardSideBar board={board} bgColor={bgColor} />}
         {board && <GroupList groups={board.groups} />}

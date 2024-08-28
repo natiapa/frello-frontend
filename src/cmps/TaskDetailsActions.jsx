@@ -44,7 +44,7 @@ export function TaskDetailsActions({
       <button
         data-name="checklists"
         className="checklist action-btn"
-        aria-describedby="1"
+        // aria-describedby="1"
         onClick={handleClick}
       >
         <span className="icon">
@@ -87,7 +87,7 @@ export function TaskDetailsActions({
       )}
 
       <button
-        aria-describedby="2"
+        // aria-describedby="2"
         data-name="labels"
         className="edit-labels action-btn"
         onClick={handleClick}

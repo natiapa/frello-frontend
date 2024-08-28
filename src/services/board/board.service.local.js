@@ -15,6 +15,7 @@ export const boardService = {
     getEmptyGroup,
     getEmptyTask,
     getEmptyItem,
+    getEmptyBoard,
 }
 window.cs = boardService
 
@@ -37,7 +38,9 @@ async function query(filterBy = { txt: '' }) {
     // }
 
     // boards = boards.map(({ _id, title, owner }) => ({ _id, title, owner }))
-    console.log('boards:', boards)
+
+
+    // console.log('boards:', boards)
 
     return boards
 }
@@ -120,6 +123,27 @@ function addActivity(txt) {
     })
 }
 
+function getEmptyBoard() {
+    return {
+        _id: '',
+        title: '',
+        isStarred: false,
+        // archivedAt: 0,
+        createdBy: {
+            id: 'u102',
+            fullname: '',
+            imgUrl: '',
+        },
+        style: {
+            backgroundImage: '',
+            backgroundColor: ''
+        },
+        members: [],
+        groups: [],
+        activities: [],
+    }
+}
+
 function getEmptyGroup() {
     return {
         id: makeId(),
@@ -151,7 +175,7 @@ function getEmptyItem() {
 }
 
 function _createBoards() {
-    return  {
+    return {
         _id: 'b101',
         title: 'Robot dev proj',
         isStarred: false,
