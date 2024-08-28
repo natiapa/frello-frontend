@@ -1,13 +1,14 @@
-import { Button, Popover, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Popover, Typography } from "@mui/material";
+import { useState } from "react";
 import { CgCreditCard } from "react-icons/cg";
 import { IoMdCheckboxOutline } from "react-icons/io";
-import { IoCard } from "react-icons/io5";
 import { TiTag } from "react-icons/ti";
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { EditLables } from "./EditLabels";
 import { EditChecklist } from "./EditChecklist";
+import { SiDatefns } from "react-icons/si";
+import { LuClock5 } from "react-icons/lu";
+import { DueDatePicker } from "./DueDatePicker";
 
 export function TaskDetailsActions({
   boardId,
@@ -28,12 +29,13 @@ export function TaskDetailsActions({
     groupId: groupParams,
     taskId: taskParams,
   } = useParams();
+  const [modalOpenByName, setModalOpenByName] = useState(null);
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
     setIsSmallModalOpen((isOpen) => !isOpen);
     setAnchorEl(ev.currentTarget);
-    setModalOpenById(currDataName);
+    setModalOpenByName(currDataName);
   }
 
   function handlePopoverClick(ev) {
@@ -50,10 +52,10 @@ export function TaskDetailsActions({
       >
         <span className="icon">
           <IoMdCheckboxOutline />
-          <span>Checklist</span>
+          <span>Checklist </span>
         </span>
 
-        {modalOpenById === "checklists" && (
+        {modalOpenByName === "checklists" && (
           <Popover
             id={anchorEl}
             open={isSmallModalOpen}
@@ -75,6 +77,92 @@ export function TaskDetailsActions({
               setIsSmallModalOpen={setIsSmallModalOpen}
               handlePopoverClick={handlePopoverClick}
             />
+          </Popover>
+        )}
+      </button>
+
+      <button
+        data-name="due-date"
+        className="due-date action-btn"
+        aria-describedby="5"
+        onClick={handleClick}
+      >
+        <div>
+        <span className="icon">
+          <LuClock5 />
+          <span> Dates </span>
+        </span>
+        </div>
+
+        {modalOpenByName === "due-date" && (
+          <Popover
+            id={anchorEl}
+            open={isSmallModalOpen}
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            disablePortal
+            // disableEnforceFocus
+            // disableAutoFocus
+            PaperProps={{
+              sx: {
+                width: '400px', 
+                height: '600px', 
+                padding: '20px',
+              },
+            }}
+          >
+            <Typography sx={{ p: 2 }} onClick={handlePopoverClick}></Typography>
+
+            <EditChecklist
+              groupId={groupId}
+              taskId={taskId}
+              task={task}
+              setIsSmallModalOpen={setIsSmallModalOpen}
+              handlePopoverClick={handlePopoverClick}
+            />
+          </Popover>
+        )}
+      </button>
+
+      <button
+        data-name="due-date"
+        className="due-date action-btn"
+        aria-describedby="5"
+        onClick={handleClick}
+      >
+        <div>
+        <span className="icon">
+          <LuClock5 />
+          <span> Dates </span>
+        </span>
+        </div>
+
+        {modalOpenByName === "due-date" && (
+          <Popover
+            id={anchorEl}
+            open={isSmallModalOpen}
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            disablePortal
+            // disableEnforceFocus
+            // disableAutoFocus
+            PaperProps={{
+              sx: {
+                width: '400px', 
+                height: '600px', 
+                padding: '20px',
+              },
+            }}
+          >
+            <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
+              <DueDatePicker task={task} taskId={taskId}/>
+            </Typography>
           </Popover>
         )}
       </button>
@@ -104,7 +192,7 @@ export function TaskDetailsActions({
           <span>Edit Labels</span>
         </span>
 
-        {modalOpenById === "labels" && (
+        {modalOpenByName === "labels" && (
           <Popover
             id={anchorEl}
             open={isSmallModalOpen}

@@ -16,23 +16,6 @@ export function TaskChecklist({
   const [newItem, setNewItem] = useState("")
   const navigate = useNavigate()
 
-  // function handleChecklistItem({ target }, checklistId, itemId,editedText) {
-  //   const isChecked = target.checked;
-
-  //   const updatedChecklists = checklistsState.map((checklist) =>
-  //     checklist.id === checklistId
-  //       ? {
-  //           ...checklist,
-  //           items: checklist.items.map((item) =>
-  //             item.id === itemId ? { ...item, isChecked } : item
-  //           ),
-  //         }
-  //       : checklist
-
-  //   )
-  //   setChecklistsState(updatedChecklists)
-  //   onUpdated("checklists", updatedChecklists)
-  // }
   function handleChecklistItem({ target }, checklistId, itemId, editedText) {
     
     const isChecked = target.checked;
@@ -54,8 +37,6 @@ export function TaskChecklist({
     onUpdated("checklists", updatedChecklists);
   }
   
-
-
   function handleHideItems() {
     setHideCheckedItems(!hideCheckedItems)
   }
@@ -81,7 +62,7 @@ export function TaskChecklist({
               text: newItem,
             },
           ],
-        };
+        }
       }
       return checklist;
     })
