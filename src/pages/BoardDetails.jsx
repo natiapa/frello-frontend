@@ -107,6 +107,7 @@ export function BoardDetails() {
     setCurrGroup(data.group);
     setCurrTask(data.task);
     setValue(data.task.title);
+    setSelectedLabels(data.task.labels || []);
   }
 
   async function onUpdated(name, value) {
@@ -162,8 +163,11 @@ export function BoardDetails() {
               style={{ ...preview }}
               method="dialog"
             >
-              <LabelList labels={selectedLabels} />
-              <form style={{ height: "100%" }} onSubmit={handleSave}>
+              <div className="labels">
+                <LabelList labels={selectedLabels} />
+              </div>
+
+              <form onSubmit={handleSave}>
                 <textarea
                   value={value || ""}
                   onChange={(ev) => setValue(ev.target.value)}
@@ -172,6 +176,7 @@ export function BoardDetails() {
                 <button type="submit">save</button>
               </form>
             </div>
+
             {taskPrevModalData && (
               <TaskDetailsActions
                 boardId={boardId}
