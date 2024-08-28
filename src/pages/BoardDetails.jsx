@@ -22,6 +22,7 @@ import { FastAverageColor } from "fast-average-color";
 
 import { updateBoard } from "../store/actions/board.actions";
 import { LabelList } from "../cmps/LabelList";
+import { boardService } from "../services/board";
 
 export function BoardDetails() {
   const { boardId } = useParams();
@@ -109,6 +110,7 @@ export function BoardDetails() {
   }
 
   async function onUpdated(name, value) {
+    if (!board) return;
     try {
       const updatedBoard = boardService.updateBoard(
         board,
@@ -126,12 +128,17 @@ export function BoardDetails() {
     }
   }
 
-  async function handleSave(ev) {
+  function handleSave(ev) {
     ev.preventDefault();
+    if (!board) return;
 
     if (currElToEdit === "title") {
       onUpdated(currElToEdit, value);
       setIsTaskPrevModalOpen((isOpenModal) => !isOpenModal);
+    }
+
+    if (currElToEdit === "labels") {
+      onUpdated("labels", selectedLabels);
     }
   }
   if (!board) return;
@@ -155,7 +162,7 @@ export function BoardDetails() {
               style={{ ...preview }}
               method="dialog"
             >
-              <LabelList labels={currTask?.labels} />
+              <LabelList labels={selectedLabels} />
               <form style={{ height: "100%" }} onSubmit={handleSave}>
                 <textarea
                   value={value || ""}
@@ -175,6 +182,7 @@ export function BoardDetails() {
                 setIsTaskPrevModalOpen={setIsTaskPrevModalOpen}
                 selectedLabels={selectedLabels}
                 setSelectedLabels={setSelectedLabels}
+                handleSave={handleSave}
               />
             )}
           </section>
