@@ -42,6 +42,7 @@ export function TaskPreview({ groupId, task }) {
 
   function handleClick(ev) {
     ev.preventDefault();
+    ev.stopPropagation();
     const dataName = ev.currentTarget.getAttribute("data-name");
     const elData = ev.target.closest(".task-preview").getBoundingClientRect();
     const previewData = { elData, group, task, dataName };

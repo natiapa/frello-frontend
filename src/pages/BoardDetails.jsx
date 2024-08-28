@@ -21,6 +21,7 @@ import { TaskDetailsActions } from "../cmps/TaskDetailsActions";
 import { FastAverageColor } from "fast-average-color";
 
 import { updateBoard } from "../store/actions/board.actions";
+import { LabelList } from "../cmps/LabelList";
 
 export function BoardDetails() {
   const { boardId } = useParams();
@@ -31,8 +32,9 @@ export function BoardDetails() {
   const [currElToEdit, setCurrElToEdit] = useState("title");
   const [value, setValue] = useState("");
   const [isTaskPrevModalOpen, setIsTaskPrevModalOpen] = useState(false);
-  const [elData, setElData] = useState("");
   const [taskPrevModalData, setTaskPrevModalData] = useState("");
+  const [selectedLabels, setSelectedLabels] = useState([]);
+
   const board = useSelector((storeState) => storeState.boardModule.board);
 
   useEffect(() => {
@@ -81,9 +83,6 @@ export function BoardDetails() {
   // }
 
   function onPreviewToShow(data) {
-    // console.log(data);
-    setElData(data);
-
     setPreview({
       position: "absolute",
       left: `${data.elData.left}px`,
@@ -122,7 +121,6 @@ export function BoardDetails() {
       );
       await updateBoard(updatedBoard);
       await loadBoard(boardId);
-      // console.log(currTask);
     } catch (error) {
       console.error("Failed to update the board:", error);
     }
@@ -136,7 +134,6 @@ export function BoardDetails() {
       setIsTaskPrevModalOpen((isOpenModal) => !isOpenModal);
     }
   }
-  // console.log(preview);
   if (!board) return;
 
   return (
@@ -158,6 +155,7 @@ export function BoardDetails() {
               style={{ ...preview }}
               method="dialog"
             >
+              <LabelList labels={currTask?.labels} />
               <form style={{ height: "100%" }} onSubmit={handleSave}>
                 <textarea
                   value={value || ""}
@@ -169,13 +167,14 @@ export function BoardDetails() {
             </div>
             {taskPrevModalData && (
               <TaskDetailsActions
-                data={elData}
                 boardId={boardId}
                 groupId={currGroup.id}
                 taskId={currTask.id}
                 task={currTask}
                 taskPrevModalData={taskPrevModalData}
                 setIsTaskPrevModalOpen={setIsTaskPrevModalOpen}
+                selectedLabels={selectedLabels}
+                setSelectedLabels={setSelectedLabels}
               />
             )}
           </section>
