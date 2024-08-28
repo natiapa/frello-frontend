@@ -8,6 +8,7 @@ import { updateBoard } from "../store/actions/board.actions";
 import { TaskDetailsActions } from "./TaskDetailsActions";
 import { MemberList } from "./MemberList";
 import { boardService } from "../services/board";
+import { DueDatePicker } from "./DueDatePicker";
 
 export function TaskDetails() {
   const [currElToEdit, setCurrElToEdit] = useState("");
@@ -16,17 +17,17 @@ export function TaskDetails() {
   const params = useParams();
   const navigate = useNavigate();
 
-  const { boardId, groupId, taskId } = params;
+  const { boardId, groupId, taskId } = params
 
-  const board = useSelector((storeState) => storeState.boardModule.board);
-  const group = board?.groups?.find((group) => group.id === groupId);
-  const task = group?.tasks?.find((task) => task.id === taskId);
+  const board = useSelector((storeState) => storeState.boardModule.board)
+  const group = board?.groups?.find((group) => group.id === groupId)
+  const task = group?.tasks?.find((task) => task.id === taskId)
 
   useEffect(() => {
     if (dialogRef.current) {
       dialogRef.current.showModal();
     }
-  }, [params]);
+  }, [params])
 
   async function onUpdated(name, value) {
     try {
@@ -36,7 +37,7 @@ export function TaskDetails() {
       });
       await updateBoard(updatedBoard);
     } catch (error) {
-      console.error("Failed to update the board:", error);
+      console.error("Failed to update the board:", error)
     }
   }
 
@@ -46,9 +47,9 @@ export function TaskDetails() {
   }
 
   function onCloseDialog() {
-    navigate(`/board/${boardId}`);
+    navigate(`/board/${boardId}`)
     if (dialogRef.current) {
-      dialogRef.current.close();
+      dialogRef.current.close()
     }
   }
 
@@ -65,10 +66,10 @@ export function TaskDetails() {
         key: "deleteTask",
         value: null,
       });
-      await updateBoard(updatedBoard);
-      navigate(`/board/${boardId}`);
+      await updateBoard(updatedBoard)
+      navigate(`/board/${boardId}`)
     } catch (error) {
-      console.error("Failed to delete task:", error);
+      console.error("Failed to delete task:", error)
     }
 
   }
@@ -133,8 +134,9 @@ export function TaskDetails() {
        
           )}
         </form>
+    
         <TaskDetailsActions />
       </dialog>
     </section>
-  );
+  )
 }

@@ -101,7 +101,15 @@ async function query(filterBy = { txt: '' }) {
                             attachments: ['wireframes_v1.png', 'wireframes_v2.png'],
                             comments: ['Create wireframes for the new Trello feature', 'Incorporate feedback from the last review'],
                             cover: 'cover_wireframes.png',
-                            dueDate: '2024-09-01',
+                            dueDate: {
+                                date: '2024-09-01',         // התאריך המדויק
+                                time: '15:00',              // השעה המדויקת (אם ישנה)
+                                isComplete: false,          // מציין אם המשימה הושלמה בזמן או לא
+                                reminder: '1h',             // זמן לפני המועד שבו יש לשלוח תזכורת (לדוגמה, '1h' - שעה לפני)
+                                createdAt: 1627991023000,   // תאריך יצירת ה-dueDate
+                                completedAt: null,          // תאריך ושעה של השלמת המשימה, אם היא הושלמה
+                                isOverdue: false            // מציין אם התאריך כבר עבר מבלי שהמשימה הושלמה
+                              },
                         },
                         {
                             id: 'c102',
