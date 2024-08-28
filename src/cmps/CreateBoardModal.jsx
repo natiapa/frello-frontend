@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { boardService } from "../services/board";
 
-export function CreateBoardModal({ handleStartBoard }) {
+export function CreateBoardModal({ handleCreateBoard }) {
   const [newBoard, setNewBoard] = useState({});
   const [bgImage, setBgImage] = useState("");
   const [boardTitle, setBoardTitle] = useState("");
@@ -55,11 +55,37 @@ export function CreateBoardModal({ handleStartBoard }) {
       src: "https://cdn.pixabay.com/photo/2020/05/23/04/11/transport-5207942_1280.jpg",
       alt: "transport",
     },
+    {
+      src: "https://cdn.pixabay.com/photo/2022/10/06/10/29/witch-hazel-7502409_960_720.jpg",
+      alt: "witch-hazel",
+    },
+    {
+      src: "https://cdn.pixabay.com/photo/2023/09/21/01/20/sugar-blader-8265868_1280.jpg",
+      alt: "sugar-blader",
+    },
+    {
+      src: "https://cdn.pixabay.com/photo/2016/11/29/06/06/coast-1867704_960_720.jpg",
+      alt: "coast",
+    },
+    {
+      src: "https://cdn.pixabay.com/photo/2017/03/17/21/32/shell-2152731_960_720.jpg",
+      alt: "shell",
+    },
   ];
 
   function handleImgClick(imgSrc, idx) {
     setBgImage(imgSrc);
     setSelectedImgIdx(idx);
+  }
+
+  function handleCreateBtnClick() {
+    const boardToCreate = {
+      ...newBoard,
+      backgroundImage: bgImage,
+      title: boardTitle,
+    };
+    setNewBoard(boardToCreate);
+    handleCreateBoard(boardToCreate);
   }
 
   return (
@@ -85,17 +111,8 @@ export function CreateBoardModal({ handleStartBoard }) {
         value={boardTitle}
         onChange={(e) => setBoardTitle(e.target.value)}
       />
-      <button
-        className="start-btn"
-        onClick={() =>
-          handleStartBoard({
-            ...newBoard,
-            backgroundImage: bgImage,
-            title: boardTitle,
-          })
-        }
-      >
-        start
+      <button className="create-btn" onClick={handleCreateBtnClick}>
+        Create
       </button>
     </div>
   );
