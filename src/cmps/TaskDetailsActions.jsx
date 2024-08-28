@@ -19,12 +19,14 @@ export function TaskDetailsActions({
   setIsTaskPrevModalOpen,
   selectedLabels,
   setSelectedLabels,
+  onUpdated,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isSmallModalOpen, setIsSmallModalOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
 
   const { taskId: taskParams } = useParams();
+  console.log(task);
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
@@ -156,7 +158,11 @@ export function TaskDetailsActions({
             }}
           >
             <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
-              <DueDatePicker task={task} taskId={taskId} />
+              <DueDatePicker
+                task={task}
+                taskId={taskId}
+                onUpdated={onUpdated}
+              />
             </Typography>
           </Popover>
         )}
