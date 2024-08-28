@@ -8,7 +8,7 @@ export function BoardHeader({ members, bgColor }) {
             <div className="board-header-actions"></div>
             <ul className="members">
                 {members.map(member => (
-                    <li key={member.id} className="member" style={{backgroundColor: getRandomColor()}}>
+                    <li key={member.id} className="member" style={{backgroundColor: member.color}}>
                         {member.fullname[0]}
                     </li>
                 ))}

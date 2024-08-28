@@ -36,7 +36,8 @@
 @import "cmps/SearchBar";
 @import "cmps/TaskDetailsActions";
 @import "cmps/MemberList";
-@import "cmps/EditTaskModal.scss";
+@import "cmps/EditTaskModal";
+@import "cmps/CreateBoardModal";
 
 @import "cmps/BoardFilter";
 @import "cmps/BoardHeader";
@@ -51,6 +52,8 @@
 @import "cmps/ProgressBar";
 
 @import "cmps/Edit";
+@import "cmps/EditChecklist";
+@import "cmps/AddingForm";
 
 @import "cmps/LabelList";
 

@@ -11,17 +11,16 @@ import { boardService } from "../services/board";
 import { DueDatePicker } from "./DueDatePicker";
 
 export function TaskDetails() {
-  const [currElToEdit, setCurrElToEdit] = useState("");
-
   const dialogRef = useRef(null);
   const params = useParams();
   const navigate = useNavigate();
-
   const { boardId, groupId, taskId } = params;
-
   const board = useSelector((storeState) => storeState.boardModule.board);
   const group = board?.groups?.find((group) => group.id === groupId);
   const task = group?.tasks?.find((task) => task.id === taskId);
+
+  const [currElToEdit, setCurrElToEdit] = useState("");
+  const [selectedLabels, setSelectedLabels] = useState(task.labels);
 
   useEffect(() => {
     if (dialogRef.current) {
@@ -99,7 +98,7 @@ export function TaskDetails() {
 
             {task.members && <MemberList members={task.members} />}
           </ul>
-          <LabelList labels={task.labels} />
+          <LabelList labels={selectedLabels} />
 
           {currElToEdit !== "description" ? (
             <p
@@ -132,12 +131,13 @@ export function TaskDetails() {
             />
           )}
         </form>
-
         <TaskDetailsActions
-          boardId={boardId}
-          groupId={groupId}
-          taskId={task}
+          boardId={board?.id}
+          groupId={group.id}
+          taskId={task.id}
           task={task}
+          selectedLabels={selectedLabels}
+          setSelectedLabels={setSelectedLabels}
         />
       </dialog>
     </section>

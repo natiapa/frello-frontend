@@ -1,13 +1,12 @@
 .task-list {
   display: grid;
   gap: 8px;
-  max-height: 72vh;
+  max-height: 60vh;
   padding: 0 0 8px;
   overflow: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
-  // -webkit-transform: translate3d(0, 0, 0);
   scrollbar-color: rgba(9, 30, 66, 0.14) rgba(9, 30, 66, 0.06);
 
   a {
@@ -20,6 +19,41 @@
 
     button {
       color: black;
+    }
+  }
+
+}
+
+.footer-group {
+  .adding-form {
+    position: relative;
+
+    margin: 0 4px;
+    padding: 8px 12px 4px;
+    border-radius: 8px;
+    border: 1.6px solid transparent;
+    background-color: $bg-color-task-preview;
+    color: $color-task-preview;
+    box-shadow: $box-shadow-task-preview;
+    cursor: pointer;
+    max-width: 256px;
+    word-break: break-all;
+  }
+
+  padding: 8px 8px 8px 0;
+
+  .add-task-btn {
+    padding: 6px 12px 6px 8px;
+    background-color: inherit;
+    height: max-content;
+    border-radius: 12px;
+    font-size: $font-size-groups-headers;
+    text-align: left;
+
+    .header-btn {
+      color: $color-task-preview;
+      font-weight: bold;
+      opacity: 1;
     }
   }
 }

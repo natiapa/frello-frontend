@@ -21,6 +21,7 @@ import { AppHeader } from "../cmps/AppHeader";
 export function BoardIndex() {
   const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter());
   const boards = useSelector((storeState) => storeState.boardModule.boards);
+  console.log(boards);
 
   useEffect(() => {
     loadBoards(filterBy);
@@ -35,11 +36,18 @@ export function BoardIndex() {
     }
   }
 
-  async function onAddBoard() {
-    const board = boardService.getEmptyBoard();
-    board.title = prompt("Title?");
+  async function onAddBoard(board) {
+    const emptyBoard = boardService.getEmptyBoard();
+    const boardToSave = {
+      ...emptyBoard,
+      title: board.title,
+      style: {
+        ...emptyBoard.style, // Ensure emptyBoard's style is preserved
+        backgroundImage: board.backgroundImage,
+      },
+    };
     try {
-      const savedBoard = await addBoard(board);
+      const savedBoard = await addBoard(boardToSave);
       showSuccessMsg(`Board added (id: ${savedBoard._id})`);
     } catch (err) {
       showErrorMsg("Cannot add board");

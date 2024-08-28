@@ -19,6 +19,8 @@
     justify-content: start;
     gap: 4px;
     margin: 0 0 4px;
+    max-width: 232px;
+
     .label-square {
       margin: 0;
       height: 8px;
@@ -27,6 +29,7 @@
 
   span {
     grid-row: 2;
+    max-width: 232px;
   }
 
   .edit-btn {
