@@ -14,6 +14,7 @@ export const boardService = {
     updateBoard,
     getEmptyGroup,
     getEmptyTask,
+    getEmptyChecklist,
     getEmptyItem,
 }
 window.cs = boardService
@@ -142,6 +143,14 @@ function getEmptyTask() {
     }
 }
 
+function getEmptyChecklist() {
+    return {
+        id: makeId(),
+        title: '',
+        items: [getEmptyItem()],
+    }
+}
+
 function getEmptyItem() {
     return {
         id: makeId(),
@@ -151,7 +160,7 @@ function getEmptyItem() {
 }
 
 function _createBoards() {
-    return  {
+    return {
         _id: 'b101',
         title: 'Robot dev proj',
         isStarred: false,
