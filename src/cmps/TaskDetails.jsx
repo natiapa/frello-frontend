@@ -99,7 +99,7 @@ export function TaskDetails() {
 
             {task.members && <MemberList members={task.members} />}
           </ul>
-          <LabelList labels={task.labels} />
+          <LabelList labels={selectedLabels} />
 
           {currElToEdit !== "description" ? (
             <p
