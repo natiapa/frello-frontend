@@ -1100,6 +1100,7 @@ function getEmptyItem() {
         text: '',
         isChecked: false
     }
+    
 }
 
 function getEmptyDueDate(){

@@ -8,13 +8,17 @@ export function DueDatePicker({ task, taskId }) {
 
   function handleCheckboxChange() {
     if (!isStartDateChecked) {
-      const today = new Date();
-      setSelectedDate(today);
+      // const updateStartDay = 
+      const today = new Date()
+      setSelectedDate(today)
+
     } else {
       setSelectedDate(null);
     }
     setIsStartDateChecked(!isStartDateChecked);
   }
+  console.log('selectedDate',selectedDate)
+  console.log('isStartDateChecked',isStartDateChecked)
 
   return (
     <div>
