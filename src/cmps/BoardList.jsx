@@ -4,6 +4,7 @@ import { BoardPreview } from "./BoardPreview";
 import { Popover } from "@mui/material";
 import { useState } from "react";
 import { CreateBoardModal } from "./CreateBoardModal";
+import { useNavigate } from "react-router-dom";
 
 export function BoardList({
   boards,
@@ -31,9 +32,10 @@ export function BoardList({
     return board.owner?._id === user._id;
   }
 
-  function handleStartBoard(board) {
+  function handleCreateBoard(board) {
     console.log(board);
     onAddBoard(board);
+    handleClosePopover();
   }
 
   function handleClosePopover() {
@@ -50,7 +52,10 @@ export function BoardList({
       {boards &&
         boards.length &&
         boards.map((board) => (
-          <li key={board._id}>
+          <li
+            key={board._id}
+            style={{ backgroundImage: `url(${board?.style?.backgroundImage})` }}
+          >
             <BoardPreview board={board} />
             <Link to={`/board/${board._id}`}>{board.title}</Link>
             <div className="actions">
@@ -79,7 +84,7 @@ export function BoardList({
           }}
           disablePortal
         >
-          <CreateBoardModal handleStartBoard={handleStartBoard} />
+          <CreateBoardModal handleCreateBoard={handleCreateBoard} />
         </Popover>
       )}
     </ul>
