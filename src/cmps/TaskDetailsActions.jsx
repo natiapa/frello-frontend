@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CgCreditCard } from "react-icons/cg";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { TiTag } from "react-icons/ti";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { EditLables } from "./EditLabels";
 import { EditChecklist } from "./EditChecklist";
 import { SiDatefns } from "react-icons/si";
