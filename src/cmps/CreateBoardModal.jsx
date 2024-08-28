@@ -39,8 +39,8 @@ export function CreateBoardModal({ handleStartBoard }) {
   }
 
   return (
-    <div style={{ backgroundColor: "lightGreen", height: "200px" }}>
-      <ul>
+    <div className="create-board-modal">
+      <ul className="img-list">
         {urlImgs.map((img, idx) => (
           <li
             key={idx}
@@ -56,6 +56,7 @@ export function CreateBoardModal({ handleStartBoard }) {
           </li>
         ))}
       </ul>
+
       <label>board title</label>
       <input
         value={boardTitle}

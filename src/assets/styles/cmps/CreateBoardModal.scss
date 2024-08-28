@@ -1,0 +1,26 @@
+.create-board-modal {
+  background-color: #fff;
+  border: 1px solid $gray1;
+  width: fit-content;
+  .img-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 1fr);
+    // grid-template-rows: 2;
+    // grid-auto-rows: auto;
+    // grid-auto-flow: dense;
+    // gap: 6px;
+
+    li {
+      //   position: relative;
+      //   padding-bottom: 100%;
+      background-color: transparent;
+      &:first-of-type {
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
