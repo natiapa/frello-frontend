@@ -30,13 +30,13 @@ export function ChecklistItem({ item, checklistId, handleChecklistItem }) {
             onChange={(ev) => setEditedText(ev.target.value)}
           />
           <button
-            onClick={() => {
+            onClick={(ev) => {
               handleChecklistItem(
-                { target: { checked: item.isChecked } },
+                {ev, target: { checked: item.isChecked } },
                 checklistId,
                 item.id,
                 editedText
-              );
+              )
               setIsEditing(false);
             }}
           >

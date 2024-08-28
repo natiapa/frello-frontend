@@ -34,6 +34,7 @@ export function TaskChecklist({
   //   onUpdated("checklists", updatedChecklists)
   // }
   function handleChecklistItem({ target }, checklistId, itemId, editedText) {
+    
     const isChecked = target.checked;
   
     const updatedChecklists = checklistsState.map((checklist) =>
@@ -120,5 +121,5 @@ export function TaskChecklist({
         />
       ))}
     </div>
-  );
+  )
 }
