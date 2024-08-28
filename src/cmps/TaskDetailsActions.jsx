@@ -17,7 +17,6 @@ export function TaskDetailsActions({
   setIsTaskPrevModalOpen,
   selectedLabels,
   setSelectedLabels,
-  handleSave,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isSmallModalOpen, setIsSmallModalOpen] = useState(false);

@@ -187,7 +187,6 @@ export function BoardDetails() {
                 setIsTaskPrevModalOpen={setIsTaskPrevModalOpen}
                 selectedLabels={selectedLabels}
                 setSelectedLabels={setSelectedLabels}
-                handleSave={handleSave}
               />
             )}
           </section>

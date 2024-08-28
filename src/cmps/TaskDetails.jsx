@@ -11,6 +11,7 @@ import { boardService } from "../services/board";
 
 export function TaskDetails() {
   const [currElToEdit, setCurrElToEdit] = useState("");
+  const [selectedLabels, setSelectedLabels] = useState([]);
 
   const dialogRef = useRef(null);
   const params = useParams();
@@ -70,7 +71,6 @@ export function TaskDetails() {
     } catch (error) {
       console.error("Failed to delete task:", error);
     }
-
   }
 
   if (!task) return;
@@ -130,10 +130,18 @@ export function TaskDetails() {
               groupId={groupId}
               boardId={boardId}
             />
-       
           )}
         </form>
-        <TaskDetailsActions />
+        <TaskDetailsActions
+          boardId={board?.id}
+          groupId={group.id}
+          taskId={task.id}
+          task={task}
+          // taskPrevModalData={taskPrevModalData}
+          // setIsTaskPrevModalOpen={setIsTaskPrevModalOpen}
+          selectedLabels={selectedLabels}
+          setSelectedLabels={setSelectedLabels}
+        />
       </dialog>
     </section>
   );
