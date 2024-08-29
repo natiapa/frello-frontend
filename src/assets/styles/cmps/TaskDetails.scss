@@ -2,24 +2,28 @@
   display: grid;
   grid-template-columns: 1fr max-content;
   word-break: break-all;
-  
+
   dialog {
     display: grid;
     grid-template-rows: 1fr max-content;
     grid-template-columns: 1fr max-content;
     width: 768px;
-    max-height: 90vh;
+    height: auto;
+
     background-color: #fff;
     border-radius: 8px;
     border: none;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    position: fixed; /* שומר את הדיאלוג במרכז */
-   
-    overflow: auto;
+    position: fixed;
+    scrollbar-width: none;
     
+
+
+
     &::backdrop {
       // display: none;
-      overflow: auto;
+      height: 200vh;
+      overflow-y: auto;
       background-color: rgba(0, 0, 0, 0.5);
       z-index: 1;
     }
@@ -76,7 +80,7 @@
       margin-block-start: 2.5rem;
       width: 168px;
       font-size: $font-size-task-details-actions;
-    
+
       .action-btn {
         display: grid;
         grid-template-columns: max-content 1fr;
@@ -93,34 +97,36 @@
         color: #172b4d;
         cursor: pointer;
         ;
-        
+
         span {
           grid-column: 1;
           height: 16px;
           width: 16px;
-          
+
         }
+
         p {
           margin: 0 0 0 8px;
           grid-column: 2;
-          
+
         }
-        &:hover{
+
+        &:hover {
           background-color: #091E4224;
         }
       }
-    
+
       .checklist {
         // display: grid;
         // grid-template-columns: max-content 1fr;
         // justify-content: center;
         // // background-color: $bg-color-article-actions;
         // cursor: pointer;
-    
+
         // p {
         //   margin: 0 0 0 8px;
         // }
-    
+
         .checklist-modal {
           z-index: 10000000000000000000;
         }
