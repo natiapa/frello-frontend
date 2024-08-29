@@ -172,8 +172,8 @@ export function TaskDetailsActions({
           <button className="open-card action-btn">
             <span>
               <CgCreditCard />
-              <span>open card</span>
             </span>
+              <p>open card</p>
           </button>
         </Link>
       )}

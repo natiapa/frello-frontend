@@ -87,6 +87,7 @@ export function BoardDetails() {
   // }
 
   function onPreviewToShow(data) {
+    console.log('data:', data)
     setPreview({
       position: "absolute",
       left: `${data.elData.left}px`,

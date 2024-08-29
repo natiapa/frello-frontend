@@ -67,7 +67,65 @@
       color: black;
     }
 
-
+    .actions {
+      display: grid;
+      align-self: start;
+      grid-row: 1/-1;
+      grid-column: 2;
+      padding: 0 16px 8px 8px;
+      margin-block-start: 2.5rem;
+      width: 168px;
+      font-size: $font-size-task-details-actions;
+    
+      .action-btn {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        justify-items: start;
+        align-items: center;
+        height: 32px;
+        margin: 8px 0 0;
+        padding: 6px 12px;
+        width: 100%;
+        font-weight: 500;
+        border-radius: 3px;
+        font-size: 14px;
+        background-color: #091E420F;
+        color: #172b4d;
+        cursor: pointer;
+        ;
+        
+        span {
+          grid-column: 1;
+          height: 16px;
+          width: 16px;
+          
+        }
+        p {
+          margin: 0 0 0 8px;
+          grid-column: 2;
+          
+        }
+        &:hover{
+          background-color: #091E4224;
+        }
+      }
+    
+      .checklist {
+        // display: grid;
+        // grid-template-columns: max-content 1fr;
+        // justify-content: center;
+        // // background-color: $bg-color-article-actions;
+        // cursor: pointer;
+    
+        // p {
+        //   margin: 0 0 0 8px;
+        // }
+    
+        .checklist-modal {
+          z-index: 10000000000000000000;
+        }
+      }
+    }
   }
 
   .editable-description {
