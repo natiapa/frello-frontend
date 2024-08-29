@@ -5,136 +5,154 @@ import { userService } from "../user";
 const STORAGE_KEY = "board";
 
 export const boardService = {
-  query,
-  getById,
-  save,
-  remove,
-  addBoardMsg,
-  updateBoard,
-  getEmptyGroup,
-  getEmptyTask,
-  getEmptyChecklist,
-  getEmptyItem,
-  getEmptyBoard,
-  getEmptyDueDate,
+    query,
+    getById,
+    save,
+    remove,
+    addBoardMsg,
+    updateBoard,
+    getEmptyGroup,
+    getEmptyTask,
+    getEmptyChecklist,
+    getEmptyItem,
+    getEmptyBoard,
+    getEmptyDueDate,
 };
 window.cs = boardService;
 
 async function query(filterBy = { txt: "" }) {
-  var boards = await storageService.query(STORAGE_KEY);
+    var boards = await storageService.query(STORAGE_KEY);
 
-  if (!boards || !boards.length) {
-    boards = _createBoards();
+    if (!boards || !boards.length) {
+        boards = _createBoards();
 
-    await storageService.post(STORAGE_KEY, boards);
-  }
-  // const { txt, sortField, sortDir } = filterBy
+        await storageService.post(STORAGE_KEY, boards);
+    }
+    // const { txt, sortField, sortDir } = filterBy
 
-  // if (txt) {
-  //     const regex = new RegExp(filterBy.txt, 'i')
-  //     boards = boards.filter(board => regex.test(board.title) || regex.test(board.description))
-  // }
+    // if (txt) {
+    //     const regex = new RegExp(filterBy.txt, 'i')
+    //     boards = boards.filter(board => regex.test(board.title) || regex.test(board.description))
+    // }
 
-  // if (sortField === 'title' || sortField === 'owner') {
-  //     boards.sort((board1, board2) => board1[sortField].localeCompare(board2[sortField]) * +sortDir)
-  // }
+    // if (sortField === 'title' || sortField === 'owner') {
+    //     boards.sort((board1, board2) => board1[sortField].localeCompare(board2[sortField]) * +sortDir)
+    // }
 
-  // boards = boards.map(({ _id, title, owner }) => ({ _id, title, owner }))
-  console.log("boards:", boards);
+    // boards = boards.map(({ _id, title, owner }) => ({ _id, title, owner }))
+    console.log("boards:", boards);
 
-  return boards;
+    return boards;
 }
 
 function getById(boardId) {
-  return storageService.get(STORAGE_KEY, boardId);
+    return storageService.get(STORAGE_KEY, boardId);
 }
 
 async function remove(boardId) {
-  // throw new Error('Nope')
-  await storageService.remove(STORAGE_KEY, boardId);
+    // throw new Error('Nope')
+    await storageService.remove(STORAGE_KEY, boardId);
 }
 
 async function save(board) {
-  var savedBoard;
-  if (board._id) {
-    savedBoard = await storageService.put(STORAGE_KEY, board);
-  } else {
-    savedBoard = await storageService.post(STORAGE_KEY, board);
-  }
-  return savedBoard;
+    var savedBoard;
+    if (board._id) {
+        savedBoard = await storageService.put(STORAGE_KEY, board);
+    } else {
+        savedBoard = await storageService.post(STORAGE_KEY, board);
+    }
+    return savedBoard;
 }
 
 async function addBoardMsg(boardId, txt) {
-  // Later, this is all done by the backend
-  const board = await getById(boardId);
+    // Later, this is all done by the backend
+    const board = await getById(boardId);
 
-  const msg = {
-    id: makeId(),
-    by: userService.getLoggedinUser(),
-    txt,
-  };
-  board.msgs.push(msg);
-  await storageService.put(STORAGE_KEY, board);
+    const msg = {
+        id: makeId(),
+        by: userService.getLoggedinUser(),
+        txt,
+    };
+    board.msgs.push(msg);
+    await storageService.put(STORAGE_KEY, board);
 
-  return msg;
+    return msg;
 }
 
 function updateBoard(board, groupId, taskId, { key, value }, activity = "") {
-  const gIdx = board.groups?.findIndex((group) => group.id === groupId);
-  const tIdx = board.groups[gIdx]?.tasks.findIndex(
-    (task) => task.id === taskId
-  );
-  // console.log('gIdx:', gIdx)
-  // console.log('tIdx:', tIdx)
+    const gIdx = board?.groups?.findIndex((group) => group.id === groupId);
+    const tIdx = board?.groups[gIdx]?.tasks.findIndex(
+        (task) => task.id === taskId
+    );
 
-  if (tIdx >= 0) {
-    // board.groups[gIdx].tasks[tIdx][key] = value
-    if (key === "deleteTask") {
-      // Remove the task from the tasks array
-      board.groups[gIdx].tasks.splice(tIdx, 1);
+    // console.log('gIdx:', gIdx)
+    // console.log('tIdx:', tIdx)
+
+    if (tIdx >= 0) {
+        if (key === "deleteTask") {
+            board.groups[gIdx].tasks.splice(tIdx, 1);
+
+        } else {
+            board.groups[gIdx].tasks[tIdx][key] = value;
+        }
+    } else if (gIdx >= 0 && tIdx < 0 && key !== 'isStarred') {
+
+        if (key === "deleteGroup") {
+            board.groups.splice(gIdx, 1);
+        } else {
+
+            board.groups[gIdx][key] = value;
+        }
     } else {
-      board.groups[gIdx].tasks[tIdx][key] = value;
+        board[key] = value;
+        // console.log("mama:", board.groups[gIdx].tasks[tIdx][key]);
     }
-  } else if (gIdx >= 0 && tIdx < 0) {
-    if (key === "deleteGroup") {
-      board.groups.splice(gIdx, 1);
-    } else {
-      board.groups[gIdx][key] = value;
+
+    if (activity) {
+        activity = addActivity(activity);
     }
-  } else {
-    board[key] = value;
-    console.log("mama:", board.groups[gIdx].tasks[tIdx][key]);
-  }
 
-  if (activity) {
-    activity = addActivity(activity);
-  }
-
-  save(board);
-  return board;
-  // Code to update the board
+    save(board);
+    return board;
+    // Code to update the board
 }
 
 function addActivity(txt) {
-  return (activity = {
-    id: utilService.makeId(),
-    txt,
-    createdAt: Date.now(),
-    byMember: {
-      _id: "u101",
-      fullname: "Abi Abambi",
-      imgUrl: "http://some-img",
-    },
-    type: "add-task",
-  });
+    return (activity = {
+        id: utilService.makeId(),
+        txt,
+        createdAt: Date.now(),
+        byMember: {
+            _id: "u101",
+            fullname: "Abi Abambi",
+            imgUrl: "http://some-img",
+        },
+        type: "add-task",
+    });
 }
 
 function getEmptyGroup() {
-  return {
-    id: makeId(),
-    title: "",
-    tasks: [
-      {
+    return {
+        id: makeId(),
+        title: "",
+        tasks: [
+            {
+                id: makeId(),
+                title: "",
+                labels: [],
+                members: [],
+                attachments: [],
+                comments: [],
+                cover: "",
+                dueDate: "",
+            },
+        ],
+        style: {},
+    };
+}
+
+function getEmptyTask() {
+    return {
         id: makeId(),
         title: "",
         labels: [],
@@ -143,39 +161,23 @@ function getEmptyGroup() {
         comments: [],
         cover: "",
         dueDate: "",
-      },
-    ],
-    style: {},
-  };
-}
-
-function getEmptyTask() {
-  return {
-    id: makeId(),
-    title: "",
-    labels: [],
-    members: [],
-    attachments: [],
-    comments: [],
-    cover: "",
-    dueDate: "",
-  };
+    };
 }
 
 function getEmptyChecklist() {
-  return {
-      id: makeId(),
-      title: '',
-      items: [getEmptyItem()],
-  }
+    return {
+        id: makeId(),
+        title: '',
+        items: [getEmptyItem()],
+    }
 }
 
- async function getEmptyItem() {
-  return {
-    id: makeId(),
-    text: "",
-    isChecked: false,
-  }
+async function getEmptyItem() {
+    return {
+        id: makeId(),
+        text: "",
+        isChecked: false,
+    }
 
 }
 
@@ -199,36 +201,36 @@ function getEmptyChecklist() {
 
 
 function getEmptyBoard() {
-  return {
-    _id: "",
-    title: "",
-    isStarred: false,
-    // archivedAt: 0,
-    createdBy: {
-      id: "u102",
-      fullname: "",
-      imgUrl: "",
-    },
-    style: {
-      backgroundImage: "",
-      backgroundColor: "",
-    },
-    members: [],
-    groups: [],
-    activities: [],
-  };
+    return {
+        _id: "",
+        title: "",
+        isStarred: false,
+        // archivedAt: 0,
+        createdBy: {
+            id: "u102",
+            fullname: "",
+            imgUrl: "",
+        },
+        style: {
+            backgroundImage: "",
+            backgroundColor: "",
+        },
+        members: [],
+        groups: [],
+        activities: [],
+    };
 }
 
 function getEmptyDueDate() {
-  return {
-    date: "",
-    time: "",
-    isComplete: false,
-    reminder: "",
-    createdAt: Date.now(),
-    completedAt: null,
-    isOverdue: false,
-  };
+    return {
+        date: "",
+        time: "",
+        isComplete: false,
+        reminder: "",
+        createdAt: Date.now(),
+        completedAt: null,
+        isOverdue: false,
+    };
 }
 function _createBoards() {
     return {

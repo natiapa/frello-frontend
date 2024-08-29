@@ -5,6 +5,8 @@ import { Popover } from "@mui/material";
 import { useState } from "react";
 import { CreateBoardModal } from "./CreateBoardModal";
 import { useNavigate } from "react-router-dom";
+import { CiStar } from "react-icons/ci";
+import { useSelector } from "react-redux";
 
 export function BoardList({
   boards,
@@ -60,12 +62,19 @@ export function BoardList({
             }}
           >
             <li key={board._id}>
-              {/* <BoardPreview board={board} /> */}
-              <span>{board.title}</span>
+              <BoardPreview
+                board={board}
+                // isStarred={isStarred}
+                // setIsStarred={setIsStarred}
+                // handleIsStarred={handleIsStarred}
+              />
 
               <div className="actions">
                 {/* <button onClick={() => onUpdateBoard(board)}>Edit</button> */}
-                <button onClick={(ev) => onRemoveBoard(ev, board._id)}>
+                <button
+                  className="close-btn"
+                  onClick={(ev) => onRemoveBoard(ev, board._id)}
+                >
                   x
                 </button>
               </div>
