@@ -39,7 +39,7 @@ export function DueDatePicker({ task, taskId, onUpdated }) {
       <ul>
         <li>
           <label>Start Date</label>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <div>
             <input
               type="checkbox"
               checked={isStartDateChecked}
@@ -50,5 +50,7 @@ export function DueDatePicker({ task, taskId, onUpdated }) {
         </li>
       </ul>
     </div>
-  );
+
+    
+  )
 }
