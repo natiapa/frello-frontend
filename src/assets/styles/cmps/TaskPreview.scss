@@ -33,11 +33,25 @@
   }
 
   .edit-btn {
-    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 0;
     right: 0;
-    background-color: inherit;
+    padding: 2px 0 0 0;
+    background-color: transparent;
+    border-radius: 16px;
+    font-size: 14px;
+    height: 2em;
+    width: 2em;
+    color: #172b4d;
+    opacity: 0;
+
+    &:hover {
+      opacity: 1;
+      background-color: #f1f2f4;
+    }
   }
 
   &:hover {
