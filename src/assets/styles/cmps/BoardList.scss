@@ -1,38 +1,103 @@
 .board-list {
   grid-column: 3;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 177px);
-  gap: 0.5em;
+  grid-template-columns: repeat(4, 177px);
+  grid-template-rows: repeat(10, 80px);
+  gap: 1.5em;
   height: 89.5vh;
   header {
     grid-row: 1;
   }
 
-  li {
-    grid-row: 2/5;
+  a {
+    grid-row: 4;
+    // grid-template-columns: 2;
+    // grid-template-rows: repeat(2, auto);
+    text-decoration: none;
     display: grid;
-    width: 177px;
-    height: 80px;
-    padding: 0.5em;
-    background-color: $blue2;
-    color: $white;
+    width: 192px;
+    height: 96px;
+    padding: 0.3em;
+
+    // background-color: #00000026;
+    border-radius: 3px;
     cursor: pointer;
-    a {
-      grid-row: 1;
+    background-size: cover;
+
+    li {
+      // grid-column: 1;
+      // grid-row: 1;
+      display: grid;
+      grid-template-columns: auto 30px;
+      position: relative;
+      color: $white;
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 20px;
       height: max-content;
+
+      span {
+        word-break: break-all;
+        text-shadow: 0px 0px 0 #000, -1px -1px 0 #000, 0px 0px 0 #000,
+          0px 0px 0 #000;
+      }
     }
     .actions {
       justify-self: end;
 
-      button {
-        padding: 0.3em 0.5em;
+      .close-btn {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        height: 20px;
+        padding: 10px 10px 11px 11px;
         background-color: $blue4;
+        border: 1px solid black;
+        color: #fff;
+      }
+    }
+
+    &:hover {
+      .starred-btn {
+        .not-starred {
+          opacity: 1;
+        }
       }
     }
   }
-  .new-board {
+  .new-board-btn {
+    grid-row: 2;
+    grid-column: 2;
     background-color: $new-board-bg-color;
     color: black;
     cursor: pointer;
+    width: 190px;
+    height: 96px;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: $new-board-hover-bg-color;
+    }
+  }
+
+  .starred-btn {
+    position: absolute;
+    right: 0;
+    top: 3.5em;
+    background-color: transparent;
+    color: #f1f2f4;
+    font-size: 16px;
+    font-weight: bold;
+
+    .starred {
+      color: $tr-icon-star;
+    }
+    .not-starred {
+      opacity: 0;
+    }
   }
 }

@@ -20,19 +20,13 @@ export function TaskDetailsActions({
   selectedLabels,
   setSelectedLabels,
   onUpdated,
-  
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isSmallModalOpen, setIsSmallModalOpen] = useState(false);
-  const [modalOpenById, setModalOpenById] = useState(null);
-
-  const {
-    boardId: boardParams,
-    groupId: groupParams,
-    taskId: taskParams,
-  } = useParams();
   const [modalOpenByName, setModalOpenByName] = useState(null);
-console.log(task)
+
+  const { taskId: taskParams } = useParams();
+  console.log(task);
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
@@ -55,8 +49,8 @@ console.log(task)
       >
         <span className="icon">
           <IoMdCheckboxOutline />
-          <span>Checklist </span>
         </span>
+          <p>Checklist </p>
 
         {modalOpenByName === "checklists" && (
           <Popover
@@ -90,12 +84,12 @@ console.log(task)
         aria-describedby="5"
         onClick={handleClick}
       >
-        <div>
+       
         <span className="icon">
           <LuClock5 />
-          <span> Dates </span>
         </span>
-        </div>
+          <p> Dates </p>
+       
 
         {modalOpenByName === "due-date" && (
           <Popover
@@ -111,14 +105,64 @@ console.log(task)
             // disableAutoFocus
             PaperProps={{
               sx: {
-                width: '400px', 
-                height: '600px', 
-                padding: '20px',
+                width: "400px",
+                height: "600px",
+                padding: "20px",
+              },
+            }}
+          >
+            <Typography sx={{ p: 2 }} onClick={handlePopoverClick}></Typography>
+
+            <EditChecklist
+              groupId={groupId}
+              taskId={taskId}
+              task={task}
+              setIsSmallModalOpen={setIsSmallModalOpen}
+              handlePopoverClick={handlePopoverClick}
+            />
+          </Popover>
+        )}
+      </button>
+
+      <button
+        data-name="due-date"
+        className="due-date action-btn"
+        aria-describedby="5"
+        onClick={handleClick}
+      >
+      
+        <span className="icon">
+          <LuClock5 />
+        </span>
+          <p> Dates </p>
+        
+
+        {modalOpenByName === "due-date" && (
+          <Popover
+            id={anchorEl}
+            open={isSmallModalOpen}
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            disablePortal
+            // disableEnforceFocus
+            // disableAutoFocus
+            PaperProps={{
+              sx: {
+                width: "400px",
+                height: "600px",
+                padding: "20px",
               },
             }}
           >
             <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
-              <DueDatePicker task={task} taskId={taskId} onUpdated={onUpdated}/>
+              <DueDatePicker
+                task={task}
+                taskId={taskId}
+                onUpdated={onUpdated}
+              />
             </Typography>
           </Popover>
         )}
@@ -146,8 +190,8 @@ console.log(task)
       >
         <span>
           <TiTag />
-          <span>Edit Labels</span>
         </span>
+          <p>Edit Labels</p>
 
         {modalOpenByName === "labels" && (
           <Popover

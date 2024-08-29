@@ -4,16 +4,25 @@ import { BoardPreview } from "./BoardPreview";
 import { Popover } from "@mui/material";
 import { useState } from "react";
 import { CreateBoardModal } from "./CreateBoardModal";
+import { useNavigate } from "react-router-dom";
+import { CiStar } from "react-icons/ci";
+import { useSelector } from "react-redux";
 
 export function BoardList({
   boards,
   onAddBoard,
   onRemoveBoard,
-  onUpdateBoard,
+  // onUpdateBoard,
 }) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [modalOpenByName, setModalOpenByName] = useState(null);
 
   function handleClick(ev) {
+    const currDataName = ev.currentTarget.getAttribute("data-name");
+
+    setAnchorEl(ev.currentTarget);
+    setModalOpenByName(currDataName);
     setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
   }
 
@@ -25,9 +34,16 @@ export function BoardList({
     return board.owner?._id === user._id;
   }
 
-  function handleStartBoard(board) {
+  function handleCreateBoard(board) {
     console.log(board);
     onAddBoard(board);
+    handleClosePopover();
+  }
+
+  function handleClosePopover() {
+    setIsPopoverOpen(false);
+    setAnchorEl(null);
+    setModalOpenByName(null);
   }
 
   return (
@@ -37,27 +53,56 @@ export function BoardList({
       </header>
       {boards &&
         boards.length &&
-        boards.map((board) => (
-          <li key={board._id}>
-            <BoardPreview board={board} />
-            <Link to={`/board/${board._id}`}>{board.title}</Link>
-            <div className="actions">
-              <button onClick={() => onUpdateBoard(board)}>Edit</button>
-              <button onClick={() => onRemoveBoard(board._id)}>x</button>
-            </div>
-          </li>
+        boards.map((board, idx) => (
+          <Link
+            to={`/board/${board._id}`}
+            key={idx}
+            style={{
+              backgroundImage: `url(${board?.style?.backgroundImage})`,
+            }}
+          >
+            <li key={board._id}>
+              <BoardPreview
+                board={board}
+                // isStarred={isStarred}
+                // setIsStarred={setIsStarred}
+                // handleIsStarred={handleIsStarred}
+              />
+
+              <div className="actions">
+                {/* <button onClick={() => onUpdateBoard(board)}>Edit</button> */}
+                <button
+                  className="close-btn"
+                  onClick={(ev) => onRemoveBoard(ev, board._id)}
+                >
+                  x
+                </button>
+              </div>
+            </li>
+          </Link>
         ))}
       <button
+        aria-describedby="7"
         data-name="add-board"
-        className="new-board"
-        // onClick={() => onAddBoard()}
+        className="new-board-btn"
         onClick={handleClick}
-        style={{ width: "200px", height: "200px" }}
       >
         Create new board
       </button>
-      {isPopoverOpen && (
-        <CreateBoardModal handleStartBoard={handleStartBoard} />
+      {modalOpenByName === "add-board" && (
+        <Popover
+          id={anchorEl}
+          open={isPopoverOpen}
+          onClose={handleClosePopover}
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          disablePortal
+        >
+          <CreateBoardModal handleCreateBoard={handleCreateBoard} />
+        </Popover>
       )}
     </ul>
   );

@@ -17,17 +17,21 @@ import { BoardList } from "../cmps/BoardList";
 import { BoardFilter } from "../cmps/BoardFilter";
 import { SideBar } from "../cmps/Sidebar";
 import { AppHeader } from "../cmps/AppHeader";
+import { useNavigate } from "react-router";
 
 export function BoardIndex() {
   const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter());
   const boards = useSelector((storeState) => storeState.boardModule.boards);
   console.log(boards);
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadBoards(filterBy);
   }, [filterBy]);
 
-  async function onRemoveBoard(boardId) {
+  async function onRemoveBoard(ev, boardId) {
+    ev.preventDefault();
+    ev.stopPropagation();
     try {
       await removeBoard(boardId);
       showSuccessMsg("Board removed");
@@ -42,19 +46,22 @@ export function BoardIndex() {
       ...emptyBoard,
       title: board.title,
       style: {
-        ...emptyBoard.style, // Ensure emptyBoard's style is preserved
+        ...emptyBoard.style,
         backgroundImage: board.backgroundImage,
       },
     };
     try {
       const savedBoard = await addBoard(boardToSave);
       showSuccessMsg(`Board added (id: ${savedBoard._id})`);
+      navigate(`/board/${savedBoard._id}`);
     } catch (err) {
       showErrorMsg("Cannot add board");
     }
   }
 
-  async function onUpdateBoard(board) {
+  async function onUpdateBoard(ev, board) {
+    ev.preventDefault();
+    ev.stopPropagation();
     const title = prompt(board.title);
     board.title = title;
     try {

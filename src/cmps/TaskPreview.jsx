@@ -57,7 +57,6 @@ export function TaskPreview({ groupId, task }) {
           data-name="title"
           className="edit-btn"
           onClick={(e) => handleClick(e)}
-          style={{ backgroundColor: "grey" }}
         >
           <FiEdit2 />
         </button>
