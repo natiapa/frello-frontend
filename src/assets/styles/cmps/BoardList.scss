@@ -63,7 +63,9 @@
 
     &:hover {
       .starred-btn {
-        display: inline-block;
+        .not-starred {
+          opacity: 1;
+        }
       }
     }
   }
@@ -93,6 +95,9 @@
 
     .starred {
       color: $tr-icon-star;
+    }
+    .not-starred {
+      opacity: 0;
     }
   }
 }
