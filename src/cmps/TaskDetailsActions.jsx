@@ -22,7 +22,7 @@ export function TaskDetailsActions({
   onUpdated,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [isSmallModalOpen, setIsSmallModalOpen] = useState(false);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
 
   const { taskId: taskParams } = useParams();
@@ -30,7 +30,7 @@ export function TaskDetailsActions({
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
-    setIsSmallModalOpen((isOpen) => !isOpen);
+    setIsPopoverOpen((isOpen) => !isOpen);
     setAnchorEl(ev.currentTarget);
     setModalOpenByName(currDataName);
   }
@@ -50,12 +50,12 @@ export function TaskDetailsActions({
         <span className="icon">
           <IoMdCheckboxOutline />
         </span>
-          <p>Checklist </p>
+        <p>Checklist </p>
 
         {modalOpenByName === "checklists" && (
           <Popover
             id={anchorEl}
-            open={isSmallModalOpen}
+            open={isPopoverOpen}
             anchorEl={anchorEl}
             anchorOrigin={{
               vertical: "bottom",
@@ -71,7 +71,7 @@ export function TaskDetailsActions({
               groupId={groupId}
               taskId={taskId}
               task={task}
-              setIsSmallModalOpen={setIsSmallModalOpen}
+              setIsPopoverOpen={setIsPopoverOpen}
               handlePopoverClick={handlePopoverClick}
             />
           </Popover>
@@ -84,17 +84,15 @@ export function TaskDetailsActions({
         aria-describedby="5"
         onClick={handleClick}
       >
-       
         <span className="icon">
           <LuClock5 />
         </span>
-          <p> Dates </p>
-       
+        <p> Dates </p>
 
         {modalOpenByName === "due-date" && (
           <Popover
             id={anchorEl}
-            open={isSmallModalOpen}
+            open={isPopoverOpen}
             anchorEl={anchorEl}
             anchorOrigin={{
               vertical: "bottom",
@@ -117,7 +115,7 @@ export function TaskDetailsActions({
               groupId={groupId}
               taskId={taskId}
               task={task}
-              setIsSmallModalOpen={setIsSmallModalOpen}
+              setIsPopoverOpen={setIsPopoverOpen}
               handlePopoverClick={handlePopoverClick}
             />
           </Popover>
@@ -130,17 +128,15 @@ export function TaskDetailsActions({
         aria-describedby="5"
         onClick={handleClick}
       >
-      
         <span className="icon">
           <LuClock5 />
         </span>
-          <p> Dates </p>
-        
+        <p> Dates </p>
 
         {modalOpenByName === "due-date" && (
           <Popover
             id={anchorEl}
-            open={isSmallModalOpen}
+            open={isPopoverOpen}
             anchorEl={anchorEl}
             anchorOrigin={{
               vertical: "bottom",
@@ -191,12 +187,12 @@ export function TaskDetailsActions({
         <span>
           <TiTag />
         </span>
-          <p>Edit Labels</p>
+        <p>Edit Labels</p>
 
         {modalOpenByName === "labels" && (
           <Popover
             id={anchorEl}
-            open={isSmallModalOpen}
+            open={isPopoverOpen}
             anchorEl={anchorEl}
             anchorOrigin={{
               vertical: "bottom",
