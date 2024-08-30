@@ -1,8 +1,8 @@
-import { storageService } from "../async-storage.service";
-import { getRandomColor, makeId } from "../util.service";
-import { userService } from "../user";
+import { storageService } from '../async-storage.service'
+import { getRandomColor, makeId } from '../util.service'
+import { userService } from '../user'
 
-const STORAGE_KEY = "board";
+const STORAGE_KEY = 'board'
 
 export const boardService = {
     query,
@@ -17,16 +17,16 @@ export const boardService = {
     getEmptyItem,
     getEmptyBoard,
     getEmptyDueDate,
-};
-window.cs = boardService;
+}
+window.cs = boardService
 
-async function query(filterBy = { txt: "" }) {
-    var boards = await storageService.query(STORAGE_KEY);
+async function query(filterBy = { txt: '' }) {
+    var boards = await storageService.query(STORAGE_KEY)
 
     if (!boards || !boards.length) {
-        boards = _createBoards();
+        boards = _createBoards()
 
-        await storageService.post(STORAGE_KEY, boards);
+        await storageService.post(STORAGE_KEY, boards)
     }
     // const { txt, sortField, sortDir } = filterBy
 
@@ -40,81 +40,71 @@ async function query(filterBy = { txt: "" }) {
     // }
 
     // boards = boards.map(({ _id, title, owner }) => ({ _id, title, owner }))
-    console.log("boards:", boards);
+    console.log('boards:', boards)
 
-    return boards;
+    return boards
 }
 
 function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId);
+    return storageService.get(STORAGE_KEY, boardId)
 }
 
 async function remove(boardId) {
     // throw new Error('Nope')
-    await storageService.remove(STORAGE_KEY, boardId);
+    await storageService.remove(STORAGE_KEY, boardId)
 }
 
 async function save(board) {
-    var savedBoard;
+    var savedBoard
     if (board._id) {
-        savedBoard = await storageService.put(STORAGE_KEY, board);
+        savedBoard = await storageService.put(STORAGE_KEY, board)
     } else {
-        savedBoard = await storageService.post(STORAGE_KEY, board);
+        savedBoard = await storageService.post(STORAGE_KEY, board)
     }
-    return savedBoard;
+    return savedBoard
 }
 
 async function addBoardMsg(boardId, txt) {
     // Later, this is all done by the backend
-    const board = await getById(boardId);
+    const board = await getById(boardId)
 
     const msg = {
         id: makeId(),
         by: userService.getLoggedinUser(),
         txt,
-    };
-    board.msgs.push(msg);
-    await storageService.put(STORAGE_KEY, board);
+    }
+    board.msgs.push(msg)
+    await storageService.put(STORAGE_KEY, board)
 
-    return msg;
+    return msg
 }
 
-function updateBoard(board, groupId, taskId, { key, value }, activity = "") {
-    const gIdx = board?.groups?.findIndex((group) => group.id === groupId);
-    const tIdx = board?.groups[gIdx]?.tasks.findIndex(
-        (task) => task.id === taskId
-    );
-
-    // console.log('gIdx:', gIdx)
-    // console.log('tIdx:', tIdx)
+function updateBoard(board, groupId, taskId, { key, value }, activity = '') {
+    const gIdx = board?.groups?.findIndex(group => group.id === groupId)
+    const tIdx = board?.groups[gIdx]?.tasks.findIndex(task => task.id === taskId)
 
     if (tIdx >= 0) {
-        if (key === "deleteTask") {
-            board.groups[gIdx].tasks.splice(tIdx, 1);
-
+        if (key === 'deleteTask') {
+            board.groups[gIdx].tasks.splice(tIdx, 1)
         } else {
-            board.groups[gIdx].tasks[tIdx][key] = value;
+            board.groups[gIdx].tasks[tIdx][key] = value
         }
     } else if (gIdx >= 0 && tIdx < 0 && key !== 'isStarred') {
-
-        if (key === "deleteGroup") {
-            board.groups.splice(gIdx, 1);
+        if (key === 'deleteGroup') {
+            board.groups.splice(gIdx, 1)
         } else {
-
-            board.groups[gIdx][key] = value;
+            board.groups[gIdx][key] = value
         }
     } else {
-        board[key] = value;
-        // console.log("mama:", board.groups[gIdx].tasks[tIdx][key]);
+        board[key] = value
     }
 
     if (activity) {
-        activity = addActivity(activity);
+        activity = addActivity(activity)
     }
 
-    save(board);
-    return board;
-    // Code to update the board
+    save(board)
+    return board
 }
 
 function addActivity(txt) {
@@ -123,45 +113,45 @@ function addActivity(txt) {
         txt,
         createdAt: Date.now(),
         byMember: {
-            _id: "u101",
-            fullname: "Abi Abambi",
-            imgUrl: "http://some-img",
+            _id: 'u101',
+            fullname: 'Abi Abambi',
+            imgUrl: 'http://some-img',
         },
-        type: "add-task",
-    });
+        type: 'add-task',
+    })
 }
 
 function getEmptyGroup() {
     return {
         id: makeId(),
-        title: "",
+        title: '',
         tasks: [
             {
                 id: makeId(),
-                title: "",
+                title: '',
                 labels: [],
                 members: [],
                 attachments: [],
                 comments: [],
-                cover: "",
-                dueDate: "",
+                cover: '',
+                dueDate: '',
             },
         ],
         style: {},
-    };
+    }
 }
 
 function getEmptyTask() {
     return {
         id: makeId(),
-        title: "",
+        title: '',
         labels: [],
         members: [],
         attachments: [],
         comments: [],
-        cover: "",
-        dueDate: "",
-    };
+        cover: '',
+        dueDate: '',
+    }
 }
 
 function getEmptyChecklist() {
@@ -175,10 +165,9 @@ function getEmptyChecklist() {
 async function getEmptyItem() {
     return {
         id: makeId(),
-        text: "",
+        text: '',
         isChecked: false,
     }
-
 }
 
 // const { txt, sortField, sortDir } = filterBy
@@ -199,38 +188,37 @@ async function getEmptyItem() {
 //     return boards
 // }
 
-
 function getEmptyBoard() {
     return {
-        _id: "",
-        title: "",
+        _id: '',
+        title: '',
         isStarred: false,
         // archivedAt: 0,
         createdBy: {
-            id: "u102",
-            fullname: "",
-            imgUrl: "",
+            id: 'u102',
+            fullname: '',
+            imgUrl: '',
         },
         style: {
-            backgroundImage: "",
-            backgroundColor: "",
+            backgroundImage: '',
+            backgroundColor: '',
         },
         members: [],
         groups: [],
         activities: [],
-    };
+    }
 }
 
 function getEmptyDueDate() {
     return {
-        date: "",
-        time: "",
+        date: '',
+        time: '',
         isComplete: false,
-        reminder: "",
+        reminder: '',
         createdAt: Date.now(),
         completedAt: null,
         isOverdue: false,
-    };
+    }
 }
 function _createBoards() {
     return {
