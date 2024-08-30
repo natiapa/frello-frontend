@@ -80,9 +80,11 @@
 
     .members {
       display: grid;
-      grid-template-columns: max-content max-content;
+      // grid-template-columns: max-content max-content;
+      // grid-template-columns: 1fr 30px;
+
       justify-content: end;
-      gap: 4px;
+      // gap: 4px;
 
       li {
         display: grid;

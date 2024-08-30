@@ -9,6 +9,7 @@ import { TaskDetailsActions } from "./TaskDetailsActions";
 import { MemberList } from "./MemberList";
 import { boardService } from "../services/board";
 import { DueDatePicker } from "./DueDatePicker";
+import SvgIcon from "./SvgIcon";
 
 export function TaskDetails() {
   const dialogRef = useRef(null);
@@ -91,7 +92,7 @@ export function TaskDetails() {
             />
           )}
           <button className="close-btn" onClick={onCloseDialog}>
-            x
+            <SvgIcon iconName="close" />
           </button>
           <ul className="member-list">
             <p className="header-member-list">Members</p>

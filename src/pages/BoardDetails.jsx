@@ -87,7 +87,7 @@ export function BoardDetails() {
   // }
 
   function onPreviewToShow(data) {
-    console.log('data:', data)
+    console.log("data:", data);
     setPreview({
       position: "absolute",
       left: `${data.elData.left}px`,
@@ -198,7 +198,11 @@ export function BoardDetails() {
           </section>
         )}
 
-        <AppHeader bgColor={bgColor} />
+        <AppHeader
+          bgColor={bgColor}
+          logoImg="https://www.pngkey.com/png/full/213-2134177_import-boards-from-trello-trello-logo-white.png"
+          logoColor="#fff"
+        />
         {/* {board?.members && board.members.length && ( */}
         <BoardHeader members={board?.members} bgColor={bgColor} />
         {/* )} */}

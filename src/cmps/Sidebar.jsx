@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+// import SvgIcon from "./SvgIcon";
 
 export function SideBar() {
   return (
@@ -20,6 +21,7 @@ export function SideBar() {
               fill="currentColor"
             />
           </svg>
+          {/* <SvgIcon iconName="close" /> */}
           <NavLink>Boards</NavLink>
         </li>
       </ul>

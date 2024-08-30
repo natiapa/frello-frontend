@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { UserModal } from "./UserModal.jsx";
 import { SearchBar } from "./SearchBar.jsx";
 
-export function AppHeader({ bgColor, borderBottom }) {
+export function AppHeader({ bgColor, borderBottom, logoImg, logoColor }) {
   const [showUserModal, setShowUserModal] = useState(false);
 
   const user = useSelector((storeState) => storeState.userModule.user);
@@ -12,16 +12,24 @@ export function AppHeader({ bgColor, borderBottom }) {
   return (
     <header
       className="app-header full"
-      style={{ backgroundColor: bgColor, borderBottom: borderBottom }}
+      style={{
+        backgroundColor: bgColor,
+        borderBottom: borderBottom,
+      }}
     >
       <section>
-        <span className="material-symbols-outlined menu">apps</span>
+        {/* <span className="material-symbols-outlined menu">apps</span> */}
         <Link to="/board">
-          <img
-            className="logo"
-            style={{ width: "5em" }}
-            src="https://1000logos.net/wp-content/uploads/2021/05/Trello-logo.png"
-          />
+          <span className="logo-icon-img">
+            <img src={logoImg} alt="" />
+            {/* <img
+              src="https://www.pngkey.com/png/full/213-2134177_import-boards-from-trello-trello-logo-white.png"
+              alt=""
+            /> */}
+          </span>
+          <span className="logo" style={{ color: `${logoColor}` }}>
+            Frello
+          </span>
         </Link>
 
         {user && (

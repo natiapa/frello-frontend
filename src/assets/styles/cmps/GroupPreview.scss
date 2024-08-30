@@ -9,16 +9,20 @@
   color: #44546f;
   background-color: #f1f2f4;
   box-shadow: $box-shadow-group-preview;
-  
-  .header-and-actions{
+
+  .header-and-actions {
     display: grid;
     grid-template-columns: 1fr max-content;
     padding: 8px 8px 0;
     h3 {
-      margin: 0 4px;
-      padding: 6px 8px 6px 12px;
+      // margin: 0 4px;
+      padding: 0px 8px 0px 5px;
+      place-self: center start;
+      font-size: 14px;
+      font-weight: 600;
+      color: #172b4d;
     }
-  
+
     button {
       margin: 4px 0;
     }

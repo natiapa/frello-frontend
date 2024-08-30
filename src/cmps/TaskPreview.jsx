@@ -73,7 +73,12 @@ export function TaskPreview({ groupId, task }) {
               {`${getIsChecked()}/${getChecklists()}`}
             </div>
           )}
-          <ul className="members">
+          <ul
+            className="members"
+            style={{
+              gridTemplateColumns: `repeat(${task.members.length}, 20px)`,
+            }}
+          >
             <MemberList members={task.members} />
           </ul>
         </div>

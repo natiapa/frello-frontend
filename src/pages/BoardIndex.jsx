@@ -53,7 +53,7 @@ export function BoardIndex() {
     try {
       const savedBoard = await addBoard(boardToSave);
       showSuccessMsg(`Board added (id: ${savedBoard._id})`);
-      navigate(`/board/${savedBoard._id}`);
+      // navigate(`/board/${savedBoard._id}`);
     } catch (err) {
       showErrorMsg("Cannot add board");
     }
@@ -74,9 +74,19 @@ export function BoardIndex() {
 
   return (
     <>
-      <AppHeader borderBottom="1px solid #ddd" />
-      <section className="board-index">
-        <SideBar />
+      <AppHeader
+        borderBottom="1px solid #ddd"
+        logoImg="https://cdn.icon-icons.com/icons2/2699/PNG/512/trello_logo_icon_167765.png"
+        logoColor="#0c66e4"
+      />
+      <section
+        className="board-index"
+        style={{
+          backgroundImage: `url(https://cdn.pixabay.com/photo/2015/03/11/19/19/violet-669046_1280.jpg)`,
+          backgroundSize: "cover",
+        }}
+      >
+        {/* <SideBar /> */}
 
         {/* <BoardFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
         <BoardList
