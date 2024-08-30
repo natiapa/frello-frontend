@@ -26,7 +26,6 @@ export function TaskDetailsActions({
   const [modalOpenByName, setModalOpenByName] = useState(null);
 
   const { taskId: taskParams } = useParams();
-  console.log(task);
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");

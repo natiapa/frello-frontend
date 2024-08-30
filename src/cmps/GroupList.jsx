@@ -11,7 +11,7 @@ export function GroupList({ groups }) {
     const currBoard = useSelector(state => state.boardModule.board)
 
     useEffect(() => {
-        console.log('groups:', groups)
+        console.log('render!')
     }, [groups?.length])
 
     function onAddGroup() {

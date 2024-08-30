@@ -29,19 +29,17 @@ export function TaskDetails() {
     }
   }, [params]);
 
-  async function onUpdated(name, value) {
-    console.log("name:", name);
-    console.log("value:", value);
-    try {
-      const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
-        key: name,
-        value: value,
-      });
-      await updateBoard(updatedBoard);
-    } catch (error) {
-      console.error("Failed to update the board:", error);
+    async function onUpdated(name, value) {
+        try {
+            const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
+                key: name,
+                value: value,
+            })
+            await updateBoard(updatedBoard)
+        } catch (error) {
+            console.error('Failed to update the board:', error)
+        }
     }
-  }
 
   function onEdit(ev) {
     const dataName = ev.currentTarget.getAttribute("data-name");

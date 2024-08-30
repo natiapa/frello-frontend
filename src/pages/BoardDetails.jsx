@@ -60,7 +60,6 @@ export function BoardDetails() {
       try {
         const color = await fac.getColorAsync(board.style.backgroundImage);
         setbgColor(color.hex);
-        console.log(color);
       } catch (error) {
         console.error("Failed to calculate background color:", error);
       }
@@ -87,7 +86,6 @@ export function BoardDetails() {
   // }
 
   function onPreviewToShow(data) {
-    console.log("data:", data);
     setPreview({
       position: "absolute",
       left: `${data.elData.left}px`,

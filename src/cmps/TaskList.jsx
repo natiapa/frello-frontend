@@ -12,7 +12,7 @@ export function TaskList({ group }) {
   const currBoard = useSelector((state) => state.boardModule.board);
 
   useEffect(() => {
-    console.log("group:", group);
+    console.log('render!');
   }, [group?.length]);
 
   function onAddTask() {
