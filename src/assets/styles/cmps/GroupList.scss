@@ -3,13 +3,11 @@
   grid-row: 3;
 
   display: grid;
-  
-  grid-auto-flow: column;
+  // grid-auto-flow: column;
+  gap: 0.6em;
   overflow: auto;
   height: 87.5vh;
   width: 100%;
-
-  
 
   .add-group-btn {
     background-color: white;
@@ -22,7 +20,7 @@
     color: white;
     background-color: #f1f2f4;
     box-shadow: $box-shadow-group-preview;
-    opacity: .5;
+    opacity: 0.5;
     text-align: left;
 
     .header-btn {
@@ -30,7 +28,6 @@
       font-weight: bold;
       opacity: 1;
     }
-
   }
 
   &::-webkit-scrollbar {
