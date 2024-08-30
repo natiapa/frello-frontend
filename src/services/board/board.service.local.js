@@ -168,7 +168,7 @@ function getEmptyChecklist() {
     return {
         id: makeId(),
         title: '',
-        items: [getEmptyItem()],
+        items: [],
     }
 }
 

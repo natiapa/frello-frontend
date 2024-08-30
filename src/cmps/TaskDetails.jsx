@@ -30,6 +30,8 @@ export function TaskDetails() {
   }, [params]);
 
   async function onUpdated(name, value) {
+    console.log("name:", name);
+    console.log("value:", value);
     try {
       const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
         key: name,

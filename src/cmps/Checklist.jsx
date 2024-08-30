@@ -13,6 +13,8 @@ export function Checklist({
   setNewItem,
   onSaveItem,
   onCloseItem,
+  onUpdated,
+  checklists,
 
 }) {
   return (
@@ -34,8 +36,10 @@ export function Checklist({
             <ChecklistItem
               key={item.id}
               item={item}
-              checklistId={checklist.id}
-              handleChecklistItem={handleChecklistItem}
+              checklist={checklist}
+              onUpdated={onUpdated}
+              checklists={checklists}
+             
             />
           ))}
       </ul>
