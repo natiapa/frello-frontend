@@ -4,7 +4,7 @@ import { getRandomColor } from "../services/util.service";
 export function BoardHeader({ members, bgColor }) {
   return (
     <section className="board-header">
-      <div className="board-header-title">Trello</div>
+      <div className="board-header-title">Frello</div>
       <div className="board-header-actions"></div>
       <ul
         className="members"
