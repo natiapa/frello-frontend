@@ -1,7 +1,6 @@
 .board-header {
   grid-column: 2/-1;
   grid-row: 2;
-  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(4px);
   background: #0000003d;
   color: var(--ds-text);
