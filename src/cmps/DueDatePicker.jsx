@@ -3,7 +3,7 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { boardService } from "../services/board";
 
-export function DueDatePicker({ task, taskId, onUpdated }) {
+export function DueDatePicker({ onUpdated }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedRange, setSelectedRange] = useState({ from: null, to: null });
   const [isCheckedDueDate, setCheckedDueDate] = useState(false);

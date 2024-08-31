@@ -110,8 +110,6 @@ export function TaskDetailsActions({
           >
             <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
               <DueDatePicker
-                task={task}
-                taskId={taskId}
                 onUpdated={onUpdated}
               />
             </Typography>
