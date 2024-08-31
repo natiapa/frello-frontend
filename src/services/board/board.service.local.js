@@ -89,12 +89,17 @@ function updateBoard(board, groupId, taskId, { key, value }, activity = '') {
         } else {
             board.groups[gIdx].tasks[tIdx][key] = value
         }
-    } else if (gIdx >= 0 && tIdx < 0 && key !== 'isStarred') {
-        if (key === 'deleteGroup') {
+    } else if (gIdx >= 0 && tIdx < 0) {
+        if (key === 'group') {
+            board.groups[gIdx] === value
+        }
+        else if (key === 'deleteGroup') {
             board.groups.splice(gIdx, 1)
         } else {
             board.groups[gIdx][key] = value
         }
+
+
     } else {
         board[key] = value
     }

@@ -12,6 +12,7 @@ export function GroupList({ groups }) {
   const [isNewGroup, setIsNewGroup] = useState(false);
   const [newGroup, setNewGroup] = useState(boardService.getEmptyGroup());
   const [currGroups, setCurrGroups] = useState(groups);
+  // const [currTasks, setCurrTasks] = useState("");
   const currBoard = useSelector((state) => state.boardModule.board);
 
   useEffect(() => {
@@ -28,9 +29,8 @@ export function GroupList({ groups }) {
   }
 
   function handleOnDragEnd(result) {
+    const { destination, source, type, draggableId } = result;
     console.log(result);
-    const { destination, source, type } = result;
-
     if (!destination) return;
 
     if (type === "group") {
@@ -39,11 +39,31 @@ export function GroupList({ groups }) {
       reorderedGroups.splice(destination.index, 0, reorderedItem);
       setCurrGroups(reorderedGroups);
       onUpdated("groups", reorderedGroups);
+    } else if (type === "task") {
+      const sourceGroup = groups.find(
+        (group) => group.id === source.droppableId
+      );
+      const destinationGroup = groups.find(
+        (group) => group.id === destination.droppableId
+      );
+      console.log(sourceGroup);
+      console.log(destinationGroup);
+
+      const draggedTaskIdx = sourceGroup.tasks.findIndex(
+        (task) => task.id === draggableId
+      );
+
+      const [reorderedTask] = sourceGroup.tasks.splice(draggedTaskIdx, 1);
+      onUpdated("group", sourceGroup, sourceGroup.id, null); //delete task from source group
+
+      destinationGroup.tasks.splice(destination.index, 0, reorderedTask); //add task to destination group
+      onUpdated("group", destinationGroup, destinationGroup.id, null);
     }
   }
-  async function onUpdated(name, value) {
+
+  async function onUpdated(name, value, groupId, taskId) {
     try {
-      const updatedBoard = boardService.updateBoard(board, null, null, {
+      const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
         key: name,
         value: value,
       });
