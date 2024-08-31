@@ -35,8 +35,8 @@ export function GroupList({ groups }) {
 
     if (type === "group") {
       const reorderedGroups = Array.from(currGroups);
-      const [reorderedItem] = reorderedGroups.splice(source.index, 1);
-      reorderedGroups.splice(destination.index, 0, reorderedItem);
+      const [reorderedGroup] = reorderedGroups.splice(source.index, 1);
+      reorderedGroups.splice(destination.index, 0, reorderedGroup);
       setCurrGroups(reorderedGroups);
       onUpdated("groups", reorderedGroups);
     } else if (type === "task") {
@@ -54,9 +54,9 @@ export function GroupList({ groups }) {
       );
 
       const [reorderedTask] = sourceGroup.tasks.splice(draggedTaskIdx, 1);
-      onUpdated("group", sourceGroup, sourceGroup.id, null); //delete task from source group
+      onUpdated("group", sourceGroup, sourceGroup.id, null);
 
-      destinationGroup.tasks.splice(destination.index, 0, reorderedTask); //add task to destination group
+      destinationGroup.tasks.splice(destination.index, 0, reorderedTask);
       onUpdated("group", destinationGroup, destinationGroup.id, null);
     }
   }
