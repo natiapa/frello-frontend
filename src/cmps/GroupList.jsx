@@ -40,8 +40,6 @@ export function GroupList({ groups }) {
       setCurrGroups(reorderedGroups);
       onUpdated("groups", reorderedGroups);
 
-      if (!sourceGroup) return;
-
       setCurrGroups(updatedGroups);
       onUpdated("groups", updatedGroups);
     }
