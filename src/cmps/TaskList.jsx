@@ -3,16 +3,18 @@ import { TaskPreview } from "./TaskPreview";
 import { useSelector } from "react-redux";
 import { updateBoard } from "../store/actions/board.actions";
 import { AddingForm } from "./AddingForm";
+import { Link } from "react-router-dom";
+import { Droppable } from "react-beautiful-dnd";
 
 export function TaskList({ group }) {
   const { tasks } = group;
 
   const [isNewTask, setIsNewTask] = useState(false);
   const [newTask, setNewTask] = useState(boardService.getEmptyTask());
-  const currBoard = useSelector((state) => state.boardModule.board);
+  const board = useSelector((state) => state.boardModule.board);
 
   useEffect(() => {
-    console.log('render!');
+    console.log("render!");
   }, [group?.length]);
 
   function onAddTask() {
@@ -22,19 +24,31 @@ export function TaskList({ group }) {
 
   return (
     <>
-      <ul className="task-list">
-        {tasks.map((task) => (
-          <li key={task.id}>
-            <TaskPreview groupId={group.id} task={task} />
-          </li>
-        ))}
-      </ul>
+      <Droppable droppableId={group.id} type="task">
+        {(provided) => (
+          <ul
+            className="task-list"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
+            {tasks.map((task, tIndex) => (
+              <TaskPreview
+                groupId={group.id}
+                task={task}
+                key={task.id}
+                tIndex={tIndex}
+              />
+            ))}
+            {provided.placeholder}
+          </ul>
+        )}
+      </Droppable>
       <div className="footer-group">
         {isNewTask && (
           <AddingForm
             setIsNew={setIsNewTask}
             setNew={setNewTask}
-            currBoard={currBoard}
+            currBoard={board}
             updateBoard={updateBoard}
             updated={newTask}
             groupId={group.id}

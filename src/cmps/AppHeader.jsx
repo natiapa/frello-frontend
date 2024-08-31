@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { UserModal } from "./UserModal.jsx";
 import { SearchBar } from "./SearchBar.jsx";
+import { useNavigate } from "react-router-dom";
 
 export function AppHeader({ bgColor, borderBottom, logoImg, logoColor }) {
   const [showUserModal, setShowUserModal] = useState(false);
