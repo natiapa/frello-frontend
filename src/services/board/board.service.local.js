@@ -215,7 +215,7 @@ function getEmptyDueDate() {
         time: '',
         isComplete: false,
         reminder: '',
-        createdAt: Date.now(),
+        createdAt: '',
         completedAt: null,
         isOverdue: false,
     }
