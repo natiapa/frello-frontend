@@ -39,9 +39,6 @@ export function GroupList({ groups }) {
       reorderedGroups.splice(destination.index, 0, reorderedItem);
       setCurrGroups(reorderedGroups);
       onUpdated("groups", reorderedGroups);
-
-      setCurrGroups(updatedGroups);
-      onUpdated("groups", updatedGroups);
     }
   }
   async function onUpdated(name, value) {
