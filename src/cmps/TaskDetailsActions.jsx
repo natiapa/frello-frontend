@@ -42,7 +42,7 @@ export function TaskDetailsActions({
 
   return (
     <section className="actions" style={{ ...taskPrevActionsModalData }}>
-      <div
+      <button
         data-name="checklists"
         className="checklist action-btn"
         aria-describedby="1"
@@ -77,9 +77,9 @@ export function TaskDetailsActions({
             />
           </Popover>
         )}
-      </div>
+      </button>
 
-      <div
+      <button
         data-name="due-date"
         className="due-date action-btn"
         aria-describedby="5"
@@ -117,7 +117,7 @@ export function TaskDetailsActions({
             />
           </Popover>
         )}
-      </div>
+      </button>
 
       {!taskParams && (
         <Link
@@ -133,7 +133,7 @@ export function TaskDetailsActions({
         </Link>
       )}
 
-      <div
+      <button
         aria-describedby="2"
         data-name="labels"
         className="edit-labels action-btn"
@@ -165,7 +165,7 @@ export function TaskDetailsActions({
             />
           </Popover>
         )}
-      </div>
+      </button>
     </section>
   );
 }
