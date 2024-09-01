@@ -6,7 +6,6 @@ import { TiTag } from "react-icons/ti";
 import { Link, useParams } from "react-router-dom";
 import { EditLables } from "./EditLabels";
 import { EditChecklist } from "./EditChecklist";
-import { SiDatefns } from "react-icons/si";
 import { LuClock5 } from "react-icons/lu";
 import { DueDatePicker } from "./DueDatePicker";
 
@@ -98,19 +97,22 @@ export function TaskDetailsActions({
               horizontal: "left",
             }}
             disablePortal
-            // disableEnforceFocus
-            // disableAutoFocus
+       
             PaperProps={{
               sx: {
                 width: "400px",
                 height: "600px",
                 padding: "20px",
+                backgroundColor: "#f4f5f7", 
+                boxShadow: "0 1px 4px rgba(0, 0, 0, 0.1)", 
+                borderRadius: "8px", 
               },
             }}
           >
             <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
               <DueDatePicker
                 onUpdated={onUpdated}
+                setIsPopoverOpen={setIsPopoverOpen}
               />
             </Typography>
           </Popover>
