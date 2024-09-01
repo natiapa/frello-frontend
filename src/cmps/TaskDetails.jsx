@@ -27,7 +27,7 @@ export function TaskDetails() {
         if (dialogRef.current) {
             dialogRef.current.showModal()
         }
-    }, [params, task.groups?.length])
+    }, [params, task.checklists?.length])
 
     async function onUpdated(name, value) {
         try {
@@ -89,15 +89,21 @@ export function TaskDetails() {
                     <button className="close-btn" onClick={onCloseDialog}>
                         <SvgIcon iconName="close" />
                     </button>
-                    <ul className="member-list">
-                        <p className="header-member-list">Members</p>
+                    <div className="information">
+                        <ul className="member-list">
+                            <p className="header">Members</p>
 
-                        {task.members && <MemberList members={task.members} />}
-                    </ul>
-                    <LabelList labels={selectedLabels} />
+                            {task.members && <MemberList members={task.members} />}
+                        </ul>
 
-                    <div>
-                        <DueDateDisplay dueDate={task.dueDate} />
+                        <ul className='labels'>
+                            <p className="header">Labels</p>
+                            <LabelList labels={selectedLabels} />
+                        </ul>
+
+                        <div>
+                            <DueDateDisplay dueDate={task.dueDate} />
+                        </div>
                     </div>
 
                     {currElToEdit !== 'description' ? (

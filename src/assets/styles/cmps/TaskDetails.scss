@@ -71,6 +71,37 @@
       color: black;
     }
 
+    .information {
+      display: grid;
+      grid-auto-flow: column;
+      .member-list{
+        width: max-content;
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: max-content max-content max-content;
+        .header{
+          grid-column: 1/2;
+          grid-row: 1;
+          font-size: 12px;
+        }
+        li{
+          grid-row: 2;
+        }
+      }
+      .labels {
+        width: max-content;
+        display: grid;
+        grid-auto-flow: column;
+        .header{
+          font-size: 12px;
+          grid-row: 1;
+        }
+        li{
+          grid-row: 2;
+        }
+      }
+    }
+
     .actions {
       display: grid;
       align-self: start;
@@ -96,6 +127,7 @@
         background-color: #091e420f;
         color: #172b4d;
         cursor: pointer;
+
         span {
           grid-column: 1;
           height: 16px;

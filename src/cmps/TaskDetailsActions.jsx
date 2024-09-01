@@ -21,6 +21,8 @@ export function TaskDetailsActions({
   selectedLabels,
   setSelectedLabels,
   onUpdated,
+  addedChecklist,
+  setAddedChecklist,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);

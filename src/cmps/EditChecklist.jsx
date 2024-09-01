@@ -30,9 +30,7 @@ export function EditChecklist({ groupId, taskId, task, setIsPopoverOpen, handleP
     }
     return (
         <div className="edit-checklist" onClick={handlePopoverClick}>
-            <h2>
-                Checklist <span>{checklists?.length}</span>
-            </h2>
+            <h2>Checklist span</h2>
             <label>
                 <span>title</span>
                 <input type="text" value={title} onChange={handleChange} />

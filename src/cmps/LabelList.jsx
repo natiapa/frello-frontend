@@ -14,11 +14,11 @@ export function LabelList({ labels }) {
 
     if (labelItem) {
       return (
-        <div
+        <li
           key={index}
           className="label-square"
           style={{ backgroundColor: labelItem.color }}
-        ></div>
+        ></li>
       );
     }
   });
