@@ -27,7 +27,6 @@ import { boardService } from "../services/board";
 export function BoardDetails() {
   const { boardId } = useParams();
   const board = useSelector((storeState) => storeState.boardModule.board);
-  const navigate = useNavigate();
 
   const [bgColor, setbgColor] = useState("");
   const [currGroup, setCurrGroup] = useState("");
@@ -204,9 +203,7 @@ export function BoardDetails() {
         />
         {/* {board?.members && board.members.length && ( */}
         <BoardHeader members={board?.members} bgColor={bgColor} />
-        <button onClick={() => navigate(`/board/${board._id}/demo-groups`)}>
-          Demo groups drag&drop
-        </button>
+
         {/* )} */}
 
         {board && <BoardSideBar board={board} bgColor={bgColor} />}
