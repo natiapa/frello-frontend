@@ -1,7 +1,7 @@
 .task-list {
   display: grid;
   gap: 8px;
-  max-height: 60vh;
+  max-height: 70vh;
   padding: 0 0 8px;
   overflow: auto;
   overflow-x: hidden;
@@ -21,6 +21,53 @@
       color: black;
     }
   }
+
+  .adding-form {
+    border: 0;
+    margin: 0 4px;
+    padding: 0;
+    box-shadow: none;
+
+    textarea {
+      // position: relative;
+      // display: grid;
+      // padding: 8px 12px 4px;
+      // border-radius: 8px;
+      // border: 1.6px solid transparent;
+      // background-color: $bg-color-task-preview;
+      // color: $color-task-preview;
+      margin: 0 4;
+      min-height: 36px;
+      // height: auto;
+      max-height: 160px;
+      padding: 8px 12px;
+      max-width: 256px;
+      overflow: hidden;
+      overflow-y: auto;
+      border: none;
+      border-radius: 8px;
+      box-shadow: $box-shadow-task-preview;
+      resize: none;
+      overflow-wrap: break-word;
+      font-weight: normal;
+      color: $color-task-preview;
+      font-family: Arial, Helvetica, sans-serif;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &::placeholder {
+      font-size: 14px;
+
+      font-weight: normal;
+      text-decoration: none;
+
+
+    }
+  }
+
 
 }
 
@@ -43,12 +90,15 @@
   padding: 8px 8px 8px 0;
 
   .add-task-btn {
+    margin: 0;
     padding: 6px 12px 6px 8px;
     background-color: inherit;
     height: max-content;
     border-radius: 12px;
     font-size: $font-size-groups-headers;
     text-align: left;
+    color: $color-task-preview;
+    font-weight: 600;
 
     .header-btn {
       color: $color-task-preview;
