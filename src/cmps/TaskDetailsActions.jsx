@@ -22,6 +22,7 @@ export function TaskDetailsActions({
   setSelectedLabels,
   onUpdated,
   setNewDueDate,
+  setNewCheckLists,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -72,8 +73,10 @@ export function TaskDetailsActions({
               groupId={groupId}
               taskId={taskId}
               task={task}
+              onUpdated={onUpdated}
               setIsPopoverOpen={setIsPopoverOpen}
               handlePopoverClick={handlePopoverClick}
+              setNewCheckLists={setNewCheckLists}
             />
           </Popover>
         )}

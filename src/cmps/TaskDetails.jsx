@@ -24,20 +24,28 @@ export function TaskDetails() {
   const [selectedLabels, setSelectedLabels] = useState(task.labels);
   //   const [dueDate, setDueDate] = useState(task.dueDate);
   const [newDueDate, setNewDueDate] = useState(task.dueDate);
-  console.log(newDueDate);
+  const [newChecklists, setNewCheckLists] = useState(task.checklists);
+  // console.log(newDueDate);
 
-    useEffect(() => {
-        if (dialogRef.current) {
-            dialogRef.current.showModal()
-        }
-    }, [params, task.checklists?.length])
+  useEffect(() => {
+    setNewCheckLists(task.checklists);
+  }, [task]);
+
+  useEffect(() => {
+    if (dialogRef.current) {
+      dialogRef.current.showModal();
+    }
+  }, [params]);
 
   async function onUpdated(name, value) {
+    console.log(task.checklists);
+
     try {
       const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
         key: name,
         value: value,
       });
+      console.log(updatedBoard);
       await updateBoard(updatedBoard);
     } catch (error) {
       console.error("Failed to update the board:", error);
@@ -78,36 +86,41 @@ export function TaskDetails() {
 
   if (!task) return;
 
-    return (
-        <section className="task-details">
-            <dialog ref={dialogRef} method="dialog" onClick={handleDialogClick}>
-                <form>
-                    {currElToEdit !== 'title' ? (
-                        <header data-name="title" onClick={onEdit}>
-                            {task?.title || 'Untitled Task'}
-                        </header>
-                    ) : (
-                        <Edit task={task} onUpdated={onUpdated} currElToEdit={currElToEdit} setCurrElToEdit={setCurrElToEdit} />
-                    )}
-                    <button className="close-btn" onClick={onCloseDialog}>
-                        <SvgIcon iconName="close" />
-                    </button>
-                    <div className="information">
-                        <ul className="member-list">
-                            <p className="header">Members</p>
+  return (
+    <section className="task-details">
+      <dialog ref={dialogRef} method="dialog" onClick={handleDialogClick}>
+        <form>
+          {currElToEdit !== "title" ? (
+            <header data-name="title" onClick={onEdit}>
+              {task?.title || "Untitled Task"}
+            </header>
+          ) : (
+            <Edit
+              task={task}
+              onUpdated={onUpdated}
+              currElToEdit={currElToEdit}
+              setCurrElToEdit={setCurrElToEdit}
+            />
+          )}
+          <button className="close-btn" onClick={onCloseDialog}>
+            <SvgIcon iconName="close" />
+          </button>
+          <div className="information">
+            <ul className="member-list">
+              <p className="header">Members</p>
 
-                            {task.members && <MemberList members={task.members} />}
-                        </ul>
+              {task.members && <MemberList members={task.members} />}
+            </ul>
 
-                        <ul className='labels'>
-                            <p className="header">Labels</p>
-                            <LabelList labels={selectedLabels} />
-                        </ul>
+            <ul className="labels">
+              <p className="header">Labels</p>
+              <LabelList labels={selectedLabels} />
+            </ul>
 
-                        <div>
-                            <DueDateDisplay dueDate={task.dueDate} />
-                        </div>
-                    </div>
+            <div>
+              <DueDateDisplay dueDate={newDueDate} />
+            </div>
+          </div>
 
           {currElToEdit !== "description" ? (
             <p
@@ -132,7 +145,7 @@ export function TaskDetails() {
 
           {task?.checklists && task.checklists.length > 0 && (
             <TaskChecklist
-              checklists={task.checklists}
+              checklists={newChecklists}
               onUpdated={onUpdated}
               task={task}
               groupId={groupId}
@@ -149,6 +162,7 @@ export function TaskDetails() {
           setSelectedLabels={setSelectedLabels}
           onUpdated={onUpdated}
           setNewDueDate={setNewDueDate}
+          setNewCheckLists={setNewCheckLists}
         />
       </dialog>
     </section>
