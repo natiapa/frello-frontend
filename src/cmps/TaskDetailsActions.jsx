@@ -21,6 +21,7 @@ export function TaskDetailsActions({
   selectedLabels,
   setSelectedLabels,
   onUpdated,
+  setNewDueDate,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -41,7 +42,7 @@ export function TaskDetailsActions({
 
   return (
     <section className="actions" style={{ ...taskPrevActionsModalData }}>
-      <button
+      <div
         data-name="checklists"
         className="checklist action-btn"
         aria-describedby="1"
@@ -65,7 +66,7 @@ export function TaskDetailsActions({
             // disableEnforceFocus
             // disableAutoFocus
           >
-            <Typography sx={{ p: 2 }} onClick={handlePopoverClick}></Typography>
+            {/* <Typography sx={{ p: 2 }} onClick={handlePopoverClick}></Typography> */}
 
             <EditChecklist
               groupId={groupId}
@@ -76,9 +77,9 @@ export function TaskDetailsActions({
             />
           </Popover>
         )}
-      </button>
+      </div>
 
-      <button
+      <div
         data-name="due-date"
         className="due-date action-btn"
         aria-describedby="5"
@@ -89,7 +90,7 @@ export function TaskDetailsActions({
         </span>
         <p> Dates </p>
 
-        {modalOpenByName === "due-date" && (
+        {modalOpenByName === "due-date" && isPopoverOpen && (
           <Popover
             id={anchorEl}
             open={isPopoverOpen}
@@ -109,38 +110,14 @@ export function TaskDetailsActions({
               },
             }}
           >
-            <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
-              <DueDatePicker onUpdated={onUpdated} />
-            </Typography>
+            <DueDatePicker
+              onUpdated={onUpdated}
+              handlePopoverClick={handlePopoverClick}
+              setNewDueDate={setNewDueDate}
+            />
           </Popover>
         )}
-      </button>
-      {modalOpenByName === "due-date" && (
-        <Popover
-          id={anchorEl}
-          open={isPopoverOpen}
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          disablePortal
-          // disableEnforceFocus
-          // disableAutoFocus
-          PaperProps={{
-            sx: {
-              width: "400px",
-              height: "600px",
-              padding: "20px",
-            },
-          }}
-        >
-          <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
-            <DueDatePicker onUpdated={onUpdated} />
-          </Typography>
-        </Popover>
-      )}
-      {/* </button> */}
+      </div>
 
       {!taskParams && (
         <Link
@@ -156,7 +133,7 @@ export function TaskDetailsActions({
         </Link>
       )}
 
-      <button
+      <div
         aria-describedby="2"
         data-name="labels"
         className="edit-labels action-btn"
@@ -188,7 +165,7 @@ export function TaskDetailsActions({
             />
           </Popover>
         )}
-      </button>
+      </div>
     </section>
   );
 }

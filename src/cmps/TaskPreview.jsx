@@ -10,7 +10,6 @@ import { MemberList } from "./MemberList";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { Draggable } from "react-beautiful-dnd";
 
-
 export function TaskPreview({ groupId, task, tIndex }) {
   // const boardId = useSelector((storeState) => storeState.boardModule.board._id);
   const board = useSelector((storeState) => storeState.boardModule.board);
@@ -59,6 +58,7 @@ export function TaskPreview({ groupId, task, tIndex }) {
           style={{
             ...provided.draggableProps.style,
             opacity: snapshot.isDragging ? "0.5" : "1",
+            // transform: snapshot.isDragging ? "rotate(1deg)" : "",
           }}
         >
           <Link to={`/board/${board._id}/${group.id}/${task.id}`}>

@@ -46,8 +46,6 @@ export function GroupList({ groups }) {
       const destinationGroup = groups.find(
         (group) => group.id === destination.droppableId
       );
-      console.log(sourceGroup);
-      console.log(destinationGroup);
 
       const draggedTaskIdx = sourceGroup.tasks.findIndex(
         (task) => task.id === draggableId
