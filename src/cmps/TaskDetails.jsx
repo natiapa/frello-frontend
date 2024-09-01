@@ -17,11 +17,26 @@ export function TaskDetails() {
   const navigate = useNavigate();
   const { boardId, groupId, taskId } = params;
   const board = useSelector((storeState) => storeState.boardModule.board);
+  const [currTask, setCurrTask] = useState("");
   const group = board?.groups?.find((group) => group.id === groupId);
   const task = group?.tasks?.find((task) => task.id === taskId);
 
   const [currElToEdit, setCurrElToEdit] = useState("");
-  const [selectedLabels, setSelectedLabels] = useState(task.labels);
+  const [selectedLabels, setSelectedLabels] = useState(task?.labels || []);
+  const [dueDate, setDueDate] = useState( boardService.getEmptyDueDate());
+  console.log(dueDate)
+
+
+
+  useEffect(() => {
+    loadTask()
+  }, [dueDate])
+
+  function loadTask() {
+    // const task = group?.tasks?.find((task) => task.id === taskId)
+    setCurrTask(task)
+
+  }
 
   useEffect(() => {
     if (dialogRef.current) {
@@ -29,17 +44,18 @@ export function TaskDetails() {
     }
   }, [params]);
 
-    async function onUpdated(name, value) {
-        try {
-            const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
-                key: name,
-                value: value,
-            })
-            await updateBoard(updatedBoard)
-        } catch (error) {
-            console.error('Failed to update the board:', error)
-        }
+  async function onUpdated(name, value) {
+    try {
+      const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
+        key: name,
+        value: value,
+      });
+      await updateBoard(updatedBoard);
+
+    } catch (error) {
+      console.error("Failed to update the board:", error);
     }
+  }
 
   function onEdit(ev) {
     const dataName = ev.currentTarget.getAttribute("data-name");
@@ -100,11 +116,10 @@ export function TaskDetails() {
             {task.members && <MemberList members={task.members} />}
           </ul>
           <LabelList labels={selectedLabels} />
-          
-        <div> 
-          <DueDateDisplay dueDate={task.dueDate}/>
-        </div>
 
+          <div>
+            <DueDateDisplay dueDate={dueDate} />
+          </div>
 
           {currElToEdit !== "description" ? (
             <p
@@ -145,6 +160,9 @@ export function TaskDetails() {
           selectedLabels={selectedLabels}
           setSelectedLabels={setSelectedLabels}
           onUpdated={onUpdated}
+          setDueDate={setDueDate}
+          dueDate={dueDate}
+       
         />
       </dialog>
     </section>

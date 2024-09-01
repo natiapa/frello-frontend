@@ -19,6 +19,9 @@ export function TaskDetailsActions({
   selectedLabels,
   setSelectedLabels,
   onUpdated,
+  setDueDate,
+  dueDate,
+
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -97,24 +100,26 @@ export function TaskDetailsActions({
               horizontal: "left",
             }}
             disablePortal
-       
             PaperProps={{
               sx: {
                 width: "400px",
-                height: "600px",
+                height: "700px",
                 padding: "20px",
-                backgroundColor: "#f4f5f7", 
-                boxShadow: "0 1px 4px rgba(0, 0, 0, 0.1)", 
-                borderRadius: "8px", 
+                backgroundColor: "#f4f5f7",
+                boxShadow: "0 1px 4px rgba(0, 0, 0, 0.1)",
+                borderRadius: "8px",
               },
             }}
           >
-            <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
-              <DueDatePicker
-                onUpdated={onUpdated}
-                setIsPopoverOpen={setIsPopoverOpen}
-              />
-            </Typography>
+            <DueDatePicker
+              onUpdated={onUpdated}
+              setIsPopoverOpen={setIsPopoverOpen}
+              handlePopoverClick={handlePopoverClick}
+              setDueDate={setDueDate}
+              dueDate={dueDate}
+              task={task}
+            
+            />
           </Popover>
         )}
       </button>

@@ -41,10 +41,18 @@ export function DueDateDisplay({ dueDate }) {
       )}
 
       {date && !createdAt && (
+       
         <div className="date-item">
+      
           <span className="date-label">Due date</span>
+          <>
+          <input
+           type="checkbox"
+           />
           <span className="date-value due-date">{formatDueDate}</span>
+          </>
         </div>
+       
       )}
 
       {createdAt && date && (
