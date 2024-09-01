@@ -22,15 +22,19 @@ export function TaskDetailsActions({
   setSelectedLabels,
   onUpdated,
   setNewDueDate,
+  setNewCheckLists,
+  // isTaskPrevModalOpen,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
+  const [dataN, setDataN] = useState("");
 
   const { taskId: taskParams } = useParams();
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
+    setDataN(currDataName);
     setIsPopoverOpen((isOpen) => !isOpen);
     setAnchorEl(ev.currentTarget);
     setModalOpenByName(currDataName);
@@ -42,7 +46,8 @@ export function TaskDetailsActions({
 
   return (
     <section className="actions" style={{ ...taskPrevActionsModalData }}>
-      <div
+      {/* {dataN !== title && ( */}
+      <button
         data-name="checklists"
         className="checklist action-btn"
         aria-describedby="1"
@@ -72,14 +77,17 @@ export function TaskDetailsActions({
               groupId={groupId}
               taskId={taskId}
               task={task}
+              onUpdated={onUpdated}
               setIsPopoverOpen={setIsPopoverOpen}
               handlePopoverClick={handlePopoverClick}
+              setNewCheckLists={setNewCheckLists}
             />
           </Popover>
         )}
-      </div>
+      </button>
+      {/* )} */}
 
-      <div
+      <button
         data-name="due-date"
         className="due-date action-btn"
         aria-describedby="5"
@@ -117,7 +125,7 @@ export function TaskDetailsActions({
             />
           </Popover>
         )}
-      </div>
+      </button>
 
       {!taskParams && (
         <Link
@@ -133,7 +141,7 @@ export function TaskDetailsActions({
         </Link>
       )}
 
-      <div
+      <button
         aria-describedby="2"
         data-name="labels"
         className="edit-labels action-btn"
@@ -165,7 +173,7 @@ export function TaskDetailsActions({
             />
           </Popover>
         )}
-      </div>
+      </button>
     </section>
   );
 }
