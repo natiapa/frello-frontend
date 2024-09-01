@@ -23,15 +23,18 @@ export function TaskDetailsActions({
   onUpdated,
   setNewDueDate,
   setNewCheckLists,
+  // isTaskPrevModalOpen,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
+  const [dataN, setDataN] = useState("");
 
   const { taskId: taskParams } = useParams();
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
+    setDataN(currDataName);
     setIsPopoverOpen((isOpen) => !isOpen);
     setAnchorEl(ev.currentTarget);
     setModalOpenByName(currDataName);
@@ -43,6 +46,7 @@ export function TaskDetailsActions({
 
   return (
     <section className="actions" style={{ ...taskPrevActionsModalData }}>
+      {/* {dataN !== title && ( */}
       <button
         data-name="checklists"
         className="checklist action-btn"
@@ -81,6 +85,7 @@ export function TaskDetailsActions({
           </Popover>
         )}
       </button>
+      {/* )} */}
 
       <button
         data-name="due-date"

@@ -22,13 +22,15 @@ export function TaskDetails() {
 
   const [currElToEdit, setCurrElToEdit] = useState("");
   const [selectedLabels, setSelectedLabels] = useState(task.labels);
-  //   const [dueDate, setDueDate] = useState(task.dueDate);
   const [newDueDate, setNewDueDate] = useState(task.dueDate);
   const [newChecklists, setNewCheckLists] = useState(task.checklists);
-  // console.log(newDueDate);
 
   useEffect(() => {
-    setNewCheckLists(task.checklists);
+    if (task) {
+      setSelectedLabels(task.labels);
+      setNewDueDate(task.dueDate);
+      setNewCheckLists(task.checklists);
+    }
   }, [task]);
 
   useEffect(() => {
@@ -45,6 +47,9 @@ export function TaskDetails() {
         key: name,
         value: value,
       });
+      if (name === "checklists") {
+        setNewCheckLists([...value]);
+      }
       console.log(updatedBoard);
       await updateBoard(updatedBoard);
     } catch (error) {
@@ -118,7 +123,7 @@ export function TaskDetails() {
             </ul>
 
             <div>
-              <DueDateDisplay dueDate={newDueDate} />
+              <DueDateDisplay dueDate={task.dueDate} />
             </div>
           </div>
 

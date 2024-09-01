@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { boardService } from "../services/board";
 import { updateBoard } from "../store/actions/board.actions";
+import { useParams } from "react-router";
 
 export function EditChecklist({
   groupId,
@@ -20,6 +21,7 @@ export function EditChecklist({
 
   useEffect(() => {
     console.log("checklists:", checklists);
+    setNewCheckLists(checklists);
   }, [checklists?.length]);
 
   function handleChange(ev) {
@@ -28,22 +30,16 @@ export function EditChecklist({
   }
 
   async function onAddChecklist() {
-    // console.log();
-    checklists.push({ ...boardService.getEmptyChecklist(), title: title });
-    setNewCheckLists(checklists);
-    // const updatedBoard = { ...board };
-    // console.log("updatedBoard:", updatedBoard);
-    // const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
-    //   key: "checklists",
-    //   value: checklists,
-    //   // value: [...(task.checklists || ''), { ...boardService.getEmptyChecklist(), title: title }],
-    // });
-    // updateBoard(updatedBoard); // מעדכן את הסטור של Redux עם ה-board המעודכן
-
+    checklists.push({ ...boardService.getEmptyChecklist(), title });
     console.log(checklists);
+    setNewCheckLists(checklists);
+
+    // console.log(checklists);
     onUpdated("checklists", checklists);
     setIsPopoverOpen(false);
   }
+
+  if (!useParams().taskId) return;
   return (
     <div className="edit-checklist" onClick={handlePopoverClick}>
       <h2>Checklist span</h2>
