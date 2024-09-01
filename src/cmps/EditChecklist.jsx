@@ -7,7 +7,7 @@ import { useParams } from 'react-router'
 export function EditChecklist({ groupId, taskId, task, onUpdated, setIsPopoverOpen, handlePopoverClick, setNewCheckLists }) {
     const board = useSelector(state => state.boardModule.board)
     const [title, setTitle] = useState('checklist')
-    const checklists = board.groups.find(group => group.id === groupId).tasks.find(task => task.id === taskId).checklists
+    const checklists = board.groups.find(group => group.id === groupId).tasks.find(task => task.id === taskId).checklists || []
 
     useEffect(() => {
         console.log('checklists:', checklists)
