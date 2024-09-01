@@ -11,7 +11,7 @@ export function TaskChecklist({ checklists, onUpdated, task, groupId, boardId })
 
     useEffect(() => {
         console.log('render!')
-    }, [updatedChecklists])
+    }, [updatedChecklists, updatedChecklists.length])
 
     function onRemoveChecklist(ev, checklistId) {
         ev.preventDefault()

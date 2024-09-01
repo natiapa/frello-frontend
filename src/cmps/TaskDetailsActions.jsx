@@ -9,6 +9,7 @@ import { EditChecklist } from "./EditChecklist";
 import { SiDatefns } from "react-icons/si";
 import { LuClock5 } from "react-icons/lu";
 import { DueDatePicker } from "./DueDatePicker";
+import { useSelector } from "react-redux";
 
 export function TaskDetailsActions({
   boardId,
@@ -49,7 +50,7 @@ export function TaskDetailsActions({
         <span className="icon">
           <IoMdCheckboxOutline />
         </span>
-        <p>Checklist </p>
+        <p>Checklist</p>
 
         {modalOpenByName === "checklists" && (
           <Popover
@@ -114,6 +115,31 @@ export function TaskDetailsActions({
           </Popover>
         )}
       </button>
+                {modalOpenByName === 'due-date' && (
+                    <Popover
+                        id={anchorEl}
+                        open={isPopoverOpen}
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                        disablePortal
+                        // disableEnforceFocus
+                        // disableAutoFocus
+                        PaperProps={{
+                            sx: {
+                                width: '400px',
+                                height: '600px',
+                                padding: '20px',
+                            },
+                        }}>
+                        <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
+                            <DueDatePicker onUpdated={onUpdated} />
+                        </Typography>
+                    </Popover>
+                )}
+            </button>
 
       {!taskParams && (
         <Link
@@ -140,7 +166,7 @@ export function TaskDetailsActions({
         </span>
         <p>Edit Labels</p>
 
-        {modalOpenByName === "labels" && isPopoverOpen && (
+        {modalOpenByName === "labels" &&  isPopoverOpen && (
           <Popover
             id={anchorEl}
             open={isPopoverOpen}
