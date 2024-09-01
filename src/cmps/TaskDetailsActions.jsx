@@ -109,9 +109,7 @@ export function TaskDetailsActions({
             }}
           >
             <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
-              <DueDatePicker
-                onUpdated={onUpdated}
-              />
+              <DueDatePicker onUpdated={onUpdated} />
             </Typography>
           </Popover>
         )}
@@ -142,7 +140,7 @@ export function TaskDetailsActions({
         </span>
         <p>Edit Labels</p>
 
-        {modalOpenByName === "labels" && (
+        {modalOpenByName === "labels" && isPopoverOpen && (
           <Popover
             id={anchorEl}
             open={isPopoverOpen}
@@ -159,6 +157,7 @@ export function TaskDetailsActions({
               handlePopoverClick={handlePopoverClick}
               selectedLabels={selectedLabels}
               setSelectedLabels={setSelectedLabels}
+              setIsPopoverOpen={setIsPopoverOpen}
             />
           </Popover>
         )}

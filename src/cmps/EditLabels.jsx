@@ -3,6 +3,7 @@ import { FiEdit2 } from "react-icons/fi";
 import { boardService } from "../services/board";
 import { useSelector } from "react-redux";
 import { updateBoard } from "../store/actions/board.actions";
+import SvgIcon from "./SvgIcon";
 // import { loadBoard, addBoardMsg } from "../store/actions/board.actions";
 
 export function EditLables({
@@ -11,18 +12,19 @@ export function EditLables({
   handlePopoverClick,
   selectedLabels,
   setSelectedLabels,
+  setIsPopoverOpen,
 }) {
   // const [selectedLabels, setSelectedLabels] = useState([]);
   const board = useSelector((storeState) => storeState.boardModule.board);
 
   const labelsList = [
-    { label: "Urgent", color: "red" },
-    { label: "In Progress", color: "orange" },
-    { label: "Completed", color: "green" },
-    { label: "On Hold", color: "yellow" },
-    { label: "Review", color: "blue" },
-    { label: "Low Priority", color: "gray" },
-    { label: "Important", color: "purple" },
+    { label: "Completed", color: "#4BCE97" },
+    { label: "On Hold", color: "#F5CD47" },
+    { label: "In Progress", color: "#FEA362" },
+    { label: "Urgent", color: "#F87168" },
+    { label: "Important", color: "#9F8FEF" },
+    { label: "Review", color: "#579DFF" },
+    { label: "Low Priority", color: "#8590A2" },
   ];
 
   useEffect(() => {
@@ -52,11 +54,20 @@ export function EditLables({
 
   return (
     <div className="edit-task-modal-content" onClick={handlePopoverClick}>
-      <h2>Labels</h2>
-      <span>X</span>
+      {/* <div className="icon"> */}
+      <button
+        className="close-labels-btn"
+        onClick={() => setIsPopoverOpen(false)}
+      >
+        <SvgIcon iconName="close" />
+      </button>
 
-      <p>Lables</p>
-      <div>
+      <h2>Labels</h2>
+      {/* </div> */}
+      {/* <span>X</span> */}
+
+      <p className="labels-title">Lables</p>
+      <div className="labels-container">
         <ul>
           {labelsList.map((label, idx) => (
             <li key={idx}>
@@ -72,9 +83,9 @@ export function EditLables({
                   backgroundColor: label.color,
                 }}
               ></div>
-              <span className="icon">
+              {/* <span className="icon">
                 <FiEdit2 />
-              </span>
+              </span> */}
             </li>
           ))}
         </ul>
