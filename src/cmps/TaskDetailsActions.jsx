@@ -115,31 +115,32 @@ export function TaskDetailsActions({
           </Popover>
         )}
       </button>
-                {modalOpenByName === 'due-date' && (
-                    <Popover
-                        id={anchorEl}
-                        open={isPopoverOpen}
-                        anchorEl={anchorEl}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'left',
-                        }}
-                        disablePortal
-                        // disableEnforceFocus
-                        // disableAutoFocus
-                        PaperProps={{
-                            sx: {
-                                width: '400px',
-                                height: '600px',
-                                padding: '20px',
-                            },
-                        }}>
-                        <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
-                            <DueDatePicker onUpdated={onUpdated} />
-                        </Typography>
-                    </Popover>
-                )}
-            </button>
+      {modalOpenByName === "due-date" && (
+        <Popover
+          id={anchorEl}
+          open={isPopoverOpen}
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          disablePortal
+          // disableEnforceFocus
+          // disableAutoFocus
+          PaperProps={{
+            sx: {
+              width: "400px",
+              height: "600px",
+              padding: "20px",
+            },
+          }}
+        >
+          <Typography sx={{ p: 2 }} onClick={handlePopoverClick}>
+            <DueDatePicker onUpdated={onUpdated} />
+          </Typography>
+        </Popover>
+      )}
+      {/* </button> */}
 
       {!taskParams && (
         <Link
@@ -166,7 +167,7 @@ export function TaskDetailsActions({
         </span>
         <p>Edit Labels</p>
 
-        {modalOpenByName === "labels" &&  isPopoverOpen && (
+        {modalOpenByName === "labels" && isPopoverOpen && (
           <Popover
             id={anchorEl}
             open={isPopoverOpen}
