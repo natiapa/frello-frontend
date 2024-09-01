@@ -49,12 +49,16 @@ export function GroupPreview({ group, gIndex }) {
 
   return (
     <Draggable key={group.id} draggableId={group.id} index={gIndex}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <li
           className="group-preview"
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          style={{
+            ...provided.draggableProps.style,
+            // opacity: snapshot.isDragging ? "0.5" : "1",
+          }}
         >
           <div className="header-and-actions">
             {currElToEdit !== "title" && (

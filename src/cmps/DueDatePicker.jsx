@@ -3,7 +3,11 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { boardService } from "../services/board";
 
-export function DueDatePicker({ onUpdated }) {
+export function DueDatePicker({
+  onUpdated,
+  handlePopoverClick,
+  setNewDueDate,
+}) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedRange, setSelectedRange] = useState({ from: null, to: null });
   const [isCheckedDueDate, setCheckedDueDate] = useState(false);
@@ -13,8 +17,7 @@ export function DueDatePicker({ onUpdated }) {
   const [dueTime, setDueTime] = useState("");
 
   function handleSelectedDayOrRange(dayOrRange) {
-   
-    console.log(dayOrRange);
+    // console.log(dayOrRange);
 
     if (isCheckedStartDate && isCheckedDueDate) {
       if (!dayOrRange || !dayOrRange.from || !dayOrRange.to) return;
@@ -134,17 +137,14 @@ export function DueDatePicker({ onUpdated }) {
   function handleDueTimeChange({ target }) {
     setDueTime(target.value);
   }
-  function handleClick(){
+  function handleClick() {
     console.log("dueDate", dueDate);
-    // const UpdateTask = {
-    //   ...task, dueDate: dueDate
-    // }
-    // console.log(UpdateTask)
-    onUpdated('dueDate',dueDate)
+    setNewDueDate(dueDate);
+    onUpdated("dueDate", dueDate);
   }
 
   return (
-    <div>
+    <div onClick={handlePopoverClick} style={{ height: "100%" }}>
       <div>
         <h4>Dates</h4>
       </div>
