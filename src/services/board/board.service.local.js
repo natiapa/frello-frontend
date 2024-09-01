@@ -385,7 +385,7 @@ function _createBoards() {
                         attachments: ['mockup_v1.png'],
                         comments: ['Design high-fidelity mockups for the app', 'Align design with the wireframes'],
                         cover: 'cover_mockup.png',
-                        dueDate: '2024-09-05',
+                        dueDate: '',
                     },
                     {
                         id: 'c103',
@@ -468,7 +468,7 @@ function _createBoards() {
                         attachments: ['icons_v1.png'],
                         comments: ['Design custom icons for the Trello project', 'Ensure consistency with the overall design'],
                         cover: 'cover_icons.png',
-                        dueDate: '2024-09-20',
+                        dueDate: '',
                     },
                     {
                         id: 'c106',
@@ -483,7 +483,7 @@ function _createBoards() {
                         attachments: ['typography_v1.png'],
                         comments: ['Select fonts for the project', 'Ensure readability and aesthetic appeal'],
                         cover: 'cover_typography.png',
-                        dueDate: '2024-09-25',
+                        dueDate: '',
                     },
                     {
                         id: 'c107',
@@ -513,7 +513,7 @@ function _createBoards() {
                         attachments: ['stakeholder_review_notes.pdf'],
                         comments: ['Present the design to stakeholders', 'Incorporate their feedback into the design'],
                         cover: 'cover_stakeholder_review.png',
-                        dueDate: '2024-10-01',
+                        dueDate: '',
                     },
                     {
                         id: 'c109',
@@ -543,7 +543,7 @@ function _createBoards() {
                         attachments: ['design_handoff.pdf'],
                         comments: ['Provide all design assets to the development team', 'Ensure clear communication during the handoff'],
                         cover: 'cover_design_handoff.png',
-                        dueDate: '2024-10-10',
+                        dueDate: '',
                     },
                 ],
                 style: {},

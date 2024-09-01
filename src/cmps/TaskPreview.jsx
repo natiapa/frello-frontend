@@ -8,7 +8,7 @@ import { FiEdit2 } from "react-icons/fi";
 import { LabelList } from "./LabelList";
 import { MemberList } from "./MemberList";
 import { IoMdCheckboxOutline } from "react-icons/io";
-import { Draggable } from "react-beautiful-dnd";
+import { DueDateDisplay } from "./DueDateDisplay";
 
 export function TaskPreview({ groupId, task, tIndex }) {
   // const boardId = useSelector((storeState) => storeState.boardModule.board._id);

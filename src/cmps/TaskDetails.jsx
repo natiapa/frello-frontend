@@ -8,8 +8,8 @@ import { updateBoard } from "../store/actions/board.actions";
 import { TaskDetailsActions } from "./TaskDetailsActions";
 import { MemberList } from "./MemberList";
 import { boardService } from "../services/board";
-import { DueDatePicker } from "./DueDatePicker";
 import SvgIcon from "./SvgIcon";
+import { DueDateDisplay } from "./DueDateDisplay";
 
 export function TaskDetails() {
   const dialogRef = useRef(null);
@@ -100,6 +100,11 @@ export function TaskDetails() {
             {task.members && <MemberList members={task.members} />}
           </ul>
           <LabelList labels={selectedLabels} />
+          
+        <div> 
+          <DueDateDisplay dueDate={task.dueDate}/>
+        </div>
+
 
           {currElToEdit !== "description" ? (
             <p
