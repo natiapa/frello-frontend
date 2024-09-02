@@ -26,6 +26,10 @@ export function BoardIndex() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    loadBoards();
+  }, [boards.length]);
+
+  useEffect(() => {
     loadBoards(filterBy);
   }, [filterBy]);
 
@@ -83,9 +87,12 @@ export function BoardIndex() {
         className="board-index"
         style={{
           backgroundImage: `url(https://cdn.pixabay.com/photo/2017/02/19/11/19/background-2079405_1280.jpg)`,
-          // backgroundImage: `url(https://cdn.pixabay.com/photo/2022/06/08/05/47/stars-7249785_1280.jpg)`,
-          // backgroundImage: `url(https://cdn.pixabay.com/photo/2015/03/11/19/19/violet-669046_1280.jpg)`,
           backgroundSize: "cover",
+          gridTemplateColumns:
+            boards.length > 0
+              ? `minmax(1rem, 204px) auto minmax(1rem, 204px)`
+              : "1",
+          // transition: " 0.3s ease, grid-template-columns 0.3s ease",
         }}
       >
         {/* <SideBar /> */}

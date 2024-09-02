@@ -8,13 +8,7 @@ import { useEffect, useState } from "react";
 import { Edit } from "./Edit";
 import { Draggable } from "react-beautiful-dnd";
 
-export function GroupPreview({
-  group,
-  gIndex,
-  allowDrop,
-  drop,
-  draggedMemberId,
-}) {
+export function GroupPreview({ group, gIndex, allowDrop, drop }) {
   const board = useSelector((storeState) => storeState.boardModule.board);
 
   const [currElToEdit, setCurrElToEdit] = useState("");
@@ -63,7 +57,7 @@ export function GroupPreview({
           {...provided.dragHandleProps}
           style={{
             ...provided.draggableProps.style,
-            // opacity: snapshot.isDragging ? "0.5" : "1",
+            opacity: snapshot.isDragging ? "0.5" : "1",
           }}
         >
           <div className="header-and-actions">
@@ -82,12 +76,7 @@ export function GroupPreview({
             )}
             <button onClick={deleteGroup}>Delete list</button>
           </div>
-          <TaskList
-            group={group}
-            allowDrop={allowDrop}
-            drop={drop}
-            // draggedMemberId={draggedMemberId}
-          />
+          <TaskList group={group} allowDrop={allowDrop} drop={drop} />
         </li>
       )}
     </Draggable>

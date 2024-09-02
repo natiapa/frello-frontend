@@ -110,7 +110,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
               <FiEdit2 />
             </button>
             <div className="labels">
-              <LabelList labels={task.labels} />
+              <LabelList labels={task.labels} labelWidth="40px" />
             </div>
 
             <span>{task.title || "New"}</span>
@@ -122,13 +122,8 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
                   {`${getIsChecked()}/${getChecklists()}`}
                 </div>
               )}
-              <ul
-                className="members"
-                // style={{
-                //   gridTemplateColumns: `repeat(${task.members.length}, 20px)`,
-                // }}
-              >
-                <MemberList members={members} gridColumnWidth="20px" />
+              <ul className="members">
+                <MemberList members={members} gridColumnWidth="28px" />
               </ul>
             </div>
           </Link>

@@ -71,13 +71,15 @@ export function BoardList({
     <ul
       className="board-list"
       style={{
+        placeSelf: boards.length > 0 ? "" : "center",
         gridTemplateRows: `repeat(${Math.ceil(
           (boards.length + 1) / columns
         )}, 96px)`,
-        gridTemplateColumns: `repeat(${columns}, 1fr)`,
+        gridTemplateColumns: boards.length > 1 ? `repeat(${columns}, 1fr)` : ``,
+        gap: boards.length > 0 ? "1em" : "",
       }}
     >
-      {boards &&
+      {boards.length > 0 &&
         boards.length &&
         boards.map((board, idx) => (
           <Link
@@ -92,7 +94,6 @@ export function BoardList({
               <BoardPreview board={board} />
 
               <div className="actions">
-                {/* <button onClick={() => onUpdateBoard(board)}>Edit</button> */}
                 <button
                   className="close-btn"
                   onClick={(ev) => onRemoveBoard(ev, board._id)}
@@ -109,8 +110,14 @@ export function BoardList({
         className="new-board-btn"
         onClick={handleClick}
         style={{
-          gridRow: `${Math.floor(boards.length / columns) + 1}`,
+          gridRow:
+            boards.length > 0
+              ? `${Math.floor(boards.length / columns) + 1}`
+              : "1",
           gridColumn: `${(boards.length % columns) + 1}`,
+          transition:
+            "transform 0.3s ease ,grid-column 0.3s ease, grid-row 0.3s ease",
+          transform: boards.length > 0 ? "scale(1)" : "scale(1.1)",
         }}
       >
         Create new board

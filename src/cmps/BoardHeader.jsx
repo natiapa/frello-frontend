@@ -11,15 +11,22 @@ export function BoardHeader({ members, bgColor, allowDrop, drag }) {
         // onDrop={(ev) => drop(ev)}
         onDragOver={(ev) => allowDrop(ev)}
         style={{
-          gridTemplateColumns: `repeat(${members.length}, 25px)`,
+          gridTemplateColumns: `repeat(${members.length}, 20px)`,
+          placeSelf: "center end",
         }}
       >
-        {members.map((member) => (
+        {members.map((member, idx) => (
           <li
             key={member.id}
             id={member.id}
             className="member"
-            style={{ backgroundColor: member.color || "#FFA500" }}
+            style={{
+              backgroundColor: member.color || "#FFA500",
+              gridColumn: `${idx + 1}`,
+              marginLeft: idx * -0.1 + "px", // adjust this value to control overlap
+              zIndex: members.length - idx, // ensure the last member is on top
+              // position: "relative",
+            }}
             draggable={true}
             onDragStart={(ev) => drag(ev)}
           >

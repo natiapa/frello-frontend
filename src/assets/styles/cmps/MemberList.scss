@@ -1,21 +1,21 @@
 ul.member-list {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  gap: 0.5rem;
+
+  .header-member-list {
+    grid-column: 1/-1;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  li {
+    grid-row: 2;
     display: grid;
-    grid-template-columns: max-content max-content;
-    gap: 0.5rem;
-    .header-member-list{
-        grid-column: 1/-1;
-        font-size: 12px;
-        font-weight: 600;
-    }
-    li {
-      
-        grid-row: 2;
-        display: grid;
-        align-content: center;
-        border-radius: 50%;
-        height: 32px;
-        width: 32px;
-        text-align: center;
-        color: white;
-    }
+    align-content: center;
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    text-align: center;
+    color: white;
+  }
 }
