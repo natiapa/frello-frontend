@@ -169,44 +169,45 @@ export function TaskDetailsActions({
         )}
       </button>
 
-      <button
-        data-name="attach"
-        className="attach action-btn"
-        aria-describedby="6"
-        onClick={handleClick}
-      >
-        <span className="icon">
-        <FiPaperclip />
+      {taskParams && (
+        <button
+          data-name="attach"
+          className="attach action-btn"
+          aria-describedby="6"
+          onClick={handleClick}
+        >
+          <span className="icon">
+            <FiPaperclip />
+          </span>
+          <p>Attchment</p>
 
-        </span>
-        <p>Attchment</p>
-
-        {modalOpenByName === "attach" && isPopoverOpen && (
-          <Popover
-            id={anchorEl}
-            open={isPopoverOpen}
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-            disablePortal
-            PaperProps={{
-              sx: {
-                width: "400px",
-                height: "600px",
-                padding: "20px",
-              },
-            }}
-          >
-            <AttachmentUploader
-              onUpdated={onUpdated}
-              setIsPopoverOpen={setIsPopoverOpen}
-              handlePopoverClick={handlePopoverClick}
-            />
-          </Popover>
-        )}
-      </button>
+          {modalOpenByName === "attach" && isPopoverOpen && (
+            <Popover
+              id={anchorEl}
+              open={isPopoverOpen}
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              disablePortal
+              PaperProps={{
+                sx: {
+                  width: "400px",
+                  height: "600px",
+                  padding: "20px",
+                },
+              }}
+            >
+              <AttachmentUploader
+                onUpdated={onUpdated}
+                setIsPopoverOpen={setIsPopoverOpen}
+                handlePopoverClick={handlePopoverClick}
+              />
+            </Popover>
+          )}
+        </button>
+      )}
     </section>
   );
 }

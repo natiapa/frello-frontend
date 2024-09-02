@@ -182,7 +182,7 @@ export function BoardDetails() {
               method="dialog"
             >
               <div className="labels">
-                <LabelList labels={selectedLabels} />
+                <LabelList labels={selectedLabels} labelWidth="40px" />
               </div>
 
               <form onSubmit={handleSave}>
@@ -197,7 +197,7 @@ export function BoardDetails() {
               </form>
             </div>
 
-            {taskPrevActionsModalData && (
+            {isTaskPrevModalOpen && (
               <TaskDetailsActions
                 boardId={boardId}
                 groupId={currGroup.id}
@@ -207,7 +207,6 @@ export function BoardDetails() {
                 setIsTaskPrevModalOpen={setIsTaskPrevModalOpen}
                 selectedLabels={selectedLabels}
                 setSelectedLabels={setSelectedLabels}
-                // isTaskPrevModalOpen={isTaskPrevModalOpen}
               />
             )}
           </section>
