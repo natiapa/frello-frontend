@@ -11,6 +11,7 @@ export const boardService = {
     remove,
     addBoardMsg,
     updateBoard,
+    getDefaultFilter,
     getEmptyGroup,
     getEmptyTask,
     getEmptyChecklist,
@@ -28,16 +29,16 @@ async function query(filterBy = { txt: '' }) {
 
         await storageService.post(STORAGE_KEY, boards)
     }
-    // const { txt, sortField, sortDir } = filterBy
+    const { txt, sortField, sortDir } = filterBy
 
-    // if (txt) {
-    //     const regex = new RegExp(filterBy.txt, 'i')
-    //     boards = boards.filter(board => regex.test(board.title) || regex.test(board.description))
-    // }
+    if (txt) {
+        const regex = new RegExp(filterBy.txt, 'i')
+        boards = boards.filter(board => regex.test(board.title) || regex.test(board.description))
+    }
 
-    // if (sortField === 'title' || sortField === 'owner') {
-    //     boards.sort((board1, board2) => board1[sortField].localeCompare(board2[sortField]) * +sortDir)
-    // }
+    if (sortField === 'title' || sortField === 'owner') {
+        boards.sort((board1, board2) => board1[sortField].localeCompare(board2[sortField]) * +sortDir)
+    }
 
     // boards = boards.map(({ _id, title, owner }) => ({ _id, title, owner }))
     console.log('boards:', boards)
@@ -192,6 +193,14 @@ async function getEmptyItem() {
 
 //     return boards
 // }
+
+function getDefaultFilter() {
+    return {
+        txt: '',
+        sortField: 'title',
+        sortDir: 1,
+    }
+}
 
 function getEmptyBoard() {
     return {

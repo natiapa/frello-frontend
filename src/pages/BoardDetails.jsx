@@ -27,7 +27,7 @@ import { boardService } from "../services/board";
 export function BoardDetails() {
   const { boardId } = useParams();
   const board = useSelector((storeState) => storeState.boardModule.board);
-
+  const filterBy = useSelector((storeState) => storeState.boardModule.filterBy);
   const [bgColor, setbgColor] = useState("");
   const [currGroup, setCurrGroup] = useState("");
   const [currTask, setCurrTask] = useState("");

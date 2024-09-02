@@ -1,6 +1,6 @@
 import { boardService } from '../../services/board'
 import { store } from '../store'
-import { ADD_BOARD, REMOVE_BOARD, SET_BOARDS, SET_BOARD, UPDATE_BOARD, ADD_BOARD_MSG } from '../reducers/board.reducer'
+import { ADD_BOARD, REMOVE_BOARD, SET_BOARDS, SET_BOARD, UPDATE_BOARD, ADD_BOARD_MSG, SET_FILTER } from '../reducers/board.reducer'
 
 export async function loadBoards(filterBy) {
     try {
@@ -12,7 +12,7 @@ export async function loadBoards(filterBy) {
     }
 }
 
-export async function loadBoard(boardId) {
+export async function loadBoard(boardId, filterBy = {}) {
     try {
         const board = await boardService.getById(boardId)
         store.dispatch(getCmdSetBoard(board))
@@ -64,6 +64,10 @@ export async function addBoardMsg(boardId, txt) {
         console.log('Cannot add board msg', err)
         throw err
     }
+}
+
+async function filterBoard(filterBy) {
+    store.dispatch({ type: SET_FILTER, filterBy })
 }
 
 // Command Creators:
