@@ -15,9 +15,10 @@ export function EditChecklist({
 }) {
   const board = useSelector((state) => state.boardModule.board);
   const [title, setTitle] = useState("checklist");
-  const checklists = board.groups
-    .find((group) => group.id === groupId)
-    .tasks.find((task) => task.id === taskId).checklists;
+  const checklists =
+    board.groups
+      .find((group) => group.id === groupId)
+      .tasks.find((task) => task.id === taskId).checklists || [];
 
   useEffect(() => {
     console.log("checklists:", checklists);
@@ -25,7 +26,6 @@ export function EditChecklist({
   }, [checklists?.length]);
 
   function handleChange(ev) {
-    // ev.preventDefault()
     setTitle(ev.target.value);
   }
 
@@ -39,7 +39,6 @@ export function EditChecklist({
     setIsPopoverOpen(false);
   }
 
-  if (!useParams().taskId) return;
   return (
     <div className="edit-checklist" onClick={handlePopoverClick}>
       <h2>Checklist span</h2>
