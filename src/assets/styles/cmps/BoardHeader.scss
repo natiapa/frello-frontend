@@ -8,7 +8,7 @@
   font-size: 14px;
 
   display: grid;
-  grid-template-columns: 1fr 50px;
+  grid-template-columns: auto 100px;
   position: relative;
 
   &::after {

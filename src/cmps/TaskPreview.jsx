@@ -9,13 +9,52 @@ import { LabelList } from "./LabelList";
 import { MemberList } from "./MemberList";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { Draggable } from "react-beautiful-dnd";
+import { loadBoard, updateBoard } from "../store/actions/board.actions";
+import { boardService } from "../services/board";
 
-export function TaskPreview({ groupId, task, tIndex }) {
-  // const boardId = useSelector((storeState) => storeState.boardModule.board._id);
+export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
   const board = useSelector((storeState) => storeState.boardModule.board);
   const group = board?.groups?.find((group) => group.id === groupId);
+  const [members, setMembers] = useState(task.members);
 
-  // const task = group?.tasks?.find((task) => task.id === taskId);
+  useEffect(() => {}, [task.members]);
+
+  function drop(ev) {
+    ev.preventDefault();
+    const data = ev.dataTransfer.getData("text");
+    const currDraggedMemberId = data;
+
+    const draggedMember = board.members.find(
+      (member) => member.id === currDraggedMemberId
+    );
+
+    if (
+      !draggedMember ||
+      task.members.some((member) => member.id === currDraggedMemberId)
+    ) {
+      return;
+    }
+
+    const membersToUpdate = Array.isArray(task.members)
+      ? [...task.members, draggedMember]
+      : [draggedMember];
+    setMembers(membersToUpdate);
+    onUpdated("members", membersToUpdate);
+  }
+
+  async function onUpdated(name, value) {
+    if (!board) return;
+    try {
+      const updatedBoard = boardService.updateBoard(board, group.id, task.id, {
+        key: name,
+        value: value,
+      });
+      updateBoard(updatedBoard);
+      // await loadBoard(board._id);
+    } catch (error) {
+      console.error("Failed to update the board:", error);
+    }
+  }
 
   function getChecklists() {
     const checklists = task.checklists;
@@ -58,8 +97,9 @@ export function TaskPreview({ groupId, task, tIndex }) {
           style={{
             ...provided.draggableProps.style,
             opacity: snapshot.isDragging ? "0.5" : "1",
-            // transform: snapshot.isDragging ? "rotate(1deg)" : "",
           }}
+          onDragOver={(ev) => allowDrop(ev)}
+          onDrop={(ev) => drop(ev)}
         >
           <Link to={`/board/${board._id}/${group.id}/${task.id}`}>
             <button
@@ -88,7 +128,7 @@ export function TaskPreview({ groupId, task, tIndex }) {
                   gridTemplateColumns: `repeat(${task.members.length}, 20px)`,
                 }}
               >
-                <MemberList members={task.members} />
+                <MemberList members={members} />
               </ul>
             </div>
           </Link>

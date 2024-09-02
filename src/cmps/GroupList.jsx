@@ -6,7 +6,7 @@ import { updateBoard } from "../store/actions/board.actions";
 import { AddingForm } from "./AddingForm";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
-export function GroupList({ groups }) {
+export function GroupList({ groups, allowDrop, drop, draggedMemberId }) {
   const board = useSelector((storeState) => storeState.boardModule.board);
 
   const [isNewGroup, setIsNewGroup] = useState(false);
@@ -86,7 +86,14 @@ export function GroupList({ groups }) {
               }}
             >
               {currGroups.map((group, gIndex) => (
-                <GroupPreview group={group} key={group.id} gIndex={gIndex} />
+                <GroupPreview
+                  group={group}
+                  key={group.id}
+                  gIndex={gIndex}
+                  allowDrop={allowDrop}
+                  drop={drop}
+                  // draggedMemberId={draggedMemberId}
+                />
               ))}
               {isNewGroup && (
                 <AddingForm

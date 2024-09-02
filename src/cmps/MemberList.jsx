@@ -1,6 +1,6 @@
 export function MemberList({ members }) {
   // if (members) console.log(members);
-  if (!members) return <div>Loading...</div>;
+  // if (!members) return <div>Loading...</div>;
   return (
     <>
       {members.map((member) => (

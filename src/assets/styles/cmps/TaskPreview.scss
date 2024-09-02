@@ -66,7 +66,8 @@
     position: relative;
     grid-row: -1;
     display: grid;
-    grid-auto-flow: column;
+    // grid-auto-flow: column;
+    grid-template-columns: auto 80px;
     align-items: center;
 
     .checklists {
@@ -84,6 +85,7 @@
       // grid-template-columns: 1fr 30px;
 
       justify-content: end;
+      height: 100%;
       // gap: 4px;
 
       li {

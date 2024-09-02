@@ -37,6 +37,7 @@ export function BoardDetails() {
   const [isTaskPrevModalOpen, setIsTaskPrevModalOpen] = useState(false);
   const [taskPrevActionsModalData, setTaskPrevActionsModalData] = useState("");
   const [selectedLabels, setSelectedLabels] = useState([]);
+  // const [draggedMemberId, setDraggedMemberId] = useState("");
 
   useEffect(() => {
     eventBus.on("show-task", onPreviewToShow);
@@ -144,6 +145,21 @@ export function BoardDetails() {
       onUpdated("labels", selectedLabels);
     }
   }
+
+  function allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+  function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  // function drop(ev) {
+  //   ev.preventDefault();
+  //   var data = ev.dataTransfer.getData("text");
+  //   ev.target.appendChild(document.getElementById(data));
+  // }
+
   if (!board) return;
 
   return (
@@ -203,12 +219,25 @@ export function BoardDetails() {
           logoColor="#fff"
         />
         {/* {board?.members && board.members.length && ( */}
-        <BoardHeader members={board?.members} bgColor={bgColor} />
+        <BoardHeader
+          members={board?.members}
+          bgColor={bgColor}
+          allowDrop={allowDrop}
+          drag={drag}
+          // drop={drop}
+        />
 
         {/* )} */}
 
         {board && <BoardSideBar board={board} bgColor={bgColor} />}
-        {board && <GroupList groups={board.groups} />}
+        {board && (
+          <GroupList
+            groups={board.groups}
+            allowDrop={allowDrop}
+            // drop={drop}
+            // draggedMemberId={draggedMemberId}
+          />
+        )}
 
         {/* {taskId && <TaskDetails board={board} group={group} task={task} onUpdateBoard={onUpdateBoard} />} */}
 
