@@ -124,11 +124,11 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
               )}
               <ul
                 className="members"
-                style={{
-                  gridTemplateColumns: `repeat(${task.members.length}, 20px)`,
-                }}
+                // style={{
+                //   gridTemplateColumns: `repeat(${task.members.length}, 20px)`,
+                // }}
               >
-                <MemberList members={members} />
+                <MemberList members={members} gridColumnWidth="20px" />
               </ul>
             </div>
           </Link>

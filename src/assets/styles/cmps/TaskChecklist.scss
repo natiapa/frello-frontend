@@ -1,33 +1,45 @@
 .task-checklist {
-    button{
-        width: max-content;
+  button {
+    width: max-content;
+  }
+  .checklists {
+    .header-and-btns {
+      display: grid;
+      grid-template-columns: 1fr max-content;
     }
-    .checklists{
-        .header-and-btns{
-            display: grid;
-            grid-template-columns: 1fr max-content;
+  }
+  .checklist {
+    display: grid;
+
+    .header-and-btns {
+      h3 {
+        span {
+          color: #172b4d;
+          font-size: 16px;
+          font-weight: 600;
+          cursor: pointer;
         }
+      }
     }
-    .checklist {
-        display: grid;
-        .item{
-            display: grid;
-            grid-template-columns: max-content 1fr;
-            grid-template-rows: max-content max-content;
-            input[type="checkbox"] {
-                grid-column: 1;
-                grid-row: 1;
-                margin-right: 0.5rem;
-            }
-            .edit-item {
-                grid-column: 2;
-                grid-row: 1/3;
-                
-                input {
-                    width: 100%;
-                }
-            }
-           
+    .item {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      grid-template-rows: max-content max-content;
+      color: #44546f;
+
+      input[type="checkbox"] {
+        grid-column: 1;
+        grid-row: 1;
+        margin-right: 0.5rem;
+      }
+      .edit-item {
+        grid-column: 2;
+        grid-row: 1/3;
+
+        input {
+          width: 100%;
         }
+      }
     }
+  }
 }

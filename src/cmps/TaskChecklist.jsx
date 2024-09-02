@@ -134,7 +134,9 @@ export function TaskChecklist({
           updatedChecklists.map((checklist) => (
             <li className="checklist" key={checklist.id}>
               <div className="header-and-btns">
-                <h1>{checklist.title}</h1>
+                <h3>
+                  <span>{checklist.title}</span>
+                </h3>
                 <button onClick={(ev) => onRemoveChecklist(ev, checklist.id)}>
                   Delete
                 </button>

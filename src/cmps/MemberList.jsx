@@ -1,13 +1,21 @@
-export function MemberList({ members }) {
+export function MemberList({ members, gridColumnWidth }) {
   // if (members) console.log(members);
   // if (!members) return <div>Loading...</div>;
   return (
-    <>
-      {members.map((member) => (
-        <li key={member.fullname} style={{ backgroundColor: member.color }}>
+    <div
+      className="list-container"
+      style={{
+        gridTemplateColumns: `repeat(${members.length}, ${gridColumnWidth})`,
+      }}
+    >
+      {members.map((member, idx) => (
+        <li
+          key={member.fullname}
+          style={{ backgroundColor: member.color, gridColumn: `${idx + 1}` }}
+        >
           {member.fullname[0].toUpperCase()}
         </li>
       ))}
-    </>
+    </div>
   );
 }

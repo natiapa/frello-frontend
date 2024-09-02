@@ -62,9 +62,21 @@
 
     .close-btn {
       position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-block-start: 9px;
       top: 5px;
       right: 15px;
-      color: black;
+      width: 40px;
+      height: 40px;
+      color: #172b4d;
+      background-color: transparent;
+      border-radius: 50%;
+      border: none;
+      &:hover {
+        background-color: #dcdfe4;
+      }
     }
 
     .delete-btn {
@@ -74,29 +86,39 @@
     .information {
       display: grid;
       grid-auto-flow: column;
-      .member-list{
+      grid-template-columns: max-content max-content max-content;
+      gap: 1em;
+
+      .member-list {
         width: max-content;
         display: grid;
-        grid-auto-flow: column;
-        grid-template-columns: max-content max-content max-content;
-        .header{
-          grid-column: 1/2;
+        grid-template-columns: 1;
+        grid-template-rows: max-content max-content;
+        // grid-auto-flow: column;
+        gap: 0;
+
+        .header {
+          // grid-column: 1;
           grid-row: 1;
           font-size: 12px;
         }
-        li{
+
+        .list-container {
           grid-row: 2;
+          display: grid;
+          grid-template-rows: max-content max-content;
+          gap: 4px;
         }
       }
       .labels {
         width: max-content;
         display: grid;
         grid-auto-flow: column;
-        .header{
+        .header {
           font-size: 12px;
           grid-row: 1;
         }
-        div{
+        div {
           grid-row: 2;
         }
       }

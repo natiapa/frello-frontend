@@ -80,20 +80,22 @@
     }
 
     .members {
-      display: grid;
       grid-column: 2;
+      display: grid;
 
       justify-content: end;
       height: 100%;
-
-      li {
+      .list-container {
         display: grid;
-        align-content: center;
-        border-radius: 50%;
-        width: 24px;
-        height: 24px;
-        text-align: center;
-        color: white;
+        li {
+          display: grid;
+          align-content: center;
+          border-radius: 50%;
+          width: 24px;
+          height: 24px;
+          text-align: center;
+          color: white;
+        }
       }
     }
   }
