@@ -19,9 +19,7 @@ export function TaskDetailsActions({
   selectedLabels,
   setSelectedLabels,
   onUpdated,
-  setDueDate,
-  dueDate,
-
+  setNewDueDate,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -63,11 +61,7 @@ export function TaskDetailsActions({
               horizontal: "left",
             }}
             disablePortal
-            // disableEnforceFocus
-            // disableAutoFocus
           >
-            <Typography sx={{ p: 2 }} onClick={handlePopoverClick}></Typography>
-
             <EditChecklist
               groupId={groupId}
               taskId={taskId}
@@ -115,10 +109,7 @@ export function TaskDetailsActions({
               onUpdated={onUpdated}
               setIsPopoverOpen={setIsPopoverOpen}
               handlePopoverClick={handlePopoverClick}
-              setDueDate={setDueDate}
-              dueDate={dueDate}
-              task={task}
-            
+              setNewDueDate={setNewDueDate}
             />
           </Popover>
         )}

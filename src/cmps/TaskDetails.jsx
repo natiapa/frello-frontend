@@ -17,26 +17,15 @@ export function TaskDetails() {
   const navigate = useNavigate();
   const { boardId, groupId, taskId } = params;
   const board = useSelector((storeState) => storeState.boardModule.board);
-  const [currTask, setCurrTask] = useState("");
+
   const group = board?.groups?.find((group) => group.id === groupId);
   const task = group?.tasks?.find((task) => task.id === taskId);
 
   const [currElToEdit, setCurrElToEdit] = useState("");
   const [selectedLabels, setSelectedLabels] = useState(task?.labels || []);
-  const [dueDate, setDueDate] = useState( boardService.getEmptyDueDate());
-  console.log(dueDate)
+  const [newDueDate, setNewDueDate] = useState(task.dueDate);
+  console.log(newDueDate)
 
-
-
-  useEffect(() => {
-    loadTask()
-  }, [dueDate])
-
-  function loadTask() {
-    // const task = group?.tasks?.find((task) => task.id === taskId)
-    setCurrTask(task)
-
-  }
 
   useEffect(() => {
     if (dialogRef.current) {
@@ -51,7 +40,6 @@ export function TaskDetails() {
         value: value,
       });
       await updateBoard(updatedBoard);
-
     } catch (error) {
       console.error("Failed to update the board:", error);
     }
@@ -118,7 +106,7 @@ export function TaskDetails() {
           <LabelList labels={selectedLabels} />
 
           <div>
-            <DueDateDisplay dueDate={dueDate} />
+            <DueDateDisplay dueDate={newDueDate} setNewDueDate={setNewDueDate} />
           </div>
 
           {currElToEdit !== "description" ? (
@@ -160,9 +148,7 @@ export function TaskDetails() {
           selectedLabels={selectedLabels}
           setSelectedLabels={setSelectedLabels}
           onUpdated={onUpdated}
-          setDueDate={setDueDate}
-          dueDate={dueDate}
-       
+          setNewDueDate={setNewDueDate}
         />
       </dialog>
     </section>

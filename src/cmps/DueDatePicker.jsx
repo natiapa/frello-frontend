@@ -8,20 +8,15 @@ export function DueDatePicker({
   onUpdated,
   setIsPopoverOpen,
   handlePopoverClick,
-  setDueDate,
-  dueDate,
-  task
+  setNewDueDate
 }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedRange, setSelectedRange] = useState({ from: null, to: null });
   const [isCheckedDueDate, setCheckedDueDate] = useState(false);
   const [isCheckedStartDate, setCheckedStartDate] = useState(false);
 
- 
+  const [dueDate, setDueDate] = useState( boardService.getEmptyDueDate());
   const [dueTime, setDueTime] = useState("");
-
-
-
 
   function handleSelectedDayOrRange(dayOrRange) {
     if (isCheckedStartDate && isCheckedDueDate) {
@@ -153,7 +148,7 @@ export function DueDatePicker({
     if (actions[name]) {
       actions[name]();
     }
-  
+    setNewDueDate(dueDate)
     setIsPopoverOpen(false);
 
   
