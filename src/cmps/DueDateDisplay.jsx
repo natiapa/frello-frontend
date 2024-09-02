@@ -1,5 +1,8 @@
-export function DueDateDisplay({ dueDate }) {
+import { useState } from "react";
+
+export function DueDateDisplay({ dueDate, setNewDueDate }) {
   const { createdAt, date, time, isComplete, completedAt } = dueDate;
+  const [isChecked, setIsChecked] = useState(isComplete || false);
 
   const formatStartDate = createdAt ? formatDateTimeForTask(createdAt) : null;
   const formatDueDate = date ? formatDateTimeForTask(date, time) : null;
@@ -29,6 +32,17 @@ export function DueDateDisplay({ dueDate }) {
 
     return formattedTime ? `${formattedDate}, ${formattedTime}` : formattedDate;
   }
+  function handleCompleteChange() {
+    const newIsChecked = !isChecked;
+    setIsChecked(newIsChecked);
+
+    const updatedDueDate = { ...dueDate, isComplete: newIsChecked };
+    setNewDueDate(updatedDueDate);
+
+    if (newIsChecked) {
+      console.log("Task completed:", updatedDueDate);
+    }
+  }
 
   if (!dueDate) return null;
   return (
@@ -39,22 +53,43 @@ export function DueDateDisplay({ dueDate }) {
           <span className="date-value start-date">{formatStartDate}</span>
         </div>
       )}
-
+  
       {date && !createdAt && (
         <div className="date-item">
           <span className="date-label">Due date</span>
-          <span className="date-value due-date">{formatDueDate}</span>
+          <>
+            <input
+              type="checkbox"
+              checked={isChecked}
+              onChange={handleCompleteChange}
+            />
+            <span className="date-value due-date">
+              {formatDueDate}
+              {isChecked && (
+                <span className="complete-badge">complete</span>
+              )}
+            </span>
+          </>
         </div>
       )}
-
+  
       {createdAt && date && (
         <div className="date-item">
           <span className="date-label">dates</span>
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={handleCompleteChange}
+          />
           <span className="date-value">
-            {formatStartDate} - {formatDueDate}
+            {`${formatStartDate} - ${formatDueDate}`}
+            {isChecked && (
+              <span className="complete-badge">complete</span>
+            )}
           </span>
         </div>
       )}
     </div>
   );
+  
 }

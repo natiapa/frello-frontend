@@ -18,16 +18,15 @@ export function EditChecklist({ groupId, taskId, task, onUpdated, setIsPopoverOp
         setTitle(ev.target.value)
     }
 
-    async function onAddChecklist() {
-        checklists.push({ ...boardService.getEmptyChecklist(), title })
-        console.log(checklists)
-        setNewCheckLists(checklists)
-
-        onUpdated('checklists', checklists)
+   async function onAddChecklist() {
+        boardService.updateBoard(board, groupId, taskId, {
+            key: 'checklists',
+            value: [...(task.checklists || ''), { ...boardService.getEmptyChecklist(), title: title }],
+        })
+        await updateBoard(board)
         setIsPopoverOpen(false)
     }
-
-    if (!useParams().taskId) return
+    
     return (
         <div className="edit-checklist" onClick={handlePopoverClick}>
             <h2>Checklist span</h2>
