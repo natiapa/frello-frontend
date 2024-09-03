@@ -8,26 +8,19 @@
 
   .actions {
     display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: max-content max-content max-content;
+    align-items: center;
     gap: 15px;
+
+    .select-labels {
+      display: grid;
+    }
+
   }
 
-  .select-member {
-    .MuiSelect-select {
-      padding: .5rem;
-    }
-
-    .MuiMenuItem-root {
-      padding: 0;
-    }
-    .MuiCheckbox-root {
-      padding: 0;
-    }
-    .MuiButtonBase-root {
-      padding: 0;
-    }
-    
+  .actions-members {
+    display: grid;
   }
-
-
-
 }
