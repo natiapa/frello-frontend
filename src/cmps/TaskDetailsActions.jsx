@@ -27,14 +27,14 @@ export function TaskDetailsActions({
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
-  const [dataN, setDataN] = useState("");
+  // const [dataN, setDataN] = useState("");
 
   const { taskId: taskParams } = useParams();
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
-    setDataN(currDataName);
-    setIsPopoverOpen((isOpen) => !isOpen);
+    // setDataN(currDataName);
+    setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
     setAnchorEl(ev.currentTarget);
     setModalOpenByName(currDataName);
   }

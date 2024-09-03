@@ -1,9 +1,32 @@
 import { CgProfile } from "react-icons/cg";
 import { getRandomColor } from "../services/util.service";
+import { RxDotsHorizontal } from "react-icons/rx";
+import { HiDotsHorizontal } from "react-icons/hi";
+import { Popover } from "@mui/material";
+import { useState } from "react";
+import { useParams } from "react-router";
+import { Activities } from "./Activities";
 
-export function BoardHeader({ members, bgColor, allowDrop, drag }) {
+export function BoardHeader({
+  members,
+  bgColor,
+  allowDrop,
+  drag,
+  setIsActivitiesOpen,
+  isActivitiesOpen,
+}) {
+  function handleClick(ev) {
+    // const currDataName = ev.currentTarget.getAttribute("data-name");
+    setIsActivitiesOpen(true);
+  }
+
   return (
-    <section className="board-header">
+    <section
+      className="board-header"
+      style={{
+        gridColumn: isActivitiesOpen ? "2/3" : "2/-1",
+      }}
+    >
       <div className="board-header-title">Frello</div>
       <div className="board-header-actions"></div>
       <ul
@@ -23,9 +46,8 @@ export function BoardHeader({ members, bgColor, allowDrop, drag }) {
             style={{
               backgroundColor: member.color || "#FFA500",
               gridColumn: `${idx + 1}`,
-              marginLeft: idx * -0.1 + "px", // adjust this value to control overlap
-              zIndex: members.length - idx, // ensure the last member is on top
-              // position: "relative",
+              marginLeft: idx * -0.1 + "px",
+              zIndex: members.length - idx,
             }}
             draggable={true}
             onDragStart={(ev) => drag(ev)}
@@ -35,8 +57,17 @@ export function BoardHeader({ members, bgColor, allowDrop, drag }) {
         ))}
       </ul>
 
-      {/* <div className="board-header-icon">🔍</div>
-      <div className="board-header-icon">➕</div> */}
+      {!isActivitiesOpen && (
+        <div
+          className="activity-menu"
+          data-name="activities"
+          onClick={handleClick}
+        >
+          <span>
+            <HiDotsHorizontal />
+          </span>
+        </div>
+      )}
     </section>
   );
 }
