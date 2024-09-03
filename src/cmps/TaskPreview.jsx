@@ -101,7 +101,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
           onDragOver={(ev) => allowDrop(ev)}
           onDrop={(ev) => drop(ev)}
         >
-          <Link to={`/board/${board._id}/${group.id}/${task.id}`}>
+          {group && task && <Link to={`/board/${board._id}/${group.id}/${task.id}`}>
             <button
               data-name="title"
               className="edit-btn"
@@ -126,7 +126,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
                 <MemberList members={members} gridColumnWidth="28px" />
               </ul>
             </div>
-          </Link>
+          </Link>}
         </li>
       )}
     </Draggable>
