@@ -75,6 +75,7 @@ export function BoardHeader({
         {members.map((member, idx) => (
           <li
             key={member.id}
+            id={member.id}
             className="member"
             draggable={true}
             onDragStart={(ev) => drag(ev)}
