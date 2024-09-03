@@ -733,18 +733,74 @@ function _createBoards() {
                 createdAt: 154514,
                 byMember: {
                     id: 'u101',
-                    fullname: 'Abi Abambi',
+                    fullname: 'Natia',
                     imgUrl: 'http://some-img',
                 },
                 group: {
                     id: 'g101',
-                    title: 'Urgent Stuff',
+                    title: 'Design Phase',
                 },
                 task: {
                     id: 'c101',
-                    title: 'Replace Logo',
+                    title: 'Design wireframes',
                 },
             },
+            {
+                id: 'a102',
+                title: 'Updated Task Description',
+                createdAt: 154520,
+                byMember: {
+                    id: 'u102',
+                    fullname: 'Avi',
+                    imgUrl: 'http://some-img',
+                },
+                group: {
+                    id: 'g101',
+                    title: 'Design Phase',
+                },
+                task: {
+                    id: 'c101',
+                    title: 'Design wireframes',
+                },
+            },
+            {
+                id: 'a103',
+                title: 'Moved Task to Review',
+                createdAt: 154530,
+                byMember: {
+                    id: 'u103',
+                    fullname: 'Yana',
+                    imgUrl: 'http://some-img',
+                },
+                group: {
+                    id: 'g101',
+                    title: 'Design Phase',
+                },
+                task: {
+                    id: 'c101',
+                    title: 'Design wireframes',
+                },
+
+            },
+            {
+                id: 'a104',
+                title: 'Moved Task to Review',
+                createdAt: 154540,
+                byMember: {
+                    id: 'u101',
+                    fullname: 'Natia',
+                    imgUrl: 'http://some-img',
+                },
+                group: {
+                    id: 'g101',
+                    title: 'Design Phase',
+                },
+                task: {
+                    id: 'c101',
+                    title: 'Design wireframes',
+                },
+            },
+
         ],
     }
 }

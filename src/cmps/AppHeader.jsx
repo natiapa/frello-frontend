@@ -76,12 +76,12 @@ export function AppHeader({ bgColor, borderBottom, logoImg, logoColor }) {
         </div>
       </section>
       {/* )} */}
-      {showUserModal && (
+      {/* {showUserModal && (
         <UserModal
           showUserModal={showUserModal}
           setShowUserModal={setShowUserModal}
         />
-      )}
+      )} */}
     </header>
   );
 }

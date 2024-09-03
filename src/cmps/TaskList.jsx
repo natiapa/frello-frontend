@@ -51,7 +51,6 @@ export function TaskList({ group, allowDrop, drop, draggedMemberId }) {
                 tIndex={tIndex}
                 allowDrop={allowDrop}
                 drop={drop}
-                // draggedMemberId={draggedMemberId}
               />
             ))}
             {provided.placeholder}

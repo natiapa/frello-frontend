@@ -23,9 +23,10 @@ import { FastAverageColor } from "fast-average-color";
 import { updateBoard } from "../store/actions/board.actions";
 import { LabelList } from "../cmps/LabelList";
 import { boardService } from "../services/board";
+import { Activities } from "../cmps/Activities";
 
 export function BoardDetails() {
-  const { boardId } = useParams();
+  const { boardId, taskId } = useParams();
   const board = useSelector((storeState) => storeState.boardModule.board);
   const filterBy = useSelector((storeState) => storeState.boardModule.filterBoard);
   const [bgColor, setbgColor] = useState("");
@@ -37,6 +38,7 @@ export function BoardDetails() {
   const [isTaskPrevModalOpen, setIsTaskPrevModalOpen] = useState(false);
   const [taskPrevActionsModalData, setTaskPrevActionsModalData] = useState("");
   const [selectedLabels, setSelectedLabels] = useState([]);
+  const [isActivitiesOpen, setIsActivitiesOpen] = useState(true);
   // const [draggedMemberId, setDraggedMemberId] = useState("");
 
   useEffect(() => {
@@ -137,12 +139,6 @@ export function BoardDetails() {
     ev.dataTransfer.setData("text", ev.target.id);
   }
 
-  // function drop(ev) {
-  //   ev.preventDefault();
-  //   var data = ev.dataTransfer.getData("text");
-  //   ev.target.appendChild(document.getElementById(data));
-  // }
-
   if (!board) return;
 
   return (
@@ -151,6 +147,8 @@ export function BoardDetails() {
         className="board-details"
         style={{
           backgroundImage: `url(${board?.style?.backgroundImage})`,
+          gridTemplateColumns: isActivitiesOpen ? "auto 1fr 340px" : "auto 1fr",
+          transition: " grid-template-columns 0.3s ease",
         }}
       >
         {isTaskPrevModalOpen && (
@@ -206,18 +204,20 @@ export function BoardDetails() {
           bgColor={bgColor}
           allowDrop={allowDrop}
           drag={drag}
-          // drop={drop}
+          setIsActivitiesOpen={setIsActivitiesOpen}
+          isActivitiesOpen={isActivitiesOpen}
         />
 
-        {/* )} */}
+        {isActivitiesOpen && !taskId && (
+          <Activities board={board} setIsActivitiesOpen={setIsActivitiesOpen} />
+        )}
 
         {board && <BoardSideBar board={board} bgColor={bgColor} />}
         {board && (
           <GroupList
             groups={board.groups}
             allowDrop={allowDrop}
-            // drop={drop}
-            // draggedMemberId={draggedMemberId}
+            isActivitiesOpen={isActivitiesOpen}
           />
         )}
 

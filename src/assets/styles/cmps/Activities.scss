@@ -1,0 +1,10 @@
+.activities-container {
+  .close-btn {
+    cursor: pointer;
+  }
+  .link {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
