@@ -1,66 +1,33 @@
 .board-filter {
   display: grid;
-  grid-template-columns: 1fr 5em 5em auto;
   align-items: center;
-  gap: 0 0.5em;
+  gap: 15px;
+  padding: 0 12px 12px;
+  width: 384px;
 
-  // background-color: $clr4;
-  padding: 0.5em;
 
-  h3 {
-    grid-column: 1 / -1;
-    font-size: rem(14px);
-    margin: 0;
+  .actions {
+    display: grid;
+    gap: 15px;
   }
 
-  & :not(h3) {
-    cursor: pointer;
-  }
-
-  input:is([type="text"], [type="number"]) {
-    height: 1.8em;
-    border: none;
-    border-block-end: 1px solid $gray1;
-
-    &:focus {
-      outline: none;
-      background-color: $gray1;
-    }
-  }
-
-  .btn-clear {
-    grid-column: 4;
-  }
-
-  .sort-field,
-  .sort-dir {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-
-    // margin-inline-start: .4em;
-
-    font-size: 0.8em;
-  }
-
-  .sort-dir {
-    grid-column: 2 / 3;
-  }
-
-  input[type="radio"] {
-    display: none;
-  }
-
-  label {
-    span {
-      font-size: 0.9em;
-      padding: 0.1em 0.3em;
-      outline: 1px solid $gray1;
+  .select-member {
+    .MuiSelect-select {
+      padding: .5rem;
     }
 
-    &:has(:checked) span {
-      //   background-color: $clr3;
-      color: $gray1;
+    .MuiMenuItem-root {
+      padding: 0;
     }
+    .MuiCheckbox-root {
+      padding: 0;
+    }
+    .MuiButtonBase-root {
+      padding: 0;
+    }
+    
   }
+
+
+
 }

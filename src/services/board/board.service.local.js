@@ -11,6 +11,7 @@ export const boardService = {
     remove,
     addBoardMsg,
     updateBoard,
+    getDefaultFilter,
     getEmptyGroup,
     getEmptyTask,
     getEmptyChecklist,
@@ -45,8 +46,54 @@ async function query(filterBy = { txt: '' }) {
     return boards
 }
 
-function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
+async function getById(boardId, filterBy = {}) {
+    const board = await storageService.get(STORAGE_KEY, boardId)
+    console.log('filterBy:', filterBy)
+    if (filterBy.txt) {
+        const regex = new RegExp(filterBy.txt, 'i')
+        board.groups = board.groups.filter(group => regex.test(group.title))
+    }
+    if (filterBy.noMembers) {
+        board.groups.forEach(group => {
+            group.tasks = group.tasks.filter(task => !task.members.length)
+        })
+    }
+    if (filterBy.noDueDate) {
+        board.groups.forEach(group => {
+            group.tasks = group.tasks.filter(task => !task.dueDate)
+        })
+    }
+    if (filterBy.noLabels) {
+        board.groups.forEach(group => {
+            group.tasks = group.tasks.filter(task => !task.labels.length)
+        })
+    }
+
+    if (filterBy.selectMember?.length) {
+        console.log('filterBy.selectMember:', filterBy.selectMember)
+        board.groups.forEach(group => {
+            group.tasks = group.tasks.filter(task => task.members.some(member => filterBy.selectMember.includes(member.id)))
+        })
+    }
+
+    if (filterBy.allMembers) {
+        board.groups.forEach(group => {
+            group.tasks = group.tasks.filter(task => task.members.length === board.members.length)
+        })
+    }
+    return board
+}
+
+function getDefaultFilter() {
+    return {
+        txt: '',
+        noMembers: false,
+        selectMember: [],
+        noDueDate: false,
+        noLabels: false,
+        sortField: 'title',
+        sortDir: 1,
+    }
 }
 
 async function remove(boardId) {
@@ -92,14 +139,11 @@ function updateBoard(board, groupId, taskId, { key, value }, activity = '') {
     } else if (gIdx >= 0 && tIdx < 0) {
         if (key === 'group') {
             board.groups[gIdx] === value
-        }
-        else if (key === 'deleteGroup') {
+        } else if (key === 'deleteGroup') {
             board.groups.splice(gIdx, 1)
         } else {
             board.groups[gIdx][key] = value
         }
-
-
     } else {
         board[key] = value
     }

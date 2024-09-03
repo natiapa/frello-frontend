@@ -1,5 +1,12 @@
 import { CgProfile } from "react-icons/cg";
 import { getRandomColor } from "../services/util.service";
+import { MdOutlineFilterList } from "react-icons/md";
+import { Popover } from "@mui/material";
+import { useState } from "react";
+import { BoardFilter } from "./BoardFilter";
+import { boardService } from "../services/board";
+import { useSelector } from "react-redux";
+import { filterBoard } from "../store/actions/board.actions";
 import { RxDotsHorizontal } from "react-icons/rx";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { Popover } from "@mui/material";
@@ -15,9 +22,17 @@ export function BoardHeader({
   setIsActivitiesOpen,
   isActivitiesOpen,
 }) {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
   function handleClick(ev) {
-    // const currDataName = ev.currentTarget.getAttribute("data-name");
+    setAnchorEl(ev.currentTarget);
+    setIsPopoverOpen((isOpen) => !isOpen);
     setIsActivitiesOpen(true);
+  }
+
+  function clearFilter() {
+    filterBoard(boardService.getDefaultFilter());
   }
 
   return (
@@ -29,28 +44,48 @@ export function BoardHeader({
     >
       <div className="board-header-title">Frello</div>
       <div className="board-header-actions"></div>
+      <div className="filter" onClick={handleClick}>
+        <p>
+          <span>
+            <MdOutlineFilterList />
+          </span>
+          Filters
+          <Popover
+            id={anchorEl}
+            open={isPopoverOpen}
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+          >
+            <BoardFilter />
+          </Popover>
+        </p>
+      </div>
+      {/* <button className="btn-clear" onClick={clearFilter}>
+                    Clear
+                </button> */}
       <ul
         className="members"
-        // onDrop={(ev) => drop(ev)}
         onDragOver={(ev) => allowDrop(ev)}
         style={{
           gridTemplateColumns: `repeat(${members.length}, 20px)`,
           placeSelf: "center end",
         }}
       >
-        {members.map((member, idx) => (
+        {members.map((member) => (
           <li
             key={member.id}
-            id={member.id}
             className="member"
+            draggable={true}
+            onDragStart={(ev) => drag(ev)}
             style={{
               backgroundColor: member.color || "#FFA500",
               gridColumn: `${idx + 1}`,
               marginLeft: idx * -0.1 + "px",
               zIndex: members.length - idx,
             }}
-            draggable={true}
-            onDragStart={(ev) => drag(ev)}
           >
             {member.fullname[0]}
           </li>

@@ -4,10 +4,12 @@ export const REMOVE_BOARD = 'REMOVE_BOARD'
 export const ADD_BOARD = 'ADD_BOARD'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
 export const ADD_BOARD_MSG = 'ADD_BOARD_MSG'
+export const SET_FILTER = 'SET_FILTER'
 
 const initialState = {
     boards: [],
-    board: null
+    board: null,
+    filterBoard: {},
 }
 
 export function boardReducer(state = initialState, action) {
@@ -29,12 +31,14 @@ export function boardReducer(state = initialState, action) {
             newState = { ...state, boards: [...state.boards, action.board] }
             break
         case UPDATE_BOARD:
-            boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
+            boards = state.boards.map(board => (board._id === action.board._id ? action.board : board))
             newState = { ...state, boards }
             break
         case ADD_BOARD_MSG:
-            newState = { ...state, board: { ...state.board, msgs: [...state.board.msgs || [], action.msg] } }
+            newState = { ...state, board: { ...state.board, msgs: [...(state.board.msgs || []), action.msg] } }
             break
+            case 'SET_FILTER':
+                newState = { ...state, filterBoard: action.filterBy }
         default:
     }
     return newState
@@ -66,4 +70,3 @@ function unitTestReducer() {
     state = boardReducer(state, { type: REMOVE_BOARD, boardId: board1._id })
     console.log('After REMOVE_BOARD:', state)
 }
-
