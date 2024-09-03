@@ -81,6 +81,12 @@ async function getById(boardId, filterBy = {}) {
             group.tasks = group.tasks.filter(task => task.members.length === board.members.length)
         })
     }
+    if (filterBy.selectLabel?.length) {
+        console.log('filterBy.selectLabel:', filterBy.selectLabel)
+        board.groups.forEach(group => {
+            group.tasks = group.tasks.filter(task => task.labels.some(label => filterBy.selectLabel.includes(label)))
+        })
+    }
     return board
 }
 
@@ -91,6 +97,7 @@ function getDefaultFilter() {
         selectMember: [],
         noDueDate: false,
         noLabels: false,
+        selectLabel: [],
         sortField: 'title',
         sortDir: 1,
     }
