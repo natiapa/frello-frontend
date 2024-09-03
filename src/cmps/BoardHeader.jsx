@@ -9,8 +9,6 @@ import { useSelector } from "react-redux";
 import { filterBoard } from "../store/actions/board.actions";
 import { RxDotsHorizontal } from "react-icons/rx";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { Popover } from "@mui/material";
-import { useState } from "react";
 import { useParams } from "react-router";
 import { Activities } from "./Activities";
 
@@ -74,7 +72,7 @@ export function BoardHeader({
           placeSelf: "center end",
         }}
       >
-        {members.map((member) => (
+        {members.map((member, idx) => (
           <li
             key={member.id}
             className="member"
