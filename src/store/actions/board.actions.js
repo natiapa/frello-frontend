@@ -14,7 +14,7 @@ export async function loadBoards(filterBy) {
 
 export async function loadBoard(boardId, filterBy = {}) {
     try {
-        const board = await boardService.getById(boardId)
+        const board = await boardService.getById(boardId, filterBy)
         store.dispatch(getCmdSetBoard(board))
     } catch (err) {
         console.log('Cannot load board', err)
@@ -66,7 +66,7 @@ export async function addBoardMsg(boardId, txt) {
     }
 }
 
-async function filterBoard(filterBy) {
+export function filterBoard(filterBy) {
     store.dispatch({ type: SET_FILTER, filterBy })
 }
 

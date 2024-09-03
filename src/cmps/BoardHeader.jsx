@@ -5,15 +5,24 @@ import { Popover } from '@mui/material'
 import { useState } from 'react'
 import { BoardFilter } from './BoardFilter'
 import { boardService } from '../services/board'
+import { useSelector } from 'react-redux'
+import { filterBoard } from '../store/actions/board.actions'
 
 export function BoardHeader({ members, bgColor }) {
     const [anchorEl, setAnchorEl] = useState(null)
     const [isPopoverOpen, setIsPopoverOpen] = useState(false)
 
+    
     function handleClick(ev) {
         setAnchorEl(ev.currentTarget)
         setIsPopoverOpen(isOpen => !isOpen)
     }
+
+    function clearFilter() {
+        filterBoard(boardService.getDefaultFilter())
+        
+    }
+
     return (
         <section className="board-header">
             <div className="board-header-title">Frello</div>
@@ -30,15 +39,15 @@ export function BoardHeader({ members, bgColor }) {
                         anchorEl={anchorEl}
                         anchorOrigin={{
                             vertical: 'bottom',
-                            horizontal: 'center',
-                    
-                        }}
-                        
-                        >
-                          <BoardFilter/>
-                        </Popover>
+                            horizontal: 'right',
+                        }}>
+                        <BoardFilter />
+                    </Popover>
                 </p>
             </div>
+                {/* <button className="btn-clear" onClick={clearFilter}>
+                    Clear
+                </button> */}
             <ul
                 className="members"
                 style={{
