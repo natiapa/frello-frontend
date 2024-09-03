@@ -28,7 +28,9 @@ import { Activities } from "../cmps/Activities";
 export function BoardDetails() {
   const { boardId, taskId } = useParams();
   const board = useSelector((storeState) => storeState.boardModule.board);
-  const filterBy = useSelector((storeState) => storeState.boardModule.filterBoard);
+  const filterBy = useSelector(
+    (storeState) => storeState.boardModule.filterBoard
+  );
   const [bgColor, setbgColor] = useState("");
   const [currGroup, setCurrGroup] = useState("");
   const [currTask, setCurrTask] = useState("");
@@ -38,7 +40,7 @@ export function BoardDetails() {
   const [isTaskPrevModalOpen, setIsTaskPrevModalOpen] = useState(false);
   const [taskPrevActionsModalData, setTaskPrevActionsModalData] = useState("");
   const [selectedLabels, setSelectedLabels] = useState([]);
-  const [isActivitiesOpen, setIsActivitiesOpen] = useState(true);
+  const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
   // const [draggedMemberId, setDraggedMemberId] = useState("");
 
   useEffect(() => {
@@ -68,8 +70,6 @@ export function BoardDetails() {
       }
     }
   }
-
- 
 
   function onPreviewToShow(data) {
     setPreview({

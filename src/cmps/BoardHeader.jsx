@@ -23,9 +23,12 @@ export function BoardHeader({
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
-  function handleClick(ev) {
+  function handleFilterClick(ev) {
     setAnchorEl(ev.currentTarget);
     setIsPopoverOpen((isOpen) => !isOpen);
+  }
+
+  function handleActivityBtnClick() {
     setIsActivitiesOpen(true);
   }
 
@@ -42,7 +45,7 @@ export function BoardHeader({
     >
       <div className="board-header-title">Frello</div>
       <div className="board-header-actions"></div>
-      <div className="filter" onClick={handleClick}>
+      <div className="filter" onClick={handleFilterClick}>
         <p>
           <span>
             <MdOutlineFilterList />
@@ -95,7 +98,7 @@ export function BoardHeader({
         <div
           className="activity-menu"
           data-name="activities"
-          onClick={handleClick}
+          onClick={handleActivityBtnClick}
         >
           <span>
             <HiDotsHorizontal />
