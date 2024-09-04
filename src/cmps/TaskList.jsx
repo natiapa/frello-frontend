@@ -55,7 +55,7 @@ export function TaskList({ group, allowDrop, drop, draggedMemberId }) {
             ))}
             {provided.placeholder}
             {isNewTask && (
-              <div ref={addingFormRef}>
+              <div className="adding-form-container" ref={addingFormRef}>
                 <AddingForm
                   setIsNew={setIsNewTask}
                   setNew={setNewTask}
@@ -73,12 +73,7 @@ export function TaskList({ group, allowDrop, drop, draggedMemberId }) {
       <div className="footer-group" hidden={isNewTask}>
         {
           <button className="add-task-btn" onClick={onAddTask}>
-            <span
-              className="header-btn"
-              
-            >
-              + Add a card
-            </span>
+            <span className="header-btn">+ Add a card</span>
           </button>
         }
       </div>

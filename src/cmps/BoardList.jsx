@@ -14,6 +14,7 @@ export function BoardList({
   onRemoveBoard,
   // onUpdateBoard,
 }) {
+  console.log(boards);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [modalOpenByName, setModalOpenByName] = useState(null);

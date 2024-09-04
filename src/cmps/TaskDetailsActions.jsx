@@ -48,7 +48,7 @@ export function TaskDetailsActions({
       {taskParams && (
         <button
           data-name="checklists"
-          className="checklist action-btn"
+          className="checklist-btn action-btn"
           aria-describedby="1"
           onClick={handleClick}
         >

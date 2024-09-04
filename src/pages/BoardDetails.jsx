@@ -42,7 +42,7 @@ export function BoardDetails() {
   const [selectedLabels, setSelectedLabels] = useState([]);
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
   // const [draggedMemberId, setDraggedMemberId] = useState("");
-
+  console.log(board);
   useEffect(() => {
     eventBus.on("show-task", onPreviewToShow);
   }, []);
