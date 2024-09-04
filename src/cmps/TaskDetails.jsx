@@ -26,9 +26,11 @@ export function TaskDetails() {
   const [selectedLabels, setSelectedLabels] = useState(task.labels);
   const [newDueDate, setNewDueDate] = useState(task.dueDate);
   const [newChecklists, setNewCheckLists] = useState(task.checklists);
-  const [newFiles, setNewFiles] = useState(task.attachment || []);
+  const [newFiles, setNewFiles] = useState(task.attachments|| []);
 
   console.log(task);
+  console.log(task.attachments);
+  console.log(newFiles);
 
   useEffect(() => {
     if (task) {
@@ -157,7 +159,11 @@ export function TaskDetails() {
           </button>
 
           {task?.attachments && task.attachments.length > 0 && (
-            <AttachmentList files={newFiles} onUpdated={onUpdated} task={task} />
+            <AttachmentList
+              files={task.attachments}
+              onUpdated={onUpdated}
+              task={task}
+            />
           )}
 
           {task?.checklists && task.checklists.length > 0 && (
