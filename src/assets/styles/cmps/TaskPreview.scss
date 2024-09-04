@@ -2,7 +2,7 @@
   position: relative;
   display: grid;
   grid-template-rows: max-content 1fr max-content;
-  padding: 8px 12px 4px;
+  padding: 8px 12px 8px;
   width: 100%;
   border-radius: 8px;
   border: 1.6px solid transparent;
@@ -13,7 +13,12 @@
   // max-width: 256px;
   word-break: break-all;
 
+  a {
+    display: grid;
+  }
+
   .labels {
+    grid-row: 1;
     display: grid;
     grid-auto-flow: column;
     justify-content: start;
@@ -29,7 +34,8 @@
 
   span {
     grid-row: 2;
-    max-width: 232px;
+    margin: 0 0 4px;
+    // max-width: 232px;
   }
 
   .edit-btn {
@@ -64,16 +70,20 @@
 
   .details {
     position: relative;
-    grid-row: -1;
+    grid-row: 3;
     display: grid;
     grid-template-columns: repeat(5, auto);
     // grid-template-columns: auto 80px;
-    align-items: center;
+    align-items: end;
+    justify-content: space-between;
+    
 
     .checklists {
       display: grid;
       grid-auto-flow: column;
-      grid-column: 4/5;
+      padding: 2px;
+      // margin: 0 0 4px;
+      // grid-column: 4/5;
       // place-self: center;
       gap: 4px;
       justify-content: end;
@@ -86,9 +96,18 @@
       display: grid;
 
       justify-content: end;
-      height: 100%;
+      height: max-content;
+      align-self: self-end;
+
       .list-container {
         display: grid;
+        grid-template-columns: max-content max-content;
+        margin-right: -4px;
+        // margin-bottom: 4px;
+        justify-content: right;
+        justify-items: end;
+        float: right;
+
         li {
           display: grid;
           align-content: center;
