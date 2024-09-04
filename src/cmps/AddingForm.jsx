@@ -24,7 +24,7 @@ export function AddingForm({ setIsNew, setNew, currBoard, updateBoard, updated, 
     }
     return (
         <form className='adding-form' onSubmit={onSave}>
-            <textarea onChange={handelChange} rows="2" cols="1" name="title" placeholder="Enter list name…"></textarea>
+            <textarea onChange={handelChange} rows="2" cols="1" name="title" placeholder="Enter list name…" autoFocus></textarea>
             <button className="save-group-btn">Add list</button>
             <button className="close-btn" onClick={onCloseForm}>
                 <span>
