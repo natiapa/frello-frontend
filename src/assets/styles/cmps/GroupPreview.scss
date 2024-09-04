@@ -1,9 +1,10 @@
 .group-preview {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
   background-color: white;
-  margin: 1em;
-  padding: 0 4px;
   width: 284px;
   height: max-content;
+  max-height: calc(100vh - 153px);
   border-radius: 12px;
   font-size: $font-size-groups-headers;
   color: #44546f;
@@ -16,7 +17,8 @@
     padding: 8px 8px 0;
     h3 {
       // margin: 0 4px;
-      padding: 0px 8px 0px 5px;
+      margin: 0px 4px;
+  padding: 2px 4px;
       place-self: center start;
       font-size: 14px;
       font-weight: 600;
@@ -24,7 +26,8 @@
     }
 
     button {
-      margin: 4px 0;
+      margin:  0;
+      padding: 0;
       background-color: #eaeaeb;
     }
   }

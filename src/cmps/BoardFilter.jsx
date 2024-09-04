@@ -152,6 +152,10 @@ export function BoardFilter() {
                     />
                     No due date
                 </label>
+
+                <label>
+                    <input type="checkbox" name="overdue" value={filterToEdit.overdue} onChange={handleChange} />
+                </label>
             </div>
 
             <div className="actions">

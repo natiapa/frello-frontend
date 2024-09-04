@@ -2,8 +2,8 @@
   position: relative;
   display: grid;
   grid-template-rows: max-content 1fr max-content;
-  margin: 0 4px;
   padding: 8px 12px 4px;
+  width: 100%;
   border-radius: 8px;
   border: 1.6px solid transparent;
   background-color: $bg-color-task-preview;

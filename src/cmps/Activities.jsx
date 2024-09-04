@@ -6,7 +6,7 @@ export function Activities({ board, setIsActivitiesOpen }) {
       className="activities-container"
       style={{
         gridColumn: "3/4",
-        gridRow: "2 / 30",
+        gridRow: "2 / 5",
         backgroundColor: "#fff",
       }}
     >

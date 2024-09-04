@@ -3,10 +3,9 @@
   gap: 1px;
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: 50px auto;
+  grid-template-rows: 50px auto 1fr .5em;
   background-size: cover;
   background-position: center;
-  // height: 100vh;
+  height: 100vh;
   // overflow-y: auto; //TEMPORARY!!!!
-  // overflow: hidden;
 }
