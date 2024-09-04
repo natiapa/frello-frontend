@@ -1,4 +1,7 @@
+
 import { useDropzone } from "react-dropzone";
+import { boardService } from "../services/board";
+import { useState } from "react";
 
 
 export function AttachmentUploader({
@@ -9,22 +12,28 @@ export function AttachmentUploader({
   setNewFiles,
   newFiles,
 }) {
+  const [addFile, setAddFile] = useState(boardService.getEmptyAttach()) 
+  
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/jpeg, image/png, application/pdf",
     onDrop: (acceptedFiles) => {
       console.log(acceptedFiles);
 
-      const formattedFiles = acceptedFiles.map((file) => ({
-        name: file.name,
-        url: URL.createObjectURL(file),
-        type: file.type,
-      }));
+
+      const formattedFiles = acceptedFiles.map((file) => {
+        const newFile = {
+          ...addFile, 
+          name: file.name,
+          url: URL.createObjectURL(file),
+          type: file.type,
+        }
+        return newFile;
+      })
 
       const updatedFiles = [...newFiles, ...formattedFiles];
-
-      console.log(updatedFiles);
-
-      setNewFiles(updatedFiles);
+      console.log(updatedFiles)
+      setNewFiles(updatedFiles)
       onUpdated("attachments", updatedFiles);
     },
   });

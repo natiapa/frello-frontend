@@ -5,6 +5,7 @@
   width: 284px;
   height: max-content;
   max-height: calc(100vh - 153px);
+  padding-bottom: 8px;
   border-radius: 12px;
   font-size: $font-size-groups-headers;
   color: #44546f;
@@ -24,6 +25,12 @@
       font-size: 14px;
       font-weight: 600;
       color: #172b4d;
+    }
+    .hi-dots {
+      height: 32px;
+      width: 32px;
+      cursor: pointer;
+      padding: 8px;
     }
 
     .group-menu {

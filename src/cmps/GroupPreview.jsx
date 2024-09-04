@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { Edit } from "./Edit";
 import { Draggable } from "react-beautiful-dnd";
 import { HiDotsHorizontal } from "react-icons/hi";
+import { Popover } from "@mui/material";
+import { HiDotsHorizontal } from "react-icons/hi";
 import { RxDotsHorizontal } from "react-icons/rx";
 import { TbDots } from "react-icons/tb";
 
@@ -15,6 +17,8 @@ export function GroupPreview({ group, gIndex, allowDrop, drop }) {
   const board = useSelector((storeState) => storeState.boardModule.board);
 
   const [currElToEdit, setCurrElToEdit] = useState("");
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [isHiDotsOpen, setIsHiDotsOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -36,6 +40,11 @@ export function GroupPreview({ group, gIndex, allowDrop, drop }) {
   function onEdit({ target }) {
     const dataName = target.getAttribute("data-name");
     setCurrElToEdit(dataName);
+  }
+
+  function onOpen(ev) {
+    setAnchorEl(ev.currentTarget);
+    setIsHiDotsOpen((isHiDotsOpen) => !isHiDotsOpen);
   }
 
   async function onUpdated(name, value) {
@@ -77,13 +86,25 @@ export function GroupPreview({ group, gIndex, allowDrop, drop }) {
                 setCurrElToEdit={setCurrElToEdit}
               />
             )}
-            <div className="group-menu" dataName="group-menu">
-              <span>
-                {/* <RxDotsHorizontal /> */}
-                <TbDots />
-              </span>
+            <div className="hi-dots" onClick={onOpen}>
+              <HiDotsHorizontal />
+
+              {isHiDotsOpen && (
+                <Popover
+                  open={isHiDotsOpen}
+                  id={anchorEl}
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
+                  }}
+                >
+                  <div className="group-preview-actions">
+                    <button onClick={deleteGroup}>Delete</button>
+                  </div>
+                </Popover>
+              )}
             </div>
-            {/* <button onClick={deleteGroup}>Delete list</button> */}
           </div>
           <TaskList group={group} allowDrop={allowDrop} drop={drop} />
         </li>
