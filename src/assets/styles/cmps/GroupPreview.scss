@@ -16,6 +16,7 @@
     display: grid;
     grid-template-columns: 1fr max-content;
     padding: 8px 8px 0;
+
     h3 {
       // margin: 0 4px;
       // margin: 0px 4px;
@@ -26,44 +27,25 @@
       font-weight: 600;
       color: #172b4d;
     }
-    .hi-dots {
-      height: 32px;
-      width: 32px;
-      cursor: pointer;
-      padding: 8px;
+  }
+
+  .hi-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    &:hover {
+      background-color: #caccd1;
     }
+  }
 
-    .group-menu {
-      grid-row: 1;
-      grid-column: 4;
-      place-self: center;
-      display: grid;
-      color: #626f86;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: transparent;
-      margin: 0;
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-
-      &:hover {
-        background-color: #caccd1;
-      }
-
-      span {
-        place-self: center;
-        display: grid;
-        svg {
-          place-self: center;
-        }
-      }
-    }
-
-    button {
-      margin: 0;
-      padding: 0;
-      background-color: #eaeaeb;
-    }
+  button {
+    margin: 0;
+    padding: 0;
+    background-color: #eaeaeb;
   }
 }

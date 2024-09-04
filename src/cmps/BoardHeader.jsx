@@ -42,11 +42,18 @@ export function BoardHeader({
       className="board-header"
       style={{
         gridColumn: isActivitiesOpen ? "2/3" : "2/-1",
+        columnGap: isActivitiesOpen ? "1em" : "",
       }}
     >
       <div className="board-header-title">Frello</div>
       <div className="board-header-actions"></div>
-      <div className="filter" onClick={handleFilterClick}>
+      <div
+        className="filter"
+        onClick={handleFilterClick}
+        style={{
+          gridColumn: isActivitiesOpen ? "3" : "2",
+        }}
+      >
         <p>
           <span>
             <MdOutlineFilterList />
@@ -72,6 +79,7 @@ export function BoardHeader({
         className="members"
         onDragOver={(ev) => allowDrop(ev)}
         style={{
+          gridColumn: isActivitiesOpen ? "4" : "3",
           gridTemplateColumns: `repeat(${members.length}, 20px)`,
           placeSelf: "center end",
         }}
@@ -102,7 +110,6 @@ export function BoardHeader({
           onClick={handleActivityBtnClick}
         >
           <span>
-            {/* <RxDotsHorizontal /> */}
             <TbDots />
           </span>
         </div>
