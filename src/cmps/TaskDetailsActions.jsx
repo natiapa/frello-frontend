@@ -26,7 +26,7 @@ export function TaskDetailsActions({
   setNewDueDate,
   setNewCheckLists,
   setNewFiles,
-  newFiles
+  newFiles,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -50,7 +50,7 @@ export function TaskDetailsActions({
   return (
     <section className="actions" style={{ ...taskPrevActionsModalData }}>
       <>
-      <h5>Add to card</h5>
+        {taskParams && <h5>Add to card</h5>}
         {taskParams && (
           <button
             data-name="checklists"
@@ -205,7 +205,7 @@ export function TaskDetailsActions({
         )}
       </>
       <>
-        <h5>Action</h5>
+        {taskParams && <h5>Action</h5>}
         {taskParams && (
           <button
             data-name="archive"

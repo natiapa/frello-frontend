@@ -10,6 +10,7 @@ export function MemberList({ members, gridColumnWidth }) {
     >
       {members.map((member, idx) => (
         <li
+          className="member"
           key={member.fullname}
           style={{ backgroundColor: member.color, gridColumn: `${idx + 1}` }}
         >

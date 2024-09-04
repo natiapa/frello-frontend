@@ -24,6 +24,8 @@ import { updateBoard } from "../store/actions/board.actions";
 import { LabelList } from "../cmps/LabelList";
 import { boardService } from "../services/board";
 import { Activities } from "../cmps/Activities";
+import { MemberList } from "../cmps/MemberList";
+import { IoMdCheckboxOutline } from "react-icons/io";
 
 export function BoardDetails() {
   const { boardId, taskId } = useParams();
@@ -77,13 +79,13 @@ export function BoardDetails() {
       left: `${data.elData.left}px`,
       top: `${data.elData.top}px`,
       width: `${data.elData.width}px`,
-      height: `${data.elData.height}px`,
+      height: `${data.elData.heigh + 100}px`,
       zIndex: "1000",
     });
 
     setTaskPrevActionsModalData({
       position: "fixed",
-      left: `${data.elData.left + 260}px`,
+      left: `${data.elData.left + 270}px`,
       top: `${data.elData.top}px`,
       width: `max-content`,
       height: `max-content`,
@@ -139,6 +141,26 @@ export function BoardDetails() {
     ev.dataTransfer.setData("text", ev.target.id);
   }
 
+  function getChecklists() {
+    const checklists = currTask.checklists;
+    if (!checklists) return 0;
+    let counter = 0;
+    checklists.forEach((checklist) => {
+      counter += checklist.items.length;
+    });
+    return counter;
+  }
+
+  function getIsChecked() {
+    const checklists = currTask.checklists;
+    if (!checklists) return 0;
+    let counter = 0;
+    checklists.forEach((checklist) => {
+      counter += checklist.items.filter((item) => item.isChecked).length;
+    });
+    return counter;
+  }
+
   if (!board) return;
 
   return (
@@ -166,7 +188,22 @@ export function BoardDetails() {
                 <LabelList labels={selectedLabels} labelWidth="40px" />
               </div>
 
-              <form onSubmit={handleSave}>
+              <div className="details-modal">
+                {currTask.checklists && currTask.checklists.length > 0 && (
+                  <div className="checklists">
+                    <IoMdCheckboxOutline />
+                    {`${getIsChecked()}/${getChecklists()}`}
+                  </div>
+                )}
+                <ul className="members-modal">
+                  <MemberList
+                    members={currTask.members}
+                    gridColumnWidth="28px"
+                  />
+                </ul>
+              </div>
+
+              <form className="modal-form" onSubmit={handleSave}>
                 <textarea
                   value={value || ""}
                   onChange={(ev) => setValue(ev.target.value)}
