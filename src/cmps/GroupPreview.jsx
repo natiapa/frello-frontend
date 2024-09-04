@@ -9,9 +9,6 @@ import { Edit } from "./Edit";
 import { Draggable } from "react-beautiful-dnd";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { Popover } from "@mui/material";
-import { HiDotsHorizontal } from "react-icons/hi";
-import { RxDotsHorizontal } from "react-icons/rx";
-import { TbDots } from "react-icons/tb";
 
 export function GroupPreview({ group, gIndex, allowDrop, drop }) {
   const board = useSelector((storeState) => storeState.boardModule.board);
