@@ -1,21 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { useSelector } from "react-redux";
 import { boardService } from "../services/board";
 
 export function DueDatePicker({
-  onUpdated,
+  onUpdated = () => {},
   setIsPopoverOpen,
   handlePopoverClick,
-  setNewDueDate
+  setNewDueDate,
 }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedRange, setSelectedRange] = useState({ from: null, to: null });
   const [isCheckedDueDate, setCheckedDueDate] = useState(false);
   const [isCheckedStartDate, setCheckedStartDate] = useState(false);
 
-  const [dueDate, setDueDate] = useState( boardService.getEmptyDueDate());
+  const [dueDate, setDueDate] = useState(boardService.getEmptyDueDate());
   const [dueTime, setDueTime] = useState("");
 
   function handleSelectedDayOrRange(dayOrRange) {
@@ -148,10 +147,8 @@ export function DueDatePicker({
     if (actions[name]) {
       actions[name]();
     }
-    setNewDueDate(dueDate)
+    setNewDueDate(dueDate);
     setIsPopoverOpen(false);
-
-  
   }
 
   return (
@@ -209,7 +206,6 @@ export function DueDatePicker({
 // import "react-day-picker/dist/style.css";
 // import { useSelector } from "react-redux";
 
-
 // export function DueDatePicker({
 //   onUpdated,
 //   setIsPopoverOpen,
@@ -223,11 +219,7 @@ export function DueDatePicker({
 //   const [isCheckedDueDate, setCheckedDueDate] = useState(false);
 //   const [isCheckedStartDate, setCheckedStartDate] = useState(false);
 
- 
 //   const [dueTime, setDueTime] = useState("");
-
-
-
 
 //   function handleSelectedDayOrRange(dayOrRange) {
 //     if (isCheckedStartDate && isCheckedDueDate) {
@@ -359,10 +351,9 @@ export function DueDatePicker({
 //     if (actions[name]) {
 //       actions[name]();
 //     }
-  
+
 //     setIsPopoverOpen(false);
 
-  
 //   }
 
 //   return (

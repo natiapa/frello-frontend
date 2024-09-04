@@ -4,10 +4,8 @@ import { ProgressBar } from "./ProgressBar";
 
 export function TaskChecklist({
   checklists,
-  onUpdated,
+  onUpdated = () => {},
   task,
-  groupId,
-  boardId,
 }) {
   const [updatedChecklists, setUpdatedChecklists] = useState([...checklists]);
   const [isAddingItem, setIsAddingItem] = useState(false);

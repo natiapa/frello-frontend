@@ -10,6 +10,7 @@ import { MemberList } from "./MemberList";
 import { boardService } from "../services/board";
 import SvgIcon from "./SvgIcon";
 import { DueDateDisplay } from "./DueDateDisplay";
+import { AttachmentList } from "./AttachmentList";
 
 export function TaskDetails() {
   const dialogRef = useRef(null);
@@ -25,6 +26,11 @@ export function TaskDetails() {
   const [selectedLabels, setSelectedLabels] = useState(task.labels);
   const [newDueDate, setNewDueDate] = useState(task.dueDate);
   const [newChecklists, setNewCheckLists] = useState(task.checklists);
+  const [newFiles, setNewFiles] = useState(task.attachments|| []);
+
+  console.log(task);
+  console.log(task.attachments);
+  console.log(newFiles);
 
   useEffect(() => {
     if (task) {
@@ -152,6 +158,14 @@ export function TaskDetails() {
             Delete task
           </button>
 
+          {task?.attachments && task.attachments.length > 0 && (
+            <AttachmentList
+              files={task.attachments}
+              onUpdated={onUpdated}
+              task={task}
+            />
+          )}
+
           {task?.checklists && task.checklists.length > 0 && (
             <TaskChecklist
               checklists={newChecklists}
@@ -172,6 +186,8 @@ export function TaskDetails() {
           onUpdated={onUpdated}
           setNewDueDate={setNewDueDate}
           setNewCheckLists={setNewCheckLists}
+          setNewFiles={setNewFiles}
+          newFiles={newFiles}
         />
       </dialog>
     </section>

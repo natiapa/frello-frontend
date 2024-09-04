@@ -6,7 +6,7 @@ import { updateBoard } from "../store/actions/board.actions";
 import SvgIcon from "./SvgIcon";
 // import { loadBoard, addBoardMsg } from "../store/actions/board.actions";
 
-export function EditLables({
+export function EditLabels({
   task,
   groupId,
   handlePopoverClick,

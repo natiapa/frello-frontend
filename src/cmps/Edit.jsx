@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-export function Edit({ task, currElToEdit, onUpdated, setCurrElToEdit }) {
+export function Edit({
+  task,
+  currElToEdit,
+  onUpdated = () => {},
+  setCurrElToEdit,
+}) {
   const [value, setValue] = useState(task[currElToEdit]);
 
   function handleSave() {
