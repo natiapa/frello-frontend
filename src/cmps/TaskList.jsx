@@ -72,7 +72,7 @@ export function TaskList({ group, allowDrop, drop, draggedMemberId }) {
                     </ul>
                 )}
             </Droppable>
-            <div className="footer-group" hidden={isNewTask}>
+            <div className="footer-group" hidden={isNewTask} style={!isNewTask ? {display: 'grid'} : {display: 'none'}}>
                 {
                     <button className="add-task-btn" onClick={onAddTask}>
                         <span className="header-btn">+ Add a card</span>
