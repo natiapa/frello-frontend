@@ -1,11 +1,6 @@
 import { useState } from "react";
 
-export function Edit({
-  task,
-  currElToEdit,
-  onUpdated,
-  setCurrElToEdit,
-}) {
+export function Edit({ task, currElToEdit, onUpdated, setCurrElToEdit }) {
   const [value, setValue] = useState(task[currElToEdit]);
 
   function handleSave() {
@@ -32,6 +27,19 @@ export function Edit({
           onChange={(ev) => setValue(ev.target.value)}
           onBlur={handleBlur}
           autoFocus
+          style={{
+            border: "1px solid #0C66E4",
+            outline: "#0C66E4",
+            color: "#172b4d",
+            backgroundColor: "",
+            fontSize: "14px",
+            fontWeight: "600",
+            borderRadius: "3px",
+            margin: "0px 4px 1px",
+            padding: "2px 3px",
+            fontFamily:
+              "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+          }}
         />
       )}
 
