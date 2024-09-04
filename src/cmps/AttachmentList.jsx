@@ -1,6 +1,6 @@
 import { AiFillFilePdf, AiFillFileImage } from "react-icons/ai";
 
-export function AttachmentList({ files = [], onUpdated, task, setNewFiles }) {
+export function AttachmentList({ files = [], onUpdated, setNewFiles }) {
   console.log(files);
 
   function handleDeleteFile(ev, deleteFile) {
@@ -15,6 +15,7 @@ export function AttachmentList({ files = [], onUpdated, task, setNewFiles }) {
   return (
     <div className="attachment-list">
       <h1>Attachments</h1>
+      <h5>Files</h5>
       {files.length > 0 ? (
         files.map((file, index) => (
           <div key={index} className="attachment-item">
@@ -39,7 +40,7 @@ export function AttachmentList({ files = [], onUpdated, task, setNewFiles }) {
                 className="remove-btn"
                 onClick={(event) => handleDeleteFile(event, file)}
               >
-                Remove
+                Delete
               </button>
             </div>
           </div>
