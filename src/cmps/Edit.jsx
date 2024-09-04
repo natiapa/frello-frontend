@@ -34,8 +34,8 @@ export function Edit({ task, currElToEdit, onUpdated, setCurrElToEdit }) {
             backgroundColor: "",
             fontSize: "14px",
             fontWeight: "600",
-            borderRadius: "3px",
-            margin: "0px 4px 1px",
+            borderRadius: "4px",
+            margin: "0px 4px 1.2px 4px ",
             padding: "2px 3px",
             fontFamily:
               "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
