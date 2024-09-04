@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 
 export function BoardList({
   boards,
+  starredBoards,
   onAddBoard,
   onRemoveBoard,
   // onUpdateBoard,
@@ -69,75 +70,87 @@ export function BoardList({
   }
 
   return (
-    <ul
-      className="board-list"
+    <section
+      className="board-list-container"
       style={{
-        placeSelf: boards.length > 0 ? "" : "center",
-        gridTemplateRows: `repeat(${Math.ceil(
-          (boards.length + 1) / columns
-        )}, 96px)`,
-        gridTemplateColumns: boards.length > 1 ? `repeat(${columns}, 1fr)` : ``,
-        gap: boards.length > 0 ? "1em" : "",
+        gridRow: starredBoards.length > 0 ? "3" : "2",
       }}
     >
-      {boards.length > 0 &&
-        boards.length &&
-        boards.map((board, idx) => (
-          <Link
-            to={`/board/${board._id}`}
-            key={idx}
-            style={{
-              backgroundImage: `url(${board?.style?.backgroundImage})`,
-              display: "block",
-            }}
-          >
-            <li key={board._id}>
-              <BoardPreview board={board} />
+      {boards.length > 0 && (
+        <h3 className="board-list-title">YOUR WORKSPACES</h3>
+      )}
 
-              <div className="actions">
-                <button
-                  className="close-btn"
-                  onClick={(ev) => onRemoveBoard(ev, board._id)}
-                >
-                  x
-                </button>
-              </div>
-            </li>
-          </Link>
-        ))}
-      <button
-        aria-describedby="7"
-        data-name="add-board"
-        className="new-board-btn"
-        onClick={handleClick}
+      <ul
+        className="board-list"
         style={{
-          gridRow:
-            boards.length > 0
-              ? `${Math.floor(boards.length / columns) + 1}`
-              : "1",
-          gridColumn: `${(boards.length % columns) + 1}`,
-          transition:
-            "transform 0.3s ease ,grid-column 0.3s ease, grid-row 0.3s ease",
-          transform: boards.length > 0 ? "scale(1)" : "scale(1.1)",
+          placeSelf: boards.length > 0 ? "" : "center",
+          gridTemplateRows: `repeat(${Math.ceil(
+            (boards.length + 1) / columns
+          )}, 96px)`,
+          gridTemplateColumns:
+            boards.length > 1 ? `repeat(${columns}, .1fr)` : ``,
+          gap: boards.length > 0 ? "1em" : "",
         }}
       >
-        Create new board
-      </button>
-      {modalOpenByName === "add-board" && (
-        <Popover
-          id={anchorEl}
-          open={isPopoverOpen}
-          onClose={handleClosePopover}
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
+        {boards.length > 0 &&
+          boards.length &&
+          boards.map((board, idx) => (
+            <Link
+              to={`/board/${board._id}`}
+              key={idx}
+              style={{
+                backgroundImage: `url(${board?.style?.backgroundImage})`,
+                display: "block",
+              }}
+            >
+              <li key={board._id}>
+                <BoardPreview board={board} />
+
+                <div className="actions">
+                  <button
+                    className="close-btn"
+                    onClick={(ev) => onRemoveBoard(ev, board._id)}
+                  >
+                    x
+                  </button>
+                </div>
+              </li>
+            </Link>
+          ))}
+        <button
+          aria-describedby="7"
+          data-name="add-board"
+          className="new-board-btn"
+          onClick={handleClick}
+          style={{
+            gridRow:
+              boards.length > 0
+                ? `${Math.floor(boards.length / columns) + 1}`
+                : "1",
+            gridColumn: `${(boards.length % columns) + 1}`,
+            transition:
+              "transform 0.3s ease ,grid-column 0.3s ease, grid-row 0.3s ease",
+            transform: boards.length > 0 ? "scale(1)" : "scale(1.1)",
           }}
-          disablePortal
         >
-          <CreateBoardModal handleCreateBoard={handleCreateBoard} />
-        </Popover>
-      )}
-    </ul>
+          Create new board
+        </button>
+        {modalOpenByName === "add-board" && (
+          <Popover
+            id={anchorEl}
+            open={isPopoverOpen}
+            onClose={handleClosePopover}
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            disablePortal
+          >
+            <CreateBoardModal handleCreateBoard={handleCreateBoard} />
+          </Popover>
+        )}
+      </ul>
+    </section>
   );
 }

@@ -11,6 +11,7 @@ import { RxDotsHorizontal } from "react-icons/rx";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useParams } from "react-router";
 import { Activities } from "./Activities";
+import { TbDots } from "react-icons/tb";
 
 export function BoardHeader({
   members,
@@ -101,7 +102,8 @@ export function BoardHeader({
           onClick={handleActivityBtnClick}
         >
           <span>
-            <HiDotsHorizontal />
+            {/* <RxDotsHorizontal /> */}
+            <TbDots />
           </span>
         </div>
       )}
