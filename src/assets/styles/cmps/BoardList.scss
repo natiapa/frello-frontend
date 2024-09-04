@@ -1,9 +1,18 @@
 .board-list-container {
   grid-column: 2;
-  grid-row: 3;
+  width: 100%;
+
+  .board-list-title {
+    font-size: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    color: #44546f;
+    margin-block-end: 8px;
+  }
 
   .board-list {
-    place-self: start center;
+    place-self: center;
     display: grid;
 
     // height: 89.5vh;

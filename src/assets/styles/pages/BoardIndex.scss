@@ -1,7 +1,6 @@
 .board-index {
   display: grid;
-  // grid-template-columns: minmax(1rem, 204px) auto minmax(1rem, 204px);
-  grid-template-rows: 40px 0.5fr 0.5fr;
+  grid-template-rows: 45px 0.5fr 0.5fr 200px;
   overflow: auto;
   height: 100vh;
   button {

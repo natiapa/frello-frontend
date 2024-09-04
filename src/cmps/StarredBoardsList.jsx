@@ -28,12 +28,14 @@ export function StarredBoardsList({ starredBoards, onRemoveBoard }) {
 
   return (
     <section className="starred-board-list-container">
-      <h3 className="starred-board-list-title">
-        <span className="star" onClick={(ev) => handleIsStarred(ev)}>
-          <FaRegStar />
-        </span>
-        Starred boards
-      </h3>
+      {starredBoards && starredBoards.length > 0 && (
+        <h3 className="starred-board-list-title">
+          <span className="star" onClick={(ev) => handleIsStarred(ev)}>
+            <FaRegStar />
+          </span>
+          <span className="title">Starred boards</span>
+        </h3>
+      )}
       <ul
         className="starred-board-list"
         style={{

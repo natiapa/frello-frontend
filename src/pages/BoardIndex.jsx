@@ -92,10 +92,9 @@ export function BoardIndex() {
           backgroundSize: "cover",
           gridTemplateColumns:
             boards.length > 0
-              ? `minmax(1rem, 204px) auto minmax(1rem, 204px)`
+              ? `minmax(1rem, 1fr) auto minmax(1rem, 1fr)`
               : "1",
-          rowGap: "4em",
-          // transition: " 0.3s ease, grid-template-columns 0.3s ease",
+          rowGap: "2em",
         }}
       >
         {/* <SideBar /> */}
@@ -107,6 +106,7 @@ export function BoardIndex() {
         {/* <BoardFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
         <BoardList
           boards={boards}
+          starredBoards={starredBoards}
           onAddBoard={onAddBoard}
           onRemoveBoard={onRemoveBoard}
           onUpdateBoard={onUpdateBoard}

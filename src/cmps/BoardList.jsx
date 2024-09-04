@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 
 export function BoardList({
   boards,
+  starredBoards,
   onAddBoard,
   onRemoveBoard,
   // onUpdateBoard,
@@ -69,8 +70,15 @@ export function BoardList({
   }
 
   return (
-    <section className="board-list-container">
-      <h3>YOUR WORKSPACES</h3>
+    <section
+      className="board-list-container"
+      style={{
+        gridRow: starredBoards.length > 0 ? "3" : "2",
+      }}
+    >
+      {boards.length > 0 && (
+        <h3 className="board-list-title">YOUR WORKSPACES</h3>
+      )}
 
       <ul
         className="board-list"
