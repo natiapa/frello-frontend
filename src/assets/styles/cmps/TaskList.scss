@@ -1,7 +1,7 @@
 .task-list {
   display: grid;
   gap: 8px;
-  margin: 0px 4px;
+  margin: 3px 4px;
   padding: 2px 4px;
   overflow: auto;
   overflow-x: hidden;
@@ -32,11 +32,9 @@
       // margin: 0 4px;
       padding: 0 0 8px;
       box-shadow: none;
-
     }
 
     textarea {
-
       margin: 0 4;
       min-height: 56px;
       max-height: 160px;
@@ -89,8 +87,6 @@
       cursor: pointer;
       word-break: break-all;
     }
-
-
   }
 
   .add-task-btn {

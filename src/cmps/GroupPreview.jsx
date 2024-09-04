@@ -7,6 +7,9 @@ import { TaskList } from "./TaskList";
 import { useEffect, useState } from "react";
 import { Edit } from "./Edit";
 import { Draggable } from "react-beautiful-dnd";
+import { HiDotsHorizontal } from "react-icons/hi";
+import { RxDotsHorizontal } from "react-icons/rx";
+import { TbDots } from "react-icons/tb";
 
 export function GroupPreview({ group, gIndex, allowDrop, drop }) {
   const board = useSelector((storeState) => storeState.boardModule.board);
@@ -74,7 +77,13 @@ export function GroupPreview({ group, gIndex, allowDrop, drop }) {
                 setCurrElToEdit={setCurrElToEdit}
               />
             )}
-            <button onClick={deleteGroup}>Delete list</button>
+            <div className="group-menu" dataName="group-menu">
+              <span>
+                {/* <RxDotsHorizontal /> */}
+                <TbDots />
+              </span>
+            </div>
+            {/* <button onClick={deleteGroup}>Delete list</button> */}
           </div>
           <TaskList group={group} allowDrop={allowDrop} drop={drop} />
         </li>

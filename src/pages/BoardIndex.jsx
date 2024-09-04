@@ -18,10 +18,12 @@ import { BoardFilter } from "../cmps/BoardFilter";
 import { SideBar } from "../cmps/Sidebar";
 import { AppHeader } from "../cmps/AppHeader";
 import { useNavigate } from "react-router";
+import { StarredBoardsList } from "../cmps/StarredBoardsList";
 
 export function BoardIndex() {
   const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter());
   const boards = useSelector((storeState) => storeState.boardModule.boards);
+  const starredBoards = boards.filter((board) => board.isStarred);
   console.log(boards);
   const navigate = useNavigate();
 
@@ -92,11 +94,16 @@ export function BoardIndex() {
             boards.length > 0
               ? `minmax(1rem, 204px) auto minmax(1rem, 204px)`
               : "1",
+          rowGap: "4em",
           // transition: " 0.3s ease, grid-template-columns 0.3s ease",
         }}
       >
         {/* <SideBar /> */}
 
+        <StarredBoardsList
+          starredBoards={starredBoards}
+          onRemoveBoard={onRemoveBoard}
+        />
         {/* <BoardFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
         <BoardList
           boards={boards}

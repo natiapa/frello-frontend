@@ -1,8 +1,8 @@
-.board-list-container {
+.starred-board-list-container {
   grid-column: 2;
-  grid-row: 3;
+  grid-row: 2;
 
-  .board-list {
+  .starred-board-list {
     place-self: start center;
     display: grid;
 

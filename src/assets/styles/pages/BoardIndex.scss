@@ -1,8 +1,9 @@
 .board-index {
   display: grid;
   // grid-template-columns: minmax(1rem, 204px) auto minmax(1rem, 204px);
-  grid-template-rows: 150px auto;
-  overflow: hidden;
+  grid-template-rows: 40px 0.5fr 0.5fr;
+  overflow: auto;
+  height: 100vh;
   button {
     margin-inline-end: 0;
     padding: 0.3em 0.5em;

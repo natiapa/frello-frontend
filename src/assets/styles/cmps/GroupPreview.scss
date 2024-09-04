@@ -26,6 +26,33 @@
       color: #172b4d;
     }
 
+    .group-menu {
+      grid-row: 1;
+      grid-column: 4;
+      place-self: center;
+      display: grid;
+      color: #626f86;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: transparent;
+      margin: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+
+      &:hover {
+        background-color: #caccd1;
+      }
+
+      span {
+        place-self: center;
+        display: grid;
+        svg {
+          place-self: center;
+        }
+      }
+    }
+
     button {
       margin: 0;
       padding: 0;

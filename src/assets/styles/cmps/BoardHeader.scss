@@ -103,10 +103,10 @@
   .activity-menu {
     grid-row: 1;
     grid-column: 4;
-    place-self: center;
+    place-self: center end;
     display: grid;
     color: #fff;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     background-color: transparent;
     margin: 0;
