@@ -34,6 +34,7 @@ export function TaskDetails() {
 
   useEffect(() => {
     if (task) {
+      setNewFiles(task.attachments)
       setSelectedLabels(task.labels);
       setNewDueDate(task.dueDate);
       setNewCheckLists(task.checklists);
@@ -163,6 +164,7 @@ export function TaskDetails() {
               files={task.attachments}
               onUpdated={onUpdated}
               task={task}
+              setNewFiles={setNewFiles}
             />
           )}
 
