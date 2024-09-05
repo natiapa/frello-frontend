@@ -12,14 +12,61 @@
   .change-img {
     display: grid;
     grid-template-rows: 3em auto 1fr 100px;
-    header {
-      display: grid;
+    .change-bg-header {
       grid-row: 1;
-      span {
+
+      display: grid;
+      grid-template-columns: 40px 1fr 40px;
+      padding: 1em;
+
+      .close-btn {
         grid-row: 1;
+        grid-column: 3;
+        place-self: center;
+        display: grid;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+
+        &:hover {
+          background-color: #091e420f;
+        }
       }
+      .back-btn {
+        grid-row: 1;
+        grid-column: 1;
+        place-self: center;
+        display: grid;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+
+        &:hover {
+          background-color: #091e420f;
+        }
+
+        i {
+          place-self: center;
+          display: grid;
+          svg {
+            place-self: center;
+
+            width: 20px;
+            height: 20px;
+            color: #44546f;
+          }
+        }
+      }
+
       h3 {
         grid-row: 1;
+        grid-column: 2;
+        place-self: center;
+        font-weight: 500;
+        font-size: 16px;
+        color: #172b4d;
       }
     }
 

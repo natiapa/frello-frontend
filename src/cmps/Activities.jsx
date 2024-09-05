@@ -1,7 +1,7 @@
 import { IoIosArrowBack } from "react-icons/io";
 import SvgIcon from "./SvgIcon";
 
-export function Activities({ board, setIsActivitiesOpen }) {
+export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
   return (
     <section
       className="activities-container"
@@ -12,12 +12,13 @@ export function Activities({ board, setIsActivitiesOpen }) {
       // }}
     >
       <header className="activity-header">
-        <span className="back-btn" onClick={() => setIsActivitiesOpen(false)}>
-          {/* <SvgIcon iconName="close" /> */}
-          <span>
-            <IoIosArrowBack />
-          </span>
+        <span className="close-btn" onClick={() => setIsMenuOpen(false)}>
+          <SvgIcon iconName="close" />
         </span>
+        <span className="back-btn" onClick={() => setIsActivitiesOpen(false)}>
+          <IoIosArrowBack />
+        </span>
+
         <h3>Activity</h3>
       </header>
       <hr></hr>

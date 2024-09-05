@@ -3,9 +3,9 @@ import { boardService } from "../services/board";
 import { loadBoard, updateBoard } from "../store/actions/board.actions";
 import { IoIosArrowBack } from "react-icons/io";
 import { useSelector } from "react-redux";
-export function ChangeBg({ board, setIsChangeBgOpen, setCurrBoard }) {
-  // const board = useSelector((storeState) => storeState.boardModule.board);
-  // const [currBoard, setCurrBoard] = useState(board);
+import SvgIcon from "../cmps/SvgIcon";
+
+export function ChangeBg({ board, setIsChangeBgOpen, setIsMenuOpen }) {
   const [type, setType] = useState("");
 
   const urlImgs = [
@@ -100,23 +100,24 @@ export function ChangeBg({ board, setIsChangeBgOpen, setCurrBoard }) {
         ...board,
         style: { backgroundImage: bgType },
       };
-      setCurrBoard(boardToUpdate);
       updateBoard(boardToUpdate);
-      loadBoard(boardToUpdate._id);
+      console.log(board);
     } else if (type === "bgColor") {
       const boardToUpdate = {
         ...board,
         style: { backgroundColor: bgType },
       };
-      setCurrBoard(boardToUpdate);
       updateBoard(boardToUpdate);
-      loadBoard(boardToUpdate._id);
+      console.log(board);
     }
   }
 
   return (
     <section className="change-img">
-      <header>
+      <header className="change-bg-header">
+        <span className="close-btn" onClick={() => setIsMenuOpen(false)}>
+          <SvgIcon iconName="close" />
+        </span>
         <span className="back-btn" onClick={() => setIsChangeBgOpen(false)}>
           <IoIosArrowBack />
         </span>
@@ -129,7 +130,7 @@ export function ChangeBg({ board, setIsChangeBgOpen, setCurrBoard }) {
           onClick={() => setType("bgImage")}
           style={{
             backgroundImage:
-              "url(https://trello.com/assets/97db30fe74a58b7b7a18.png)",
+              "url(https://trello.com/assets/8f9c1323c9c16601a9a4.jpg)",
           }}
         >
           <span className="photos-title">Photos</span>
@@ -139,7 +140,7 @@ export function ChangeBg({ board, setIsChangeBgOpen, setCurrBoard }) {
           onClick={() => setType("bgColor")}
           style={{
             backgroundImage:
-              "url(https://trello.com/assets/8f9c1323c9c16601a9a4.jpg)",
+              "url(https://trello.com/assets/97db30fe74a58b7b7a18.png)",
           }}
         >
           <span className="colors-title">Colors</span>
@@ -153,7 +154,6 @@ export function ChangeBg({ board, setIsChangeBgOpen, setCurrBoard }) {
               <img
                 src={img.src}
                 alt={img.alt}
-                // style={{ width: "100px" }}
                 onClick={() => handleImgClick(img.src, idx)}
               />
             </li>

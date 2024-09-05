@@ -14,11 +14,26 @@
     grid-row: 1;
 
     display: grid;
-    grid-template-columns: 1fr 40px;
+    grid-template-columns: 40px 1fr 40px;
     padding: 1em;
+
     .close-btn {
       grid-row: 1;
-      grid-column: 2;
+      grid-column: 3;
+      place-self: center;
+      display: grid;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+
+      &:hover {
+        background-color: #091e420f;
+      }
+    }
+    .back-btn {
+      grid-row: 1;
+      grid-column: 1;
       place-self: center;
       display: grid;
       cursor: pointer;
@@ -45,7 +60,7 @@
 
     h3 {
       grid-row: 1;
-      grid-column: 1;
+      grid-column: 2;
       place-self: center;
       font-weight: 500;
       font-size: 16px;
