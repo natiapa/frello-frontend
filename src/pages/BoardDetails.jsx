@@ -20,34 +20,34 @@ import { TaskDetailsActions } from '../cmps/TaskDetailsActions'
 
 import { FastAverageColor } from 'fast-average-color'
 
-import { updateBoard } from '../store/actions/board.actions'
-import { LabelList } from '../cmps/LabelList'
-import { boardService } from '../services/board'
-import { Activities } from '../cmps/Activities'
-import { MemberList } from '../cmps/MemberList'
-import { IoMdCheckboxOutline } from 'react-icons/io'
+import { updateBoard } from "../store/actions/board.actions";
+import { LabelList } from "../cmps/LabelList";
+import { boardService } from "../services/board";
+import { Activities } from "../cmps/Activities";
+import { MemberList } from "../cmps/MemberList";
+import { IoMdCheckboxOutline } from "react-icons/io";
+import { Menu } from "../cmps/Menu";
 
 export function BoardDetails() {
-    const { boardId, taskId } = useParams()
-    const board = useSelector(storeState => storeState.boardModule.board)
-    const filterBy = useSelector(
-        storeState => storeState.boardModule.filterBoard
-    )
-    const [bgColor, setbgColor] = useState('')
-    const [currGroup, setCurrGroup] = useState('')
-    const [currTask, setCurrTask] = useState('')
-    const [preview, setPreview] = useState({})
-    const [currElToEdit, setCurrElToEdit] = useState('title')
-    const [value, setValue] = useState('')
-    const [isTaskPrevModalOpen, setIsTaskPrevModalOpen] = useState(false)
-    const [taskPrevActionsModalData, setTaskPrevActionsModalData] = useState('')
-    const [selectedLabels, setSelectedLabels] = useState([])
-    const [isActivitiesOpen, setIsActivitiesOpen] = useState(false)
-    // const [draggedMemberId, setDraggedMemberId] = useState("");
-    console.log(board)
-    useEffect(() => {
-        eventBus.on('show-task', onPreviewToShow)
-    }, [])
+  const { boardId, taskId } = useParams();
+  const board = useSelector((storeState) => storeState.boardModule.board);
+  const filterBy = useSelector(
+    (storeState) => storeState.boardModule.filterBoard
+  );
+  const [bgColor, setBgColor] = useState("");
+  const [currGroup, setCurrGroup] = useState("");
+  const [currTask, setCurrTask] = useState("");
+  const [preview, setPreview] = useState({});
+  const [currElToEdit, setCurrElToEdit] = useState("title");
+  const [value, setValue] = useState("");
+  const [isTaskPrevModalOpen, setIsTaskPrevModalOpen] = useState(false);
+  const [taskPrevActionsModalData, setTaskPrevActionsModalData] = useState("");
+  const [selectedLabels, setSelectedLabels] = useState([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    eventBus.on("show-task", onPreviewToShow);
+  }, []);
 
     useEffect(() => {
         loadBoard(boardId, filterBy)
@@ -55,25 +55,26 @@ export function BoardDetails() {
         setPreview(preview)
     }, [boardId, preview, filterBy])
 
-    useEffect(() => {
-        calculateBgColor()
-    }, [board?.style?.backgroundImage, bgColor])
+  useEffect(() => {
+    calculateBgColor();
+  }, [board?.style, bgColor]);
 
-    async function calculateBgColor() {
-        const bgImage = await board?.style?.backgroundImage
+  async function calculateBgColor() {
+    const bgImage = await board?.style?.backgroundImage;
+    const bgColor = await board?.style?.backgroundColor;
 
-        if (bgImage) {
-            const fac = new FastAverageColor()
-            try {
-                const color = await fac.getColorAsync(
-                    board.style.backgroundImage
-                )
-                setbgColor(color.hex)
-            } catch (error) {
-                console.error('Failed to calculate background color:', error)
-            }
-        }
+    if (bgImage) {
+      const fac = new FastAverageColor();
+      try {
+        const color = await fac.getColorAsync(board.style.backgroundImage);
+        setBgColor(color.hex);
+      } catch (error) {
+        console.error("Failed to calculate background color:", error);
+      }
+    } else if (bgColor) {
+      setBgColor(bgColor);
     }
+  }
 
     function onPreviewToShow(data) {
         setPreview({
@@ -165,121 +166,117 @@ export function BoardDetails() {
 
     if (!board) return
 
-    return (
-        <>
-            <section
-                className="board-details"
-                style={{
-                    backgroundImage: `url(${board?.style?.backgroundImage})`,
-                    gridTemplateColumns: isActivitiesOpen
-                        ? 'auto 1fr 340px'
-                        : 'auto 1fr',
-                    transition: ' grid-template-columns 0.3s ease',
-                }}
-                >
-                {isTaskPrevModalOpen && (
-                    <section>
-                        <div
-                            onClick={handleSave}
-                            className="task-preview-modal-overlay"></div>
-                        <div
-                            className="task-preview-modal"
-                            style={{ ...preview }}
-                            method="dialog">
-                            <div className="labels">
-                                <LabelList
-                                    labels={selectedLabels}
-                                    labelWidth="40px"
-                                />
-                            </div>
+  return (
+    <section
+      className="board-details"
+      style={{
+        backgroundImage: board.style.backgroundImage
+          ? `url(${board?.style?.backgroundImage})`
+          : "none",
+        backgroundColor: board.style.backgroundColor
+          ? board?.style?.backgroundColor
+          : "none",
 
-                            <div className="details-modal">
-                                {currTask.checklists &&
-                                    currTask.checklists.length > 0 && (
-                                        <div className="checklists">
-                                            <IoMdCheckboxOutline />
-                                            {`${getIsChecked()}/${getChecklists()}`}
-                                        </div>
-                                    )}
-                                <ul className="members-modal">
-                                    <MemberList
-                                        members={currTask.members}
-                                        gridColumnWidth="28px"
-                                    />
-                                </ul>
-                            </div>
+        gridTemplateColumns: isMenuOpen ? "auto 1fr 340px" : "auto 1fr ",
+        transition: " grid-template-columns 0.3s ease",
+      }}
+    >
+      {isTaskPrevModalOpen && (
+        <section>
+          <div
+            onClick={handleSave}
+            className="task-preview-modal-overlay"
+          ></div>
+          <div
+            className="task-preview-modal"
+            style={{ ...preview }}
+            method="dialog"
+          >
+            <div className="labels">
+              <LabelList labels={selectedLabels} labelWidth="40px" />
+            </div>
 
-                            <form className="modal-form" onSubmit={handleSave}>
-                                <textarea
-                                    value={value || ''}
-                                    onChange={ev => setValue(ev.target.value)}
-                                />
+            <div className="details-modal">
+              {currTask.checklists && currTask.checklists.length > 0 && (
+                <div className="checklists">
+                  <IoMdCheckboxOutline />
+                  {`${getIsChecked()}/${getChecklists()}`}
+                </div>
+              )}
+              <ul className="members-modal">
+                <MemberList members={currTask.members} gridColumnWidth="28px" />
+              </ul>
+            </div>
 
-                                <button className="save-btn" type="submit">
-                                    <span>Save</span>
-                                </button>
-                            </form>
-                        </div>
+            <form className="modal-form" onSubmit={handleSave}>
+              <textarea
+                value={value || ""}
+                onChange={(ev) => setValue(ev.target.value)}
+              />
 
-                        {isTaskPrevModalOpen && (
-                            <TaskDetailsActions
-                                boardId={boardId}
-                                groupId={currGroup.id}
-                                taskId={currTask.id}
-                                task={currTask}
-                                taskPrevActionsModalData={
-                                    taskPrevActionsModalData
-                                }
-                                setIsTaskPrevModalOpen={setIsTaskPrevModalOpen}
-                                selectedLabels={selectedLabels}
-                                setSelectedLabels={setSelectedLabels}
-                            />
-                        )}
-                    </section>
-                )}
+              <button className="save-btn" type="submit">
+                <span>Save</span>
+              </button>
+            </form>
+          </div>
 
-                <AppHeader
-                    bgColor={bgColor}
-                    logoImg="https://www.pngkey.com/png/full/213-2134177_import-boards-from-trello-trello-logo-white.png"
-                    logoColor="#fff"
-                />
-                {/* {board?.members && board.members.length && ( */}
-                <BoardHeader
-                    members={board?.members}
-                    bgColor={bgColor}
-                    allowDrop={allowDrop}
-                    drag={drag}
-                    setIsActivitiesOpen={setIsActivitiesOpen}
-                    isActivitiesOpen={isActivitiesOpen}
-                />
+          {isTaskPrevModalOpen && (
+            <TaskDetailsActions
+              boardId={boardId}
+              groupId={currGroup.id}
+              taskId={currTask.id}
+              task={currTask}
+              taskPrevActionsModalData={taskPrevActionsModalData}
+              setIsTaskPrevModalOpen={setIsTaskPrevModalOpen}
+              selectedLabels={selectedLabels}
+              setSelectedLabels={setSelectedLabels}
+            />
+          )}
+        </section>
+      )}
 
-                {isActivitiesOpen && !taskId && (
-                    <Activities
-                        board={board}
-                        setIsActivitiesOpen={setIsActivitiesOpen}
-                    />
-                )}
+      <AppHeader
+        bgColor={bgColor}
+        logoImg="https://www.pngkey.com/png/full/213-2134177_import-boards-from-trello-trello-logo-white.png"
+        logoColor="#fff"
+      />
+      {/* {board?.members && board.members.length && ( */}
+      <BoardHeader
+        members={board?.members}
+        bgColor={bgColor}
+        allowDrop={allowDrop}
+        drag={drag}
+        setIsMenuOpen={setIsMenuOpen}
+        isMenuOpen={isMenuOpen}
+      />
 
-                {board && <BoardSideBar board={board} bgColor={bgColor} />}
-                {board && (
-                    <GroupList
-                        groups={board.groups}
-                        allowDrop={allowDrop}
-                        isActivitiesOpen={isActivitiesOpen}
-                    />
-                )}
+      {isMenuOpen && !taskId && (
+        <Menu
+          board={board}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
+        />
+      )}
 
-                {/* {taskId && <TaskDetails board={board} group={group} task={task} onUpdateBoard={onUpdateBoard} />} */}
+      {board && <BoardSideBar board={board} bgColor={bgColor} />}
+      {board && (
+        <GroupList
+          groups={board.groups}
+          allowDrop={allowDrop}
+          isActivitiesOpen={isMenuOpen}
+        />
+      )}
 
-                {/* <button
+      {/* {taskId && <TaskDetails board={board} group={group} task={task} onUpdateBoard={onUpdateBoard} />} */}
+
+      {/* <button
                 onClick={() => {
                     onAddBoardMsg(board._id)
                 }}>
                 Add board msg
             </button> */}
 
-                <Outlet />
-            </section>
-        </>
-    )
+      <Outlet />
+    </section>
+  );
 }

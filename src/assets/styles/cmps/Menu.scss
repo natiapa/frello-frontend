@@ -1,0 +1,145 @@
+.menu {
+  grid-column: 3/4;
+  grid-row: 2 / 5;
+  display: grid;
+  grid-template-rows: repeat(3, max-content);
+  background-color: #fff;
+
+  .back-btn {
+    cursor: pointer;
+  }
+
+  .change-img {
+    display: grid;
+    grid-template-rows: 3em auto 1fr 100px;
+    .change-bg-header {
+      grid-row: 1;
+
+      display: grid;
+      grid-template-columns: 40px 1fr 40px;
+      padding: 1em;
+
+      .close-btn {
+        grid-row: 1;
+        grid-column: 3;
+        place-self: center;
+        display: grid;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+
+        &:hover {
+          background-color: #091e420f;
+        }
+      }
+      .back-btn {
+        grid-row: 1;
+        grid-column: 1;
+        place-self: center;
+        display: grid;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+
+        &:hover {
+          background-color: #091e420f;
+        }
+
+        i {
+          place-self: center;
+          display: grid;
+          svg {
+            place-self: center;
+
+            width: 20px;
+            height: 20px;
+            color: #44546f;
+          }
+        }
+      }
+
+      h3 {
+        grid-row: 1;
+        grid-column: 2;
+        place-self: center;
+        font-weight: 500;
+        font-size: 16px;
+        color: #172b4d;
+      }
+    }
+
+    .btns {
+      grid-row: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 30px;
+
+      .images-btn {
+        position: relative;
+        place-self: center;
+        width: 150px;
+        height: 96px;
+        background-size: cover;
+        border-radius: 8px;
+
+        .photos-title {
+          position: absolute;
+          top: 8em;
+          left: 4em;
+        }
+      }
+
+      .colors-btn {
+        position: relative;
+        place-self: center;
+        width: 150px;
+        height: 96px;
+        background-size: cover;
+        border-radius: 8px;
+
+        .colors-title {
+          position: absolute;
+          top: 8em;
+          left: 4em;
+        }
+      }
+    }
+
+    .img-list {
+      grid-row: 3/4;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5em;
+      padding: 1em 0.5em 1em 1em;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+      overflow-x: hidden;
+
+      img {
+        cursor: pointer;
+        width: 144px;
+        height: 96px;
+        border-radius: 8px;
+      }
+    }
+
+    .color-list {
+      grid-row: 3;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5em;
+      padding: 1em 0.5em 1em 1em;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+      overflow-x: hidden;
+      .color {
+        cursor: pointer;
+        width: 144px;
+        height: 96px;
+        border-radius: 8px;
+      }
+    }
+  }
+}

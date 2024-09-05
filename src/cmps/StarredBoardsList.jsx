@@ -52,7 +52,13 @@ export function StarredBoardsList({ starredBoards, onRemoveBoard }) {
             to={`/board/${starredBoard._id}`}
             key={idx}
             style={{
-              backgroundImage: `url(${starredBoard?.style?.backgroundImage})`,
+              backgroundImage: starredBoard.style.backgroundImage
+                ? `url(${starredBoard?.style?.backgroundImage})`
+                : "",
+              backgroundColor: starredBoard.style.backgroundColor
+                ? starredBoard?.style?.backgroundColor
+                : "",
+
               display: "block",
             }}
           >

@@ -78,6 +78,18 @@ export function BoardIndex() {
     }
   }
 
+  function handleCreateBoard(board) {
+    console.log(board);
+    onAddBoard(board);
+    handleClosePopover();
+  }
+
+  function handleClosePopover() {
+    setIsPopoverOpen(false);
+    setAnchorEl(null);
+    setModalOpenByName(null);
+  }
+
   return (
     <>
       <AppHeader

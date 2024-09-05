@@ -18,8 +18,8 @@ export function BoardHeader({
   bgColor,
   allowDrop,
   drag,
-  setIsActivitiesOpen,
-  isActivitiesOpen,
+  setIsMenuOpen,
+  isMenuOpen,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -29,8 +29,8 @@ export function BoardHeader({
     setIsPopoverOpen((isOpen) => !isOpen);
   }
 
-  function handleActivityBtnClick() {
-    setIsActivitiesOpen(true);
+  function handleMenuBtnClick() {
+    setIsMenuOpen(true);
   }
 
   function clearFilter() {
@@ -41,8 +41,8 @@ export function BoardHeader({
     <section
       className="board-header"
       style={{
-        gridColumn: isActivitiesOpen ? "2/3" : "2/-1",
-        columnGap: isActivitiesOpen ? "1em" : "",
+        gridColumn: isMenuOpen ? "2/3" : "2/-1",
+        columnGap: isMenuOpen ? "1em" : "",
       }}
     >
       <div className="board-header-title">Frello</div>
@@ -51,7 +51,7 @@ export function BoardHeader({
         className="filter"
         onClick={handleFilterClick}
         style={{
-          gridColumn: isActivitiesOpen ? "3" : "2",
+          gridColumn: isMenuOpen ? "3" : "2",
         }}
       >
         <p>
@@ -79,7 +79,7 @@ export function BoardHeader({
         className="members"
         onDragOver={(ev) => allowDrop(ev)}
         style={{
-          gridColumn: isActivitiesOpen ? "4" : "3",
+          gridColumn: isMenuOpen ? "4" : "3",
           gridTemplateColumns: `repeat(${members.length}, 20px)`,
           placeSelf: "center end",
         }}
@@ -103,11 +103,11 @@ export function BoardHeader({
         ))}
       </ul>
 
-      {!isActivitiesOpen && (
+      {!isMenuOpen && (
         <div
           className="activity-menu"
           data-name="activities"
-          onClick={handleActivityBtnClick}
+          onClick={handleMenuBtnClick}
         >
           <span>
             <TbDots />

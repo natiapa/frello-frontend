@@ -1,19 +1,24 @@
+import { IoIosArrowBack } from "react-icons/io";
 import SvgIcon from "./SvgIcon";
 
-export function Activities({ board, setIsActivitiesOpen }) {
+export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
   return (
-    <aside
+    <section
       className="activities-container"
-      style={{
-        gridColumn: "3/4",
-        gridRow: "2 / 5",
-        backgroundColor: "#fff",
-      }}
+      // style={{
+      //   gridColumn: "3/4",
+      //   gridRow: "2 / 5",
+      //   backgroundColor: "#fff",
+      // }}
     >
       <header className="activity-header">
-        <span className="close-btn" onClick={() => setIsActivitiesOpen(false)}>
+        <span className="close-btn" onClick={() => setIsMenuOpen(false)}>
           <SvgIcon iconName="close" />
         </span>
+        <span className="back-btn" onClick={() => setIsActivitiesOpen(false)}>
+          <IoIosArrowBack />
+        </span>
+
         <h3>Activity</h3>
       </header>
       <hr></hr>
@@ -40,6 +45,6 @@ export function Activities({ board, setIsActivitiesOpen }) {
           );
         })}
       </ul>
-    </aside>
+    </section>
   );
 }
