@@ -136,7 +136,7 @@ export function ChangeBg({ setIsChangeBgOpen }) {
       </section>
 
       {type === "bgImage" && (
-        <ul className="img-list" style={{ height: "80vh", overflow: "auto" }}>
+        <ul className="img-list" style={{ height: "85vh", overflow: "auto" }}>
           {urlImgs.map((img, idx) => (
             <li key={idx}>
               <img
@@ -150,7 +150,7 @@ export function ChangeBg({ setIsChangeBgOpen }) {
         </ul>
       )}
       {type === "bgColor" && (
-        <ul className="color-list" style={{ height: "80vh", overflow: "auto" }}>
+        <ul className="color-list" style={{ height: "85vh", overflow: "auto" }}>
           {colors.map((color, idx) => (
             <li key={idx} onClick={() => handleImgClick(color, idx)}>
               <div
