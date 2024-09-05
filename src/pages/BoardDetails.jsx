@@ -162,23 +162,8 @@ export function BoardDetails() {
     return counter;
   }
 
-  function darkenColor(color, amount) {
-    let col = color.substring(1);
-    let num = parseInt(col, 16);
-
-    let r = (num >> 16) - Math.round(255 * amount);
-    let g = ((num >> 8) & 0x00ff) - Math.round(255 * amount);
-    let b = (num & 0x0000ff) - Math.round(255 * amount);
-
-    // Ensure the values stay in the 0-255 range
-    r = r < 0 ? 0 : r > 255 ? 255 : r;
-    g = g < 0 ? 0 : g > 255 ? 255 : g;
-    b = b < 0 ? 0 : b > 255 ? 255 : b;
-
-    return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, "0")}`;
-  }
-
   if (!board || !board.style) return;
+  console.log(board);
 
   return (
     <>
@@ -192,11 +177,6 @@ export function BoardDetails() {
             ? board?.style?.backgroundColor
             : "none",
 
-          background: board.style.backgroundColor
-            ? `linear-gradient(to right bottom,  ${
-                board.style.backgroundColor
-              } 0%, ${darkenColor(board.style.backgroundColor, 0.2)} 100%)`
-            : "",
           gridTemplateColumns: isMenuOpen ? "auto 1fr 340px" : "auto 1fr ",
           transition: " grid-template-columns 0.3s ease",
         }}

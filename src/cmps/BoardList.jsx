@@ -88,20 +88,18 @@ export function BoardList({
               to={`/board/${board._id}`}
               key={idx}
               style={{
-                backgroundImage: board.style.backgroundImage
-                  ? `url(${board?.style?.backgroundImage})`
-                  : "none",
-                backgroundColor: board.style.backgroundColor
-                  ? board?.style?.backgroundColor
-                  : "none",
-                background: board.style.backgroundColor
-                  ? `linear-gradient(to right bottom,  ${
-                      board.style.backgroundColor
-                    } 0%, ${darkenColor(
-                      board.style.backgroundColor,
-                      0.2
-                    )} 100%)`
-                  : "",
+                backgroundImage: `url(${board?.style?.backgroundImage})`,
+
+                backgroundColor: board?.style?.backgroundColor,
+
+                // background: board.style.backgroundColor
+                //   ? `linear-gradient(to right bottom,  ${
+                //       board.style.backgroundColor
+                //     } 0%, ${darkenColor(
+                //       board.style.backgroundColor,
+                //       0.2
+                //     )} 100%)`
+                //   : "",
                 display: "block",
               }}
             >

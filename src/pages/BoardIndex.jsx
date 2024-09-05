@@ -90,22 +90,6 @@ export function BoardIndex() {
     setModalOpenByName(null);
   }
 
-  function darkenColor(color, amount) {
-    let col = color.substring(1);
-    let num = parseInt(col, 16);
-
-    let r = (num >> 16) - Math.round(255 * amount);
-    let g = ((num >> 8) & 0x00ff) - Math.round(255 * amount);
-    let b = (num & 0x0000ff) - Math.round(255 * amount);
-
-    // Ensure the values stay in the 0-255 range
-    r = r < 0 ? 0 : r > 255 ? 255 : r;
-    g = g < 0 ? 0 : g > 255 ? 255 : g;
-    b = b < 0 ? 0 : b > 255 ? 255 : b;
-
-    return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, "0")}`;
-  }
-
   return (
     <>
       <AppHeader
@@ -130,7 +114,6 @@ export function BoardIndex() {
         <StarredBoardsList
           starredBoards={starredBoards}
           onRemoveBoard={onRemoveBoard}
-          darkenColor={darkenColor}
         />
         {/* <BoardFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
         <BoardList
@@ -139,7 +122,6 @@ export function BoardIndex() {
           onAddBoard={onAddBoard}
           onRemoveBoard={onRemoveBoard}
           onUpdateBoard={onUpdateBoard}
-          darkenColor={darkenColor}
         />
       </section>
     </>
