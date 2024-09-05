@@ -1,3 +1,4 @@
+import { IoIosArrowBack } from "react-icons/io";
 import SvgIcon from "./SvgIcon";
 
 export function Activities({ board, setIsActivitiesOpen }) {
@@ -11,9 +12,11 @@ export function Activities({ board, setIsActivitiesOpen }) {
       // }}
     >
       <header className="activity-header">
-        <span className="close-btn" onClick={() => setIsActivitiesOpen(false)}>
+        <span className="back-btn" onClick={() => setIsActivitiesOpen(false)}>
           {/* <SvgIcon iconName="close" /> */}
-          <span>back</span>
+          <span>
+            <IoIosArrowBack />
+          </span>
         </span>
         <h3>Activity</h3>
       </header>

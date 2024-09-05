@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { boardService } from "../services/board";
 import { loadBoard, updateBoard } from "../store/actions/board.actions";
-export function ChangeBg({ board, setIsChangeBgOpen }) {
+import { IoIosArrowBack } from "react-icons/io";
+import { useSelector } from "react-redux";
+export function ChangeBg({ setIsChangeBgOpen }) {
+  const board = useSelector((storeState) => storeState.boardModule.board);
   const [currBoard, setCurrBoard] = useState(board);
-  //   const [isBgImage, setIsBgImage] = useState(false);
-  //   const [isBgColor, setIsBgColor] = useState(false);
   const [type, setType] = useState("");
 
-  //   useEffect(() => {
-  //     // loadBoard(board._id);
-  //     console.log(currBoard);
-  //     setCurrBoard(currBoard);
-  //   }, [currBoard]);
+  useEffect(() => {
+    loadBoard(board._id);
+  }, [currBoard.style]);
 
   const urlImgs = [
     {
@@ -81,22 +80,22 @@ export function ChangeBg({ board, setIsChangeBgOpen }) {
   ];
 
   const colors = [
-    "#F5A623", // כתום
-    "#50E3C2", // טורקיז
-    "#4A90E2", // כחול
-    "#B8E986", // ירוק בהיר
-    "#E94E77", // ורוד
-    "#D0021B", // אדום
-    "#F8E71C", // צהוב
-    "#7ED321", // ירוק
-    "#BD10E0", // סגול
-    "#9013FE", // סגול כהה
-    "#FFB700", // ענבר
-    "#FF7F50", // קורל
-    "#00BFFF", // כחול שמיים
-    "#9B59B6", // אמטיסט
-    "#E67E22", // גזר
-    "#3498DB", // כחול שמיים
+    "#A05A6C", // Dusty Rose
+    "#B69F6A", // Golden Olive
+    "#7D9ACF", // Powder Blue
+    "#8F9A7B", // Moss Green
+    "#9B7E9A", // Mauve
+    "#D0959C", // Blush Pink
+    "#8F9C8E", // Olive Green
+    "#9C8D9E", // Lavender
+    "#8E7F6D", // Earthy Beige
+    "#7B9AB0", // Steel Blue
+    "#D07B7A", // Coral
+    "#8D6D9B", // Deep Lilac
+    "#7F9C8F", // Forest Green
+    "#D07F6D", // Light Terracotta
+    "#6A8AB2", // Slate Blue
+    "#D2A4A3", // Salmon
   ];
 
   function handleImgClick(bgType, idx) {
@@ -107,28 +106,34 @@ export function ChangeBg({ board, setIsChangeBgOpen }) {
       };
       setCurrBoard(boardToUpdate);
       updateBoard(boardToUpdate);
-    }
-    if (type === "bgColor") {
+    } else if (type === "bgColor") {
       const boardToUpdate = {
         ...currBoard,
         style: { backgroundColor: bgType },
       };
       setCurrBoard(boardToUpdate);
+      console.log(currBoard.style);
       updateBoard(boardToUpdate);
     }
   }
 
-  console.log(type);
-
   return (
-    <section>
+    <section className="change-img">
       <header>
-        <span onClick={() => setIsChangeBgOpen(false)}>back</span>
+        <span className="back-btn" onClick={() => setIsChangeBgOpen(false)}>
+          <IoIosArrowBack />
+        </span>
         <h3>Change background</h3>
       </header>
 
-      <button onClick={() => setType("bgImage")}>Photos</button>
-      <button onClick={() => setType("bgColor")}>Colors</button>
+      <section className="btns">
+        <button className="images-btn" onClick={() => setType("bgImage")}>
+          Photos
+        </button>
+        <button className="colors-btn" onClick={() => setType("bgColor")}>
+          Colors
+        </button>
+      </section>
 
       {type === "bgImage" && (
         <ul className="img-list" style={{ height: "80vh", overflow: "auto" }}>
@@ -137,7 +142,7 @@ export function ChangeBg({ board, setIsChangeBgOpen }) {
               <img
                 src={img.src}
                 alt={img.alt}
-                style={{ width: "100px" }}
+                // style={{ width: "100px" }}
                 onClick={() => handleImgClick(img.src, idx)}
               />
             </li>
@@ -149,10 +154,9 @@ export function ChangeBg({ board, setIsChangeBgOpen }) {
           {colors.map((color, idx) => (
             <li key={idx} onClick={() => handleImgClick(color, idx)}>
               <div
+                className="color"
                 style={{
                   backgroundColor: color,
-                  width: "100px",
-                  height: "100px",
                 }}
               ></div>
             </li>
