@@ -23,9 +23,9 @@ import { StarredBoardsList } from "../cmps/StarredBoardsList";
 export function BoardIndex() {
   const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter());
   const boards = useSelector((storeState) => storeState.boardModule.boards);
-  const starredBoards = boards.filter((board) => board.isStarred);
-  console.log(boards);
-  const navigate = useNavigate();
+  const starredBoards = Array.isArray(boards)
+    ? boards.filter((board) => board.isStarred)
+    : [];
 
   useEffect(() => {
     loadBoards();

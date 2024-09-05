@@ -1,10 +1,81 @@
 .activities-container {
-  .close-btn {
-    cursor: pointer;
+  display: grid;
+  grid-template-rows: 56px;
+  hr {
+    grid-row: 1;
+    place-self: end center;
+    width: 90%;
+    // background-color: #dadbdc;
+    height: 3px;
+    border: none;
+    margin: 0;
   }
-  .link {
-    &:hover {
-      text-decoration: underline;
+  .activity-header {
+    grid-row: 1;
+
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    padding: 1em;
+    .close-btn {
+      grid-row: 1;
+      grid-column: 2;
+      place-self: center;
+      display: grid;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+
+      &:hover {
+        background-color: #091e420f;
+      }
+
+      i {
+        place-self: center;
+        display: grid;
+        svg {
+          place-self: center;
+
+          width: 20px;
+          height: 20px;
+          color: #44546f;
+        }
+      }
+    }
+
+    h3 {
+      grid-row: 1;
+      grid-column: 1;
+      place-self: center;
+      font-weight: 500;
+      font-size: 16px;
+      color: #172b4d;
+    }
+  }
+
+  .activities-list {
+    place-self: start;
+    grid-row: 2;
+    padding: 1em;
+
+    li {
+      display: grid;
+      font-size: 14px;
+      span {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+      }
+
+      .activity-fullname {
+        font-weight: 700;
+      }
+
+      .link {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 }

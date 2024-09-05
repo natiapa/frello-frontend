@@ -10,16 +10,22 @@ export function Activities({ board, setIsActivitiesOpen }) {
         backgroundColor: "#fff",
       }}
     >
-      <span className="close-btn" onClick={() => setIsActivitiesOpen(false)}>
-        <SvgIcon iconName="close" />
-      </span>
-      <h1>Activities</h1>
+      <header className="activity-header">
+        <span className="close-btn" onClick={() => setIsActivitiesOpen(false)}>
+          <SvgIcon iconName="close" />
+        </span>
+        <h3>Activity</h3>
+      </header>
+      <hr></hr>
       <ul className="activities-list">
         {board.activities.map((activity) => {
           return (
             <li key={activity.id}>
-              <span>{activity.byMember.fullname} </span>
-              <span>{activity.title} </span>
+              {/* <div className="member-img">{activity.byMember.fullname[0]}</div> */}
+              <span className="activity-fullname">
+                {activity.byMember.fullname}{" "}
+              </span>
+              <span className="activity-title">{activity.title} </span>
 
               <span>
                 at{" "}
