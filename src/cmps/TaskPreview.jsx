@@ -128,7 +128,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
                                 {task.checklists &&
                                     task.checklists.length > 0 && (
                                         <div className="checklists">
-                                            <IoMdCheckboxOutline />
+                                            <IoMdCheckboxOutline style={{height:'14px',width:'14px'}}/>
                                             {`${getIsChecked()}/${getChecklists()}`}
                                         </div>
                                     )}
