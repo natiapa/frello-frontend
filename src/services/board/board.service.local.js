@@ -276,528 +276,533 @@ function getEmptyAttach() {
     type: "",
     createdAt: new Date(),
   };
-  
+
 }
 function _createBoards() {
-    return {
-      _id: "b101",
-      title: "Robot dev proj",
-      isStarred: false,
-      archivedAt: 1589983468418,
-      createdBy: {
+  return {
+    _id: "b101",
+    title: "Robot dev proj",
+    isStarred: false,
+    archivedAt: 1589983468418,
+    createdBy: {
+      id: "u101",
+      fullname: "Abi Abambi",
+      imgUrl: "http://some-img",
+    },
+    style: {
+      backgroundImage:
+        "https://cdn.pixabay.com/photo/2024/07/05/22/30/penguin-8875750_1280.jpg",
+      backgroundColor: "#61bd4f",
+    },
+    members: [
+      {
         id: "u101",
-        fullname: "Abi Abambi",
-        imgUrl: "http://some-img",
+        fullname: "Natia ",
+        imgUrl: "https://www.google.com",
+        color: "#61bd4f",
       },
-      style: {
-        backgroundImage:
-          "https://cdn.pixabay.com/photo/2024/07/05/22/30/penguin-8875750_1280.jpg",
-        backgroundColor: "#61bd4f",
+      {
+        id: "u102",
+        fullname: "Avi",
+        imgUrl: "https://www.google.com",
+        color: "#f2d600",
       },
-      members: [
-        {
+      {
+        id: "u103",
+        fullname: "Yana",
+        imgUrl: "https://www.google.com",
+        color: "#f3a600",
+      },
+    ],
+    groups: [
+      {
+        id: "g101",
+        title: "Design Phase",
+        archivedAt: 1589983468418,
+        tasks: [
+          {
+            id: "c101",
+            title: "Design wireframes",
+            labels: ["Urgent", "In Progress"],
+            description: "",
+            checklists: [
+              {
+                id: "chk101",
+                title: "Design Process",
+                items: [
+                  {
+                    id: "item101",
+                    text: "Gather requirements from the team",
+                    isChecked: true,
+                  },
+                  {
+                    id: "item102",
+                    text: "Create wireframe sketches",
+                    isChecked: false,
+                  },
+                  {
+                    id: "item103",
+                    text: "Design high-fidelity mockups",
+                    isChecked: false,
+                  },
+                ],
+              },
+              {
+                id: "chk102",
+                title: "Review Process",
+                items: [
+                  {
+                    id: "item201",
+                    text: "Review mockups with the team",
+                    isChecked: false,
+                  },
+                  {
+                    id: "item202",
+                    text: "Make adjustments based on feedback",
+                    isChecked: false,
+                  },
+                ],
+              },
+            ],
+            members: [
+              {
+                id: "u101",
+                fullname: "Natia ",
+                imgUrl: "https://www.google.com",
+                color: "#61bd4f",
+              },
+              {
+                id: "u102",
+                fullname: "Avi",
+                imgUrl: "https://www.google.com",
+                color: "#f2d600",
+              },
+            ],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Create wireframes for the new Trello feature",
+              "Incorporate feedback from the last review",
+            ],
+            cover: "cover_wireframes.png",
+            dueDate: "",
+          },
+          {
+            id: "c102",
+            title: "Create design mockups",
+            labels: [],
+            description: "",
+            checklists: [
+              {
+                id: "chk10656",
+                title: "Design Process",
+                items: [
+                  {
+                    id: "item101",
+                    text: "Gather requirements from the team",
+                    isChecked: true,
+                  },
+                  {
+                    id: "item102",
+                    text: "Create wireframe sketches",
+                    isChecked: false,
+                  },
+                  {
+                    id: "item103",
+                    text: "Design high-fidelity mockups",
+                    isChecked: false,
+                  },
+                ],
+              },
+              {
+                id: "chk106252222256",
+                title: "Design Process",
+                items: [
+                  {
+                    id: "item101",
+                    text: "Gather requirements from the team",
+                    isChecked: true,
+                  },
+                  {
+                    id: "item102",
+                    text: "Create wireframe sketches",
+                    isChecked: false,
+                  },
+                  {
+                    id: "item103",
+                    text: "Design high-fidelity mockups",
+                    isChecked: false,
+                  },
+                ],
+              },
+
+              {
+                id: "chk1022525",
+                title: "Review Process",
+                items: [
+                  {
+                    id: "item201",
+                    text: "Review mockups with the team",
+                    isChecked: false,
+                  },
+                  {
+                    id: "item202",
+                    text: "Make adjustments based on feedback",
+                    isChecked: false,
+                  },
+                ],
+              },
+            ],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Design high-fidelity mockups for the app",
+              "Align design with the wireframes",
+            ],
+            cover: "cover_mockup.png",
+            dueDate: "",
+          },
+          {
+            id: "c103",
+            title: "Design logo",
+            labels: [],
+            description: "",
+            checklists: [
+              {
+                id: "chk10136352",
+                title: "Design Process",
+                items: [
+                  {
+                    id: "item101",
+                    text: "Gather requirements from the team",
+                    isChecked: true,
+                  },
+                  {
+                    id: "item102",
+                    text: "Create wireframe sketches",
+                    isChecked: false,
+                  },
+                  {
+                    id: "item103",
+                    text: "Design high-fidelity mockups",
+                    isChecked: false,
+                  },
+                ],
+              },
+              {
+                id: "chk333102",
+                title: "Review Process",
+                items: [
+                  {
+                    id: "item201",
+                    text: "Review mockups with the team",
+                    isChecked: false,
+                  },
+                  {
+                    id: "item202",
+                    text: "Make adjustments based on feedback",
+                    isChecked: false,
+                  },
+                ],
+              },
+            ],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Design a logo for the Trello project",
+              "Ensure it aligns with the brand identity",
+            ],
+            cover: "cover_logo.png",
+            dueDate: "",
+          },
+          {
+            id: "c104",
+            title: "Create color scheme",
+            labels: [],
+            description: "",
+            checklists: [],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Develop a color scheme for the app",
+              "Use brand colors as a base",
+            ],
+            cover: "cover_color_scheme.png",
+            dueDate: "",
+          },
+          {
+            id: "c105",
+            title: "Design icons",
+            labels: [],
+            description: "",
+            checklists: [],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Design custom icons for the Trello project",
+              "Ensure consistency with the overall design",
+            ],
+            cover: "cover_icons.png",
+            dueDate: "",
+          },
+          {
+            id: "c106",
+            title: "Create typography",
+            labels: [],
+            description: "",
+            checklists: [],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Select fonts for the project",
+              "Ensure readability and aesthetic appeal",
+            ],
+            cover: "cover_typography.png",
+            dueDate: "",
+          },
+          {
+            id: "c107",
+            title: "Develop design system",
+            labels: [],
+            description: "",
+            checklists: [],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Create a design system for the app",
+              "Include guidelines for all design elements",
+            ],
+            cover: "cover_design_system.png",
+            dueDate: "2024-09-30",
+          },
+          {
+            id: "c108",
+            title: "Review design with stakeholders",
+            labels: [],
+            description: "",
+            checklists: [],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Present the design to stakeholders",
+              "Incorporate their feedback into the design",
+            ],
+            cover: "cover_stakeholder_review.png",
+            dueDate: "",
+          },
+          {
+            id: "c109",
+            title: "Finalize design",
+            labels: [],
+            description: "",
+            checklists: [],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Finalize the design for the Trello project",
+              "Prepare for the development phase",
+            ],
+            cover: "cover_finalize_design.png",
+            dueDate: "2024-10-05",
+          },
+          {
+            id: "c110",
+            title: "Handoff design to developers",
+            labels: [],
+            description: "",
+            checklists: [],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Provide all design assets to the development team",
+              "Ensure clear communication during the handoff",
+            ],
+            cover: "cover_design_handoff.png",
+            dueDate: "",
+          },
+        ],
+        style: {},
+      },
+      {
+        id: "g102",
+        title: "Development Phase",
+        archivedAt: null,
+        tasks: [
+          {
+            id: "c111",
+            title: "Set up development environment",
+            labels: [],
+            description: "",
+            checklists: [],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Install all necessary tools",
+              "Ensure compatibility with the latest tech stack",
+            ],
+            cover: "cover_dev_env.png",
+            dueDate: "2024-09-01",
+          },
+          {
+            id: "c112",
+            title: "Create project structure",
+            labels: [],
+            description: "",
+            checklists: [],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Set up the initial project structure",
+              "Follow best practices for maintainability",
+            ],
+            cover: "cover_project_structure.png",
+            dueDate: "2024-09-05",
+          },
+        ],
+        style: {},
+      },
+
+      {
+        id: "g103",
+        title: "Testing Phase",
+        archivedAt: null,
+        tasks: [
+          {
+            id: "c113",
+            title: "Write unit tests",
+            labels: ["In Progress"],
+            description: "Create unit tests for the core functionalities of the application.",
+            checklists: [],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Focus on critical paths",
+              "Ensure all edge cases are covered",
+            ],
+            cover: "cover_unit_tests.png",
+            dueDate: "2024-09-10",
+          },
+          {
+            id: "c114",
+            title: "Perform integration testing",
+            labels: ["Urgent", "Important"],
+            description: "Test the integration of different modules to ensure they work together as expected.",
+            checklists: [],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Verify module interactions",
+              "Check for data consistency",
+            ],
+            cover: "cover_integration_testing.png",
+            dueDate: "2024-09-15",
+          },
+        ],
+      },
+      {
+        id: "g104",
+        title: "Deployment Phase",
+        archivedAt: null,
+        tasks: [
+          {
+            id: "c115",
+            title: "Prepare deployment environment",
+            labels: ["Important"],
+            description: "Set up the environment for deployment, including server configurations and deployment scripts.",
+            checklists: [],
+            members: [],
+            attachments: '', // שדה attachments ריק
+            comments: [
+              "Ensure security configurations are in place",
+              "Test deployment scripts",
+            ],
+            cover: "cover_deployment_environment.png",
+            dueDate: "2024-09-20",
+          },
+        ],
+      },
+    ],
+    activities: [
+      {
+        id: "a101",
+        title: "Changed Color",
+        createdAt: 154514,
+        byMember: {
           id: "u101",
-          fullname: "Natia ",
-          imgUrl: "https://www.google.com",
+          fullname: "Natia",
+          imgUrl: "http://some-img",
           color: "#61bd4f",
+
         },
-        {
-          id: "u102",
-          fullname: "Avi",
-          imgUrl: "https://www.google.com",
-          color: "#f2d600",
-        },
-        {
-          id: "u103",
-          fullname: "Yana",
-          imgUrl: "https://www.google.com",
-          color: "#f3a600",
-        },
-      ],
-      groups: [
-        {
+        group: {
           id: "g101",
           title: "Design Phase",
-          archivedAt: 1589983468418,
-          tasks: [
-            {
-              id: "c101",
-              title: "Design wireframes",
-              labels: ["Urgent", "In Progress"],
-              description: "",
-              checklists: [
-                {
-                  id: "chk101",
-                  title: "Design Process",
-                  items: [
-                    {
-                      id: "item101",
-                      text: "Gather requirements from the team",
-                      isChecked: true,
-                    },
-                    {
-                      id: "item102",
-                      text: "Create wireframe sketches",
-                      isChecked: false,
-                    },
-                    {
-                      id: "item103",
-                      text: "Design high-fidelity mockups",
-                      isChecked: false,
-                    },
-                  ],
-                },
-                {
-                  id: "chk102",
-                  title: "Review Process",
-                  items: [
-                    {
-                      id: "item201",
-                      text: "Review mockups with the team",
-                      isChecked: false,
-                    },
-                    {
-                      id: "item202",
-                      text: "Make adjustments based on feedback",
-                      isChecked: false,
-                    },
-                  ],
-                },
-              ],
-              members: [
-                {
-                  id: "u101",
-                  fullname: "Natia ",
-                  imgUrl: "https://www.google.com",
-                  color: "#61bd4f",
-                },
-                {
-                  id: "u102",
-                  fullname: "Avi",
-                  imgUrl: "https://www.google.com",
-                  color: "#f2d600",
-                },
-              ],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Create wireframes for the new Trello feature",
-                "Incorporate feedback from the last review",
-              ],
-              cover: "cover_wireframes.png",
-              dueDate: "",
-            },
-            {
-              id: "c102",
-              title: "Create design mockups",
-              labels: [],
-              description: "",
-              checklists: [
-                {
-                  id: "chk10656",
-                  title: "Design Process",
-                  items: [
-                    {
-                      id: "item101",
-                      text: "Gather requirements from the team",
-                      isChecked: true,
-                    },
-                    {
-                      id: "item102",
-                      text: "Create wireframe sketches",
-                      isChecked: false,
-                    },
-                    {
-                      id: "item103",
-                      text: "Design high-fidelity mockups",
-                      isChecked: false,
-                    },
-                  ],
-                },
-                {
-                  id: "chk106252222256",
-                  title: "Design Process",
-                  items: [
-                    {
-                      id: "item101",
-                      text: "Gather requirements from the team",
-                      isChecked: true,
-                    },
-                    {
-                      id: "item102",
-                      text: "Create wireframe sketches",
-                      isChecked: false,
-                    },
-                    {
-                      id: "item103",
-                      text: "Design high-fidelity mockups",
-                      isChecked: false,
-                    },
-                  ],
-                },
-  
-                {
-                  id: "chk1022525",
-                  title: "Review Process",
-                  items: [
-                    {
-                      id: "item201",
-                      text: "Review mockups with the team",
-                      isChecked: false,
-                    },
-                    {
-                      id: "item202",
-                      text: "Make adjustments based on feedback",
-                      isChecked: false,
-                    },
-                  ],
-                },
-              ],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Design high-fidelity mockups for the app",
-                "Align design with the wireframes",
-              ],
-              cover: "cover_mockup.png",
-              dueDate: "",
-            },
-            {
-              id: "c103",
-              title: "Design logo",
-              labels: [],
-              description: "",
-              checklists: [
-                {
-                  id: "chk10136352",
-                  title: "Design Process",
-                  items: [
-                    {
-                      id: "item101",
-                      text: "Gather requirements from the team",
-                      isChecked: true,
-                    },
-                    {
-                      id: "item102",
-                      text: "Create wireframe sketches",
-                      isChecked: false,
-                    },
-                    {
-                      id: "item103",
-                      text: "Design high-fidelity mockups",
-                      isChecked: false,
-                    },
-                  ],
-                },
-                {
-                  id: "chk333102",
-                  title: "Review Process",
-                  items: [
-                    {
-                      id: "item201",
-                      text: "Review mockups with the team",
-                      isChecked: false,
-                    },
-                    {
-                      id: "item202",
-                      text: "Make adjustments based on feedback",
-                      isChecked: false,
-                    },
-                  ],
-                },
-              ],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Design a logo for the Trello project",
-                "Ensure it aligns with the brand identity",
-              ],
-              cover: "cover_logo.png",
-              dueDate: "",
-            },
-            {
-              id: "c104",
-              title: "Create color scheme",
-              labels: [],
-              description: "",
-              checklists: [],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Develop a color scheme for the app",
-                "Use brand colors as a base",
-              ],
-              cover: "cover_color_scheme.png",
-              dueDate: "",
-            },
-            {
-              id: "c105",
-              title: "Design icons",
-              labels: [],
-              description: "",
-              checklists: [],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Design custom icons for the Trello project",
-                "Ensure consistency with the overall design",
-              ],
-              cover: "cover_icons.png",
-              dueDate: "",
-            },
-            {
-              id: "c106",
-              title: "Create typography",
-              labels: [],
-              description: "",
-              checklists: [],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Select fonts for the project",
-                "Ensure readability and aesthetic appeal",
-              ],
-              cover: "cover_typography.png",
-              dueDate: "",
-            },
-            {
-              id: "c107",
-              title: "Develop design system",
-              labels: [],
-              description: "",
-              checklists: [],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Create a design system for the app",
-                "Include guidelines for all design elements",
-              ],
-              cover: "cover_design_system.png",
-              dueDate: "2024-09-30",
-            },
-            {
-              id: "c108",
-              title: "Review design with stakeholders",
-              labels: [],
-              description: "",
-              checklists: [],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Present the design to stakeholders",
-                "Incorporate their feedback into the design",
-              ],
-              cover: "cover_stakeholder_review.png",
-              dueDate: "",
-            },
-            {
-              id: "c109",
-              title: "Finalize design",
-              labels: [],
-              description: "",
-              checklists: [],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Finalize the design for the Trello project",
-                "Prepare for the development phase",
-              ],
-              cover: "cover_finalize_design.png",
-              dueDate: "2024-10-05",
-            },
-            {
-              id: "c110",
-              title: "Handoff design to developers",
-              labels: [],
-              description: "",
-              checklists: [],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Provide all design assets to the development team",
-                "Ensure clear communication during the handoff",
-              ],
-              cover: "cover_design_handoff.png",
-              dueDate: "",
-            },
-          ],
-          style: {},
         },
-        {
-          id: "g102",
-          title: "Development Phase",
-          archivedAt: null,
-          tasks: [
-            {
-              id: "c111",
-              title: "Set up development environment",
-              labels: [],
-              description: "",
-              checklists: [],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Install all necessary tools",
-                "Ensure compatibility with the latest tech stack",
-              ],
-              cover: "cover_dev_env.png",
-              dueDate: "2024-09-01",
-            },
-            {
-              id: "c112",
-              title: "Create project structure",
-              labels: [],
-              description: "",
-              checklists: [],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Set up the initial project structure",
-                "Follow best practices for maintainability",
-              ],
-              cover: "cover_project_structure.png",
-              dueDate: "2024-09-05",
-            },
-          ],
-          style: {},
+        task: {
+          id: "c101",
+          title: "Design wireframes",
         },
-  
-        {
-          id: "g103",
-          title: "Testing Phase",
-          archivedAt: null,
-          tasks: [
-            {
-              id: "c113",
-              title: "Write unit tests",
-              labels: ["In Progress"],
-              description: "Create unit tests for the core functionalities of the application.",
-              checklists: [],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Focus on critical paths",
-                "Ensure all edge cases are covered",
-              ],
-              cover: "cover_unit_tests.png",
-              dueDate: "2024-09-10",
-            },
-            {
-              id: "c114",
-              title: "Perform integration testing",
-              labels: ["Urgent", "Important"],
-              description: "Test the integration of different modules to ensure they work together as expected.",
-              checklists: [],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Verify module interactions",
-                "Check for data consistency",
-              ],
-              cover: "cover_integration_testing.png",
-              dueDate: "2024-09-15",
-            },
-          ],
+      },
+      {
+        id: "a102",
+        title: "Updated Task Description",
+        createdAt: 154520,
+        byMember: {
+          id: "u102",
+          fullname: "Avi",
+          imgUrl: "http://some-img",
+          color: "#f2d600",
         },
-        {
-          id: "g104",
-          title: "Deployment Phase",
-          archivedAt: null,
-          tasks: [
-            {
-              id: "c115",
-              title: "Prepare deployment environment",
-              labels: ["Important"],
-              description: "Set up the environment for deployment, including server configurations and deployment scripts.",
-              checklists: [],
-              members: [],
-              attachments: '', // שדה attachments ריק
-              comments: [
-                "Ensure security configurations are in place",
-                "Test deployment scripts",
-              ],
-              cover: "cover_deployment_environment.png",
-              dueDate: "2024-09-20",
-            },
-          ],
+        group: {
+          id: "g101",
+          title: "Design Phase",
         },
-      ],
-      activities: [
-        {
-          id: "a101",
-          title: "Changed Color",
-          createdAt: 154514,
-          byMember: {
-            id: "u101",
-            fullname: "Natia",
-            imgUrl: "http://some-img",
-          },
-          group: {
-            id: "g101",
-            title: "Design Phase",
-          },
-          task: {
-            id: "c101",
-            title: "Design wireframes",
-          },
+        task: {
+          id: "c101",
+          title: "Design wireframes",
         },
-        {
-          id: "a102",
-          title: "Updated Task Description",
-          createdAt: 154520,
-          byMember: {
-            id: "u102",
-            fullname: "Avi",
-            imgUrl: "http://some-img",
-          },
-          group: {
-            id: "g101",
-            title: "Design Phase",
-          },
-          task: {
-            id: "c101",
-            title: "Design wireframes",
-          },
+      },
+      {
+        id: "a103",
+        title: "Moved Task to Review",
+        createdAt: 154530,
+        byMember: {
+          id: "u103",
+          fullname: "Yana",
+          imgUrl: "http://some-img",
+          color: "#f3a600",
         },
-        {
-          id: "a103",
-          title: "Moved Task to Review",
-          createdAt: 154530,
-          byMember: {
-            id: "u103",
-            fullname: "Yana",
-            imgUrl: "http://some-img",
-          },
-          group: {
-            id: "g101",
-            title: "Design Phase",
-          },
-          task: {
-            id: "c101",
-            title: "Design wireframes",
-          },
+        group: {
+          id: "g101",
+          title: "Design Phase",
         },
-        {
-          id: "a104",
-          title: "Moved Task to Review",
-          createdAt: 154540,
-          byMember: {
-            id: "u101",
-            fullname: "Natia",
-            imgUrl: "http://some-img",
-          },
-          group: {
-            id: "g101",
-            title: "Design Phase",
-          },
-          task: {
-            id: "c101",
-            title: "Design wireframes",
-          },
+        task: {
+          id: "c101",
+          title: "Design wireframes",
         },
-      ],
-    };
-  }
-  
+      },
+      {
+        id: "a104",
+        title: "Moved Task to Review",
+        createdAt: 154540,
+        byMember: {
+          id: "u101",
+          fullname: "Natia",
+          imgUrl: "http://some-img",
+          color: "#61bd4f",
+        },
+        group: {
+          id: "g101",
+          title: "Design Phase",
+        },
+        task: {
+          id: "c101",
+          title: "Design wireframes",
+        },
+      },
+    ],
+  };
+}
+
 // function _createBoards() {
 //   return {
 //     _id: "b101",

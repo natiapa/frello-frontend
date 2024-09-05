@@ -5,8 +5,56 @@
   grid-template-rows: repeat(3, max-content);
   background-color: #fff;
 
-  .back-btn {
-    cursor: pointer;
+  .menu-header {
+    grid-row: 1;
+
+    display: grid;
+    grid-template-rows: 1fr 0;
+    grid-template-columns: 30px 1fr 30px;
+    padding-inline: 12px;
+
+    &::after {
+      content: "";
+      grid-column: 1 / -1;
+      margin-top: 0em;
+      height: 1px;
+      width: 100%;
+      background-color: #dddee1;
+    }
+
+    .close-btn {
+      grid-row: 1;
+      grid-column: 3;
+      place-self: center;
+      display: grid;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+
+      &:hover {
+        background-color: #091e420f;
+      }
+      i {
+        display: grid;
+        place-self: center;
+
+        svg {
+          place-self: center;
+        }
+      }
+    }
+
+    h3 {
+      // grid-row: 1;
+      grid-column: 2;
+      place-self: center;
+      font-weight: 500;
+      font-size: 16px;
+      color: #172b4d;
+      // margin-block-start: 7px;
+      margin: 1em;
+    }
   }
 
   .change-img {
@@ -16,8 +64,18 @@
       grid-row: 1;
 
       display: grid;
-      grid-template-columns: 40px 1fr 40px;
-      padding: 1em;
+      grid-template-rows: 1fr 0;
+      grid-template-columns: 30px 1fr 30px;
+      padding-inline: 12px;
+
+      &::after {
+        content: "";
+        grid-column: 1 / -1;
+        margin-top: 0em;
+        height: 1px;
+        width: 100%;
+        background-color: #dddee1;
+      }
 
       .close-btn {
         grid-row: 1;
@@ -32,7 +90,17 @@
         &:hover {
           background-color: #091e420f;
         }
+
+        i {
+          display: grid;
+          place-self: center;
+
+          svg {
+            place-self: center;
+          }
+        }
       }
+
       .back-btn {
         grid-row: 1;
         grid-column: 1;
@@ -47,16 +115,13 @@
           background-color: #091e420f;
         }
 
-        i {
-          place-self: center;
+        svg {
           display: grid;
-          svg {
-            place-self: center;
+          place-self: center;
 
-            width: 20px;
-            height: 20px;
-            color: #44546f;
-          }
+          width: 20px;
+          height: 20px;
+          color: #44546f;
         }
       }
 
@@ -75,6 +140,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 30px;
+      padding-block-start: 0.4em;
 
       .images-btn {
         position: relative;

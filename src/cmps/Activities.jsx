@@ -23,10 +23,14 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
       </header>
       <hr></hr>
       <ul className="activities-list">
-        {board.activities.map((activity) => {
-          return (
-            <li key={activity.id}>
-              {/* <div className="member-img">{activity.byMember.fullname[0]}</div> */}
+        {board.activities.map((activity) => (
+          <li
+            key={activity.id}
+            className="activity"
+            style={{ display: "grid", fontSize: "14px" }}
+          >
+            {/* <div className="member-img">{activity.byMember.fullname[0]}</div> */}
+            <section className="activity-data" style={{ gridColumn: "2" }}>
               <span className="activity-fullname">
                 {activity.byMember.fullname}{" "}
               </span>
@@ -41,9 +45,9 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
                   {activity.task.title}
                 </a>
               </span>
-            </li>
-          );
-        })}
+            </section>
+          </li>
+        ))}
       </ul>
     </section>
   );
