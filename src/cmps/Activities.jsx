@@ -2,17 +2,18 @@ import SvgIcon from "./SvgIcon";
 
 export function Activities({ board, setIsActivitiesOpen }) {
   return (
-    <aside
+    <section
       className="activities-container"
-      style={{
-        gridColumn: "3/4",
-        gridRow: "2 / 5",
-        backgroundColor: "#fff",
-      }}
+      // style={{
+      //   gridColumn: "3/4",
+      //   gridRow: "2 / 5",
+      //   backgroundColor: "#fff",
+      // }}
     >
       <header className="activity-header">
         <span className="close-btn" onClick={() => setIsActivitiesOpen(false)}>
-          <SvgIcon iconName="close" />
+          {/* <SvgIcon iconName="close" /> */}
+          <span>back</span>
         </span>
         <h3>Activity</h3>
       </header>
@@ -40,6 +41,6 @@ export function Activities({ board, setIsActivitiesOpen }) {
           );
         })}
       </ul>
-    </aside>
+    </section>
   );
 }

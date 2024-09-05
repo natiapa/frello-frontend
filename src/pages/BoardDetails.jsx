@@ -26,6 +26,7 @@ import { boardService } from "../services/board";
 import { Activities } from "../cmps/Activities";
 import { MemberList } from "../cmps/MemberList";
 import { IoMdCheckboxOutline } from "react-icons/io";
+import { Menu } from "../cmps/Menu";
 
 export function BoardDetails() {
   const { boardId, taskId } = useParams();
@@ -42,9 +43,9 @@ export function BoardDetails() {
   const [isTaskPrevModalOpen, setIsTaskPrevModalOpen] = useState(false);
   const [taskPrevActionsModalData, setTaskPrevActionsModalData] = useState("");
   const [selectedLabels, setSelectedLabels] = useState([]);
-  const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const [draggedMemberId, setDraggedMemberId] = useState("");
-  console.log(board);
+
   useEffect(() => {
     eventBus.on("show-task", onPreviewToShow);
   }, []);
@@ -161,15 +162,42 @@ export function BoardDetails() {
     return counter;
   }
 
-  if (!board) return;
+  function darkenColor(color, amount) {
+    let col = color.substring(1);
+    let num = parseInt(col, 16);
+
+    let r = (num >> 16) - Math.round(255 * amount);
+    let g = ((num >> 8) & 0x00ff) - Math.round(255 * amount);
+    let b = (num & 0x0000ff) - Math.round(255 * amount);
+
+    // Ensure the values stay in the 0-255 range
+    r = r < 0 ? 0 : r > 255 ? 255 : r;
+    g = g < 0 ? 0 : g > 255 ? 255 : g;
+    b = b < 0 ? 0 : b > 255 ? 255 : b;
+
+    return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, "0")}`;
+  }
+
+  if (!board || !board.style) return;
 
   return (
     <>
       <section
         className="board-details"
         style={{
-          backgroundImage: `url(${board?.style?.backgroundImage})`,
-          gridTemplateColumns: isActivitiesOpen ? "auto 1fr 340px" : "auto 1fr",
+          backgroundImage: board.style.backgroundImage
+            ? `url(${board?.style?.backgroundImage})`
+            : "none",
+          backgroundColor: board.style.backgroundColor
+            ? board?.style?.backgroundColor
+            : "none",
+
+          background: board.style.backgroundColor
+            ? `linear-gradient(to right bottom,  ${
+                board.style.backgroundColor
+              } 0%, ${darkenColor(board.style.backgroundColor, 0.2)} 100%)`
+            : "",
+          gridTemplateColumns: isMenuOpen ? "auto 1fr 340px" : "auto 1fr ",
           transition: " grid-template-columns 0.3s ease",
         }}
       >
@@ -241,12 +269,16 @@ export function BoardDetails() {
           bgColor={bgColor}
           allowDrop={allowDrop}
           drag={drag}
-          setIsActivitiesOpen={setIsActivitiesOpen}
-          isActivitiesOpen={isActivitiesOpen}
+          setIsMenuOpen={setIsMenuOpen}
+          isMenuOpen={isMenuOpen}
         />
 
-        {isActivitiesOpen && !taskId && (
-          <Activities board={board} setIsActivitiesOpen={setIsActivitiesOpen} />
+        {isMenuOpen && !taskId && (
+          <Menu
+            board={board}
+            isMenuOpen={isMenuOpen}
+            setIsMenuOpen={setIsMenuOpen}
+          />
         )}
 
         {board && <BoardSideBar board={board} bgColor={bgColor} />}
@@ -254,7 +286,7 @@ export function BoardDetails() {
           <GroupList
             groups={board.groups}
             allowDrop={allowDrop}
-            isActivitiesOpen={isActivitiesOpen}
+            isActivitiesOpen={isMenuOpen}
           />
         )}
 

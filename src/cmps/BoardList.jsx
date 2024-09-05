@@ -13,6 +13,7 @@ export function BoardList({
   starredBoards,
   onAddBoard,
   onRemoveBoard,
+  darkenColor,
   // onUpdateBoard,
 }) {
   console.log(boards);
@@ -57,18 +58,6 @@ export function BoardList({
     return board.owner?._id === user._id;
   }
 
-  function handleCreateBoard(board) {
-    console.log(board);
-    onAddBoard(board);
-    handleClosePopover();
-  }
-
-  function handleClosePopover() {
-    setIsPopoverOpen(false);
-    setAnchorEl(null);
-    setModalOpenByName(null);
-  }
-
   return (
     <section
       className="board-list-container"
@@ -99,7 +88,20 @@ export function BoardList({
               to={`/board/${board._id}`}
               key={idx}
               style={{
-                backgroundImage: `url(${board?.style?.backgroundImage})`,
+                backgroundImage: board.style.backgroundImage
+                  ? `url(${board?.style?.backgroundImage})`
+                  : "none",
+                backgroundColor: board.style.backgroundColor
+                  ? board?.style?.backgroundColor
+                  : "none",
+                background: board.style.backgroundColor
+                  ? `linear-gradient(to right bottom,  ${
+                      board.style.backgroundColor
+                    } 0%, ${darkenColor(
+                      board.style.backgroundColor,
+                      0.2
+                    )} 100%)`
+                  : "",
                 display: "block",
               }}
             >

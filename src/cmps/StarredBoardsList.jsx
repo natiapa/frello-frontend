@@ -3,7 +3,11 @@ import { BoardPreview } from "./BoardPreview";
 import { useEffect, useState } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
 
-export function StarredBoardsList({ starredBoards, onRemoveBoard }) {
+export function StarredBoardsList({
+  starredBoards,
+  onRemoveBoard,
+  darkenColor,
+}) {
   const [columns, setColumns] = useState(4);
 
   useEffect(() => {
@@ -52,7 +56,20 @@ export function StarredBoardsList({ starredBoards, onRemoveBoard }) {
             to={`/board/${starredBoard._id}`}
             key={idx}
             style={{
-              backgroundImage: `url(${starredBoard?.style?.backgroundImage})`,
+              backgroundImage: starredBoard.style.backgroundImage
+                ? `url(${starredBoard?.style?.backgroundImage})`
+                : "none",
+              backgroundColor: starredBoard.style.backgroundColor
+                ? starredBoard?.style?.backgroundColor
+                : "none",
+              background: starredBoard.style.backgroundColor
+                ? `linear-gradient(to right bottom,  ${
+                    starredBoard.style.backgroundColor
+                  } 0%, ${darkenColor(
+                    starredBoard.style.backgroundColor,
+                    0.2
+                  )} 100%)`
+                : "",
               display: "block",
             }}
           >

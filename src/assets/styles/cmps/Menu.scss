@@ -1,0 +1,7 @@
+.menu {
+  grid-column: 3/4;
+  grid-row: 2 / 5;
+  display: grid;
+  grid-template-rows: repeat(3, max-content);
+  background-color: #fff;
+}
