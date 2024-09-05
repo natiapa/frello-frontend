@@ -3,14 +3,10 @@ import { boardService } from "../services/board";
 import { loadBoard, updateBoard } from "../store/actions/board.actions";
 import { IoIosArrowBack } from "react-icons/io";
 import { useSelector } from "react-redux";
-export function ChangeBg({ setIsChangeBgOpen }) {
-  const board = useSelector((storeState) => storeState.boardModule.board);
-  const [currBoard, setCurrBoard] = useState(board);
+export function ChangeBg({ board, setIsChangeBgOpen, setCurrBoard }) {
+  // const board = useSelector((storeState) => storeState.boardModule.board);
+  // const [currBoard, setCurrBoard] = useState(board);
   const [type, setType] = useState("");
-
-  useEffect(() => {
-    loadBoard(board._id);
-  }, [currBoard.style]);
 
   const urlImgs = [
     {
@@ -98,22 +94,23 @@ export function ChangeBg({ setIsChangeBgOpen }) {
     "#D2A4A3", // Salmon
   ];
 
-  function handleImgClick(bgType, idx) {
+  async function handleImgClick(bgType, idx) {
     if (type === "bgImage") {
       const boardToUpdate = {
-        ...currBoard,
+        ...board,
         style: { backgroundImage: bgType },
       };
       setCurrBoard(boardToUpdate);
       updateBoard(boardToUpdate);
+      loadBoard(boardToUpdate._id);
     } else if (type === "bgColor") {
       const boardToUpdate = {
-        ...currBoard,
+        ...board,
         style: { backgroundColor: bgType },
       };
       setCurrBoard(boardToUpdate);
-      console.log(currBoard.style);
       updateBoard(boardToUpdate);
+      loadBoard(boardToUpdate._id);
     }
   }
 
@@ -127,11 +124,25 @@ export function ChangeBg({ setIsChangeBgOpen }) {
       </header>
 
       <section className="btns">
-        <button className="images-btn" onClick={() => setType("bgImage")}>
-          Photos
+        <button
+          className="images-btn"
+          onClick={() => setType("bgImage")}
+          style={{
+            backgroundImage:
+              "url(https://trello.com/assets/97db30fe74a58b7b7a18.png)",
+          }}
+        >
+          <span className="photos-title">Photos</span>
         </button>
-        <button className="colors-btn" onClick={() => setType("bgColor")}>
-          Colors
+        <button
+          className="colors-btn"
+          onClick={() => setType("bgColor")}
+          style={{
+            backgroundImage:
+              "url(https://trello.com/assets/8f9c1323c9c16601a9a4.jpg)",
+          }}
+        >
+          <span className="colors-title">Colors</span>
         </button>
       </section>
 

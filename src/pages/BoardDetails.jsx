@@ -44,6 +44,8 @@ export function BoardDetails() {
   const [taskPrevActionsModalData, setTaskPrevActionsModalData] = useState("");
   const [selectedLabels, setSelectedLabels] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currBoard, setCurrBoard] = useState(board);
+
   // const [draggedMemberId, setDraggedMemberId] = useState("");
 
   useEffect(() => {
@@ -54,19 +56,19 @@ export function BoardDetails() {
     loadBoard(boardId, filterBy);
     if (!preview?.length) return;
     setPreview(preview);
-  }, [boardId, preview, filterBy]);
+  }, [boardId, preview, filterBy, currBoard]);
 
   useEffect(() => {
     calculateBgColor();
-  }, [board?.style?.backgroundImage, bgColor]);
+  }, [currBoard?.style?.backgroundImage, bgColor]);
 
   async function calculateBgColor() {
-    const bgImage = await board?.style?.backgroundImage;
+    const bgImage = await currBoard?.style?.backgroundImage;
 
     if (bgImage) {
       const fac = new FastAverageColor();
       try {
-        const color = await fac.getColorAsync(board.style.backgroundImage);
+        const color = await fac.getColorAsync(currBoard.style.backgroundImage);
         setbgColor(color.hex);
       } catch (error) {
         console.error("Failed to calculate background color:", error);
@@ -162,7 +164,7 @@ export function BoardDetails() {
     return counter;
   }
 
-  if (!board || !board.style) return;
+  if (!board || !currBoard) return;
   console.log(board);
 
   return (
@@ -170,11 +172,11 @@ export function BoardDetails() {
       <section
         className="board-details"
         style={{
-          backgroundImage: board.style.backgroundImage
-            ? `url(${board?.style?.backgroundImage})`
+          backgroundImage: currBoard.style.backgroundImage
+            ? `url(${currBoard?.style?.backgroundImage})`
             : "none",
-          backgroundColor: board.style.backgroundColor
-            ? board?.style?.backgroundColor
+          backgroundColor: currBoard.style.backgroundColor
+            ? currBoard?.style?.backgroundColor
             : "none",
 
           gridTemplateColumns: isMenuOpen ? "auto 1fr 340px" : "auto 1fr ",
@@ -258,6 +260,7 @@ export function BoardDetails() {
             board={board}
             isMenuOpen={isMenuOpen}
             setIsMenuOpen={setIsMenuOpen}
+            setCurrBoard={setCurrBoard}
           />
         )}
 

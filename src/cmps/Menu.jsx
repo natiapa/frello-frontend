@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Activities } from "./Activities";
 import { ChangeBg } from "./ChangeBg";
 
-export function Menu({ board, isMenuOpen, setIsMenuOpen }) {
+export function Menu({ board, isMenuOpen, setIsMenuOpen, setCurrBoard }) {
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
   const [isChangeBgOpen, setIsChangeBgOpen] = useState(false);
   return (
@@ -12,7 +12,11 @@ export function Menu({ board, isMenuOpen, setIsMenuOpen }) {
       )}
 
       {isChangeBgOpen && !isActivitiesOpen && (
-        <ChangeBg board={board} setIsChangeBgOpen={setIsChangeBgOpen} />
+        <ChangeBg
+          board={board}
+          setCurrBoard={setCurrBoard}
+          setIsChangeBgOpen={setIsChangeBgOpen}
+        />
       )}
 
       {!isActivitiesOpen && !isChangeBgOpen && (
