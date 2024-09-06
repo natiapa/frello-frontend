@@ -5,7 +5,12 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useSelector } from "react-redux";
 import SvgIcon from "../cmps/SvgIcon";
 
-export function ChangeBg({ board, setIsChangeBgOpen, setIsMenuOpen }) {
+export function ChangeBg({
+  board,
+  setIsChangeBgOpen,
+  setIsMenuOpen,
+  setCurrBoardBgStyle,
+}) {
   const [type, setType] = useState("");
 
   const urlImgs = [
@@ -101,14 +106,14 @@ export function ChangeBg({ board, setIsChangeBgOpen, setIsMenuOpen }) {
         style: { backgroundImage: bgType },
       };
       updateBoard(boardToUpdate);
-      console.log(board);
+      setCurrBoardBgStyle(boardToUpdate.style);
     } else if (type === "bgColor") {
       const boardToUpdate = {
         ...board,
         style: { backgroundColor: bgType },
       };
       updateBoard(boardToUpdate);
-      console.log(board);
+      setCurrBoardBgStyle(boardToUpdate.style);
     }
   }
 
