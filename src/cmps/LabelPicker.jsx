@@ -1,11 +1,12 @@
 
 import { useEffect, useState } from "react";
-import { FiEdit } from "react-icons/fi";
+
 import { boardService } from "../services/board";
 import { useSelector } from "react-redux";
 import { updateBoard } from "../store/actions/board.actions";
 import SvgIcon from "./SvgIcon";
 import { MdEdit } from "react-icons/md";
+import { EditLabel } from "./EditLabel";
 // import { loadBoard, addBoardMsg } from "../store/actions/board.actions";
 
 export function LabelPicker({
@@ -16,11 +17,10 @@ export function LabelPicker({
   setSelectedLabels,
   setIsPopoverOpen,
 }) {
-
-  
   const board = useSelector((storeState) => storeState.boardModule.board);
+  const [editLabel, setEditLabel] = useState('')
   const labelsList = board.labels
-  console.log(labelsList)
+
 
   // useEffect(() => {
   //   setSelectedLabels(task.labels);
@@ -46,45 +46,55 @@ export function LabelPicker({
     });
     updateBoard(updatedBoard);
   }
+  function handleEditLabel(label){
+    setEditLabel(label)
+    console.log(label)
 
-  return (
+  }
+
+ return (
     <div className="edit-task-modal-content" onClick={handlePopoverClick}>
- 
-      <button
-        className="close-labels-btn"
-        onClick={() => setIsPopoverOpen(false)}
-      >
-        <SvgIcon iconName="close" />
-      </button>
+      {editLabel ? (
+        <EditLabel label={editLabel} /> 
+      ) : (
+        <>
+          <button
+            className="close-labels-btn"
+            onClick={() => setIsPopoverOpen(false)}
+          >
+            <SvgIcon iconName="close" />
+          </button>
 
-      <h2>Labels</h2>
+          <h2>Labels</h2>
 
-      <p className="labels-title">Lables</p>
-      <div className="labels-container">
-        <ul>
-          {labelsList.map((label, idx) => (
-            <li key={idx}>
-              <input
-                data-name={label.color}
-                type="checkbox"
-                // checked={selectedLabels.includes(label.color)}
-                // onChange={() => handleLabelChange(label.color)}
-              />
-              <div
-                className="label-color"
-                style={{
-                  backgroundColor: label.color,
-                }}
-              ></div>
+          <p className="labels-title">Labels</p>
+          <div className="labels-container">
+            <ul>
+              {labelsList.map((label, idx) => (
+                <li key={idx}>
+                  <input
+                    data-name={label.color}
+                    type="checkbox"
+                    // checked={selectedLabels.includes(label.color)}
+                    // onChange={() => handleLabelChange(label.color)}
+                  />
+                  <div
+                    className="label-color"
+                    style={{
+                      backgroundColor: label.color,
+                    }}
+                  ></div>
 
-              <span className="edit-icon">
-                <MdEdit/>
-              </span>
-
-            </li>
-          ))}
-        </ul>
-      </div>
+                  <span className="edit-icon">
+                    <MdEdit onClick={()=>handleEditLabel(label)} />
+        
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
     </div>
   );
 }
