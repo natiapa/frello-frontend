@@ -1,24 +1,24 @@
-import { useState, useEffect, useRef } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { Link, Outlet } from 'react-router-dom'
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, Outlet } from "react-router-dom";
 
 import {
-    showSuccessMsg,
-    showErrorMsg,
-    eventBus,
-} from '../services/event-bus.service'
-import { loadBoard, addBoardMsg } from '../store/actions/board.actions'
+  showSuccessMsg,
+  showErrorMsg,
+  eventBus,
+} from "../services/event-bus.service";
+import { loadBoard, addBoardMsg } from "../store/actions/board.actions";
 
-import { GroupList } from '../cmps/GroupList'
-import { SideBar } from '../cmps/Sidebar'
-import { BoardHeader } from '../cmps/BoardHeader'
+import { GroupList } from "../cmps/GroupList";
+import { SideBar } from "../cmps/Sidebar";
+import { BoardHeader } from "../cmps/BoardHeader";
 // import { Outlet } from "react-router-dom"
-import { BoardSideBar } from '../cmps/BoardSideBar'
-import { AppHeader } from '../cmps/AppHeader'
-import { TaskDetailsActions } from '../cmps/TaskDetailsActions'
+import { BoardSideBar } from "../cmps/BoardSideBar";
+import { AppHeader } from "../cmps/AppHeader";
+import { TaskDetailsActions } from "../cmps/TaskDetailsActions";
 
-import { FastAverageColor } from 'fast-average-color'
+import { FastAverageColor } from "fast-average-color";
 
 import { updateBoard } from "../store/actions/board.actions";
 import { LabelList } from "../cmps/LabelList";
@@ -44,29 +44,35 @@ export function BoardDetails() {
   const [taskPrevActionsModalData, setTaskPrevActionsModalData] = useState("");
   const [selectedLabels, setSelectedLabels] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currBoardBgStyle, setCurrBoardBgStyle] = useState(board?.style);
 
   useEffect(() => {
     eventBus.on("show-task", onPreviewToShow);
   }, []);
 
-    useEffect(() => {
-        loadBoard(boardId, filterBy)
-        if (!preview?.length) return
-        setPreview(preview)
-    }, [boardId, preview, filterBy])
+  useEffect(() => {
+    loadBoard(boardId, filterBy);
+    if (!preview?.length) return;
+    setPreview(preview);
+  }, [boardId, preview, filterBy]);
 
   useEffect(() => {
     calculateBgColor();
-  }, [board?.style, bgColor]);
+  }, [board?.style, bgColor, currBoardBgStyle]);
 
   async function calculateBgColor() {
-    const bgImage = await board?.style?.backgroundImage;
-    const bgColor = await board?.style?.backgroundColor;
+    const bgImage = currBoardBgStyle?.backgroundImage
+      ? await currBoardBgStyle.backgroundImage
+      : await board?.style?.backgroundImage;
+
+    const bgColor = currBoardBgStyle?.backgroundColor
+      ? await currBoardBgStyle.backgroundColor
+      : await board?.style?.backgroundColor;
 
     if (bgImage) {
       const fac = new FastAverageColor();
       try {
-        const color = await fac.getColorAsync(board.style.backgroundImage);
+        const color = await fac.getColorAsync(bgImage);
         setBgColor(color.hex);
       } catch (error) {
         console.error("Failed to calculate background color:", error);
@@ -76,105 +82,108 @@ export function BoardDetails() {
     }
   }
 
-    function onPreviewToShow(data) {
-        setPreview({
-            position: 'absolute',
-            left: `${data.elData.left}px`,
-            top: `${data.elData.top}px`,
-            width: `${data.elData.width}px`,
-            height: `${data.elData.heigh + 100}px`,
-            zIndex: '1000',
-        })
+  function onPreviewToShow(data) {
+    setPreview({
+      position: "absolute",
+      left: `${data.elData.left}px`,
+      top: `${data.elData.top}px`,
+      width: `${data.elData.width}px`,
+      height: `${data.elData.heigh + 100}px`,
+      zIndex: "1000",
+    });
 
-        setTaskPrevActionsModalData({
-            position: 'fixed',
-            left: `${data.elData.left + 270}px`,
-            top: `${data.elData.top}px`,
-            width: `max-content`,
-            height: `max-content`,
-            zIndex: '1000',
-        })
-        setIsTaskPrevModalOpen(isOpenModal => !isOpenModal)
+    setTaskPrevActionsModalData({
+      position: "fixed",
+      left: `${data.elData.left + 270}px`,
+      top: `${data.elData.top}px`,
+      width: `max-content`,
+      height: `max-content`,
+      zIndex: "1000",
+    });
+    setIsTaskPrevModalOpen((isOpenModal) => !isOpenModal);
 
-        setCurrElToEdit(data.dataName)
-        setCurrGroup(data.group)
-        setCurrTask(data.task)
-        setValue(data.task.title)
-        setSelectedLabels(data.task.labels || [])
-    }
+    setCurrElToEdit(data.dataName);
+    setCurrGroup(data.group);
+    setCurrTask(data.task);
+    setValue(data.task.title);
+    setSelectedLabels(data.task.labels || []);
+  }
 
-    async function onUpdated(name, value) {
-        if (!board) return
-        try {
-            const updatedBoard = boardService.updateBoard(
-                board,
-                currGroup.id,
-                currTask.id,
-                {
-                    key: name,
-                    value: value,
-                }
-            )
-            await updateBoard(updatedBoard)
-            await loadBoard(boardId)
-        } catch (error) {
-            console.error('Failed to update the board:', error)
+  async function onUpdated(name, value) {
+    if (!board) return;
+    try {
+      const updatedBoard = boardService.updateBoard(
+        board,
+        currGroup.id,
+        currTask.id,
+        {
+          key: name,
+          value: value,
         }
+      );
+      await updateBoard(updatedBoard);
+      await loadBoard(boardId);
+    } catch (error) {
+      console.error("Failed to update the board:", error);
+    }
+  }
+
+  function handleSave(ev) {
+    ev.preventDefault();
+    if (!board) return;
+
+    if (currElToEdit === "title") {
+      onUpdated(currElToEdit, value);
+      setIsTaskPrevModalOpen((isOpenModal) => !isOpenModal);
     }
 
-    function handleSave(ev) {
-        ev.preventDefault()
-        if (!board) return
-
-        if (currElToEdit === 'title') {
-            onUpdated(currElToEdit, value)
-            setIsTaskPrevModalOpen(isOpenModal => !isOpenModal)
-        }
-
-        if (currElToEdit === 'labels') {
-            onUpdated('labels', selectedLabels)
-        }
+    if (currElToEdit === "labels") {
+      onUpdated("labels", selectedLabels);
     }
+  }
 
-    function allowDrop(ev) {
-        ev.preventDefault()
-    }
+  function allowDrop(ev) {
+    ev.preventDefault();
+  }
 
-    function drag(ev) {
-        ev.dataTransfer.setData('text', ev.target.id)
-    }
+  function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
 
-    function getChecklists() {
-        const checklists = currTask.checklists
-        if (!checklists) return 0
-        let counter = 0
-        checklists.forEach(checklist => {
-            counter += checklist.items.length
-        })
-        return counter
-    }
+  function getChecklists() {
+    const checklists = currTask.checklists;
+    if (!checklists) return 0;
+    let counter = 0;
+    checklists.forEach((checklist) => {
+      counter += checklist.items.length;
+    });
+    return counter;
+  }
 
-    function getIsChecked() {
-        const checklists = currTask.checklists
-        if (!checklists) return 0
-        let counter = 0
-        checklists.forEach(checklist => {
-            counter += checklist.items.filter(item => item.isChecked).length
-        })
-        return counter
-    }
+  function getIsChecked() {
+    const checklists = currTask.checklists;
+    if (!checklists) return 0;
+    let counter = 0;
+    checklists.forEach((checklist) => {
+      counter += checklist.items.filter((item) => item.isChecked).length;
+    });
+    return counter;
+  }
 
-    if (!board) return
-
+  if (!board || !board.style) return;
   return (
     <section
       className="board-details"
       style={{
-        backgroundImage: board.style.backgroundImage
-          ? `url(${board?.style?.backgroundImage})`
+        backgroundImage: currBoardBgStyle?.backgroundImage
+          ? `url(${currBoardBgStyle.backgroundImage})`
+          : board?.style?.backgroundImage
+          ? `url(${board.style.backgroundImage})`
           : "none",
-        backgroundColor: board.style.backgroundColor
-          ? board?.style?.backgroundColor
+        backgroundColor: currBoardBgStyle?.backgroundColor
+          ? `${currBoardBgStyle.backgroundColor}`
+          : board?.style?.backgroundColor
+          ? `${board.style.backgroundColor}`
           : "none",
 
         gridTemplateColumns: isMenuOpen ? "auto 1fr 340px" : "auto 1fr ",
@@ -255,6 +264,7 @@ export function BoardDetails() {
           board={board}
           isMenuOpen={isMenuOpen}
           setIsMenuOpen={setIsMenuOpen}
+          setCurrBoardBgStyle={setCurrBoardBgStyle}
         />
       )}
 

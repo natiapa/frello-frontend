@@ -14,7 +14,7 @@ export function AppHeader({ bgColor, borderBottom, logoImg, logoColor }) {
     <header
       className="app-header full"
       style={{
-        backgroundColor: `${bgColor}00`,
+        backgroundColor: `${bgColor}`,
         borderBottom: borderBottom,
       }}
     >

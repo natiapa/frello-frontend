@@ -4,7 +4,12 @@ import { ChangeBg } from "./ChangeBg";
 import SvgIcon from "./SvgIcon";
 import { IoIosArrowBack } from "react-icons/io";
 
-export function Menu({ board, isMenuOpen, setIsMenuOpen }) {
+export function Menu({
+  board,
+  isMenuOpen,
+  setIsMenuOpen,
+  setCurrBoardBgStyle,
+}) {
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
   const [isChangeBgOpen, setIsChangeBgOpen] = useState(false);
   return (
@@ -22,6 +27,7 @@ export function Menu({ board, isMenuOpen, setIsMenuOpen }) {
           board={board}
           setIsChangeBgOpen={setIsChangeBgOpen}
           setIsMenuOpen={setIsMenuOpen}
+          setCurrBoardBgStyle={setCurrBoardBgStyle}
         />
       )}
 
