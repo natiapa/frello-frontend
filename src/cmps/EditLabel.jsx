@@ -3,10 +3,18 @@ import { useState, useEffect } from "react";
 export function EditLabel({ label }) {
   const [labelToEdit, setLabelToEdit] = useState(label);
 
+  const colors = [
+    "#A4E57E", "#FFECB3", "#FFE0B2", "#FFCDD2", "#D1C4E9",
+    "#81C784", "#FFD54F", "#FF7043", "#E57373", "#9575CD",
+    "#4CAF50", "#FFB74D", "#FF5722", "#F44336", "#673AB7",
+    "#2196F3", "#4DD0E1", "#AED581", "#FFC107", "#BDBDBD",
+    "#1976D2", "#00ACC1", "#689F38", "#EC407A", "#616161",
+  ];
+
   console.log(label);
-  //   useEffect(() => {
-  //     setLabelToEdit(label);
-  //   }, [label]);
+  useEffect(() => {
+    setLabelToEdit(label);
+  }, [label]);
 
   //   function handleInputChange(event) {
   //     const { name, value } = event.target;
@@ -15,6 +23,14 @@ export function EditLabel({ label }) {
   //       [name]: value,
   //     }));
   //   }
+
+  function handelInputChange({ target }) {
+    const { name, value } = target
+    setLabelToEdit((prevLabel) => ({
+      ...prevLabel,
+      [name]: value,
+    }))
+  }
 
   return (
     <>
@@ -27,7 +43,13 @@ export function EditLabel({ label }) {
           {labelToEdit.title}
         </div>
 
-        
+        <label>Title</label>
+        <input
+          type="text"
+          name="title"
+          value={labelToEdit.title}
+          onChange={handelInputChange}
+        />
       </section>
     </>
   );

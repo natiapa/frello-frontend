@@ -30,4 +30,44 @@
     font-weight: bold;
     margin-bottom: 10px;
   }
+  .input-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  input::placeholder {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  input:focus::placeholder {
+    opacity: 0; /* העלמת הטקסט של placeholder כאשר מתחילים להקליד */
+  }
+  
+  .cursor {
+    display: inline-block;
+    width: 1px;
+    height: 1.5em;
+    background-color: black;
+    animation: blink 1s steps(2, start) infinite;
+    position: absolute;
+    top: 50%;
+    left: 5px; /* מקם את הקו לצד הימני */
+    transform: translateY(-50%);
+  }
+  
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
   
