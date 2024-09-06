@@ -19,6 +19,7 @@ import { AppHeader } from "../cmps/AppHeader";
 import { TaskDetailsActions } from "../cmps/TaskDetailsActions";
 
 import { FastAverageColor } from "fast-average-color";
+import chroma from "chroma-js";
 
 import { updateBoard } from "../store/actions/board.actions";
 import { LabelList } from "../cmps/LabelList";
@@ -78,7 +79,8 @@ export function BoardDetails() {
         console.error("Failed to calculate background color:", error);
       }
     } else if (bgColor) {
-      setBgColor(bgColor);
+      const darkenedColor = chroma(bgColor).darken(1.5).hex();
+      setBgColor(darkenedColor);
     }
   }
 
