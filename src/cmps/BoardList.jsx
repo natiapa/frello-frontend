@@ -13,7 +13,6 @@ export function BoardList({
   starredBoards,
   onAddBoard,
   onRemoveBoard,
-  darkenColor,
   // onUpdateBoard,
 }) {
   console.log(boards);
@@ -139,7 +138,7 @@ export function BoardList({
           <Popover
             id={anchorEl}
             open={isPopoverOpen}
-            onClose={handleClosePopover}
+            // onClose={handleClosePopover}
             anchorEl={anchorEl}
             anchorOrigin={{
               vertical: "bottom",

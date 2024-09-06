@@ -4,6 +4,7 @@
   display: grid;
   grid-template-rows: repeat(3, max-content);
   background-color: #fff;
+  transition: grid-column 0.3s ease;
 
   .menu-header {
     grid-row: 1;
@@ -41,6 +42,8 @@
 
         svg {
           place-self: center;
+          width: 20px;
+          height: 20px;
         }
       }
     }
@@ -97,6 +100,8 @@
 
           svg {
             place-self: center;
+            width: 20px;
+            height: 20px;
           }
         }
       }

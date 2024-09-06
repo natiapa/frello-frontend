@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { boardService } from "../services/board";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 
 export function Edit({
   task,
@@ -7,11 +10,23 @@ export function Edit({
   setCurrElToEdit,
 }) {
   const [value, setValue] = useState(task[currElToEdit]);
+  const board = useSelector((storeState) => storeState.boardModule.board);
+
+  const { groupId } = useParams();
+  const group = board?.groups?.find((group) => group.id === groupId);
 
   function handleSave() {
     if (currElToEdit === "description") {
       onUpdated(currElToEdit, value);
       setCurrElToEdit("");
+      boardService.updateActivities(
+        board,
+        "updated description",
+        group.id,
+        group.title,
+        task.id,
+        task.title
+      );
     }
   }
 
@@ -19,6 +34,14 @@ export function Edit({
     if (currElToEdit === "title") {
       onUpdated(currElToEdit, value);
       setCurrElToEdit("");
+      boardService.updateActivities(
+        board,
+        "updated title",
+        group.id,
+        group.title,
+        task.id,
+        task.title
+      );
     }
   }
 

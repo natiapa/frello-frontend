@@ -2,15 +2,7 @@
   display: grid;
   // grid-template-rows: 56px;
   grid-template-columns: 1fr;
-  hr {
-    grid-row: 1;
-    place-self: end center;
-    width: 90%;
-    // background-color: #dadbdc;
-    height: 3px;
-    border: none;
-    margin: 0;
-  }
+
   .activity-header {
     grid-row: 1;
     display: grid;
@@ -47,6 +39,8 @@
 
         svg {
           place-self: center;
+          width: 20px;
+          height: 20px;
         }
       }
     }
@@ -88,11 +82,24 @@
   .activities-list {
     place-self: start;
     grid-row: 2;
-    padding: 1em;
-
+    display: grid;
+    row-gap: 0.8em;
+    padding-block-start: 1em;
     .activity {
-      // display: grid;
-      // font-size: 14px;
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      font-size: 14px;
+
+      .member-img {
+        display: grid;
+        place-self: start center;
+        align-content: center;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        text-align: center;
+        color: white;
+      }
 
       .activity-data {
         grid-column: 2;

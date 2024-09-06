@@ -2,6 +2,7 @@ import { storageService } from "../async-storage.service";
 import { getRandomColor, makeId } from "../util.service";
 import { userService } from "../user";
 
+
 const STORAGE_KEY = "board";
 
 export const boardService = {
@@ -18,7 +19,8 @@ export const boardService = {
   getEmptyItem,
   getEmptyBoard,
   getEmptyDueDate,
-  getEmptyAttach
+  getEmptyAttach,
+  updateActivities
 };
 window.cs = boardService;
 
@@ -167,6 +169,14 @@ function updateBoard(board, groupId, taskId, { key, value }, activity = "") {
   if (activity) {
     activity = addActivity(activity);
   }
+
+  save(board);
+  return board;
+}
+
+function updateActivities(board, action, groupId, groupTitle, taskId, taskTitle) {
+  const member = userService.getLoggedinUser()
+  board.activities.push({ id: makeId(), byMember: member, createdAt: Date.now(), group: { id: groupId, title: groupTitle }, task: { id: taskId, title: taskTitle }, title: action })
 
   save(board);
   return board;

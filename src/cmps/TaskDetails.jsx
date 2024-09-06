@@ -26,7 +26,7 @@ export function TaskDetails() {
   const [selectedLabels, setSelectedLabels] = useState(task.labels);
   const [newDueDate, setNewDueDate] = useState(task.dueDate);
   const [newChecklists, setNewCheckLists] = useState(task.checklists);
-  const [newFiles, setNewFiles] = useState(task.attachments|| []);
+  const [newFiles, setNewFiles] = useState(task.attachments || []);
 
   console.log(task);
   console.log(task.attachments);
@@ -34,7 +34,7 @@ export function TaskDetails() {
 
   useEffect(() => {
     if (task) {
-      setNewFiles(task.attachments)
+      setNewFiles(task.attachments);
       setSelectedLabels(task.labels);
       setNewDueDate(task.dueDate);
       setNewCheckLists(task.checklists);
