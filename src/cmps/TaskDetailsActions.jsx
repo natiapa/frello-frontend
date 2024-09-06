@@ -149,13 +149,13 @@ export function TaskDetailsActions({
                 horizontal: "left",
               }}
               disablePortal
-              // PaperProps={{
-              //   sx: {
-              //     width: "400px",
-              //     height: "600px",
-              //     padding: "20px",
-              //   },
-              // }}
+              PaperProps={{
+                sx: {
+                  width: "400px",
+                  height: "600px",
+                  padding: "20px",
+                },
+              }}
               
             >
               <LabelPicker
