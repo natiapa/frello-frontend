@@ -3,6 +3,7 @@ import { boardService } from '../services/board'
 import { filterBoard } from '../store/actions/board.actions'
 import { useSelector } from 'react-redux'
 import { Checkbox, MenuItem, Select } from '@mui/material'
+import { HiMiniUserCircle } from 'react-icons/hi2'
 
 export function BoardFilter() {
     const [filterToEdit, setFilterToEdit] = useState(
@@ -99,7 +100,7 @@ export function BoardFilter() {
     const countMembers = filterToEdit.selectMember.length || 0
     return (
         <section className="board-filter" onClick={handlePopoverClick}>
-            <h3 className='header'>Filter</h3>
+            <h3 className="header">Filter</h3>
             <h3>Keyword</h3>
             <input
                 type="text"
@@ -118,13 +119,16 @@ export function BoardFilter() {
                         value={filterToEdit.noMembers}
                         onChange={handleChange}
                     />
+                    <span>
+                        <HiMiniUserCircle style={{height: '24px', width:'24px', marginTop: '5px'}}/>
+                    </span>{' '}
                     No members
                 </label>
 
                 {/* <input type="checkbox" name="allMembers" value={filterToEdit.allMembers} onChange={handleChange} checked={!!filterToEdit.allMembers} /> */}
 
                 <Select
-                    className='select-input'
+                    className="select-input"
                     name="selectMember"
                     onChange={handleChangeSelectMember}
                     value={filterToEdit.selectMember}
@@ -155,7 +159,12 @@ export function BoardFilter() {
                 </label>
 
                 <label>
-                    <input type="checkbox" name="overdue" value={filterToEdit.overdue} onChange={handleChange} />
+                    <input
+                        type="checkbox"
+                        name="overdue"
+                        value={filterToEdit.overdue}
+                        onChange={handleChange}
+                    />
                 </label>
             </div>
 
