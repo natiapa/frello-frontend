@@ -57,6 +57,18 @@ export function BoardList({
     return board.owner?._id === user._id;
   }
 
+  function handleCreateBoard(board) {
+    console.log(board);
+    onAddBoard(board);
+    handleClosePopover();
+  }
+
+  function handleClosePopover() {
+    setIsPopoverOpen(false);
+    setAnchorEl(null);
+    setModalOpenByName(null);
+  }
+
   return (
     <section
       className="board-list-container"
