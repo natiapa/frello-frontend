@@ -295,18 +295,13 @@ function _createBoards() {
       backgroundColor: "#61bd4f",
     },
     labels: [
-      { id: 1, label: "Green", color: "#61bd4f" },
-      { id: 2, label: "Yellow", color: "#f2d600" },
-      { id: 3, label: "Orange", color: "#ff9f1a" },
-      { id: 4, label: "Red", color: "#eb5a46" },
-      { id: 5, label: "Purple", color: "#c377e0" },
-      { id: 6, label: "Blue", color: "#0079bf" },
-      { id: 7, label: "Light Blue", color: "#00c2e0" },
-      { id: 8, label: "Pink", color: "#ff78cb" },
-      { id: 9, label: "Black", color: "#344563" },
-      { id: 10, label: "Sky", color: "#00bcd4" },
-      { id: 11, label: "Lime", color: "#51e898" },
-      { id: 12, label: "None", color: "#ffffff" }
+      { id: 1, title: "", color: "#7F5F01" },
+      { id: 2, title: "", color: "#A54800" },
+      { id: 3, title: "", color: "#AE2E24" },
+      { id: 4, title: "", color: "#5E4DB2" },
+      { id: 5, titel: "", color: "#0055CC" },
+      { id: 6, titel: "", color: "#206A83" },
+      { id: 12, titel: "", color: "#A1BDD914" }
     ],
     members: [
       {

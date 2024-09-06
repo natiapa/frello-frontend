@@ -125,13 +125,13 @@ export function TaskDetails() {
                 )}
               </ul>
             )}
-
+{/* 
             {selectedLabels.length > 0 && (
               <ul className="labels">
                 <p className="header">Labels</p>
                 <LabelList labels={selectedLabels} />
               </ul>
-            )}
+            )} */}
 
             <div>
               <DueDateDisplay dueDate={task.dueDate} />

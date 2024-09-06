@@ -4,7 +4,7 @@ import { CgCreditCard } from "react-icons/cg";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { TiTag } from "react-icons/ti";
 import { Link, useParams } from "react-router-dom";
-import { EditLabels } from "./EditLabels";
+import {  LabelPicker } from "./LabelPicker";
 import { EditChecklist } from "./EditChecklist";
 import { LuClock5 } from "react-icons/lu";
 import { DueDatePicker } from "./DueDatePicker";
@@ -149,8 +149,16 @@ export function TaskDetailsActions({
                 horizontal: "left",
               }}
               disablePortal
+              // PaperProps={{
+              //   sx: {
+              //     width: "400px",
+              //     height: "600px",
+              //     padding: "20px",
+              //   },
+              // }}
+              
             >
-              <EditLabels
+              <LabelPicker
                 groupId={groupId}
                 task={task}
                 handlePopoverClick={handlePopoverClick}
