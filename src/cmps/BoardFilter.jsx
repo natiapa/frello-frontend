@@ -99,7 +99,7 @@ export function BoardFilter() {
     const countMembers = filterToEdit.selectMember.length || 0
     return (
         <section className="board-filter" onClick={handlePopoverClick}>
-            <h3>Filter</h3>
+            <h3 className='header'>Filter</h3>
             <h3>Keyword</h3>
             <input
                 type="text"
@@ -124,6 +124,7 @@ export function BoardFilter() {
                 {/* <input type="checkbox" name="allMembers" value={filterToEdit.allMembers} onChange={handleChange} checked={!!filterToEdit.allMembers} /> */}
 
                 <Select
+                    className='select-input'
                     name="selectMember"
                     onChange={handleChangeSelectMember}
                     value={filterToEdit.selectMember}
