@@ -14,6 +14,7 @@ export function EditChecklist({
   setNewCheckLists,
 }) {
   const board = useSelector((state) => state.boardModule.board);
+
   const [title, setTitle] = useState("checklist");
   const checklists =
     board.groups
@@ -31,11 +32,22 @@ export function EditChecklist({
 
   async function onAddChecklist() {
     checklists.push({ ...boardService.getEmptyChecklist(), title });
-    console.log(checklists);
     setNewCheckLists(checklists);
 
-    // console.log(checklists);
+    console.log(checklists[checklists.length - 1]);
+    const group = board?.groups?.find((group) => group.id === groupId);
+
     onUpdated("checklists", checklists);
+
+    await boardService.updateActivities(
+      board,
+      "",
+      "addChecklist",
+      group,
+      task,
+      checklists[checklists.length - 1]
+    );
+
     setIsPopoverOpen(false);
   }
 

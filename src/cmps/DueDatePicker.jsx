@@ -5,6 +5,9 @@ import { boardService } from "../services/board";
 
 export function DueDatePicker({
   onUpdated = () => {},
+  board,
+  task,
+  group,
   setIsPopoverOpen,
   handlePopoverClick,
   setNewDueDate,
@@ -148,6 +151,21 @@ export function DueDatePicker({
       actions[name]();
     }
     setNewDueDate(dueDate);
+    console.log(dueDate);
+
+    if (dueDate.date) {
+      boardService.updateActivities(
+        board,
+        "title",
+        "setDueDate",
+        group,
+        task,
+        "",
+        "",
+        "",
+        dueDate
+      );
+    }
     setIsPopoverOpen(false);
   }
 

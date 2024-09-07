@@ -47,6 +47,22 @@ export function TaskDetails() {
     }
   }, [params]);
 
+  function calculateTaskNumber() {
+    let taskNumber = 0;
+
+    for (const grp of board.groups) {
+      if (grp.id === groupId) {
+        const taskIndex = grp.tasks.findIndex((task) => task.id === taskId);
+        taskNumber += taskIndex + 2;
+        break;
+      } else {
+        taskNumber += grp.tasks.length;
+      }
+    }
+
+    return taskNumber;
+  }
+
   async function onUpdated(name, value) {
     try {
       const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
@@ -88,6 +104,16 @@ export function TaskDetails() {
         value: null,
       });
       await updateBoard(updatedBoard);
+
+      await boardService.updateActivities(
+        board,
+        "",
+        "deleteTask",
+        group,
+        task,
+        "",
+        calculateTaskNumber()
+      );
       navigate(`/board/${boardId}`);
     } catch (error) {
       console.error("Failed to delete task:", error);
@@ -134,7 +160,10 @@ export function TaskDetails() {
             )}
 
             <div>
-              <DueDateDisplay dueDate={task.dueDate} />
+              <DueDateDisplay
+                setNewDueDate={setNewDueDate}
+                dueDate={task.dueDate}
+              />
             </div>
           </div>
 
@@ -173,16 +202,20 @@ export function TaskDetails() {
               checklists={newChecklists}
               onUpdated={onUpdated}
               task={task}
+              group={group}
+              board={board}
               groupId={groupId}
               boardId={boardId}
             />
           )}
         </form>
         <TaskDetailsActions
+          board={board}
+          group={group}
+          task={task}
           boardId={board?.id}
           groupId={group.id}
           taskId={task.id}
-          task={task}
           selectedLabels={selectedLabels}
           setSelectedLabels={setSelectedLabels}
           onUpdated={onUpdated}

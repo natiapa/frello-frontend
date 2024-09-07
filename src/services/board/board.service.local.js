@@ -174,15 +174,15 @@ function updateBoard(board, groupId, taskId, { key, value }, activity = "") {
   return board;
 }
 
-async function updateActivities(board, title, type, group, task, checklist, item, dueDate) {
-  const activityToAdd = addActivity(title, type, group, task, checklist, item, dueDate)
+async function updateActivities(board, title, type, group, task, checklist, taskNumber, item, dueDate) {
+  const activityToAdd = addActivity(title, type, group, task, checklist, taskNumber, item, dueDate)
   console.log(activityToAdd)
 
   await board.activities.unshift(activityToAdd);
   await save(board);
 }
 
-function addActivity(title, type, group, task, checklist, item, dueDate) {
+function addActivity(title, type, group, task, checklist, taskNumber, item, dueDate) {
   const activity = {
     id: makeId(),
     title,
@@ -198,10 +198,20 @@ function addActivity(title, type, group, task, checklist, item, dueDate) {
       id: group?.id,
       title: group?.title
     },
-    task,
-    checklist,
+    task: {
+      id: task.id,
+      title: task.title
+    },
+    taskNumber,
+    checklist: {
+      id: checklist.id,
+      title: checklist.title
+    },
     item,
-    dueDate,
+    dueDate: {
+      date: dueDate?.date,
+      time: dueDate?.time
+    }
   };
 
   return activity
@@ -827,7 +837,6 @@ function _createBoards() {
           title: "Design wireframes",
         },
         dueDate: {
-          createdAt: "2024-09-01",
           date: "2024-09-04",
           time: "01:02"
         }

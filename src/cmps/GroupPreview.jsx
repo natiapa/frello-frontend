@@ -28,6 +28,7 @@ export function GroupPreview({ group, gIndex, allowDrop, drop }) {
         value: null,
       });
       await updateBoard(newBoard);
+      await boardService.updateActivities(board, "", "deleteGroup", group);
     } catch (error) {
       console.error("Failed to update the board:", error);
     }

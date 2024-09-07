@@ -14,10 +14,12 @@ import { BsArchive } from "react-icons/bs";
 import { ArchiveAction } from "./ArchiveAction.JSX";
 
 export function TaskDetailsActions({
+  board,
+  group,
+  task,
   boardId,
   groupId,
   taskId,
-  task,
   taskPrevActionsModalData,
   setIsTaskPrevModalOpen,
   selectedLabels,
@@ -64,7 +66,7 @@ export function TaskDetailsActions({
 
             {modalOpenByName === "checklists" && (
               <Popover
-                id={isPopoverOpen ? "checklist-popover" : undefined} 
+                id={isPopoverOpen ? "checklist-popover" : undefined}
                 open={isPopoverOpen}
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -101,7 +103,7 @@ export function TaskDetailsActions({
 
           {modalOpenByName === "due-date" && isPopoverOpen && (
             <Popover
-              id={isPopoverOpen ? "due-date-popover" : undefined} 
+              id={isPopoverOpen ? "due-date-popover" : undefined}
               open={isPopoverOpen}
               anchorEl={anchorEl}
               anchorOrigin={{
@@ -118,6 +120,9 @@ export function TaskDetailsActions({
               }}
             >
               <DueDatePicker
+                board={board}
+                task={task}
+                group={group}
                 onUpdated={onUpdated}
                 setIsPopoverOpen={setIsPopoverOpen}
                 handlePopoverClick={handlePopoverClick}
@@ -141,7 +146,7 @@ export function TaskDetailsActions({
 
           {modalOpenByName === "labels" && isPopoverOpen && (
             <Popover
-              id={isPopoverOpen ? "labels-popover" : undefined} 
+              id={isPopoverOpen ? "labels-popover" : undefined}
               open={isPopoverOpen}
               anchorEl={anchorEl}
               anchorOrigin={{
@@ -177,7 +182,7 @@ export function TaskDetailsActions({
 
             {modalOpenByName === "attach" && isPopoverOpen && (
               <Popover
-                id={isPopoverOpen ? "attachment-popover" : undefined} 
+                id={isPopoverOpen ? "attachment-popover" : undefined}
                 open={isPopoverOpen}
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -223,7 +228,7 @@ export function TaskDetailsActions({
 
             {modalOpenByName === "archive" && isPopoverOpen && (
               <Popover
-                id={isPopoverOpen ? "archive-popover" : undefined} 
+                id={isPopoverOpen ? "archive-popover" : undefined}
                 open={isPopoverOpen}
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -264,5 +269,3 @@ export function TaskDetailsActions({
     </section>
   );
 }
-
-

@@ -1,8 +1,34 @@
 import { IoIosArrowBack } from "react-icons/io";
 import SvgIcon from "./SvgIcon";
+import { useEffect } from "react";
 
 export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
-  console.log(board.activities);
+  function formatDateForTask(dateString) {
+    const date = new Date(dateString.split("/").reverse().join("-"));
+    const options = { month: "short", day: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
+    const currentYear = new Date().getFullYear();
+    const year = date.getFullYear();
+
+    if (year === currentYear) {
+      return formattedDate;
+    } else {
+      return `${formattedDate}, ${year}`;
+    }
+  }
+
+  function formatDateTimeForTask(date, time) {
+    const formattedDate = formatDateForTask(date);
+    const formattedTime = time
+      ? new Date(`1970-01-01T${time}`).toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+        })
+      : "";
+
+    return formattedTime ? `${formattedDate}, ${formattedTime}` : formattedDate;
+  }
+
   return (
     <section className="activities-container">
       <header className="activity-header">
@@ -101,7 +127,11 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
                   >
                     {activity.task.title}
                   </a>{" "}
-                  to be due {activity.dueDate.date}
+                  to be due{" "}
+                  {formatDateTimeForTask(
+                    activity.dueDate.date,
+                    activity.dueDate.time
+                  )}
                 </span>
               )}
 
@@ -113,13 +143,16 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
                     href={`/board/${board._id}/${activity.group.id}/${activity.task.id}`}
                   >
                     {" "}
-                    {activity.checklist.title}
+                    {activity.task.title}
                   </a>
                 </span>
               )}
 
               {activity.type === "deleteTask" && (
-                <span>deleted card #4 from {activity.task.title}</span>
+                <span>
+                  deleted card #{activity.taskNumber} from{" "}
+                  {activity.group.title}
+                </span>
               )}
 
               {activity.type === "deleteGroup" && (

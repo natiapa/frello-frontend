@@ -189,7 +189,7 @@ export function BoardDetails() {
           : "none",
 
         gridTemplateColumns: isMenuOpen ? "auto 1fr 340px" : "auto 1fr ",
-        transition: "grid-template-columns 0.3s ease",
+        // transition: "grid-template-columns 0.3s ease",
       }}
     >
       {isTaskPrevModalOpen && (

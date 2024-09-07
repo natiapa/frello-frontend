@@ -3,6 +3,7 @@ import { Activities } from "./Activities";
 import { ChangeBg } from "./ChangeBg";
 import SvgIcon from "./SvgIcon";
 import { IoIosArrowBack } from "react-icons/io";
+import { useParams } from "react-router";
 
 export function Menu({
   board,
@@ -12,6 +13,9 @@ export function Menu({
 }) {
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
   const [isChangeBgOpen, setIsChangeBgOpen] = useState(false);
+
+  const { taskId } = useParams();
+  if (taskId) setIsMenuOpen(false);
   return (
     <aside className="menu">
       {isActivitiesOpen && !isChangeBgOpen && (
