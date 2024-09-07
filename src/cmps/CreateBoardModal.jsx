@@ -6,6 +6,7 @@ export function CreateBoardModal({ handleCreateBoard }) {
   const [bgImage, setBgImage] = useState("");
   const [boardTitle, setBoardTitle] = useState("");
   const [selectedImgIdx, setSelectedImgIdx] = useState(null);
+
   const urlImgs = [
     {
       src: "https://cdn.pixabay.com/photo/2024/08/01/10/18/bird-8936789_1280.jpg",

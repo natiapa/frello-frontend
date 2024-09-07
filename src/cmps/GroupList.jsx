@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { GroupPreview } from "./GroupPreview";
 import { boardService } from "../services/board";
 import { useSelector } from "react-redux";
-import { updateBoard } from "../store/actions/board.actions";
+import { loadBoard, updateBoard } from "../store/actions/board.actions";
 import { AddingForm } from "./AddingForm";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
@@ -23,14 +23,13 @@ export function GroupList({ groups, allowDrop, drop, isActivitiesOpen }) {
     console.log("render!");
   }, [currGroups?.length]);
 
-  function onAddGroup() {
+  async function onAddGroup() {
     setIsNewGroup(true);
     setNewGroup(boardService.getEmptyGroup());
   }
 
   function handleOnDragEnd(result) {
     const { destination, source, type, draggableId } = result;
-    console.log(result);
     if (!destination) return;
 
     if (type === "group") {
@@ -65,6 +64,7 @@ export function GroupList({ groups, allowDrop, drop, isActivitiesOpen }) {
         key: name,
         value: value,
       });
+
       await updateBoard(updatedBoard);
     } catch (error) {
       console.error("Failed to update the board:", error);

@@ -19,14 +19,6 @@ export function Edit({
     if (currElToEdit === "description") {
       onUpdated(currElToEdit, value);
       setCurrElToEdit("");
-      boardService.updateActivities(
-        board,
-        "updated description",
-        group.id,
-        group.title,
-        task.id,
-        task.title
-      );
     }
   }
 
@@ -34,14 +26,6 @@ export function Edit({
     if (currElToEdit === "title") {
       onUpdated(currElToEdit, value);
       setCurrElToEdit("");
-      boardService.updateActivities(
-        board,
-        "updated title",
-        group.id,
-        group.title,
-        task.id,
-        task.title
-      );
     }
   }
 

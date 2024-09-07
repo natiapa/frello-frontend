@@ -62,14 +62,8 @@ async function logout() {
 }
 
 function getLoggedinUser() {
-    const loggedinUser = {
-        id: "u103",
-        fullname: "Yana",
-        imgUrl: "https://www.google.com",
-        color: "#f3a600",
-    }
-    return loggedinUser
-    // return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+
+    return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
 }
 
 function saveLoggedinUser(user) {

@@ -174,26 +174,37 @@ function updateBoard(board, groupId, taskId, { key, value }, activity = "") {
   return board;
 }
 
-function updateActivities(board, action, groupId, groupTitle, taskId, taskTitle) {
-  const member = userService.getLoggedinUser()
-  board.activities.push({ id: makeId(), byMember: member, createdAt: Date.now(), group: { id: groupId, title: groupTitle }, task: { id: taskId, title: taskTitle }, title: action })
+async function updateActivities(board, title, type, group, task, checklist, item, dueDate) {
+  const activityToAdd = addActivity(title, type, group, task, checklist, item, dueDate)
+  console.log(activityToAdd)
 
-  save(board);
-  return board;
+  await board.activities.unshift(activityToAdd);
+  await save(board);
 }
 
-function addActivity(txt) {
-  return (activity = {
-    id: utilService.makeId(),
-    txt,
+function addActivity(title, type, group, task, checklist, item, dueDate) {
+  const activity = {
+    id: makeId(),
+    title,
+    type,
     createdAt: Date.now(),
     byMember: {
       _id: "u101",
       fullname: "Abi Abambi",
       imgUrl: "http://some-img",
+      color: '#000'
     },
-    type: "add-task",
-  });
+    group: {
+      id: group?.id,
+      title: group?.title
+    },
+    task,
+    checklist,
+    item,
+    dueDate,
+  };
+
+  return activity
 }
 
 function getEmptyGroup() {
@@ -733,8 +744,47 @@ function _createBoards() {
     ],
     activities: [
       {
-        id: "a101",
-        title: "Changed Color",
+        id: "a112",
+        title: "deleted list group-title",
+        type: 'deleteGroup',
+        createdAt: 154514,
+        byMember: {
+          id: "u102",
+          fullname: "Avi",
+          imgUrl: "http://some-img",
+          color: "#f2d600",
+
+        },
+        group: {
+          id: "g101",
+          title: "Design Phase",
+        },
+      },
+      {
+        id: "a111",
+        title: "deleted card #4 from group-title",
+        type: 'deleteTask',
+        createdAt: 154514,
+        byMember: {
+          id: "u102",
+          fullname: "Avi",
+          imgUrl: "http://some-img",
+          color: "#f2d600",
+
+        },
+        group: {
+          id: "g101",
+          title: "Design Phase",
+        },
+        task: {
+          id: "c101",
+          title: "Design wireframes",
+        }
+      },
+      {
+        id: "a110",
+        title: "removed checklist-title",
+        type: 'deleteChecklist',
         createdAt: 154514,
         byMember: {
           id: "u101",
@@ -751,10 +801,70 @@ function _createBoards() {
           id: "c101",
           title: "Design wireframes",
         },
+        checklist: {
+          id: 'ck101',
+          title: 'Design Process',
+        },
+      },
+      {
+        id: "a109",
+        title: "set task-title to be task-due-date",
+        type: 'setDueDate',
+        createdAt: 154514,
+        byMember: {
+          id: "u103",
+          fullname: "Yana",
+          imgUrl: "http://some-img",
+          color: "#f3a600",
+
+        },
+        group: {
+          id: "g101",
+          title: "Design Phase",
+        },
+        task: {
+          id: "c101",
+          title: "Design wireframes",
+        },
+        dueDate: {
+          createdAt: "2024-09-01",
+          date: "2024-09-04",
+          time: "01:02"
+        }
+      },
+      {
+        id: "a101",
+        title: "complete checklist-item-text on task-title",
+        type: 'completeChecklistItem',
+        createdAt: 154514,
+        byMember: {
+          id: "u101",
+          fullname: "Natia",
+          imgUrl: "http://some-img",
+          color: "#61bd4f",
+
+        },
+        group: {
+          id: "g101",
+          title: "Design Phase",
+        },
+        task: {
+          id: "c101",
+          title: "Design wireframes",
+        },
+        checklist: {
+          id: 'ck101',
+          title: 'Design Process',
+        },
+        item: {
+          id: 'item101',
+          text: 'Gather requirements from the team',
+        }
       },
       {
         id: "a102",
-        title: "Updated Task Description",
+        title: "added checklistt-title to group-title",
+        type: 'addChecklist',
         createdAt: 154520,
         byMember: {
           id: "u102",
@@ -770,10 +880,35 @@ function _createBoards() {
           id: "c101",
           title: "Design wireframes",
         },
+        checklist: {
+          id: 'chk101',
+          title: 'colors',
+        }
+      },
+      {
+        id: "a104",
+        title: `added task-title to group-title`,
+        type: "addTask",
+        createdAt: 154540,
+        byMember: {
+          id: "u101",
+          fullname: "Natia",
+          imgUrl: "http://some-img",
+          color: "#61bd4f",
+        },
+        group: {
+          id: "g101",
+          title: "Design Phase",
+        },
+        task: {
+          id: "c101",
+          title: "Design wireframes",
+        },
       },
       {
         id: "a103",
-        title: "Moved Task to Review",
+        title: `added group-title`,
+        type: 'addGroup',
         createdAt: 154530,
         byMember: {
           id: "u103",
@@ -790,15 +925,37 @@ function _createBoards() {
           title: "Design wireframes",
         },
       },
+
       {
-        id: "a104",
-        title: "Moved Task to Review",
-        createdAt: 154540,
+        id: "a108",
+        title: 'added this board to',
+        type: 'addBoard',
+        createdAt: Date.now(),
         byMember: {
-          id: "u101",
-          fullname: "Natia",
+          _id: "u101",
+          fullname: "Abi Abambi",
           imgUrl: "http://some-img",
-          color: "#61bd4f",
+          color: '#000'
+        },
+        group: {
+          id: "g101",
+          title: "Design Phase",
+        },
+        task: {
+          id: "c101",
+          title: "Design wireframes",
+        },
+      },
+      {
+        id: "a107",
+        title: 'created this board',
+        type: 'createBoard',
+        createdAt: Date.now(),
+        byMember: {
+          _id: "u101",
+          fullname: "Abi Abambi",
+          imgUrl: "http://some-img",
+          color: '#000'
         },
         group: {
           id: "g101",

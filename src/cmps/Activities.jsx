@@ -35,17 +35,96 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
               <span className="activity-fullname">
                 {activity.byMember.fullname}{" "}
               </span>
-              <span className="activity-title">{activity.title} </span>
 
-              <span>
-                at{" "}
-                <a
-                  className="link"
-                  href={`/board/${board._id}/${activity.group.id}/${activity.task.id}`}
-                >
-                  {activity.task.title}
-                </a>
-              </span>
+              {activity.type === "createBoard" && (
+                <span>{activity.title} </span>
+              )}
+
+              {activity.type === "addBoard" && (
+                <span>
+                  {activity.title}{" "}
+                  <a className="link" href={`/board`}>
+                    Frello Workspace
+                  </a>
+                </span>
+              )}
+
+              {activity.type === "addTask" && (
+                <span>
+                  added{" "}
+                  <a
+                    className="link"
+                    href={`/board/${board._id}/${activity.group.id}/${activity.task.id}`}
+                  >
+                    {activity.task.title}{" "}
+                  </a>
+                  to {activity.group.title}
+                </span>
+              )}
+
+              {activity.type === "addGroup" && (
+                <span>added {activity.group.title} to this board</span>
+              )}
+
+              {activity.type === "addChecklist" && (
+                <span>
+                  added {activity.checklist.title} to
+                  <a
+                    className="link"
+                    href={`/board/${board._id}/${activity.group.id}/${activity.task.id}`}
+                  >
+                    {" "}
+                    {activity.task.title}
+                  </a>
+                </span>
+              )}
+
+              {activity.type === "completeChecklistItem" && (
+                <span>
+                  complete {activity.item.text} on
+                  <a
+                    className="link"
+                    href={`/board/${board._id}/${activity.group.id}/${activity.task.id}`}
+                  >
+                    {" "}
+                    {activity.task.title}
+                  </a>
+                </span>
+              )}
+
+              {activity.type === "setDueDate" && (
+                <span>
+                  set{" "}
+                  <a
+                    className="link"
+                    href={`/board/${board._id}/${activity.group.id}/${activity.task.id}`}
+                  >
+                    {activity.task.title}
+                  </a>{" "}
+                  to be due {activity.dueDate.date}
+                </span>
+              )}
+
+              {activity.type === "deleteChecklist" && (
+                <span>
+                  removed {activity.checklist.title} from
+                  <a
+                    className="link"
+                    href={`/board/${board._id}/${activity.group.id}/${activity.task.id}`}
+                  >
+                    {" "}
+                    {activity.checklist.title}
+                  </a>
+                </span>
+              )}
+
+              {activity.type === "deleteTask" && (
+                <span>deleted card #4 from {activity.task.title}</span>
+              )}
+
+              {activity.type === "deleteGroup" && (
+                <span>deleted list {activity.group.title}</span>
+              )}
             </section>
           </li>
         ))}

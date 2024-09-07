@@ -7,6 +7,7 @@ import { CreateBoardModal } from "./CreateBoardModal";
 import { useNavigate } from "react-router-dom";
 import { CiStar } from "react-icons/ci";
 import { useSelector } from "react-redux";
+import { boardService } from "../services/board";
 
 export function BoardList({
   boards,
@@ -15,7 +16,7 @@ export function BoardList({
   onRemoveBoard,
   // onUpdateBoard,
 }) {
-  console.log(boards);
+  // console.log(boards);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [modalOpenByName, setModalOpenByName] = useState(null);
@@ -150,7 +151,7 @@ export function BoardList({
           <Popover
             id={anchorEl}
             open={isPopoverOpen}
-            // onClose={handleClosePopover}
+            onClose={handleClosePopover}
             anchorEl={anchorEl}
             anchorOrigin={{
               vertical: "bottom",

@@ -59,6 +59,17 @@ export function BoardIndex() {
     try {
       const savedBoard = await addBoard(boardToSave);
       showSuccessMsg(`Board added (id: ${savedBoard._id})`);
+      boardService.updateActivities(
+        savedBoard,
+        "created this board",
+        "createBoard"
+      );
+      boardService.updateActivities(
+        savedBoard,
+        "added this board to",
+        "addBoard"
+      );
+
       // navigate(`/board/${savedBoard._id}`);
     } catch (err) {
       showErrorMsg("Cannot add board");
@@ -89,6 +100,8 @@ export function BoardIndex() {
     setAnchorEl(null);
     setModalOpenByName(null);
   }
+
+  if (!boards || !boards.length) return;
 
   return (
     <>
