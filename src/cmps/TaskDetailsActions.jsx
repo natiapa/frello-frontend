@@ -4,7 +4,7 @@ import { CgCreditCard } from "react-icons/cg";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { TiTag } from "react-icons/ti";
 import { Link, useParams } from "react-router-dom";
-import {  LabelPicker } from "./LabelPicker";
+import { LabelPicker } from "./LabelPicker";
 import { EditChecklist } from "./EditChecklist";
 import { LuClock5 } from "react-icons/lu";
 import { DueDatePicker } from "./DueDatePicker";
@@ -12,6 +12,8 @@ import { AttachmentUploader } from "./AttachmentUploader";
 import { FiPaperclip } from "react-icons/fi";
 import { BsArchive } from "react-icons/bs";
 import { ArchiveAction } from "./ArchiveAction.JSX";
+import { CoverPicker } from "./CoverPicker";
+import { BsCardImage } from "react-icons/bs";
 
 export function TaskDetailsActions({
   boardId,
@@ -27,7 +29,6 @@ export function TaskDetailsActions({
   setNewCheckLists,
   setNewFiles,
   newFiles,
- 
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -65,7 +66,7 @@ export function TaskDetailsActions({
 
             {modalOpenByName === "checklists" && (
               <Popover
-                id={isPopoverOpen ? "checklist-popover" : undefined} 
+                id={isPopoverOpen ? "checklist-popover" : undefined}
                 open={isPopoverOpen}
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -102,7 +103,7 @@ export function TaskDetailsActions({
 
           {modalOpenByName === "due-date" && isPopoverOpen && (
             <Popover
-              id={isPopoverOpen ? "due-date-popover" : undefined} 
+              id={isPopoverOpen ? "due-date-popover" : undefined}
               open={isPopoverOpen}
               anchorEl={anchorEl}
               anchorOrigin={{
@@ -142,7 +143,7 @@ export function TaskDetailsActions({
 
           {modalOpenByName === "labels" && isPopoverOpen && (
             <Popover
-              id={isPopoverOpen ? "labels-popover" : undefined} 
+              id={isPopoverOpen ? "labels-popover" : undefined}
               open={isPopoverOpen}
               anchorEl={anchorEl}
               anchorOrigin={{
@@ -152,16 +153,15 @@ export function TaskDetailsActions({
               disablePortal
               PaperProps={{
                 sx: {
-                  width: "auto", 
-                  maxWidth: "400px", 
-                  maxHeight: "90vh", 
-                  overflow: "auto", 
-                  padding: "10px", 
+                  width: "auto",
+                  maxWidth: "400px",
+                  maxHeight: "90vh",
+                  overflow: "auto",
+                  padding: "10px",
                 },
               }}
             >
               <LabelPicker
-
                 task={task}
                 handlePopoverClick={handlePopoverClick}
                 setTaskSelectedLabels={setTaskSelectedLabels}
@@ -188,7 +188,7 @@ export function TaskDetailsActions({
 
             {modalOpenByName === "attach" && isPopoverOpen && (
               <Popover
-                id={isPopoverOpen ? "attachment-popover" : undefined} 
+                id={isPopoverOpen ? "attachment-popover" : undefined}
                 open={isPopoverOpen}
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -196,7 +196,6 @@ export function TaskDetailsActions({
                   horizontal: "left",
                 }}
                 disablePortal
-               
               >
                 <AttachmentUploader
                   onUpdated={onUpdated}
@@ -210,7 +209,48 @@ export function TaskDetailsActions({
             )}
           </div>
         )}
+
+        <div
+          role="button"
+          data-name="cover"
+          className="cover action-btn"
+          aria-describedby="5"
+          onClick={handleClick}
+        >
+          <span className="icon">
+          <BsCardImage  />
+          </span>
+          <p>Cover</p>
+
+          {modalOpenByName === "cover" && isPopoverOpen && (
+            <Popover
+              id={isPopoverOpen ? "cover-popover" : undefined}
+              open={isPopoverOpen}
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              disablePortal
+              PaperProps={{
+                sx: {
+                  width: "400px",
+                  height: "600px",
+                  padding: "20px",
+                },
+              }}
+            >
+              <CoverPicker 
+                onUpdated={onUpdated}
+                setIsPopoverOpen={setIsPopoverOpen}
+                handlePopoverClick={handlePopoverClick}
+             
+              />
+            </Popover>
+          )}
+        </div>
       </>
+
       <>
         {taskParams && <h5>Action</h5>}
         {taskParams && (
@@ -218,7 +258,7 @@ export function TaskDetailsActions({
             role="button"
             data-name="archive"
             className="archive action-btn"
-            aria-describedby="5"
+            aria-describedby="6"
             onClick={handleClick}
           >
             <span className="icon">
@@ -228,7 +268,7 @@ export function TaskDetailsActions({
 
             {modalOpenByName === "archive" && isPopoverOpen && (
               <Popover
-                id={isPopoverOpen ? "archive-popover" : undefined} 
+                id={isPopoverOpen ? "archive-popover" : undefined}
                 open={isPopoverOpen}
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -269,5 +309,3 @@ export function TaskDetailsActions({
     </section>
   );
 }
-
-
