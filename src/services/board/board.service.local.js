@@ -1,5 +1,5 @@
 import { storageService } from "../async-storage.service";
-import { getRandomColor, makeId ,sortColorsByHue} from "../util.service";
+import { getRandomColor, makeId, sortColorsByHue } from "../util.service";
 import { userService } from "../user";
 
 const STORAGE_KEY = "board";
@@ -21,6 +21,7 @@ export const boardService = {
   getEmptyAttach,
   getAllLabels,
   getEmptyLabel,
+  getColorsCover
 };
 window.cs = boardService;
 
@@ -295,7 +296,7 @@ const colors = [
   { id: "J7K8L", title: "", color: "#EB5A46", colorName: "Red" },
   { id: "M9N0O", title: "", color: "#C377E0", colorName: "Purple" },
   { id: "P1Q2R", title: "", color: "#0079BF", colorName: "Blue" },
-  { id: "S3T4U", title: "", color: "#00C2E0", colorName: "Sky Blue" },  // Changed from "Light Blue"
+  { id: "S3T4U", title: "", color: "#00C2E0", colorName: "Sky Blue" }, // Changed from "Light Blue"
   { id: "V5W6X", title: "", color: "#51E898", colorName: "Light Green" },
   { id: "Y7Z8A", title: "", color: "#FF80CE", colorName: "Pink" },
   { id: "B9C0D", title: "", color: "#344563", colorName: "Dark Navy Blue" },
@@ -309,7 +310,7 @@ const colors = [
   { id: "Z5A6B", title: "", color: "#1F8A9D", colorName: "Teal" },
   { id: "C7D8E", title: "", color: "#519839", colorName: "Forest Green" },
   { id: "F9G0H", title: "", color: "#D29034", colorName: "Light Orange" },
-  { id: "I1J2K", title: "", color: "#C4C9CC", colorName: "Light Gray" },  // Changed from "Light Grayish Blue"
+  { id: "I1J2K", title: "", color: "#C4C9CC", colorName: "Light Gray" }, // Changed from "Light Grayish Blue"
   { id: "L3M4N", title: "", color: "#E4F0F6", colorName: "Pale Blue" },
   { id: "O5P6Q", title: "", color: "#F5DDC0", colorName: "Light Peach" },
   { id: "R7S8T", title: "", color: "#F5C4B1", colorName: "Pale Pink" },
@@ -321,10 +322,23 @@ const colors = [
   { id: "G7H8I", title: "", color: "#A4A4A4", colorName: "Gray" },
 ];
 
-
+function getColorsCover() {
+  return [
+    { id: "Z5A6B", color: "#9F8FEF" },
+    { id: "C7D8E", color: "#F87168" },
+    { id: "F9G0H", color: "#FEA362" },
+    { id: "I1J2K", color: "#F5CD47" },
+    { id: "L3M4N", color: "#4BCE97" },
+    { id: "O5P6Q", color: "#8590A2" },
+    { id: "R7S8T", color: "#E774BB" },
+    { id: "U9V0W", color: "#94C748" },
+    { id: "X1Y2Z", color: "#6CC3E0" },
+    { id: "Z1X2C", color: "#579DFF" },
+  ]
+}
 function getAllLabels() {
-  const allLabels =  colors;
-  return sortColorsByHue(allLabels)
+  const allLabels = colors;
+  return sortColorsByHue(allLabels);
 }
 
 function _createBoards() {

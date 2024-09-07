@@ -228,8 +228,8 @@ export function TaskDetailsActions({
               open={isPopoverOpen}
               anchorEl={anchorEl}
               anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
+                vertical: "top",
+                horizontal: "right",
               }}
               disablePortal
               PaperProps={{
@@ -244,7 +244,6 @@ export function TaskDetailsActions({
                 onUpdated={onUpdated}
                 setIsPopoverOpen={setIsPopoverOpen}
                 handlePopoverClick={handlePopoverClick}
-             
               />
             </Popover>
           )}
