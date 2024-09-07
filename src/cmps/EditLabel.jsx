@@ -1,39 +1,26 @@
 import { useState, useEffect } from "react";
+import { boardService } from "../services/board";
+import { MdClose } from "react-icons/md";
+import { IoArrowBackOutline } from "react-icons/io5";
 
-export function EditLabel({ label }) {
-  const [labelToEdit, setLabelToEdit] = useState(label);
+export function EditLabel({
+  label,
+  onSave,
+  onDelete,
+  onAdd,
+  handleClose,
+  setEditLabel,
+}) {
+  const [labelToEdit, setLabelToEdit] = useState(
+    label || { title: "", color: "" }
+  );
+  const staticLabels = boardService.getAllLabels();
+  const [deleteLabel, setDeleteLabel] = useState(false);
 
-  const colors = [
-    "#A4E57E",
-    "#FFECB3",
-    "#FFE0B2",
-    "#FFCDD2",
-    "#D1C4E9",
-    "#81C784",
-    "#FFD54F",
-    "#FF7043",
-    "#E57373",
-    "#9575CD",
-    "#4CAF50",
-    "#FFB74D",
-    "#FF5722",
-    "#F44336",
-    "#673AB7",
-    "#2196F3",
-    "#4DD0E1",
-    "#AED581",
-    "#FFC107",
-    "#BDBDBD",
-    "#1976D2",
-    "#00ACC1",
-    "#689F38",
-    "#EC407A",
-    "#616161",
-  ];
+  console.log(labelToEdit);
 
-  console.log(label);
   useEffect(() => {
-    setLabelToEdit(label);
+    setLabelToEdit(label );
   }, [label]);
 
   function handelInputChange({ target }) {
@@ -44,50 +31,118 @@ export function EditLabel({ label }) {
     }));
   }
 
-function handleColorChange(color) {
+  function handleColorChange(color) {
     setLabelToEdit((prevLabel) => ({
-        ...prevLabel,
-        color: color,
-      }))
-}
+      ...prevLabel,
+      color: color,
+    }));
+  }
+
+  function handleRemoveColor() {
+    setLabelToEdit((prevLabel) => ({
+      ...prevLabel,
+      color: "",
+    }));
+  }
+
+  function handleAddLabel() {
+    onAdd(labelToEdit);
+  }
+
+  function handleBack() {
+    setEditLabel("");
+  }
 
   return (
     <>
-      <h4>Edit Label</h4>
-      <section className="label-edit-container">
-        <div
-          className="label-preview"
-          style={{ backgroundColor: labelToEdit.color || "#f0f0f0" }}
-        >
-          {labelToEdit.title}
-        </div>
+      {deleteLabel ? (
+ 
+        <section className="label-delete-container">
+              <h5>Delete lable</h5>
+          <p>This will remove this label from all cards.There is no undo.</p>
+          <button
+            className="confirm-delete-btn"
+            onClick={() => onDelete(labelToEdit)}
+          >
+            Yes, delete
+          </button>
+          <button className="cancel-btn" onClick={() => setDeleteLabel(false)}>
+            Cancel
+          </button>
+        </section>
+      ) : (
+        <section className="label-edit-container">
+          <div className="header">
+            <button className="back-btn" onClick={handleBack}>
+              <IoArrowBackOutline />
+            </button>
+            <h5 className="labels-heading">
+              {labelToEdit.isEditable === true
+                ? "Edit Label"
+                : "Create New Label"}
+            </h5>
+            <button className="close-btn" onClick={handleClose}>
+              <MdClose />
+            </button>
+          </div>
 
-        <label>Title</label>
-        <input
-          type="text"
-          name="title"
-          value={labelToEdit.title}
-          onChange={handelInputChange}
-        />
+          <div
+            className="label-preview"
+            style={{ backgroundColor: labelToEdit.color || "#f0f0f0" }}
+          >
+            {labelToEdit.title}
+          </div>
 
-        <label>Select a color</label>
-        <div className="color-grid">
-          {colors.map((color, idx) => (
-            <div
-              key={idx}
-              className={`color-item ${
-                labelToEdit.color === color ? "selected" : ""
-              }`}
-              style={{ backgroundColor: color }}
-              onClick={() => handleColorChange(color)}
-            ></div>
-          ))}
-        </div>
+          <label>Title</label>
+          <input
+            type="text"
+            name="title"
+            value={labelToEdit.title || ""}
+            onChange={handelInputChange}
+          />
 
-        <button className="">
+          <label>Select a color</label>
+          <div className="color-grid">
+            {staticLabels.map((label, idx) => (
+              <div
+                key={label.id}
+                className={`color-item ${
+                  labelToEdit.color === label.color ? "selected" : ""
+                }`}
+                style={{ backgroundColor: label.color }}
+                onClick={() => handleColorChange(label.color)}
+              ></div>
+            ))}
+          </div>
 
-        </button>
-      </section>
+          <button className="remove-color-button" onClick={handleRemoveColor}>
+            × Remove color
+          </button>
+
+          <div className="action-buttons">
+            {labelToEdit.isEditable === true ? (
+              <>
+                <button
+                  className="save-btn"
+                  onClick={() => onSave(labelToEdit)}
+                >
+                  Save
+                </button>
+                <button
+                  className="delete-btn"
+                  onClick={() => setDeleteLabel(true)}
+                >
+                  Delete
+                </button>
+              </>
+            ) : (
+              <button className="create-btn" onClick={handleAddLabel}>
+                Create
+              </button>
+            )}
+          </div>
+        </section>
+      )}
     </>
   );
 }

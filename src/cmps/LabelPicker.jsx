@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 
 import { boardService } from "../services/board";
@@ -7,55 +6,91 @@ import { updateBoard } from "../store/actions/board.actions";
 import SvgIcon from "./SvgIcon";
 import { MdEdit } from "react-icons/md";
 import { EditLabel } from "./EditLabel";
-// import { loadBoard, addBoardMsg } from "../store/actions/board.actions";
 
 export function LabelPicker({
   task,
-  groupId,
   handlePopoverClick,
-  selectedLabels,
-  setSelectedLabels,
+  setTaskSelectedLabels,
+  boardSelectedLabels,
   setIsPopoverOpen,
+  onUpdated,
 }) {
   const board = useSelector((storeState) => storeState.boardModule.board);
-  const [editLabel, setEditLabel] = useState('')
-  const labelsList = board.labels
+  const [editLabel, setEditLabel] = useState("");
+  const [addLable, setAddLabel] = useState(boardService.getEmptyLabel());
 
-
-  // useEffect(() => {
-  //   setSelectedLabels(task.labels);
-  // }, [board]);
-
-  // useEffect(() => {
-  //   if (!selectedLabels) return;
-  //   onUpdateBoard();
-  // }, [selectedLabels, board]);
+  const labelsList = Array.isArray(board.labels) ? board.labels : [];
+  const labelsTaskList = Array.isArray(task.labels) ? task.labels : [];
 
   function handleLabelChange(label) {
-    setSelectedLabels((prevSelected) =>
-      prevSelected.includes(label)
-        ? prevSelected.filter((l) => l !== label)
-        : [...prevSelected, label]
+    const updatedTaskLabels = labelsTaskList.some((l) => l.id === label.id)
+      ? labelsTaskList.filter((l) => l.id !== label.id)
+      : [...labelsTaskList, label];
+
+    onUpdated("labels", updatedTaskLabels);
+
+    setTaskSelectedLabels(updatedTaskLabels);
+
+    console.log(updatedTaskLabels);
+  }
+
+  async function onSave(newLabel) {
+    console.log(newLabel);
+
+    const updatedLabels = labelsList.map((label) =>
+      label.id === newLabel.id ? newLabel : label
     );
+
+    onUpdatedBoard(updatedLabels);
   }
 
-  function onUpdateBoard() {
-    const updatedBoard = boardService.updateBoard(board, groupId, task.id, {
-      key: "labels",
-      value: selectedLabels,
-    });
-    updateBoard(updatedBoard);
-  }
-  function handleEditLabel(label){
-    setEditLabel(label)
-    console.log(label)
+  function onDelete(deleteLabel) {
+    const updatedLabels = labelsList.filter(
+      (label) => label.id !== deleteLabel.id
+    );
 
+    onUpdatedBoard(updatedLabels);
   }
 
- return (
+  function onAdd(newLable) {
+    const updateLable = { ...newLable, isEditable: true };
+    const updatedLabels = [updateLable, ...labelsList];
+    setAddLabel(boardService.getEmptyLabel());
+
+    onUpdatedBoard(updatedLabels);
+  }
+
+  function handleClose() {
+    setIsPopoverOpen(false);
+  }
+
+  async function onUpdatedBoard(updatedLabels) {
+    try {
+      const updatedBoard = boardService.updateBoard(board, null, null, {
+        key: "labels",
+        value: updatedLabels,
+      });
+
+      await updateBoard(updatedBoard);
+      setEditLabel("");
+    } catch (error) {
+      console.error("Failed to update the board:", error);
+    }
+    boardSelectedLabels(updatedLabels);
+    setEditLabel("");
+  }
+
+  return (
     <div className="edit-task-modal-content" onClick={handlePopoverClick}>
       {editLabel ? (
-        <EditLabel label={editLabel} /> 
+        <EditLabel
+          label={editLabel}
+          onSave={onSave}
+          onDelete={onDelete}
+          onAdd={onAdd}
+          handleClose={handleClose}
+          setEditLabel={setEditLabel}
+        />
       ) : (
         <>
           <button
@@ -65,7 +100,7 @@ export function LabelPicker({
             <SvgIcon iconName="close" />
           </button>
 
-          <h2>Labels</h2>
+          <h2 className="labels-heading">Labels</h2>
 
           <p className="labels-title">Labels</p>
           <div className="labels-container">
@@ -75,48 +110,34 @@ export function LabelPicker({
                   <input
                     data-name={label.color}
                     type="checkbox"
-                    // checked={selectedLabels.includes(label.color)}
-                    // onChange={() => handleLabelChange(label.color)}
+                    onChange={() => handleLabelChange(label)}
+                    checked={labelsTaskList.some((l) => l.id === label.id)}
                   />
+
                   <div
                     className="label-color"
                     style={{
                       backgroundColor: label.color,
                     }}
-                  ></div>
+                  >
+                    <p>{label.title}</p>
+                  </div>
 
                   <span className="edit-icon">
-                    <MdEdit onClick={()=>handleEditLabel(label)} />
-        
+                    <MdEdit onClick={() => setEditLabel(label)} />
                   </span>
                 </li>
               ))}
             </ul>
           </div>
+          <button
+            className="create-label-btn"
+            onClick={() => setEditLabel(addLable)}
+          >
+            Create a new label
+          </button>
         </>
       )}
     </div>
   );
 }
-
-// <ul>
-// {labelsList.map((label, idx) => (
-//  <li key={idx}>
-//    <input
-//      data-name={label.label}
-//      type="checkbox"
-//      checked={selectedLabels.includes(label.label)}
-//      onChange={() => handleLabelChange(label.label)}
-//    />
-//    <div
-//      className="label-color"
-//      style={{
-//        backgroundColor: label.color,
-//      }}
-//    ></div>
-//    {/* <span className="icon">
-//      <FiEdit2 />
-//    </span> */}
-//  </li>
-// ))}
-// </ul>

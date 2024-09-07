@@ -23,10 +23,12 @@ export function TaskDetails() {
   const task = group?.tasks?.find((task) => task.id === taskId);
 
   const [currElToEdit, setCurrElToEdit] = useState("");
-  const [selectedLabels, setSelectedLabels] = useState(task.labels);
+  const [boardSelectedLabels, setBoardSelectedLabels] = useState(board.labels);
+  const [taskSelectedLabels, setTaskSelectedLabels] = useState(task.labels);
   const [newDueDate, setNewDueDate] = useState(task.dueDate);
   const [newChecklists, setNewCheckLists] = useState(task.checklists);
   const [newFiles, setNewFiles] = useState(task.attachments|| []);
+
 
   console.log(task);
   console.log(task.attachments);
@@ -35,7 +37,7 @@ export function TaskDetails() {
   useEffect(() => {
     if (task) {
       setNewFiles(task.attachments)
-      setSelectedLabels(task.labels);
+      setTaskSelectedLabels(task.labels);
       setNewDueDate(task.dueDate);
       setNewCheckLists(task.checklists);
     }
@@ -125,13 +127,13 @@ export function TaskDetails() {
                 )}
               </ul>
             )}
-{/* 
-            {selectedLabels.length > 0 && (
+
+            {taskSelectedLabels.length > 0 && (
               <ul className="labels">
                 <p className="header">Labels</p>
-                <LabelList labels={selectedLabels} />
+                <LabelList taskLabels={taskSelectedLabels} />
               </ul>
-            )} */}
+            )}
 
             <div>
               <DueDateDisplay dueDate={task.dueDate} />
@@ -183,8 +185,8 @@ export function TaskDetails() {
           groupId={group.id}
           taskId={task.id}
           task={task}
-          selectedLabels={selectedLabels}
-          setSelectedLabels={setSelectedLabels}
+          setBoardSelectedLabels={setBoardSelectedLabels}
+          setTaskSelectedLabels={setTaskSelectedLabels}
           onUpdated={onUpdated}
           setNewDueDate={setNewDueDate}
           setNewCheckLists={setNewCheckLists}

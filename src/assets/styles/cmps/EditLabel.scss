@@ -1,166 +1,118 @@
+
+
+/* עיצוב ל-Popover של EditLabel */
+.popover-content-edit-label {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  max-width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* עיצוב תצוגת הלייבל */
 .label-edit-container {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: lightgray;
-  }
+  display: flex;
+  flex-direction: column;
+}
+
+.label-edit-container h4 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.label-edit-container .label-preview {
+  height: 30px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background-color: #f0f0f0;
+}
+
+.label-edit-container input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+
+.label-edit-container .color-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 צבעים בכל שורה */
+  gap: 5px; /* מרווח בין הצבעים */
+}
+
+.label-edit-container .color-item {
+  width: 100%; /* הגדרה שתאפשר התאמה אוטומטית לרוחב העמודה */
+  height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.label-edit-container .color-item.selected {
+  border: 2px solid #000;
+}
+/* כפתור הסרת צבע */
+.remove-color-button {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* כפתורי פעולה */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.action-buttons button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.save-btn:hover {
+  background-color: #218838;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.create-btn {
+  background-color: #0079bf;
+  color: #fff;
+}
+
+.create-btn:hover {
+  background-color: #005a91;
+}
+
   
-  .label-preview {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    text-align: center;
-    margin-bottom: 20px;
-    
-  }
-  
-  .label-preview p {
-    margin: 0;
-  }
-  
-  .label-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  .input-container {
-    position: relative;
-    width: 100%;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-  }
-  
-  input::placeholder {
-    opacity: 1;
-    transition: opacity 0.3s ease;
-  }
-  
-  input:focus::placeholder {
-    opacity: 0; /* העלמת הטקסט של placeholder כאשר מתחילים להקליד */
-  }
-  
-  .cursor {
-    display: inline-block;
-    width: 1px;
-    height: 1.5em;
-    background-color: black;
-    animation: blink 1s steps(2, start) infinite;
-    position: absolute;
-    top: 50%;
-    left: 5px; /* מקם את הקו לצד הימני */
-    transform: translateY(-50%);
-  }
-  
-  @keyframes blink {
-    to {
-      visibility: hidden;
-    }
-  }
-  /* עיצוב כולל לקונטיינר */
-.label-edit-container {
-    padding: 20px;
-    max-width: 400px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* תצוגת התצוגה המקדימה של הלייבל */
-  .label-preview {
-    width: 100%;
-    height: 50px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  
-  /* עיצוב שדה הקלט */
-  input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  /* עיצוב גריד לבחירת צבעים */
-  .color-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 עמודות */
-    gap: 10px;
-  }
-  
-  .color-item {
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .color-item:hover {
-    transform: scale(1.1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .color-item.selected {
-    border: 2px solid #000;
-  }
-  
-  /* כפתור שמירה ומחיקה */
-  .action-buttons {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  button {
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 16px;
-    transition: background-color 0.3s;
-  }
-  
-  .save-btn {
-    background-color: #28a745;
-    color: #fff;
-  }
-  
-  .save-btn:hover {
-    background-color: #218838;
-  }
-  
-  .delete-btn {
-    background-color: #dc3545;
-    color: #fff;
-  }
-  
-  .delete-btn:hover {
-    background-color: #c82333;
-  }
-  
+.labels-heading {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}

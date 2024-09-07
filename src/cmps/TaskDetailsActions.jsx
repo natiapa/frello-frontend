@@ -20,8 +20,8 @@ export function TaskDetailsActions({
   task,
   taskPrevActionsModalData,
   setIsTaskPrevModalOpen,
-  selectedLabels,
-  setSelectedLabels,
+  setTaskSelectedLabels,
+  setBoardSelectedLabels,
   onUpdated = () => {},
   setNewDueDate,
   setNewCheckLists,
@@ -151,20 +151,22 @@ export function TaskDetailsActions({
               disablePortal
               PaperProps={{
                 sx: {
-                  width: "400px",
-                  height: "600px",
-                  padding: "20px",
+                  width: "auto", 
+                  maxWidth: "400px", 
+                  maxHeight: "90vh", 
+                  overflow: "auto", 
+                  padding: "10px", 
                 },
               }}
-              
             >
               <LabelPicker
-                groupId={groupId}
+
                 task={task}
                 handlePopoverClick={handlePopoverClick}
-                selectedLabels={selectedLabels}
-                setSelectedLabels={setSelectedLabels}
+                setTaskSelectedLabels={setTaskSelectedLabels}
+                setBoardSelectedLabels={setBoardSelectedLabels}
                 setIsPopoverOpen={setIsPopoverOpen}
+                onUpdated={onUpdated}
               />
             </Popover>
           )}
@@ -193,13 +195,7 @@ export function TaskDetailsActions({
                   horizontal: "left",
                 }}
                 disablePortal
-                PaperProps={{
-                  sx: {
-                    width: "400px",
-                    height: "600px",
-                    padding: "20px",
-                  },
-                }}
+               
               >
                 <AttachmentUploader
                   onUpdated={onUpdated}

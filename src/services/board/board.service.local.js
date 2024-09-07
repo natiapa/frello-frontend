@@ -1,5 +1,5 @@
 import { storageService } from "../async-storage.service";
-import { getRandomColor, makeId } from "../util.service";
+import { getRandomColor, makeId ,sortColorsByHue} from "../util.service";
 import { userService } from "../user";
 
 const STORAGE_KEY = "board";
@@ -18,7 +18,9 @@ export const boardService = {
   getEmptyItem,
   getEmptyBoard,
   getEmptyDueDate,
-  getEmptyAttach
+  getEmptyAttach,
+  getAllLabels,
+  getEmptyLabel,
 };
 window.cs = boardService;
 
@@ -276,8 +278,55 @@ function getEmptyAttach() {
     type: "",
     createdAt: new Date(),
   };
-  
 }
+function getEmptyLabel() {
+  return {
+    id: makeId(),
+    title: "",
+    color: "",
+    colorName: "",
+    isEditable: false,
+  };
+}
+const colors = [
+  { id: "A1B2C", title: "", color: "#61BD4F", colorName: "Green" },
+  { id: "D3E4F", title: "", color: "#F2D600", colorName: "Yellow" },
+  { id: "G5H6I", title: "", color: "#FFAB4A", colorName: "Orange" },
+  { id: "J7K8L", title: "", color: "#EB5A46", colorName: "Red" },
+  { id: "M9N0O", title: "", color: "#C377E0", colorName: "Purple" },
+  { id: "P1Q2R", title: "", color: "#0079BF", colorName: "Blue" },
+  { id: "S3T4U", title: "", color: "#00C2E0", colorName: "Sky Blue" },  // Changed from "Light Blue"
+  { id: "V5W6X", title: "", color: "#51E898", colorName: "Light Green" },
+  { id: "Y7Z8A", title: "", color: "#FF80CE", colorName: "Pink" },
+  { id: "B9C0D", title: "", color: "#344563", colorName: "Dark Navy Blue" },
+  { id: "E1F2G", title: "", color: "#B6BBBF", colorName: "Gray" }, // Changed from "Light Gray"
+  { id: "H3I4J", title: "", color: "#E6C84F", colorName: "Mustard Yellow" },
+  { id: "K5L6M", title: "", color: "#CF513D", colorName: "Dark Red" },
+  { id: "N7O8P", title: "", color: "#E39E23", colorName: "Dark Orange" },
+  { id: "Q9R0S", title: "", color: "#B04632", colorName: "Brick Red" },
+  { id: "T1U2V", title: "", color: "#89609E", colorName: "Dark Purple" },
+  { id: "W3X4Y", title: "", color: "#055A8C", colorName: "Dark Blue" },
+  { id: "Z5A6B", title: "", color: "#1F8A9D", colorName: "Teal" },
+  { id: "C7D8E", title: "", color: "#519839", colorName: "Forest Green" },
+  { id: "F9G0H", title: "", color: "#D29034", colorName: "Light Orange" },
+  { id: "I1J2K", title: "", color: "#C4C9CC", colorName: "Light Gray" },  // Changed from "Light Grayish Blue"
+  { id: "L3M4N", title: "", color: "#E4F0F6", colorName: "Pale Blue" },
+  { id: "O5P6Q", title: "", color: "#F5DDC0", colorName: "Light Peach" },
+  { id: "R7S8T", title: "", color: "#F5C4B1", colorName: "Pale Pink" },
+  { id: "U9V0W", title: "", color: "#F3E0AE", colorName: "Soft Yellow" },
+  { id: "X1Y2Z", title: "", color: "#ECD7E7", colorName: "Light Lavender" },
+  { id: "Z1X2C", title: "", color: "#B7E3E4", colorName: "Light Turquoise" },
+  { id: "C2A3B", title: "", color: "#D5F0EC", colorName: "Light Aqua" },
+  { id: "D6E7F", title: "", color: "#F6D6D1", colorName: "Soft Red" },
+  { id: "G7H8I", title: "", color: "#A4A4A4", colorName: "Gray" },
+];
+
+
+function getAllLabels() {
+  const allLabels =  colors;
+  return sortColorsByHue(allLabels)
+}
+
 function _createBoards() {
   return {
     _id: "b101",
@@ -295,14 +344,57 @@ function _createBoards() {
       backgroundColor: "#61bd4f",
     },
     labels: [
-      { id: 1, title: "", color: "#7F5F01" },
-      { id: 2, title: "", color: "#A54800" },
-      { id: 3, title: "", color: "#AE2E24" },
-      { id: 4, title: "", color: "#5E4DB2" },
-      { id: 5, titel: "", color: "#0055CC" },
-      { id: 6, titel: "", color: "#206A83" },
-      { id: 12, titel: "", color: "#A1BDD914" }
+      {
+        id: makeId(),
+        title: "",
+        color: "#7F5F01",
+        colorName: "Brown",
+        isEditable: true,
+      },
+      {
+        id: makeId(),
+        title: "",
+        color: "#A54800",
+        colorName: "Dark Orange",
+        isEditable: true,
+      },
+      {
+        id: makeId(),
+        title: "",
+        color: "#AE2E24",
+        colorName: "Red",
+        isEditable: true,
+      },
+      {
+        id: makeId(),
+        title: "",
+        color: "#5E4DB2",
+        colorName: "Purple",
+        isEditable: true,
+      },
+      {
+        id: makeId(),
+        title: "",
+        color: "#0055CC",
+        colorName: "Blue",
+        isEditable: true,
+      },
+      {
+        id: makeId(),
+        title: "",
+        color: "#206A83",
+        colorName: "Teal",
+        isEditable: true,
+      },
+      {
+        id: makeId(),
+        title: "",
+        color: "#A1BDD914",
+        colorName: "Light Green",
+        isEditable: true,
+      },
     ],
+
     members: [
       {
         id: "u101",
@@ -332,7 +424,7 @@ function _createBoards() {
           {
             id: "c101",
             title: "Design wireframes",
-            labels: [],  // שדה labels עם מערך ריק
+            labels: [], // שדה labels עם מערך ריק
             description: "",
             checklists: [
               {
@@ -387,7 +479,7 @@ function _createBoards() {
                 color: "#f2d600",
               },
             ],
-            attachments: '',
+            attachments: "",
             comments: [
               "Create wireframes for the new Trello feature",
               "Incorporate feedback from the last review",
@@ -398,7 +490,7 @@ function _createBoards() {
           {
             id: "c102",
             title: "Create design mockups",
-            labels: [],  // שדה labels עם מערך ריק
+            labels: [], // שדה labels עם מערך ריק
             description: "",
             checklists: [
               {
@@ -461,7 +553,7 @@ function _createBoards() {
               },
             ],
             members: [],
-            attachments: '',
+            attachments: "",
             comments: [
               "Design high-fidelity mockups for the app",
               "Align design with the wireframes",
@@ -472,11 +564,11 @@ function _createBoards() {
           {
             id: "c103",
             title: "Design logo",
-            labels: [],  // שדה labels עם מערך ריק
+            labels: [], // שדה labels עם מערך ריק
             description: "",
             checklists: [],
             members: [],
-            attachments: '',
+            attachments: "",
             comments: [
               "Design a logo for the Trello project",
               "Ensure it aligns with the brand identity",
@@ -670,7 +762,7 @@ function _createBoards() {
 //                     },
 //                   ],
 //                 },
-  
+
 //                 {
 //                   id: "chk1022525",
 //                   title: "Review Process",
@@ -896,7 +988,7 @@ function _createBoards() {
 //           ],
 //           style: {},
 //         },
-  
+
 //         {
 //           id: "g103",
 //           title: "Testing Phase",
@@ -1033,5 +1125,3 @@ function _createBoards() {
 //       ],
 //     };
 //   }
-  
-
