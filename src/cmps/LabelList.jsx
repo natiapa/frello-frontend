@@ -1,5 +1,8 @@
+import { IoAddOutline } from "react-icons/io5";
+
 export function LabelList({ taskLabels, labelWidth }) {
   if (!taskLabels) return null;
+
 
   return (
     <div className="label-container">
@@ -9,12 +12,16 @@ export function LabelList({ taskLabels, labelWidth }) {
           className="label-square"
           style={{
             backgroundColor: label.color,
-            width: "40px",
+            width: "60px",
           }}
         >
           <p>{label.title || ""}</p>
         </div>
+        
       ))}
+       <div className="add-label-button" >
+        <IoAddOutline style={{ fontSize: "20px", color: "#0079bf" }} />
+      </div>
     </div>
   );
 }

@@ -27,6 +27,7 @@ export function TaskDetailsActions({
   setNewCheckLists,
   setNewFiles,
   newFiles,
+ 
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
