@@ -469,7 +469,7 @@ function _createBoards() {
           {
             id: "c101",
             title: "Design wireframes",
-            labels: ["Urgent", "In Progress"],
+            labels: '',
             description: "",
             checklists: [
               {
@@ -673,7 +673,7 @@ function _createBoards() {
               "Develop a color scheme for the app",
               "Use brand colors as a base",
             ],
-            cover: "cover_color_scheme.png",
+             cover:{color:'', img: ''},
             dueDate: "",
           },
           {
@@ -688,7 +688,7 @@ function _createBoards() {
               "Design custom icons for the Trello project",
               "Ensure consistency with the overall design",
             ],
-            cover: "cover_icons.png",
+            cover:{color:'', img: ''},
             dueDate: "",
           },
           {
@@ -703,7 +703,7 @@ function _createBoards() {
               "Select fonts for the project",
               "Ensure readability and aesthetic appeal",
             ],
-            cover: "cover_typography.png",
+            cover:{color:'', img: ''},
             dueDate: "",
           },
           {
@@ -718,7 +718,7 @@ function _createBoards() {
               "Create a design system for the app",
               "Include guidelines for all design elements",
             ],
-            cover: "cover_design_system.png",
+             cover:{color:'', img: ''},
             dueDate: "2024-09-30",
           },
           {
@@ -733,7 +733,7 @@ function _createBoards() {
               "Present the design to stakeholders",
               "Incorporate their feedback into the design",
             ],
-            cover: "cover_stakeholder_review.png",
+            cover:{color:'', img: ''},
             dueDate: "",
           },
           {
@@ -748,7 +748,7 @@ function _createBoards() {
               "Finalize the design for the Trello project",
               "Prepare for the development phase",
             ],
-            cover: "cover_finalize_design.png",
+            cover:{color:'', img: ''},
             dueDate: "2024-10-05",
           },
           {
@@ -763,7 +763,7 @@ function _createBoards() {
               "Provide all design assets to the development team",
               "Ensure clear communication during the handoff",
             ],
-            cover: "cover_design_handoff.png",
+            cover:{color:'', img: ''},
             dueDate: "",
           },
         ],
@@ -786,7 +786,7 @@ function _createBoards() {
               "Install all necessary tools",
               "Ensure compatibility with the latest tech stack",
             ],
-            cover: "cover_dev_env.png",
+            cover:{color:'', img: ''},
             dueDate: "2024-09-01",
           },
           {
@@ -801,7 +801,7 @@ function _createBoards() {
               "Set up the initial project structure",
               "Follow best practices for maintainability",
             ],
-            cover: "cover_project_structure.png",
+            cover:{color:'', img: ''},
             dueDate: "2024-09-05",
           },
         ],
@@ -816,7 +816,7 @@ function _createBoards() {
           {
             id: "c113",
             title: "Write unit tests",
-            labels: ["In Progress"],
+            labels: [],
             description: "Create unit tests for the core functionalities of the application.",
             checklists: [],
             members: [],
@@ -825,13 +825,13 @@ function _createBoards() {
               "Focus on critical paths",
               "Ensure all edge cases are covered",
             ],
-            cover: "cover_unit_tests.png",
+            cover:{color:'', img: ''},
             dueDate: "2024-09-10",
           },
           {
             id: "c114",
             title: "Perform integration testing",
-            labels: ["Urgent", "Important"],
+            labels: [],
             description: "Test the integration of different modules to ensure they work together as expected.",
             checklists: [],
             members: [],
@@ -840,7 +840,7 @@ function _createBoards() {
               "Verify module interactions",
               "Check for data consistency",
             ],
-            cover: "cover_integration_testing.png",
+            cover:{color:'', img: ''},
             dueDate: "2024-09-15",
           },
         ],
@@ -853,7 +853,7 @@ function _createBoards() {
           {
             id: "c115",
             title: "Prepare deployment environment",
-            labels: ["Important"],
+            labels: [],
             description: "Set up the environment for deployment, including server configurations and deployment scripts.",
             checklists: [],
             members: [],
@@ -862,7 +862,7 @@ function _createBoards() {
               "Ensure security configurations are in place",
               "Test deployment scripts",
             ],
-            cover: "cover_deployment_environment.png",
+            cover:{color:'', img: ''},
             dueDate: "2024-09-20",
           },
         ],
