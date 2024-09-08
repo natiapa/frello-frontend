@@ -1,28 +1,51 @@
-export function LabelList({ labels, labelWidth }) {
-  const labelsList = [
-    { label: "Completed", color: "#4BCE97" },
-    { label: "On Hold", color: "#F5CD47" },
-    { label: "In Progress", color: "#FEA362" },
-    { label: "Urgent", color: "#F87168" },
-    { label: "Important", color: "#9F8FEF" },
-    { label: "Review", color: "#579DFF" },
-    { label: "Low Priority", color: "#8590A2" },
-  ];
+import { IoAddOutline } from "react-icons/io5";
 
-  return labels.map((label, index) => {
-    const labelItem = labelsList.find((item) => item.label === label);
+export function LabelList({ taskLabels, labelWidth }) {
+  if (!taskLabels) return null;
 
-    if (labelItem) {
-      return (
+
+  return (
+    <div className="label-container">
+      {taskLabels.map((label, index) => (
         <div
           key={index}
           className="label-square"
           style={{
-            backgroundColor: labelItem.color,
-            width: labelWidth,
+            backgroundColor: label.color,
+            width: "60px",
           }}
-        ></div>
-      );
-    }
-  });
+        >
+          <p>{label.title || ""}</p>
+        </div>
+        
+      ))}
+    
+    </div>
+  );
 }
+
+// export function LabelList({ taskLabels, boardLabels,labelWidth }) {
+// console.log(taskLabels)
+// console.log(boardLabels)
+// return (
+//   <div>
+//     <h1>list</h1>
+//   </div>
+// )
+//   return labels.map((label, index) => {
+//     const labelItem = labelsList.find((item) => item.label === label);
+
+//     if (labelItem) {
+//       return (
+//         <div
+//           key={index}
+//           className="label-square"
+//           style={{
+//             backgroundColor: labelItem.color,
+//             width: labelWidth,
+//           }}
+//         ></div>
+//       );
+//     }
+//   });
+// }

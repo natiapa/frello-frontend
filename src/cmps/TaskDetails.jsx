@@ -11,6 +11,8 @@ import { boardService } from "../services/board";
 import SvgIcon from "./SvgIcon";
 import { DueDateDisplay } from "./DueDateDisplay";
 import { AttachmentList } from "./AttachmentList";
+import { IoAddOutline } from "react-icons/io5";
+import { CoverDisplay } from "./CoverDisplay";
 
 export function TaskDetails() {
   const dialogRef = useRef(null);
@@ -23,19 +25,22 @@ export function TaskDetails() {
   const task = group?.tasks?.find((task) => task.id === taskId);
 
   const [currElToEdit, setCurrElToEdit] = useState("");
-  const [selectedLabels, setSelectedLabels] = useState(task.labels);
+  const [boardSelectedLabels, setBoardSelectedLabels] = useState(board.labels);
+  const [taskSelectedLabels, setTaskSelectedLabels] = useState(task.labels);
   const [newDueDate, setNewDueDate] = useState(task.dueDate);
   const [newChecklists, setNewCheckLists] = useState(task.checklists);
   const [newFiles, setNewFiles] = useState(task.attachments || []);
+  const [currCover, setCurrCover] = useState(task.cover)
+  console.log(currCover)
 
-  console.log(task);
-  console.log(task.attachments);
-  console.log(newFiles);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [modalOpenByName, setModalOpenByName] = useState(null);
 
   useEffect(() => {
     if (task) {
       setNewFiles(task.attachments);
-      setSelectedLabels(task.labels);
+      setTaskSelectedLabels(task.labels);
       setNewDueDate(task.dueDate);
       setNewCheckLists(task.checklists);
     }
@@ -119,13 +124,38 @@ export function TaskDetails() {
       console.error("Failed to delete task:", error);
     }
   }
+  function handleClick(ev) {
+    const currDataName = ev.currentTarget.getAttribute("data-name");
+    setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
+    setAnchorEl(ev.currentTarget);
+    setModalOpenByName(currDataName);
+  }
 
+  function handleAddLabel(ev) {
+    console.log("Label added:", ev);
+    handleClick(ev);
+  }
   if (!task) return;
 
   return (
     <section className="task-details">
       <dialog ref={dialogRef} method="dialog" onClick={handleDialogClick}>
-        <form>
+        {currCover.color && <CoverDisplay currCover={currCover.color } />}
+
+        <button
+          className="close-btn"
+          onClick={onCloseDialog}
+          style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            zIndex: 1001,
+          }}
+        >
+          <SvgIcon iconName="close" />
+        </button>
+
+        <form style={{ marginTop: currCover.color ? "120px" : "0" }}>
           {currElToEdit !== "title" ? (
             <header data-name="title" onClick={onEdit}>
               {task?.title || "Untitled Task"}
@@ -138,9 +168,7 @@ export function TaskDetails() {
               setCurrElToEdit={setCurrElToEdit}
             />
           )}
-          <button className="close-btn" onClick={onCloseDialog}>
-            <SvgIcon iconName="close" />
-          </button>
+
           <div className="information">
             {task.members.length > 0 && (
               <ul className="member-list">
@@ -152,17 +180,27 @@ export function TaskDetails() {
               </ul>
             )}
 
-            {selectedLabels.length > 0 && (
+            {/* Label-List */}
+            {taskSelectedLabels.length > 0 && (
               <ul className="labels">
                 <p className="header">Labels</p>
-                <LabelList labels={selectedLabels} />
+                <LabelList taskLabels={taskSelectedLabels} />
+                <div
+                  className="add-label-button"
+                  data-name="labels"
+                  onClick={handleAddLabel}
+                >
+                  <IoAddOutline
+                    style={{ fontSize: "20px", color: "#0079bf" }}
+                  />
+                </div>
               </ul>
             )}
 
             <div>
               <DueDateDisplay
-                setNewDueDate={setNewDueDate}
                 dueDate={task.dueDate}
+                setNewDueDate={setNewDueDate}
               />
             </div>
           </div>
@@ -209,21 +247,30 @@ export function TaskDetails() {
             />
           )}
         </form>
-        <TaskDetailsActions
+        <div style={{ marginTop: currCover.color ? "120px" : "0" }}>
+          <TaskDetailsActions
           board={board}
           group={group}
           task={task}
-          boardId={board?.id}
-          groupId={group.id}
-          taskId={task.id}
-          selectedLabels={selectedLabels}
-          setSelectedLabels={setSelectedLabels}
-          onUpdated={onUpdated}
-          setNewDueDate={setNewDueDate}
-          setNewCheckLists={setNewCheckLists}
-          setNewFiles={setNewFiles}
-          newFiles={newFiles}
-        />
+            boardId={board?.id}
+            groupId={group.id}
+            taskId={task.id}
+            setBoardSelectedLabels={setBoardSelectedLabels}
+            setTaskSelectedLabels={setTaskSelectedLabels}
+            onUpdated={onUpdated}
+            setNewDueDate={setNewDueDate}
+            setNewCheckLists={setNewCheckLists}
+            setNewFiles={setNewFiles}
+            setCurrCover={setCurrCover}
+            currCover={currCover}
+            newFiles={newFiles}
+            handleClick={handleClick}
+            anchorEl={anchorEl}
+            setIsPopoverOpen={setIsPopoverOpen}
+            modalOpenByName={modalOpenByName}
+            isPopoverOpen={isPopoverOpen}
+          />
+        </div>
       </dialog>
     </section>
   );
