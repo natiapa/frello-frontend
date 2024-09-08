@@ -11,7 +11,6 @@
 }
 
 .app-header {
-  // @include flexCenter(space-between);
   display: grid;
   grid-template-columns: 1fr max-content;
   padding: 0 1em;
@@ -21,7 +20,6 @@
 
   section {
     &:first-of-type {
-      // @include flexCenter(space-between);
       display: grid;
       grid-template-columns: 1fr;
 
@@ -35,10 +33,10 @@
       }
 
       a {
-        // @include flexCenter(center);
         display: grid;
         grid-template-columns: max-content max-content;
         gap: 2px;
+        width: fit-content;
 
         .logo-icon-img {
           grid-row: 1;

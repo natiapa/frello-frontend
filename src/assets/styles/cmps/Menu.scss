@@ -247,7 +247,7 @@
       grid-template-columns: 144px 142px;
       gap: 0.5em;
 
-      padding: 1em 0 0 5px;
+      padding: 1em 0 0 1em;
       scrollbar-width: thin;
       -webkit-overflow-scrolling: touch;
       overflow-x: hidden;
@@ -278,7 +278,7 @@
       display: grid;
       grid-template-columns: 144px 142px;
       gap: 0.5em;
-      padding: 1em 0em 0 5px;
+      padding: 1em 0 0 1em;
       scrollbar-width: thin;
       -webkit-overflow-scrolling: touch;
       overflow-x: hidden;
@@ -306,6 +306,14 @@
 
       .btns {
         gap: 3px;
+      }
+
+      .img-list {
+        padding: 1em 0 0 5px;
+      }
+
+      .color-list {
+        padding: 1em 0em 0 5px;
       }
     }
   }
