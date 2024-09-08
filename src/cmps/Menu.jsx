@@ -65,7 +65,7 @@ export function Menu({
                   ? `url(${board.style.backgroundImage})`
                   : "none",
 
-                background: "cover",
+                backgroundSize: "cover",
               }}
             ></span>
             <span className="change-bg-btn">Change background</span>

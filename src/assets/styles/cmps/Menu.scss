@@ -6,7 +6,7 @@
   display: grid;
   grid-template-rows: repeat(3, max-content);
   background-color: #fff;
-  // transition: grid-column 0.3s ease;
+  transition: grid-column 0.3s ease;
   // width: 339px;
 
   .menu-header {
@@ -291,6 +291,7 @@
       right: 0;
       top: 0;
       width: 305px;
+
       .btns {
         gap: 3px;
       }
