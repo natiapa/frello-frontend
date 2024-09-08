@@ -190,7 +190,7 @@ export function BoardDetails() {
           ? `${board.style.backgroundColor}`
           : "none",
 
-        gridTemplateColumns: isMenuOpen ? "auto 1fr 339px" : "auto 1fr ",
+        gridTemplateColumns: isMenuOpen ? "auto 1fr auto" : "auto 1fr ",
       }}
     >
       {isTaskPrevModalOpen && (
