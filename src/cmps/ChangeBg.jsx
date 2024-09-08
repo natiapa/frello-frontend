@@ -139,9 +139,7 @@ export function ChangeBg({
             backgroundImage:
               "url(https://trello.com/assets/8f9c1323c9c16601a9a4.jpg)",
           }}
-        >
-          <span className="photos-title">Photos</span>
-        </button>
+        ></button>
         <button
           className="colors-btn"
           onClick={() => setType("bgColor")}
@@ -149,9 +147,9 @@ export function ChangeBg({
             backgroundImage:
               "url(https://trello.com/assets/97db30fe74a58b7b7a18.png)",
           }}
-        >
-          <span className="colors-title">Colors</span>
-        </button>
+        ></button>
+        <span className="photos-title">Photos</span>
+        <span className="colors-title">Colors</span>
       </section>
 
       {type === "bgImage" && (

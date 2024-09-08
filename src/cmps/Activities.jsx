@@ -2,8 +2,10 @@ import { IoIosArrowBack } from "react-icons/io";
 import SvgIcon from "./SvgIcon";
 import { useEffect } from "react";
 import { loadBoard } from "../store/actions/board.actions";
+import { useNavigate } from "react-router";
 
 export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
+  const navigate = useNavigate();
   function formatDateForTask(dateString) {
     const date = new Date(dateString.split("/").reverse().join("-"));
     const options = { month: "short", day: "numeric" };
@@ -70,7 +72,7 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
               {activity.type === "addBoard" && (
                 <span>
                   {activity.title}{" "}
-                  <a className="link" href={`/board`}>
+                  <a className="link" onClick={() => navigate(`/board`)}>
                     Frello Workspace
                   </a>
                 </span>
@@ -81,7 +83,11 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
                   added{" "}
                   <a
                     className="link"
-                    href={`/board/${board._id}/${activity.group.id}/${activity.task.id}`}
+                    onClick={() =>
+                      navigate(
+                        `/board/${board._id}/${activity.group.id}/${activity.task.id}`
+                      )
+                    }
                   >
                     {activity.task.title}{" "}
                   </a>
@@ -98,7 +104,11 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
                   added {activity.checklist.title} to
                   <a
                     className="link"
-                    href={`/board/${board._id}/${activity.group.id}/${activity.task.id}`}
+                    onClick={() =>
+                      navigate(
+                        `/board/${board._id}/${activity.group.id}/${activity.task.id}`
+                      )
+                    }
                   >
                     {" "}
                     {activity.task.title}
@@ -111,7 +121,11 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
                   complete {activity.item.text} on
                   <a
                     className="link"
-                    href={`/board/${board._id}/${activity.group.id}/${activity.task.id}`}
+                    onClick={() =>
+                      navigate(
+                        `/board/${board._id}/${activity.group.id}/${activity.task.id}`
+                      )
+                    }
                   >
                     {" "}
                     {activity.task.title}
@@ -124,7 +138,11 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
                   set{" "}
                   <a
                     className="link"
-                    href={`/board/${board._id}/${activity.group.id}/${activity.task.id}`}
+                    onClick={() =>
+                      navigate(
+                        `/board/${board._id}/${activity.group.id}/${activity.task.id}`
+                      )
+                    }
                   >
                     {activity.task.title}
                   </a>{" "}
@@ -141,7 +159,11 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
                   removed {activity.checklist.title} from
                   <a
                     className="link"
-                    href={`/board/${board._id}/${activity.group.id}/${activity.task.id}`}
+                    onClick={() =>
+                      navigate(
+                        `/board/${board._id}/${activity.group.id}/${activity.task.id}`
+                      )
+                    }
                   >
                     {" "}
                     {activity.task.title}

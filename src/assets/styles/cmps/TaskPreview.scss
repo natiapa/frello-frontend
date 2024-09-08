@@ -1,5 +1,5 @@
 .task-preview {
-  position: relative;
+  // position: relative;
   display: grid;
   grid-template-rows: max-content 1fr max-content;
   padding: 8px 12px 8px;
@@ -69,14 +69,13 @@
   }
 
   .details {
-    position: relative;
+    // position: relative;
     grid-row: 3;
     display: grid;
     grid-template-columns: repeat(5, auto);
     // grid-template-columns: auto 80px;
     align-items: end;
     justify-content: space-between;
-    
 
     .checklists {
       display: grid;

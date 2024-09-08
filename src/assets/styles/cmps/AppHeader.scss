@@ -11,7 +11,9 @@
 }
 
 .app-header {
-  @include flexCenter(space-between);
+  // @include flexCenter(space-between);
+  display: grid;
+  grid-template-columns: 1fr max-content;
   padding: 0 1em;
   height: 50px;
   grid-column: 1/-1;
@@ -19,7 +21,9 @@
 
   section {
     &:first-of-type {
-      @include flexCenter(space-between);
+      // @include flexCenter(space-between);
+      display: grid;
+      grid-template-columns: 1fr;
 
       & > * {
         margin-inline-end: 0.8em;
@@ -33,7 +37,7 @@
       a {
         // @include flexCenter(center);
         display: grid;
-        grid-template-columns: auto;
+        grid-template-columns: max-content max-content;
         gap: 2px;
 
         .logo-icon-img {
@@ -63,7 +67,9 @@
 
   section {
     &:nth-of-type(2) {
-      @include flexCenter(center);
+      // @include flexCenter(center);
+      display: grid;
+
       height: 100%;
       .login-btn {
         @include btn();
@@ -82,6 +88,7 @@
 
       .profile {
         @include flexCenter(center);
+        place-self: center end;
         width: 2em;
         height: 2em;
         padding: 1em;

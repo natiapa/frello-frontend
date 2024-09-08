@@ -386,7 +386,7 @@ function _createBoards() {
     style: {
       backgroundImage:
         "https://cdn.pixabay.com/photo/2024/07/05/22/30/penguin-8875750_1280.jpg",
-      backgroundColor: "#61bd4f",
+      // backgroundColor: "#61bd4f",
     },
     labels: [
       {
