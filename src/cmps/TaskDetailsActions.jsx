@@ -1,10 +1,9 @@
-import { Popover, Typography } from "@mui/material";
-import { useState } from "react";
+import { Popover } from "@mui/material";
 import { CgCreditCard } from "react-icons/cg";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { TiTag } from "react-icons/ti";
 import { Link, useParams } from "react-router-dom";
-import { EditLabels } from "./EditLabels";
+import { LabelPicker } from "./LabelPicker";
 import { EditChecklist } from "./EditChecklist";
 import { LuClock5 } from "react-icons/lu";
 import { DueDatePicker } from "./DueDatePicker";
@@ -12,6 +11,8 @@ import { AttachmentUploader } from "./AttachmentUploader";
 import { FiPaperclip } from "react-icons/fi";
 import { BsArchive } from "react-icons/bs";
 import { ArchiveAction } from "./ArchiveAction.JSX";
+import { CoverPicker } from "./CoverPicker";
+import { BsCardImage } from "react-icons/bs";
 
 export function TaskDetailsActions({
   board,
@@ -22,26 +23,25 @@ export function TaskDetailsActions({
   taskId,
   taskPrevActionsModalData,
   setIsTaskPrevModalOpen,
-  selectedLabels,
-  setSelectedLabels,
+  setTaskSelectedLabels,
+  setBoardSelectedLabels,
   onUpdated = () => {},
   setNewDueDate,
   setNewCheckLists,
   setNewFiles,
   newFiles,
+  anchorEl,
+  setCurrCover,
+  setIsPopoverOpen,
+  modalOpenByName,
+  currCover,
+  handleClick,
+  isPopoverOpen
 }) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const [modalOpenByName, setModalOpenByName] = useState(null);
 
   const { taskId: taskParams } = useParams();
 
-  function handleClick(ev) {
-    const currDataName = ev.currentTarget.getAttribute("data-name");
-    setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
-    setAnchorEl(ev.currentTarget);
-    setModalOpenByName(currDataName);
-  }
+
 
   function handlePopoverClick(ev) {
     ev.stopPropagation();
@@ -154,14 +154,23 @@ export function TaskDetailsActions({
                 horizontal: "left",
               }}
               disablePortal
+              PaperProps={{
+                sx: {
+                  width: "auto",
+                  maxWidth: "400px",
+                  maxHeight: "90vh",
+                  overflow: "auto",
+                  padding: "10px",
+                },
+              }}
             >
-              <EditLabels
-                groupId={groupId}
+              <LabelPicker
                 task={task}
                 handlePopoverClick={handlePopoverClick}
-                selectedLabels={selectedLabels}
-                setSelectedLabels={setSelectedLabels}
+                setTaskSelectedLabels={setTaskSelectedLabels}
+                setBoardSelectedLabels={setBoardSelectedLabels}
                 setIsPopoverOpen={setIsPopoverOpen}
+                onUpdated={onUpdated}
               />
             </Popover>
           )}
@@ -190,13 +199,6 @@ export function TaskDetailsActions({
                   horizontal: "left",
                 }}
                 disablePortal
-                PaperProps={{
-                  sx: {
-                    width: "400px",
-                    height: "600px",
-                    padding: "20px",
-                  },
-                }}
               >
                 <AttachmentUploader
                   onUpdated={onUpdated}
@@ -210,7 +212,49 @@ export function TaskDetailsActions({
             )}
           </div>
         )}
+
+        <div
+          role="button"
+          data-name="cover"
+          className="cover action-btn"
+          aria-describedby="5"
+          onClick={handleClick}
+        >
+          <span className="icon">
+          <BsCardImage  />
+          </span>
+          <p>Cover</p>
+
+          {modalOpenByName === "cover" && isPopoverOpen && (
+            <Popover
+              id={isPopoverOpen ? "cover-popover" : undefined}
+              open={isPopoverOpen}
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              disablePortal
+              PaperProps={{
+                sx: {
+                  width: "400px",
+                  height: "600px",
+                  padding: "20px",
+                },
+              }}
+            >
+              <CoverPicker 
+                onUpdated={onUpdated}
+                setIsPopoverOpen={setIsPopoverOpen}
+                handlePopoverClick={handlePopoverClick}
+                setCurrCover={setCurrCover}
+                currCover={currCover}
+              />
+            </Popover>
+          )}
+        </div>
       </>
+
       <>
         {taskParams && <h5>Action</h5>}
         {taskParams && (
@@ -218,7 +262,7 @@ export function TaskDetailsActions({
             role="button"
             data-name="archive"
             className="archive action-btn"
-            aria-describedby="5"
+            aria-describedby="6"
             onClick={handleClick}
           >
             <span className="icon">
