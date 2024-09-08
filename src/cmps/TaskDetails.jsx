@@ -140,8 +140,18 @@ export function TaskDetails() {
   return (
     <section className="task-details">
       <dialog ref={dialogRef} method="dialog" onClick={handleDialogClick}>
-        {currCover.color && <CoverDisplay currCover={currCover.color} />}
-
+        {currCover.color && (
+          <>
+            <CoverDisplay currCover={currCover} />
+            <button
+              className="cover-btn"
+              data-name="cover"
+              onClick={handleAddLabel}
+            >
+              cover
+            </button>
+          </>
+        )}
         <button
           className="close-btn"
           onClick={onCloseDialog}
@@ -154,17 +164,6 @@ export function TaskDetails() {
         >
           <SvgIcon iconName="close" />
         </button>
-        <button
-            className="cover-btn"
-            data-name="cover"
-            onClick={handleAddLabel}
-            style={{
-              position: "absolute",
-              top: "50px",
-              right: "10px",
-              zIndex: 1001,
-            }}
-          >cover</button>
 
         <form style={{ marginTop: currCover.color ? "120px" : "0" }}>
           {currElToEdit !== "title" ? (
