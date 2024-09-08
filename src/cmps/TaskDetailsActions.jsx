@@ -36,12 +36,9 @@ export function TaskDetailsActions({
   modalOpenByName,
   currCover,
   handleClick,
-  isPopoverOpen
+  isPopoverOpen,
 }) {
-
   const { taskId: taskParams } = useParams();
-
-
 
   function handlePopoverClick(ev) {
     ev.stopPropagation();
@@ -221,7 +218,7 @@ export function TaskDetailsActions({
           onClick={handleClick}
         >
           <span className="icon">
-          <BsCardImage  />
+            <BsCardImage />
           </span>
           <p>Cover</p>
 
@@ -231,15 +228,16 @@ export function TaskDetailsActions({
               open={isPopoverOpen}
               anchorEl={anchorEl}
               anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: "bottom",
+                horizontal: "left",
               }}
               disablePortal
               PaperProps={{
                 sx: {
-                  width: "400px",
-                  height: "600px",
+
                   padding: "20px",
+                  boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", 
+                  borderRadius: "8px", 
                 },
               }}
             >
@@ -252,6 +250,10 @@ export function TaskDetailsActions({
               />
             </Popover>
           )}
+
+
+
+          
         </div>
       </>
 

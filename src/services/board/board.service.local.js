@@ -2,7 +2,6 @@ import { storageService } from "../async-storage.service";
 import { getRandomColor, makeId, sortColorsByHue } from "../util.service";
 import { userService } from "../user";
 
-
 const STORAGE_KEY = "board";
 
 export const boardService = {
@@ -23,7 +22,8 @@ export const boardService = {
   getAllLabels,
   getEmptyLabel,
   getColorsCover,
-  updateActivities
+  updateActivities,
+  getImgs
 };
 window.cs = boardService;
 
@@ -177,15 +177,43 @@ function updateBoard(board, groupId, taskId, { key, value }, activity = "") {
   return board;
 }
 
-async function updateActivities(board, title, type, group, task, checklist, taskNumber, item, dueDate) {
-  const activityToAdd = addActivity(title, type, group, task, checklist, taskNumber, item, dueDate)
-  console.log(activityToAdd)
+async function updateActivities(
+  board,
+  title,
+  type,
+  group,
+  task,
+  checklist,
+  taskNumber,
+  item,
+  dueDate
+) {
+  const activityToAdd = addActivity(
+    title,
+    type,
+    group,
+    task,
+    checklist,
+    taskNumber,
+    item,
+    dueDate
+  );
+  console.log(activityToAdd);
 
   await board.activities.unshift(activityToAdd);
   await save(board);
 }
 
-function addActivity(title, type, group, task, checklist, taskNumber, item, dueDate) {
+function addActivity(
+  title,
+  type,
+  group,
+  task,
+  checklist,
+  taskNumber,
+  item,
+  dueDate
+) {
   const activity = {
     id: makeId(),
     title,
@@ -195,29 +223,29 @@ function addActivity(title, type, group, task, checklist, taskNumber, item, dueD
       _id: "u101",
       fullname: "Abi Abambi",
       imgUrl: "http://some-img",
-      color: '#000'
+      color: "#000",
     },
     group: {
       id: group?.id,
-      title: group?.title
+      title: group?.title,
     },
     task: {
       id: task?.id,
-      title: task?.title
+      title: task?.title,
     },
     taskNumber,
     checklist: {
       id: checklist?.id,
-      title: checklist?.title
+      title: checklist?.title,
     },
     item,
     dueDate: {
       date: dueDate?.date,
-      time: dueDate?.time
-    }
+      time: dueDate?.time,
+    },
   };
 
-  return activity
+  return activity;
 }
 
 function getEmptyGroup() {
@@ -320,6 +348,89 @@ function getEmptyLabel() {
     isEditable: false,
   };
 }
+const urlImgs = [
+  {
+    src: "https://cdn.pixabay.com/photo/2024/08/01/10/18/bird-8936789_1280.jpg",
+    color: "#ffedcc", // pastel peach
+    alt: "bird",
+  },
+  {
+    src: "https://cdn.pixabay.com/photo/2024/07/31/15/13/green-8935080_1280.jpg",
+    color: "#d4f5dc", // pastel mint green
+    alt: "green-swirl",
+  },
+  {
+    src: "https://cdn.pixabay.com/photo/2024/02/17/17/20/chess-8579843_1280.jpg",
+    color: "#f4e3ff", // pastel lavender
+    alt: "chess",
+  },
+  {
+    src: "https://cdn.pixabay.com/photo/2013/02/17/07/19/flower-82437_1280.jpg",
+    color: "#ffe6e6", // pastel pink
+    alt: "orange-flower",
+  },
+  {
+    src: "https://cdn.pixabay.com/photo/2024/08/11/18/15/leaves-8962041_1280.jpg",
+    color: "#d6f5d6", // pastel light green
+    alt: "leafs",
+  },
+  {
+    src: "https://cdn.pixabay.com/photo/2022/06/23/09/58/the-season-of-ripe-rice-7279448_1280.jpg",
+    color: "#f2e6cc", // pastel cream
+    alt: "the-season-of-ripe-rice",
+  },
+  // {
+  //   src: "https://cdn.pixabay.com/photo/2024/07/05/22/30/penguin-8875750_1280.jpg",
+  //   color: "#e6f2ff", // pastel light blue
+  //   alt: "penguin",
+  // },
+  // {
+  //   src: "https://cdn.pixabay.com/photo/2024/03/04/14/56/pagoda-8612554_1280.jpg",
+  //   color: "#ffebd6", // pastel peach
+  //   alt: "pagoda",
+  // },
+  // {
+  //   src: "https://cdn.pixabay.com/photo/2018/01/31/12/16/architecture-3121009_1280.jpg",
+  //   color: "#e6e6ff", // pastel lavender
+  //   alt: "architecture",
+  // },
+  // {
+  //   src: "https://cdn.pixabay.com/photo/2016/05/10/12/21/animal-1383616_960_720.jpg",
+  //   color: "#f9e6e6", // pastel coral
+  //   alt: "lemur",
+  // },
+  // {
+  //   src: "https://cdn.pixabay.com/photo/2017/04/28/15/20/mount-rushmore-2268636_1280.jpg",
+  //   color: "#e6f7ff", // pastel sky blue
+  //   alt: "mount-rushmore",
+  // },
+  // {
+  //   src: "https://cdn.pixabay.com/photo/2020/05/23/04/11/transport-5207942_1280.jpg",
+  //   color: "#ffe6cc", // pastel peach
+  //   alt: "transport",
+  // },
+  // {
+  //   src: "https://cdn.pixabay.com/photo/2022/10/06/10/29/witch-hazel-7502409_960_720.jpg",
+  //   color: "#fff0e6", // pastel light coral
+  //   alt: "witch-hazel",
+  // },
+  // {
+  //   src: "https://cdn.pixabay.com/photo/2023/09/21/01/20/sugar-blader-8265868_1280.jpg",
+  //   color: "#e6ffe6", // pastel light green
+  //   alt: "sugar-blader",
+  // },
+  // {
+  //   src: "https://cdn.pixabay.com/photo/2016/11/29/06/06/coast-1867704_960_720.jpg",
+  //   color: "#e0f7fa", // pastel aqua
+  //   alt: "coast",
+  // },
+  // {
+  //   src: "https://cdn.pixabay.com/photo/2017/03/17/21/32/shell-2152731_960_720.jpg",
+  //   color: "#fff5e6", // pastel apricot
+  //   alt: "shell",
+  // },
+];
+
 const colors = [
   { id: "A1B2C", title: "", color: "#61BD4F", colorName: "Green" },
   { id: "D3E4F", title: "", color: "#F2D600", colorName: "Yellow" },
@@ -365,11 +476,16 @@ function getColorsCover() {
     { id: "U9V0W", color: "#94C748" },
     { id: "X1Y2Z", color: "#6CC3E0" },
     { id: "Z1X2C", color: "#579DFF" },
-  ]
+  ];
 }
 function getAllLabels() {
   const allLabels = colors;
   return sortColorsByHue(allLabels);
+}
+
+function getImgs() {
+ const imgs = urlImgs
+ return imgs
 }
 
 function _createBoards() {
@@ -469,7 +585,7 @@ function _createBoards() {
           {
             id: "c101",
             title: "Design wireframes",
-            labels: '',
+            labels: "",
             description: "",
             checklists: [
               {
@@ -524,12 +640,12 @@ function _createBoards() {
                 color: "#f2d600",
               },
             ],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Create wireframes for the new Trello feature",
               "Incorporate feedback from the last review",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "",
           },
           {
@@ -599,12 +715,12 @@ function _createBoards() {
               },
             ],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Design high-fidelity mockups for the app",
               "Align design with the wireframes",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
 
             dueDate: "",
           },
@@ -653,12 +769,12 @@ function _createBoards() {
               },
             ],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Design a logo for the Trello project",
               "Ensure it aligns with the brand identity",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "",
           },
           {
@@ -668,12 +784,12 @@ function _createBoards() {
             description: "",
             checklists: [],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Develop a color scheme for the app",
               "Use brand colors as a base",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "",
           },
           {
@@ -683,12 +799,12 @@ function _createBoards() {
             description: "",
             checklists: [],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Design custom icons for the Trello project",
               "Ensure consistency with the overall design",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "",
           },
           {
@@ -698,12 +814,12 @@ function _createBoards() {
             description: "",
             checklists: [],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Select fonts for the project",
               "Ensure readability and aesthetic appeal",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "",
           },
           {
@@ -713,12 +829,12 @@ function _createBoards() {
             description: "",
             checklists: [],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Create a design system for the app",
               "Include guidelines for all design elements",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "2024-09-30",
           },
           {
@@ -728,12 +844,12 @@ function _createBoards() {
             description: "",
             checklists: [],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Present the design to stakeholders",
               "Incorporate their feedback into the design",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "",
           },
           {
@@ -743,12 +859,12 @@ function _createBoards() {
             description: "",
             checklists: [],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Finalize the design for the Trello project",
               "Prepare for the development phase",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "2024-10-05",
           },
           {
@@ -758,12 +874,12 @@ function _createBoards() {
             description: "",
             checklists: [],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Provide all design assets to the development team",
               "Ensure clear communication during the handoff",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "",
           },
         ],
@@ -781,12 +897,12 @@ function _createBoards() {
             description: "",
             checklists: [],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Install all necessary tools",
               "Ensure compatibility with the latest tech stack",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "2024-09-01",
           },
           {
@@ -796,12 +912,12 @@ function _createBoards() {
             description: "",
             checklists: [],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Set up the initial project structure",
               "Follow best practices for maintainability",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "2024-09-05",
           },
         ],
@@ -817,30 +933,32 @@ function _createBoards() {
             id: "c113",
             title: "Write unit tests",
             labels: [],
-            description: "Create unit tests for the core functionalities of the application.",
+            description:
+              "Create unit tests for the core functionalities of the application.",
             checklists: [],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Focus on critical paths",
               "Ensure all edge cases are covered",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "2024-09-10",
           },
           {
             id: "c114",
             title: "Perform integration testing",
             labels: [],
-            description: "Test the integration of different modules to ensure they work together as expected.",
+            description:
+              "Test the integration of different modules to ensure they work together as expected.",
             checklists: [],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Verify module interactions",
               "Check for data consistency",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "2024-09-15",
           },
         ],
@@ -854,15 +972,16 @@ function _createBoards() {
             id: "c115",
             title: "Prepare deployment environment",
             labels: [],
-            description: "Set up the environment for deployment, including server configurations and deployment scripts.",
+            description:
+              "Set up the environment for deployment, including server configurations and deployment scripts.",
             checklists: [],
             members: [],
-            attachments: '', // שדה attachments ריק
+            attachments: "", // שדה attachments ריק
             comments: [
               "Ensure security configurations are in place",
               "Test deployment scripts",
             ],
-            cover: { color: '', img: '' },
+            cover: { color: "", img: "" },
             dueDate: "2024-09-20",
           },
         ],
@@ -872,14 +991,13 @@ function _createBoards() {
       {
         id: "a112",
         title: "deleted list group-title",
-        type: 'deleteGroup',
+        type: "deleteGroup",
         createdAt: 154514,
         byMember: {
           id: "u102",
           fullname: "Avi",
           imgUrl: "http://some-img",
           color: "#f2d600",
-
         },
         group: {
           id: "g101",
@@ -889,14 +1007,13 @@ function _createBoards() {
       {
         id: "a111",
         title: "deleted card #4 from group-title",
-        type: 'deleteTask',
+        type: "deleteTask",
         createdAt: 154514,
         byMember: {
           id: "u102",
           fullname: "Avi",
           imgUrl: "http://some-img",
           color: "#f2d600",
-
         },
         group: {
           id: "g101",
@@ -905,19 +1022,18 @@ function _createBoards() {
         task: {
           id: "c101",
           title: "Design wireframes",
-        }
+        },
       },
       {
         id: "a110",
         title: "removed checklist-title",
-        type: 'deleteChecklist',
+        type: "deleteChecklist",
         createdAt: 154514,
         byMember: {
           id: "u101",
           fullname: "Natia",
           imgUrl: "http://some-img",
           color: "#61bd4f",
-
         },
         group: {
           id: "g101",
@@ -928,21 +1044,20 @@ function _createBoards() {
           title: "Design wireframes",
         },
         checklist: {
-          id: 'ck101',
-          title: 'Design Process',
+          id: "ck101",
+          title: "Design Process",
         },
       },
       {
         id: "a109",
         title: "set task-title to be task-due-date",
-        type: 'setDueDate',
+        type: "setDueDate",
         createdAt: 154514,
         byMember: {
           id: "u103",
           fullname: "Yana",
           imgUrl: "http://some-img",
           color: "#f3a600",
-
         },
         group: {
           id: "g101",
@@ -954,20 +1069,19 @@ function _createBoards() {
         },
         dueDate: {
           date: "2024-09-04",
-          time: "01:02"
-        }
+          time: "01:02",
+        },
       },
       {
         id: "a101",
         title: "complete checklist-item-text on task-title",
-        type: 'completeChecklistItem',
+        type: "completeChecklistItem",
         createdAt: 154514,
         byMember: {
           id: "u101",
           fullname: "Natia",
           imgUrl: "http://some-img",
           color: "#61bd4f",
-
         },
         group: {
           id: "g101",
@@ -978,18 +1092,18 @@ function _createBoards() {
           title: "Design wireframes",
         },
         checklist: {
-          id: 'ck101',
-          title: 'Design Process',
+          id: "ck101",
+          title: "Design Process",
         },
         item: {
-          id: 'item101',
-          text: 'Gather requirements from the team',
-        }
+          id: "item101",
+          text: "Gather requirements from the team",
+        },
       },
       {
         id: "a102",
         title: "added checklistt-title to group-title",
-        type: 'addChecklist',
+        type: "addChecklist",
         createdAt: 154520,
         byMember: {
           id: "u102",
@@ -1006,9 +1120,9 @@ function _createBoards() {
           title: "Design wireframes",
         },
         checklist: {
-          id: 'chk101',
-          title: 'colors',
-        }
+          id: "chk101",
+          title: "colors",
+        },
       },
       {
         id: "a104",
@@ -1033,7 +1147,7 @@ function _createBoards() {
       {
         id: "a103",
         title: `added group-title`,
-        type: 'addGroup',
+        type: "addGroup",
         createdAt: 154530,
         byMember: {
           id: "u103",
@@ -1053,14 +1167,14 @@ function _createBoards() {
 
       {
         id: "a108",
-        title: 'added this board to',
-        type: 'addBoard',
+        title: "added this board to",
+        type: "addBoard",
         createdAt: Date.now(),
         byMember: {
           _id: "u101",
           fullname: "Abi Abambi",
           imgUrl: "http://some-img",
-          color: '#000'
+          color: "#000",
         },
         group: {
           id: "g101",
@@ -1073,14 +1187,14 @@ function _createBoards() {
       },
       {
         id: "a107",
-        title: 'created this board',
-        type: 'createBoard',
+        title: "created this board",
+        type: "createBoard",
         createdAt: Date.now(),
         byMember: {
           _id: "u101",
           fullname: "Abi Abambi",
           imgUrl: "http://some-img",
-          color: '#000'
+          color: "#000",
         },
         group: {
           id: "g101",
@@ -1094,4 +1208,3 @@ function _createBoards() {
     ],
   };
 }
-

@@ -206,3 +206,24 @@
       sans-serif;
   }
 }
+.cover-btn {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  z-index: 1001;
+  background-color: rgba(255, 255, 255, 0); /* רקע שקוף */
+  border: 1px solid #ccc; /* גבול אפור בהיר */
+  color: #0079bf; /* צבע טקסט כחול */
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* צל עדין */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cover-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* רקע שקוף יותר ב-hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* הגדלת הצל ב-hover */
+}
