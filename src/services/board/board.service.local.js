@@ -498,7 +498,7 @@ function _createBoards() {
               "Create wireframes for the new Trello feature",
               "Incorporate feedback from the last review",
             ],
-            cover: "cover_wireframes.png",
+            cover:{color:'', img: ''},
             dueDate: "",
           },
           {

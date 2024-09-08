@@ -4,11 +4,16 @@ export function CoverPicker({
   onUpdated,
   setIsPopoverOpen,
   handlePopoverClick,
+  setCurrCover,
+  currCover
 }) {
   const coverColors = boardService.getColorsCover();
-  function handleCoverSelection(ev) {
+
+  function handleCoverSelection(ev,color) {
     ev.stopPropagation()
- 
+    
+    const updateColor = {...currCover, color: color }
+    setCurrCover(updateColor)
   }
 
   return (
@@ -26,7 +31,7 @@ export function CoverPicker({
                 style={{
                   backgroundColor: coverColor.color,
                 }}
-                onClick={handleCoverSelection}
+                onClick={(event)=> handleCoverSelection(event,coverColor.color)}
               ></div>
             </li>
           ))}

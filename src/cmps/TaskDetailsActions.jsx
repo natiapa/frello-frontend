@@ -1,5 +1,4 @@
-import { Popover, Typography } from "@mui/material";
-import { useState } from "react";
+import { Popover } from "@mui/material";
 import { CgCreditCard } from "react-icons/cg";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { TiTag } from "react-icons/ti";
@@ -30,10 +29,10 @@ export function TaskDetailsActions({
   setNewFiles,
   newFiles,
   anchorEl,
-  setAnchorEl,
+  setCurrCover,
   setIsPopoverOpen,
   modalOpenByName,
-  setModalOpenByName,
+  currCover,
   handleClick,
   isPopoverOpen
 }) {
@@ -243,6 +242,8 @@ export function TaskDetailsActions({
                 onUpdated={onUpdated}
                 setIsPopoverOpen={setIsPopoverOpen}
                 handlePopoverClick={handlePopoverClick}
+                setCurrCover={setCurrCover}
+                currCover={currCover}
               />
             </Popover>
           )}

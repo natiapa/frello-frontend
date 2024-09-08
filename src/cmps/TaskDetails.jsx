@@ -12,6 +12,7 @@ import SvgIcon from "./SvgIcon";
 import { DueDateDisplay } from "./DueDateDisplay";
 import { AttachmentList } from "./AttachmentList";
 import { IoAddOutline } from "react-icons/io5";
+import { CoverDisplay } from "./CoverDisplay";
 
 export function TaskDetails() {
   const dialogRef = useRef(null);
@@ -29,14 +30,12 @@ export function TaskDetails() {
   const [newDueDate, setNewDueDate] = useState(task.dueDate);
   const [newChecklists, setNewCheckLists] = useState(task.checklists);
   const [newFiles, setNewFiles] = useState(task.attachments || []);
+  const [currCover, setCurrCover] = useState(task.cover)
+  console.log(currCover)
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
-
-  console.log(task);
-  console.log(task.attachments);
-  console.log(newFiles);
 
   useEffect(() => {
     if (task) {
@@ -115,7 +114,22 @@ export function TaskDetails() {
   return (
     <section className="task-details">
       <dialog ref={dialogRef} method="dialog" onClick={handleDialogClick}>
-        <form>
+        {currCover.color && <CoverDisplay currCover={currCover.color } />}
+
+        <button
+          className="close-btn"
+          onClick={onCloseDialog}
+          style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            zIndex: 1001,
+          }}
+        >
+          <SvgIcon iconName="close" />
+        </button>
+
+        <form style={{ marginTop: currCover.color ? "120px" : "0" }}>
           {currElToEdit !== "title" ? (
             <header data-name="title" onClick={onEdit}>
               {task?.title || "Untitled Task"}
@@ -128,9 +142,7 @@ export function TaskDetails() {
               setCurrElToEdit={setCurrElToEdit}
             />
           )}
-          <button className="close-btn" onClick={onCloseDialog}>
-            <SvgIcon iconName="close" />
-          </button>
+
           <div className="information">
             {task.members.length > 0 && (
               <ul className="member-list">
@@ -207,26 +219,28 @@ export function TaskDetails() {
             />
           )}
         </form>
-        <TaskDetailsActions
-          boardId={board?.id}
-          groupId={group.id}
-          taskId={task.id}
-          task={task}
-          setBoardSelectedLabels={setBoardSelectedLabels}
-          setTaskSelectedLabels={setTaskSelectedLabels}
-          onUpdated={onUpdated}
-          setNewDueDate={setNewDueDate}
-          setNewCheckLists={setNewCheckLists}
-          setNewFiles={setNewFiles}
-          newFiles={newFiles}
-          handleClick={handleClick}
-          anchorEl={anchorEl} // מעביר את anchorEl כפרופס
-          setAnchorEl={setAnchorEl}
-          setIsPopoverOpen={setIsPopoverOpen}
-          modalOpenByName={modalOpenByName}
-          setModalOpenByName={setModalOpenByName}
-          isPopoverOpen={isPopoverOpen}
-        />
+        <div style={{ marginTop: currCover.color ? "120px" : "0" }}>
+          <TaskDetailsActions
+            boardId={board?.id}
+            groupId={group.id}
+            taskId={task.id}
+            task={task}
+            setBoardSelectedLabels={setBoardSelectedLabels}
+            setTaskSelectedLabels={setTaskSelectedLabels}
+            onUpdated={onUpdated}
+            setNewDueDate={setNewDueDate}
+            setNewCheckLists={setNewCheckLists}
+            setNewFiles={setNewFiles}
+            setCurrCover={setCurrCover}
+            currCover={currCover}
+            newFiles={newFiles}
+            handleClick={handleClick}
+            anchorEl={anchorEl}
+            setIsPopoverOpen={setIsPopoverOpen}
+            modalOpenByName={modalOpenByName}
+            isPopoverOpen={isPopoverOpen}
+          />
+        </div>
       </dialog>
     </section>
   );
