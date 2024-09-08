@@ -19,9 +19,7 @@ export function LabelList({ taskLabels, labelWidth }) {
         </div>
         
       ))}
-       <div className="add-label-button" >
-        <IoAddOutline style={{ fontSize: "20px", color: "#0079bf" }} />
-      </div>
+    
     </div>
   );
 }

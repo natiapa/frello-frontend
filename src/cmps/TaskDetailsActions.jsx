@@ -29,19 +29,18 @@ export function TaskDetailsActions({
   setNewCheckLists,
   setNewFiles,
   newFiles,
+  anchorEl,
+  setAnchorEl,
+  setIsPopoverOpen,
+  modalOpenByName,
+  setModalOpenByName,
+  handleClick,
+  isPopoverOpen
 }) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const [modalOpenByName, setModalOpenByName] = useState(null);
 
   const { taskId: taskParams } = useParams();
 
-  function handleClick(ev) {
-    const currDataName = ev.currentTarget.getAttribute("data-name");
-    setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
-    setAnchorEl(ev.currentTarget);
-    setModalOpenByName(currDataName);
-  }
+
 
   function handlePopoverClick(ev) {
     ev.stopPropagation();

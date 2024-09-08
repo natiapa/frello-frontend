@@ -11,6 +11,7 @@ import { boardService } from "../services/board";
 import SvgIcon from "./SvgIcon";
 import { DueDateDisplay } from "./DueDateDisplay";
 import { AttachmentList } from "./AttachmentList";
+import { IoAddOutline } from "react-icons/io5";
 
 export function TaskDetails() {
   const dialogRef = useRef(null);
@@ -27,8 +28,11 @@ export function TaskDetails() {
   const [taskSelectedLabels, setTaskSelectedLabels] = useState(task.labels);
   const [newDueDate, setNewDueDate] = useState(task.dueDate);
   const [newChecklists, setNewCheckLists] = useState(task.checklists);
-  const [newFiles, setNewFiles] = useState(task.attachments|| []);
+  const [newFiles, setNewFiles] = useState(task.attachments || []);
 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [modalOpenByName, setModalOpenByName] = useState(null);
 
   console.log(task);
   console.log(task.attachments);
@@ -36,7 +40,7 @@ export function TaskDetails() {
 
   useEffect(() => {
     if (task) {
-      setNewFiles(task.attachments)
+      setNewFiles(task.attachments);
       setTaskSelectedLabels(task.labels);
       setNewDueDate(task.dueDate);
       setNewCheckLists(task.checklists);
@@ -95,8 +99,17 @@ export function TaskDetails() {
       console.error("Failed to delete task:", error);
     }
   }
+  function handleClick(ev) {
+    const currDataName = ev.currentTarget.getAttribute("data-name");
+    setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
+    setAnchorEl(ev.currentTarget);
+    setModalOpenByName(currDataName);
+  }
 
-
+  function handleAddLabel(ev) {
+    console.log("Label added:", ev);
+    handleClick(ev);
+  }
   if (!task) return;
 
   return (
@@ -129,15 +142,28 @@ export function TaskDetails() {
               </ul>
             )}
 
+            {/* Label-List */}
             {taskSelectedLabels.length > 0 && (
               <ul className="labels">
                 <p className="header">Labels</p>
                 <LabelList taskLabels={taskSelectedLabels} />
+                <div
+                  className="add-label-button"
+                  data-name="labels"
+                  onClick={handleAddLabel}
+                >
+                  <IoAddOutline
+                    style={{ fontSize: "20px", color: "#0079bf" }}
+                  />
+                </div>
               </ul>
             )}
 
             <div>
-              <DueDateDisplay dueDate={task.dueDate} />
+              <DueDateDisplay
+                dueDate={task.dueDate}
+                setNewDueDate={setNewDueDate}
+              />
             </div>
           </div>
 
@@ -193,6 +219,13 @@ export function TaskDetails() {
           setNewCheckLists={setNewCheckLists}
           setNewFiles={setNewFiles}
           newFiles={newFiles}
+          handleClick={handleClick}
+          anchorEl={anchorEl} // מעביר את anchorEl כפרופס
+          setAnchorEl={setAnchorEl}
+          setIsPopoverOpen={setIsPopoverOpen}
+          modalOpenByName={modalOpenByName}
+          setModalOpenByName={setModalOpenByName}
+          isPopoverOpen={isPopoverOpen}
         />
       </dialog>
     </section>
