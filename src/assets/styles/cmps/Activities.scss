@@ -1,6 +1,8 @@
 .activities-container {
   display: grid;
   // grid-template-rows: 56px;
+  grid-template-rows: auto 1fr 100px;
+
   grid-template-columns: 1fr;
 
   .activity-header {
@@ -81,10 +83,13 @@
 
   .activities-list {
     place-self: start;
-    grid-row: 2;
+    grid-row: 2/3;
     display: grid;
-    row-gap: 0.8em;
     padding-block-start: 1em;
+    padding-bottom: 90px;
+    row-gap: 0.8em;
+    height: calc(100vh - 110px);
+    overflow: auto;
     .activity {
       display: grid;
       grid-template-columns: 50px 1fr;

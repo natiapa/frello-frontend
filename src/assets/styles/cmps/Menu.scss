@@ -13,6 +13,7 @@
     grid-template-rows: 1fr 0;
     grid-template-columns: 30px 1fr 30px;
     padding-inline: 12px;
+    padding-block-end: 1em;
 
     &::after {
       content: "";
@@ -57,6 +58,50 @@
       color: #172b4d;
       // margin-block-start: 7px;
       margin: 1em;
+    }
+  }
+
+  .menu-btn {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    background-color: transparent;
+    height: 32px;
+    column-gap: 10px;
+    padding: 6px 12px;
+    margin: 0;
+    margin-inline: 0.9em;
+    margin-block-end: 5px;
+    border-radius: 8px;
+    &:hover {
+      background-color: #091e420f;
+    }
+
+    svg {
+      grid-row: 1;
+      font-size: 20px;
+      color: #172b4d;
+    }
+    .activity-btn {
+      grid-row: 1;
+      place-self: center start;
+      color: #172b4d;
+      font-weight: 400;
+      margin-block-start: 2px;
+    }
+
+    .color-container {
+      grid-row: 1;
+      height: 100%;
+      width: 100%;
+      border-radius: 3px;
+    }
+
+    .change-bg-btn {
+      grid-row: 1;
+      place-self: center start;
+      color: #172b4d;
+      font-weight: 400;
+      margin-block-start: 2px;
     }
   }
 
