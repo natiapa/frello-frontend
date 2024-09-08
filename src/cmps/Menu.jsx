@@ -11,10 +11,10 @@ export function Menu({
   setIsMenuOpen,
   setCurrBoardBgStyle,
 }) {
+  const { taskId } = useParams();
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
   const [isChangeBgOpen, setIsChangeBgOpen] = useState(false);
 
-  const { taskId } = useParams();
   if (taskId) setIsMenuOpen(false);
   return (
     <aside className="menu">

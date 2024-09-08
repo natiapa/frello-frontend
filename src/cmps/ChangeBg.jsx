@@ -12,6 +12,8 @@ export function ChangeBg({
   setCurrBoardBgStyle,
 }) {
   const [type, setType] = useState("");
+  const [selectedImgIdx, setSelectedImgIdx] = useState(null);
+  const [showUploading, setShowUploading] = useState(false);
 
   useEffect(() => {}, [board]);
 
@@ -102,6 +104,9 @@ export function ChangeBg({
   ];
 
   async function handleImgClick(bgType, idx) {
+    setSelectedImgIdx(idx);
+    setShowUploading(true);
+
     if (type === "bgImage") {
       const boardToUpdate = {
         ...board,
@@ -117,6 +122,9 @@ export function ChangeBg({
       updateBoard(boardToUpdate);
       setCurrBoardBgStyle(boardToUpdate.style);
     }
+    setTimeout(() => {
+      setShowUploading(false);
+    }, 1000);
   }
 
   return (
@@ -155,12 +163,15 @@ export function ChangeBg({
       {type === "bgImage" && (
         <ul className="img-list" style={{ height: "85vh", overflow: "auto" }}>
           {urlImgs.map((img, idx) => (
-            <li key={idx}>
+            <li key={idx} style={{ position: "relative" }}>
               <img
                 src={img.src}
                 alt={img.alt}
                 onClick={() => handleImgClick(img.src, idx)}
               />
+              {selectedImgIdx === idx && showUploading && (
+                <span className="loading">uploading...</span>
+              )}
             </li>
           ))}
         </ul>

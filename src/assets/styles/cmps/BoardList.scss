@@ -97,7 +97,6 @@
       color: #f1f2f4;
       font-size: 16px;
       font-weight: bold;
-
       .starred {
         color: $tr-icon-star;
       }
@@ -105,5 +104,11 @@
         opacity: 0;
       }
     }
+  }
+}
+
+@media (width<500) {
+  .not-starred {
+    opacity: 1;
   }
 }

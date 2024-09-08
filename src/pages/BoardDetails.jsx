@@ -48,7 +48,7 @@ export function BoardDetails() {
   const [currBoardBgStyle, setCurrBoardBgStyle] = useState(
     board?.style || "#f8bbd0"
   );
-  console.log(currBoardBgStyle);
+
   useEffect(() => {
     eventBus.on("show-task", onPreviewToShow);
   }, []);
