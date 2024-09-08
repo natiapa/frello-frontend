@@ -13,6 +13,7 @@ export function CoverPicker({
     ev.stopPropagation()
     
     const updateColor = {...currCover, color: color }
+    onUpdated('cover',updateColor)
     setCurrCover(updateColor)
   }
 
