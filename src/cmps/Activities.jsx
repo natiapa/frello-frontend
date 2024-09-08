@@ -1,6 +1,7 @@
 import { IoIosArrowBack } from "react-icons/io";
 import SvgIcon from "./SvgIcon";
 import { useEffect } from "react";
+import { loadBoard } from "../store/actions/board.actions";
 
 export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
   function formatDateForTask(dateString) {
@@ -157,6 +158,16 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
 
               {activity.type === "deleteGroup" && (
                 <span>deleted list {activity.group.title}</span>
+              )}
+
+              {activity.type === "addMember" && (
+                <span>
+                  added {activity.member.fullname} to {activity.task.title}
+                </span>
+              )}
+
+              {activity.type === "addMyself" && (
+                <span>joined {activity.task.title}</span>
               )}
             </section>
           </li>
