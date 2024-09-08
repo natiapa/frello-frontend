@@ -5,16 +5,16 @@ export function CoverPicker({
   setIsPopoverOpen,
   handlePopoverClick,
   setCurrCover,
-  currCover
+  currCover,
 }) {
   const coverColors = boardService.getColorsCover();
 
-  function handleCoverSelection(ev,color) {
-    ev.stopPropagation()
-    
-    const updateColor = {...currCover, color: color }
-    onUpdated('cover',updateColor)
-    setCurrCover(updateColor)
+  function handleCoverSelection(ev, color) {
+    ev.stopPropagation();
+
+    const updateColor = { ...currCover, color: color };
+    onUpdated("cover", updateColor);
+    setCurrCover(updateColor);
   }
 
   return (
@@ -22,17 +22,28 @@ export function CoverPicker({
       <div className="header-container">
         <span className="pop-over-header-title">Cover</span>
       </div>
+      {currCover.color || currCover.img ? (
+        <button
+          className="remov-cover-btn"
+          onClick={(ev) => handleCoverSelection(ev, "")}
+        >
+          Remove cover
+        </button>
+      ) : null}
 
       <div className="cover-colors-container">
+        <span>colors</span>
         <ul className="cover-colors-list">
-          {coverColors.map((coverColor, idx) => (
+          {coverColors.map((coverColor) => (
             <li key={coverColor.color} className="cover-color-item">
               <div
                 className="cover-color"
                 style={{
                   backgroundColor: coverColor.color,
                 }}
-                onClick={(event)=> handleCoverSelection(event,coverColor.color)}
+                onClick={(event) =>
+                  handleCoverSelection(event, coverColor.color)
+                }
               ></div>
             </li>
           ))}
