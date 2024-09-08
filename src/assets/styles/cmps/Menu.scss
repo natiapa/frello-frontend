@@ -6,8 +6,6 @@
   display: grid;
   grid-template-rows: repeat(3, max-content);
   background-color: #fff;
-  transition: grid-column 0.3s ease;
-  // width: 339px;
 
   .menu-header {
     grid-row: 1;
@@ -201,7 +199,7 @@
       grid-template-columns: 150px 150px;
       grid-template-rows: minmax(0, 96px) 30px;
       padding-block-start: 0.4em;
-      // gap: 3px;
+      gap: 5px;
 
       .images-btn {
         grid-column: 1;
@@ -294,6 +292,10 @@
   }
 }
 
+.menu-closed {
+  transform: translateX(100%);
+}
+
 @media (width<500px) {
   .board-details {
     position: relative;
@@ -303,10 +305,6 @@
       right: 0;
       top: 0;
       width: 305px;
-
-      .btns {
-        gap: 3px;
-      }
 
       .img-list {
         padding: 1em 0 0 5px;

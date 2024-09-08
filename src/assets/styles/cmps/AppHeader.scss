@@ -85,18 +85,18 @@
       }
 
       .profile {
-        @include flexCenter(center);
+        display: grid;
         place-self: center end;
         width: 2em;
         height: 2em;
-        padding: 1em;
         border-radius: 50%;
         color: $white;
         cursor: pointer;
 
         span {
-          @include flexCenter(center);
-          padding-block-start: 3px;
+          display: grid;
+          justify-content: center;
+          align-items: center;
           height: 2em;
           width: 2em;
         }
