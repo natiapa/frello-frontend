@@ -36,12 +36,9 @@ export function TaskDetailsActions({
   modalOpenByName,
   currCover,
   handleClick,
-  isPopoverOpen
+  isPopoverOpen,
 }) {
-
   const { taskId: taskParams } = useParams();
-
-
 
   function handlePopoverClick(ev) {
     ev.stopPropagation();
@@ -221,7 +218,7 @@ export function TaskDetailsActions({
           onClick={handleClick}
         >
           <span className="icon">
-          <BsCardImage  />
+            <BsCardImage />
           </span>
           <p>Cover</p>
 
@@ -253,6 +250,10 @@ export function TaskDetailsActions({
               />
             </Popover>
           )}
+
+
+
+          
         </div>
       </>
 
