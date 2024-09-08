@@ -202,13 +202,13 @@ function addActivity(title, type, group, task, checklist, taskNumber, item, dueD
       title: group?.title
     },
     task: {
-      id: task.id,
-      title: task.title
+      id: task?.id,
+      title: task?.title
     },
     taskNumber,
     checklist: {
-      id: checklist.id,
-      title: checklist.title
+      id: checklist?.id,
+      title: checklist?.title
     },
     item,
     dueDate: {
@@ -529,7 +529,7 @@ function _createBoards() {
               "Create wireframes for the new Trello feature",
               "Incorporate feedback from the last review",
             ],
-            cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "",
           },
           {
@@ -604,8 +604,8 @@ function _createBoards() {
               "Design high-fidelity mockups for the app",
               "Align design with the wireframes",
             ],
-            cover:{color:'', img: ''},
-          
+            cover: { color: '', img: '' },
+
             dueDate: "",
           },
           {
@@ -658,7 +658,7 @@ function _createBoards() {
               "Design a logo for the Trello project",
               "Ensure it aligns with the brand identity",
             ],
-            cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "",
           },
           {
@@ -673,7 +673,7 @@ function _createBoards() {
               "Develop a color scheme for the app",
               "Use brand colors as a base",
             ],
-             cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "",
           },
           {
@@ -688,7 +688,7 @@ function _createBoards() {
               "Design custom icons for the Trello project",
               "Ensure consistency with the overall design",
             ],
-            cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "",
           },
           {
@@ -703,7 +703,7 @@ function _createBoards() {
               "Select fonts for the project",
               "Ensure readability and aesthetic appeal",
             ],
-            cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "",
           },
           {
@@ -718,7 +718,7 @@ function _createBoards() {
               "Create a design system for the app",
               "Include guidelines for all design elements",
             ],
-             cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "2024-09-30",
           },
           {
@@ -733,7 +733,7 @@ function _createBoards() {
               "Present the design to stakeholders",
               "Incorporate their feedback into the design",
             ],
-            cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "",
           },
           {
@@ -748,7 +748,7 @@ function _createBoards() {
               "Finalize the design for the Trello project",
               "Prepare for the development phase",
             ],
-            cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "2024-10-05",
           },
           {
@@ -763,7 +763,7 @@ function _createBoards() {
               "Provide all design assets to the development team",
               "Ensure clear communication during the handoff",
             ],
-            cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "",
           },
         ],
@@ -786,7 +786,7 @@ function _createBoards() {
               "Install all necessary tools",
               "Ensure compatibility with the latest tech stack",
             ],
-            cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "2024-09-01",
           },
           {
@@ -801,7 +801,7 @@ function _createBoards() {
               "Set up the initial project structure",
               "Follow best practices for maintainability",
             ],
-            cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "2024-09-05",
           },
         ],
@@ -825,7 +825,7 @@ function _createBoards() {
               "Focus on critical paths",
               "Ensure all edge cases are covered",
             ],
-            cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "2024-09-10",
           },
           {
@@ -840,7 +840,7 @@ function _createBoards() {
               "Verify module interactions",
               "Check for data consistency",
             ],
-            cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "2024-09-15",
           },
         ],
@@ -862,7 +862,7 @@ function _createBoards() {
               "Ensure security configurations are in place",
               "Test deployment scripts",
             ],
-            cover:{color:'', img: ''},
+            cover: { color: '', img: '' },
             dueDate: "2024-09-20",
           },
         ],
