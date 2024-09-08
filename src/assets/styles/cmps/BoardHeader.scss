@@ -12,7 +12,7 @@
   // grid-template-rows: max-content;
   // column-gap: 15px 50px 50px;
   // grid-auto-flow: column;
-  grid-template-columns: auto 100px 50px 50px;
+  grid-template-columns: auto repeat(5, max-content);
   position: relative;
 
   &::after {

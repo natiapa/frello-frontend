@@ -13,6 +13,8 @@ export function ChangeBg({
 }) {
   const [type, setType] = useState("");
 
+  useEffect(() => {}, [board]);
+
   const urlImgs = [
     {
       src: "https://cdn.pixabay.com/photo/2024/08/01/10/18/bird-8936789_1280.jpg",

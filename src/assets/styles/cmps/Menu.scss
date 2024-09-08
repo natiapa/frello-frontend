@@ -1,10 +1,11 @@
 .menu {
-  grid-column: 3/4;
+  grid-column: 3/-1;
   grid-row: 2 / 5;
   display: grid;
   grid-template-rows: repeat(3, max-content);
   background-color: #fff;
   transition: grid-column 0.3s ease;
+  max-width: 339px;
 
   .menu-header {
     grid-row: 1;

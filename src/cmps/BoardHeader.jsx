@@ -46,7 +46,7 @@ export function BoardHeader({
       }}
     >
       <div className="board-header-title">Frello</div>
-      <div className="board-header-actions"></div>
+      {/* <div className="board-header-actions"></div> */}
       <div
         className="filter"
         onClick={handleFilterClick}

@@ -46,7 +46,7 @@ export function BoardDetails() {
   const [selectedLabels, setSelectedLabels] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currBoardBgStyle, setCurrBoardBgStyle] = useState(board?.style);
-
+  console.log(currBoardBgStyle);
   useEffect(() => {
     eventBus.on("show-task", onPreviewToShow);
   }, []);
@@ -188,8 +188,7 @@ export function BoardDetails() {
           ? `${board.style.backgroundColor}`
           : "none",
 
-        gridTemplateColumns: isMenuOpen ? "auto 1fr 340px" : "auto 1fr ",
-        // transition: "grid-template-columns 0.3s ease",
+        gridTemplateColumns: isMenuOpen ? "auto 1fr auto" : "auto 1fr ",
       }}
     >
       {isTaskPrevModalOpen && (
