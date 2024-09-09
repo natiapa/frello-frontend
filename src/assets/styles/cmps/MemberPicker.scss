@@ -1,0 +1,31 @@
+.member-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background-color: white;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    white-space: nowrap; /* מונע ירידת שורה */
+  }
+  
+  .member-name {
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap; /* מונע ירידת שורה */
+  }
+  
+  .remove-member-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #d32f2f;
+    font-size: 14px;
+    transition: color 0.2s ease;
+  }
+  
+  .remove-member-btn:hover {
+    color: #f44336;
+  }
+  

@@ -31,7 +31,7 @@ export function TaskDetails() {
   const [newChecklists, setNewCheckLists] = useState(task.checklists);
   const [newFiles, setNewFiles] = useState(task.attachments || []);
   const [currCover, setCurrCover] = useState(task.cover);
-  console.log(currCover);
+  const [taskMembers, setTaskMembers] = useState(task.members);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -128,6 +128,10 @@ export function TaskDetails() {
     setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
     setAnchorEl(ev.currentTarget);
     setModalOpenByName(currDataName);
+
+    console.log("modalOpenByName:", modalOpenByName);
+    console.log("isPopoverOpen:", isPopoverOpen);
+    console.log("currDataName:", currDataName);
   }
 
   function handleAddLabel(ev) {
@@ -143,13 +147,6 @@ export function TaskDetails() {
         {currCover.color && (
           <>
             <CoverDisplay currCover={currCover} />
-            {/* <button
-              className="cover-btn"
-              data-name="cover"
-              onClick={handleAddLabel}
-            >
-              cover
-            </button> */}
           </>
         )}
         <button
@@ -278,6 +275,8 @@ export function TaskDetails() {
             setIsPopoverOpen={setIsPopoverOpen}
             modalOpenByName={modalOpenByName}
             isPopoverOpen={isPopoverOpen}
+            setTaskMembers={setTaskMembers}
+            taskMembers={taskMembers}
           />
         </div>
       </dialog>

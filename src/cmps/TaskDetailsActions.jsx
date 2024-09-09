@@ -14,6 +14,7 @@ import { ArchiveAction } from "./ArchiveAction.JSX";
 import { CoverPicker } from "./CoverPicker";
 import { BsCardImage } from "react-icons/bs";
 import { useState } from "react";
+import { MemberPicker } from "./MemberPicker";
 
 export function TaskDetailsActions({
   board,
@@ -38,26 +39,69 @@ export function TaskDetailsActions({
   currCover,
   handleClick,
   isPopoverOpen,
+  setTaskMembers,
+  taskMembers,
 }) {
   const { taskId: taskParams } = useParams();
-
 
   function handlePopoverClick(ev) {
     ev.stopPropagation();
   }
 
-
-
   return (
     <section className="actions" style={{ ...taskPrevActionsModalData }}>
       <>
         {taskParams && <h5>Add to card</h5>}
+
+        <div
+          role="button"
+          data-name="members"
+          className="members action-btn"
+          aria-describedby="1"
+          onClick={handleClick}
+        >
+          <span className="icon">
+            <LuClock5 />
+          </span>
+          <p>Members</p>
+
+          {modalOpenByName === "members" && isPopoverOpen && (
+            <Popover
+              id={isPopoverOpen ? "members-popover" : undefined}
+              open={isPopoverOpen}
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              disablePortal
+              PaperProps={{
+                sx: {
+                  width: "400px",
+                  height: "600px",
+                  padding: "20px",
+                },
+              }}
+            >
+              <MemberPicker
+                board={board}
+                task={task}
+                handlePopoverClick={handlePopoverClick}
+                setIsPopoverOpen={setIsPopoverOpen}
+                onUpdated={onUpdated}
+                setTaskMembers={setTaskMembers}
+                taskMembers={taskMembers}
+              />
+            </Popover>
+          )}
+        </div>
+
         {taskParams && (
           <div
             role="button"
             data-name="checklists"
             className="checklist action-btn"
-            aria-describedby="1"
+            aria-describedby="2"
             onClick={handleClick}
           >
             <span className="icon">
@@ -94,7 +138,7 @@ export function TaskDetailsActions({
           role="button"
           data-name="due-date"
           className="due-date action-btn"
-          aria-describedby="2"
+          aria-describedby="3"
           onClick={handleClick}
         >
           <span className="icon">
@@ -137,7 +181,7 @@ export function TaskDetailsActions({
           role="button"
           data-name="labels"
           className="labels action-btn"
-          aria-describedby="3"
+          aria-describedby="4"
           onClick={handleClick}
         >
           <span className="icon">
@@ -182,7 +226,7 @@ export function TaskDetailsActions({
             role="button"
             data-name="attach"
             className="attach action-btn"
-            aria-describedby="4"
+            aria-describedby="5"
             onClick={handleClick}
           >
             <span className="icon">
@@ -265,7 +309,7 @@ export function TaskDetailsActions({
           className={`cover action-btn ${
             currCover.color ? "cover-selected" : ""
           }`}
-          aria-describedby="5"
+          aria-describedby="6"
           onClick={handleClick}
           style={{
             position: currCover.color ? "absolute" : "relative",
@@ -315,7 +359,7 @@ export function TaskDetailsActions({
             role="button"
             data-name="archive"
             className="archive action-btn"
-            aria-describedby="6"
+            aria-describedby="7"
             onClick={handleClick}
           >
             <span className="icon">
