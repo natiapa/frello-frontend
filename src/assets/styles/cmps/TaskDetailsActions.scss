@@ -88,18 +88,29 @@
   background-color: #005a91;
 }
 
-
-
 .actions {
   display: grid;
- 
+
+  h5 {
+    color: #44546f;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    margin-bottom: -4px;
+  }
+
+  h5 {
+    &:nth-of-type(2) {
+      margin-block-start: 20px;
+    }
+  }
 
   .action-btn {
     margin: 0;
     margin-bottom: 4px;
     padding: 6px 12px 6px 10px;
     border-radius: 3px;
-    font-weight: 500;
+    font-weight: 500;
     display: grid;
     justify-content: start;
     width: max-content;
@@ -107,11 +118,10 @@
       Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
       sans-serif;
     background-color: #f1f2f4;
-    color:#172b4d;
+    color: #172b4d;
     span {
       grid-column: 1;
       font-size: 14px;
-
     }
 
     p {

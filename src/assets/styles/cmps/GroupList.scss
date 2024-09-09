@@ -60,3 +60,11 @@
     }
   }
 }
+
+@media (width<$mobile-breakpoint) {
+  .group-list {
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-color: rgb(224, 221, 221, 0.5) rgb(9, 30, 66);
+  }
+}

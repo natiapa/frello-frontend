@@ -13,6 +13,10 @@ import { DueDateDisplay } from "./DueDateDisplay";
 import { AttachmentList } from "./AttachmentList";
 import { IoAddOutline } from "react-icons/io5";
 import { CoverDisplay } from "./CoverDisplay";
+import { RxIdCard } from "react-icons/rx";
+import { BsCardText } from "react-icons/bs";
+import { FaCreditCard, FaRegCreditCard } from "react-icons/fa";
+import { VscListFlat } from "react-icons/vsc";
 
 export function TaskDetails() {
   const dialogRef = useRef(null);
@@ -143,39 +147,48 @@ export function TaskDetails() {
 
   return (
     <section className="task-details">
-      <dialog ref={dialogRef} method="dialog" onClick={handleDialogClick}>
+      <dialog
+        ref={dialogRef}
+        method="dialog"
+        onClick={handleDialogClick}
+        style={{
+          gridTemplateRows: currCover.color
+            ? "100px max-content max-content"
+            : "0 max-content max-content",
+        }}
+      >
+        <button className="close-btn" onClick={onCloseDialog}>
+          <SvgIcon iconName="close" />
+        </button>
+
         {currCover.color && (
           <>
             <CoverDisplay currCover={currCover} />
           </>
         )}
-        <button
-          className="close-btn"
-          onClick={onCloseDialog}
-          style={{
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            zIndex: 1001,
-          }}
+
+        {currElToEdit !== "title" ? (
+          <header data-name="title" onClick={onEdit}>
+            <FaRegCreditCard />
+
+            <section className="titles">
+              <span className="task-title">
+                {task?.title || "Untitled Task"}
+              </span>
+              <span className="group-title">in list {group.title}</span>
+            </section>
+          </header>
+        ) : (
+          <Edit
+            task={task}
+            onUpdated={onUpdated}
+            currElToEdit={currElToEdit}
+            setCurrElToEdit={setCurrElToEdit}
+          />
+        )}
+        <form
+        // style={{ marginTop: currCover.color ? "120px" : "0" }}
         >
-          <SvgIcon iconName="close" />
-        </button>
-
-        <form style={{ marginTop: currCover.color ? "120px" : "0" }}>
-          {currElToEdit !== "title" ? (
-            <header data-name="title" onClick={onEdit}>
-              {task?.title || "Untitled Task"}
-            </header>
-          ) : (
-            <Edit
-              task={task}
-              onUpdated={onUpdated}
-              currElToEdit={currElToEdit}
-              setCurrElToEdit={setCurrElToEdit}
-            />
-          )}
-
           <div className="information">
             {task.members.length > 0 && (
               <ul className="member-list">
@@ -188,20 +201,21 @@ export function TaskDetails() {
             )}
 
             {/* Label-List */}
-            {taskSelectedLabels.length > 0 && (
-              <ul className="labels">
-                <p className="header">Labels</p>
-                <LabelList taskLabels={taskSelectedLabels} />
-              </ul>
-            )}
-
-            <div
-              className="add-label-button"
-              data-name="labels"
-              onClick={handleAddLabel}
-            >
-              <IoAddOutline style={{ fontSize: "20px", color: "#0079bf" }} />
-            </div>
+            <section className="labels-container">
+              {taskSelectedLabels.length > 0 && (
+                <ul className="labels">
+                  <p className="header">Labels</p>
+                  <LabelList taskLabels={taskSelectedLabels} />
+                </ul>
+              )}
+              <div
+                className="add-label-button"
+                data-name="labels"
+                onClick={handleAddLabel}
+              >
+                <IoAddOutline style={{ fontSize: "20px", color: "#0079bf" }} />
+              </div>
+            </section>
 
             <div>
               <DueDateDisplay
@@ -212,13 +226,17 @@ export function TaskDetails() {
           </div>
 
           {currElToEdit !== "description" ? (
-            <p
-              className="editable-description"
-              data-name="description"
-              onClick={onEdit}
-            >
-              {task?.description || "Add a more detailed description..."}
-            </p>
+            <section className="description-container">
+              <VscListFlat />
+              <h3>Description</h3>
+              <p
+                className="editable-description"
+                data-name="description"
+                onClick={onEdit}
+              >
+                {task?.description || "Add a more detailed description..."}
+              </p>
+            </section>
           ) : (
             <Edit
               task={task}
@@ -228,9 +246,9 @@ export function TaskDetails() {
             />
           )}
 
-          <button className="delete-btn" onClick={deleteTask}>
+          {/* <button className="delete-btn" onClick={deleteTask}>
             Delete task
-          </button>
+          </button> */}
 
           {task?.attachments && task.attachments.length > 0 && (
             <AttachmentList
@@ -253,7 +271,10 @@ export function TaskDetails() {
             />
           )}
         </form>
-        <div style={{ marginTop: currCover.color ? "120px" : "0" }}>
+        <div
+          className="task-details-actions"
+          // style={{ marginTop: currCover.color ? "120px" : "0" }}
+        >
           <TaskDetailsActions
             board={board}
             group={group}
