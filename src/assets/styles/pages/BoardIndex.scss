@@ -9,3 +9,9 @@
     background-color: $blue4;
   }
 }
+
+@media (width<500px) {
+  .board-index {
+    grid-template-rows: 0 1fr 1fr 200px;
+  }
+}

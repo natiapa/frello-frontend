@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Activities } from "./Activities";
 import { ChangeBg } from "./ChangeBg";
 import SvgIcon from "./SvgIcon";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack, IoMdList } from "react-icons/io";
 import { useParams } from "react-router";
 
 export function Menu({
@@ -11,10 +11,10 @@ export function Menu({
   setIsMenuOpen,
   setCurrBoardBgStyle,
 }) {
+  const { taskId } = useParams();
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
   const [isChangeBgOpen, setIsChangeBgOpen] = useState(false);
 
-  const { taskId } = useParams();
   if (taskId) setIsMenuOpen(false);
   return (
     <aside className="menu">
@@ -46,11 +46,31 @@ export function Menu({
             <h3>Menu</h3>
           </header>
 
-          <button onClick={() => setIsActivitiesOpen(true)}>
-            <span>Activity</span>
+          <button
+            className="menu-btn"
+            onClick={() => setIsActivitiesOpen(true)}
+          >
+            <IoMdList />
+            <span className="activity-btn">Activity</span>
           </button>
-          <button onClick={() => setIsChangeBgOpen(true)}>
-            <span>Change background</span>
+          <button className="menu-btn" onClick={() => setIsChangeBgOpen(true)}>
+            <span
+              className="color-container"
+              style={{
+                backgroundColor: board?.style?.backgroundColor
+                  ? board.style.backgroundColor
+                  : "none",
+                // background: board?.style?.backgroundColor
+                //   ? `linear-gradient(to bottom right, ${board.style.darkenedColor}, ${board.style.backgroundColor})`
+                //   : "none",
+                backgroundImage: board?.style?.backgroundImage
+                  ? `url(${board.style.backgroundImage})`
+                  : "none",
+
+                backgroundSize: "cover",
+              }}
+            ></span>
+            <span className="change-bg-btn">Change background</span>
           </button>
         </>
       )}

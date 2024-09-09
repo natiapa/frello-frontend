@@ -46,7 +46,7 @@ export function BoardHeader({
       }}
     >
       <div className="board-header-title">Frello</div>
-      <div className="board-header-actions"></div>
+      {/* <div className="board-header-actions"></div> */}
       <div
         className="filter"
         onClick={handleFilterClick}
@@ -54,11 +54,15 @@ export function BoardHeader({
           gridColumn: isMenuOpen ? "3" : "2",
         }}
       >
-        <p>
+        <p
+          style={{
+            paddingInlineEnd: isMenuOpen ? "0" : "10px",
+          }}
+        >
           <span>
             <MdOutlineFilterList />
           </span>
-          Filters
+          <span>Filters</span>
           <Popover
             id={anchorEl}
             open={isPopoverOpen}

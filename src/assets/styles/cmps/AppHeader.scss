@@ -11,21 +11,21 @@
 }
 
 .app-header {
-  @include flexCenter(space-between);
-  padding: .5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0 1em;
   height: 50px;
   grid-column: 1/-1;
   grid-row: 1;
 
   section {
     &:first-of-type {
-      // @include flexCenter(space-between);
       display: grid;
-      grid-template-columns: auto auto;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-     
+      grid-template-columns: 1fr;
+
+      & > * {
+        margin-inline-end: 0.8em;
+      }
 
       .menu {
         @include btn();
@@ -33,10 +33,10 @@
       }
 
       a {
-        // @include flexCenter(center);
         display: grid;
-        grid-template-columns: auto;
+        grid-template-columns: max-content max-content;
         gap: 2px;
+        width: fit-content;
 
         .logo-icon-img {
           grid-row: 1;
@@ -65,7 +65,9 @@
 
   section {
     &:nth-of-type(2) {
-      @include flexCenter(center);
+      // @include flexCenter(center);
+      display: grid;
+
       height: 100%;
       .login-btn {
         @include btn();
@@ -83,17 +85,18 @@
       }
 
       .profile {
-        @include flexCenter(center);
+        display: grid;
+        place-self: center end;
         width: 2em;
         height: 2em;
-        padding: 1em;
         border-radius: 50%;
         color: $white;
         cursor: pointer;
 
         span {
-          @include flexCenter(center);
-          padding-block-start: 3px;
+          display: grid;
+          justify-content: center;
+          align-items: center;
           height: 2em;
           width: 2em;
         }

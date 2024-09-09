@@ -4,6 +4,7 @@ import { loadBoard, updateBoard } from "../store/actions/board.actions";
 import { IoIosArrowBack } from "react-icons/io";
 import { useSelector } from "react-redux";
 import SvgIcon from "../cmps/SvgIcon";
+import chroma from "chroma-js";
 
 export function ChangeBg({
   board,
@@ -12,6 +13,14 @@ export function ChangeBg({
   setCurrBoardBgStyle,
 }) {
   const [type, setType] = useState("");
+  const [selectedImgIdx, setSelectedImgIdx] = useState(null);
+  const [showUploading, setShowUploading] = useState(false);
+
+  //
+  // const darkenedColor = chroma(bgColor).darken(1.5).hex();
+  // setBgColor(darkenedColor);
+
+  useEffect(() => {}, [board]);
 
   const urlImgs = [
     {
@@ -99,7 +108,29 @@ export function ChangeBg({
     "#D2A4A3", // Salmon
   ];
 
+  const darkenedColor = [
+    chroma("#A05A6C").darken(1.5).hex(),
+    chroma("#B69F6A").darken(1.5).hex(),
+    chroma("#7D9ACF").darken(1.5).hex(),
+    chroma("#8F9A7B").darken(1.5).hex(),
+    chroma("#9B7E9A").darken(1.5).hex(),
+    chroma("#D0959C").darken(1.5).hex(),
+    chroma("#8F9C8E").darken(1.5).hex(),
+    chroma("#9C8D9E").darken(1.5).hex(),
+    chroma("#8E7F6D").darken(1.5).hex(),
+    chroma("#7B9AB0").darken(1.5).hex(),
+    chroma("#D07B7A").darken(1.5).hex(),
+    chroma("#8D6D9B").darken(1.5).hex(),
+    chroma("#7F9C8F").darken(1.5).hex(),
+    chroma("#D07F6D").darken(1.5).hex(),
+    chroma("#6A8AB2").darken(1.5).hex(),
+    chroma("#D2A4A3").darken(1.5).hex(),
+  ];
+
   async function handleImgClick(bgType, idx) {
+    setSelectedImgIdx(idx);
+    setShowUploading(true);
+
     if (type === "bgImage") {
       const boardToUpdate = {
         ...board,
@@ -110,11 +141,18 @@ export function ChangeBg({
     } else if (type === "bgColor") {
       const boardToUpdate = {
         ...board,
-        style: { backgroundColor: bgType },
+        style: {
+          backgroundColor: bgType,
+          darkenedColor: chroma(bgType).darken(1.5).hex(),
+        },
       };
+
       updateBoard(boardToUpdate);
       setCurrBoardBgStyle(boardToUpdate.style);
     }
+    setTimeout(() => {
+      setShowUploading(false);
+    }, 1000);
   }
 
   return (
@@ -137,9 +175,7 @@ export function ChangeBg({
             backgroundImage:
               "url(https://trello.com/assets/8f9c1323c9c16601a9a4.jpg)",
           }}
-        >
-          <span className="photos-title">Photos</span>
-        </button>
+        ></button>
         <button
           className="colors-btn"
           onClick={() => setType("bgColor")}
@@ -147,20 +183,23 @@ export function ChangeBg({
             backgroundImage:
               "url(https://trello.com/assets/97db30fe74a58b7b7a18.png)",
           }}
-        >
-          <span className="colors-title">Colors</span>
-        </button>
+        ></button>
+        <span className="photos-title">Photos</span>
+        <span className="colors-title">Colors</span>
       </section>
 
       {type === "bgImage" && (
         <ul className="img-list" style={{ height: "85vh", overflow: "auto" }}>
           {urlImgs.map((img, idx) => (
-            <li key={idx}>
+            <li key={idx} style={{ position: "relative" }}>
               <img
                 src={img.src}
                 alt={img.alt}
                 onClick={() => handleImgClick(img.src, idx)}
               />
+              {selectedImgIdx === idx && showUploading && (
+                <span className="loading">uploading...</span>
+              )}
             </li>
           ))}
         </ul>
@@ -168,13 +207,20 @@ export function ChangeBg({
       {type === "bgColor" && (
         <ul className="color-list" style={{ height: "85vh", overflow: "auto" }}>
           {colors.map((color, idx) => (
-            <li key={idx} onClick={() => handleImgClick(color, idx)}>
+            <li
+              key={idx}
+              onClick={() => handleImgClick(color, idx)}
+              style={{ position: "relative" }}
+            >
               <div
                 className="color"
                 style={{
-                  backgroundColor: color,
+                  background: `linear-gradient(to bottom right, ${darkenedColor[idx]}, ${color})`,
                 }}
               ></div>
+              {selectedImgIdx === idx && showUploading && (
+                <span className="loading">uploading...</span>
+              )}
             </li>
           ))}
         </ul>

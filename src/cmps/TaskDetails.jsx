@@ -30,8 +30,8 @@ export function TaskDetails() {
   const [newDueDate, setNewDueDate] = useState(task.dueDate);
   const [newChecklists, setNewCheckLists] = useState(task.checklists);
   const [newFiles, setNewFiles] = useState(task.attachments || []);
-  const [currCover, setCurrCover] = useState(task.cover)
-  console.log(currCover)
+  const [currCover, setCurrCover] = useState(task.cover);
+  const [taskMembers, setTaskMembers] = useState(task.members);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -64,7 +64,6 @@ export function TaskDetails() {
         taskNumber += grp.tasks.length;
       }
     }
-
     return taskNumber;
   }
 
@@ -129,9 +128,14 @@ export function TaskDetails() {
     setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
     setAnchorEl(ev.currentTarget);
     setModalOpenByName(currDataName);
+
+    console.log("modalOpenByName:", modalOpenByName);
+    console.log("isPopoverOpen:", isPopoverOpen);
+    console.log("currDataName:", currDataName);
   }
 
   function handleAddLabel(ev) {
+    ev.preventDefault();
     console.log("Label added:", ev);
     handleClick(ev);
   }
@@ -140,8 +144,11 @@ export function TaskDetails() {
   return (
     <section className="task-details">
       <dialog ref={dialogRef} method="dialog" onClick={handleDialogClick}>
-        {currCover.color && <CoverDisplay currCover={currCover.color } />}
-
+        {currCover.color && (
+          <>
+            <CoverDisplay currCover={currCover} />
+          </>
+        )}
         <button
           className="close-btn"
           onClick={onCloseDialog}
@@ -185,17 +192,16 @@ export function TaskDetails() {
               <ul className="labels">
                 <p className="header">Labels</p>
                 <LabelList taskLabels={taskSelectedLabels} />
-                <div
-                  className="add-label-button"
-                  data-name="labels"
-                  onClick={handleAddLabel}
-                >
-                  <IoAddOutline
-                    style={{ fontSize: "20px", color: "#0079bf" }}
-                  />
-                </div>
               </ul>
             )}
+
+            <div
+              className="add-label-button"
+              data-name="labels"
+              onClick={handleAddLabel}
+            >
+              <IoAddOutline style={{ fontSize: "20px", color: "#0079bf" }} />
+            </div>
 
             <div>
               <DueDateDisplay
@@ -249,9 +255,9 @@ export function TaskDetails() {
         </form>
         <div style={{ marginTop: currCover.color ? "120px" : "0" }}>
           <TaskDetailsActions
-          board={board}
-          group={group}
-          task={task}
+            board={board}
+            group={group}
+            task={task}
             boardId={board?.id}
             groupId={group.id}
             taskId={task.id}
@@ -269,6 +275,8 @@ export function TaskDetails() {
             setIsPopoverOpen={setIsPopoverOpen}
             modalOpenByName={modalOpenByName}
             isPopoverOpen={isPopoverOpen}
+            setTaskMembers={setTaskMembers}
+            taskMembers={taskMembers}
           />
         </div>
       </dialog>
