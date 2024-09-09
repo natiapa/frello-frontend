@@ -13,6 +13,7 @@ import { BsArchive } from "react-icons/bs";
 import { ArchiveAction } from "./ArchiveAction.JSX";
 import { CoverPicker } from "./CoverPicker";
 import { BsCardImage } from "react-icons/bs";
+import { useState } from "react";
 
 export function TaskDetailsActions({
   board,
@@ -39,9 +40,15 @@ export function TaskDetailsActions({
   isPopoverOpen,
 }) {
   const { taskId: taskParams } = useParams();
+  const [popoverClosed, setPopoverClosed] = useState(false); // משתנה שיעקוב אחרי סגירת הפופ-אובר
 
   function handlePopoverClick(ev) {
     ev.stopPropagation();
+  }
+
+  function handleClosePopover() {
+    setIsPopoverOpen(false); // סוגר את הפופ-אובר
+    setPopoverClosed(true); // מעדכן שסגרנו את הפופ-אובר
   }
 
   return (
@@ -210,7 +217,7 @@ export function TaskDetailsActions({
           </div>
         )}
 
-        <div
+        {/* <div
           role="button"
           data-name="cover"
           className="cover action-btn"
@@ -254,6 +261,53 @@ export function TaskDetailsActions({
 
 
           
+        </div> */}
+        <div
+          role="button"
+          data-name="cover"
+          className={`cover action-btn ${
+            currCover.color ? "cover-selected" : ""
+          }`}
+          aria-describedby="5"
+          onClick={handleClick}
+          style={{
+            position: currCover.color ? "absolute" : "relative",
+            top: currCover.color ? "50px" : "auto",
+            zIndex: currCover.color ? 1001 : "auto",
+          }}
+        >
+          <span className="icon">
+            <BsCardImage />
+          </span>
+          <p>Cover</p>
+
+          {modalOpenByName === "cover" && isPopoverOpen && (
+            <Popover
+              id={isPopoverOpen ? "cover-popover" : undefined}
+              open={isPopoverOpen}
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              disablePortal
+              PaperProps={{
+                sx: {
+                  padding: "20px",
+                  boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+                  borderRadius: "8px",
+                },
+              }}
+            >
+              <CoverPicker
+                onUpdated={onUpdated}
+                setIsPopoverOpen={setIsPopoverOpen}
+                handlePopoverClick={handlePopoverClick}
+                setCurrCover={setCurrCover}
+                currCover={currCover}
+              />
+            </Popover>
+          )}
         </div>
       </>
 

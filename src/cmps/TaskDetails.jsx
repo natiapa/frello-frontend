@@ -143,13 +143,13 @@ export function TaskDetails() {
         {currCover.color && (
           <>
             <CoverDisplay currCover={currCover} />
-            <button
+            {/* <button
               className="cover-btn"
               data-name="cover"
               onClick={handleAddLabel}
             >
               cover
-            </button>
+            </button> */}
           </>
         )}
         <button
