@@ -13,6 +13,8 @@ import { BsArchive } from "react-icons/bs";
 import { ArchiveAction } from "./ArchiveAction.JSX";
 import { CoverPicker } from "./CoverPicker";
 import { BsCardImage } from "react-icons/bs";
+import { useState } from "react";
+import { MemberPicker } from "./MemberPicker";
 
 export function TaskDetailsActions({
   board,
@@ -37,6 +39,8 @@ export function TaskDetailsActions({
   currCover,
   handleClick,
   isPopoverOpen,
+  setTaskMembers,
+  taskMembers,
 }) {
   const { taskId: taskParams } = useParams();
 
@@ -48,12 +52,56 @@ export function TaskDetailsActions({
     <section className="actions" style={{ ...taskPrevActionsModalData }}>
       <>
         {taskParams && <h5>Add to card</h5>}
+
+        <div
+          role="button"
+          data-name="members"
+          className="members action-btn"
+          aria-describedby="1"
+          onClick={handleClick}
+        >
+          <span className="icon">
+            <LuClock5 />
+          </span>
+          <p>Members</p>
+
+          {modalOpenByName === "members" && isPopoverOpen && (
+            <Popover
+              id={isPopoverOpen ? "members-popover" : undefined}
+              open={isPopoverOpen}
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              disablePortal
+              PaperProps={{
+                sx: {
+                  width: "400px",
+                  height: "600px",
+                  padding: "20px",
+                },
+              }}
+            >
+              <MemberPicker
+                board={board}
+                task={task}
+                handlePopoverClick={handlePopoverClick}
+                setIsPopoverOpen={setIsPopoverOpen}
+                onUpdated={onUpdated}
+                setTaskMembers={setTaskMembers}
+                taskMembers={taskMembers}
+              />
+            </Popover>
+          )}
+        </div>
+
         {taskParams && (
           <div
             role="button"
             data-name="checklists"
             className="checklist action-btn"
-            aria-describedby="1"
+            aria-describedby="2"
             onClick={handleClick}
           >
             <span className="icon">
@@ -90,7 +138,7 @@ export function TaskDetailsActions({
           role="button"
           data-name="due-date"
           className="due-date action-btn"
-          aria-describedby="2"
+          aria-describedby="3"
           onClick={handleClick}
         >
           <span className="icon">
@@ -133,7 +181,7 @@ export function TaskDetailsActions({
           role="button"
           data-name="labels"
           className="labels action-btn"
-          aria-describedby="3"
+          aria-describedby="4"
           onClick={handleClick}
         >
           <span className="icon">
@@ -178,7 +226,7 @@ export function TaskDetailsActions({
             role="button"
             data-name="attach"
             className="attach action-btn"
-            aria-describedby="4"
+            aria-describedby="5"
             onClick={handleClick}
           >
             <span className="icon">
@@ -210,7 +258,7 @@ export function TaskDetailsActions({
           </div>
         )}
 
-        <div
+        {/* <div
           role="button"
           data-name="cover"
           className="cover action-btn"
@@ -254,6 +302,53 @@ export function TaskDetailsActions({
 
 
           
+        </div> */}
+        <div
+          role="button"
+          data-name="cover"
+          className={`cover action-btn ${
+            currCover.color ? "cover-selected" : ""
+          }`}
+          aria-describedby="6"
+          onClick={handleClick}
+          style={{
+            position: currCover.color ? "absolute" : "relative",
+            top: currCover.color ? "50px" : "auto",
+            zIndex: currCover.color ? 1001 : "auto",
+          }}
+        >
+          <span className="icon">
+            <BsCardImage />
+          </span>
+          <p>Cover</p>
+
+          {modalOpenByName === "cover" && isPopoverOpen && (
+            <Popover
+              id={isPopoverOpen ? "cover-popover" : undefined}
+              open={isPopoverOpen}
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              disablePortal
+              PaperProps={{
+                sx: {
+                  padding: "20px",
+                  boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+                  borderRadius: "8px",
+                },
+              }}
+            >
+              <CoverPicker
+                onUpdated={onUpdated}
+                setIsPopoverOpen={setIsPopoverOpen}
+                handlePopoverClick={handlePopoverClick}
+                setCurrCover={setCurrCover}
+                currCover={currCover}
+              />
+            </Popover>
+          )}
         </div>
       </>
 
@@ -264,7 +359,7 @@ export function TaskDetailsActions({
             role="button"
             data-name="archive"
             className="archive action-btn"
-            aria-describedby="6"
+            aria-describedby="7"
             onClick={handleClick}
           >
             <span className="icon">

@@ -562,6 +562,7 @@ function _createBoards() {
         fullname: "Natia ",
         imgUrl: "https://www.google.com",
         color: "#61bd4f",
+        
       },
       {
         id: "u102",
