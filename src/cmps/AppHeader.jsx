@@ -1,87 +1,41 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { UserModal } from "./UserModal.jsx";
-import { SearchBar } from "./SearchBar.jsx";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { UserModal } from './UserModal.jsx'
+import { SearchBar } from './SearchBar.jsx'
+import { useNavigate } from 'react-router-dom'
 
 export function AppHeader({ bgColor, borderBottom, logoImg, logoColor }) {
-  const [showUserModal, setShowUserModal] = useState(false);
+    const [showUserModal, setShowUserModal] = useState(false)
 
-  const user = useSelector((storeState) => storeState.userModule.user);
+    const user = useSelector(storeState => storeState.userModule.user)
+    console.log('user:', user)
 
-  return (
-    <header
-      className="app-header full"
-      style={{
-        backgroundColor: `${bgColor}`,
-        borderBottom: borderBottom,
-      }}
-    >
-      <section>
-        {/* <span className="material-symbols-outlined menu">apps</span> */}
-        <Link to="/board">
-          <span className="logo-icon-img">
-            <img src={logoImg} alt="" />
-            {/* <img
-              src="https://www.pngkey.com/png/full/213-2134177_import-boards-from-trello-trello-logo-white.png"
-              alt=""
-            /> */}
-          </span>
-          <span className="logo" style={{ color: `${logoColor}` }}>
-            Frello
-          </span>
-        </Link>
-
-        {user && (
-          <button className="create-btn">
-            <span>Create</span>
-          </button>
-        )}
-      </section>
-
-      {/* {!user && (
-          <section>
-            <button className="login-btn" onClick={handleOpenAuth}>
-              <Link to={"/auth/login"}>
-                <span>Login</span>
-              </Link>
-            </button>
-
-            <button className="signup-btn" onClick={handleOpenAuth}>
-              <Link to={"/auth/signup"}>
-                <span>Get Trello for free</span>
-              </Link>
-            </button>
-          </section>
-        )} */}
-
-      {/* {user && ( */}
-      <section>
-        {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
-        {/* <div>
-            <input />
-            <span class="material-symbols-outlined">search</span>
-          </div> */}
-
-        {/* <SearchBar /> */}
-
-        <div
-          style={{ backgroundColor: "orange" }}
-          className="profile"
-          onClick={() => setShowUserModal(!showUserModal)}
-        >
-          <span>U</span>
-          {/* <span>{user.fullname.charAt(0).toUpperCase()}</span> */}
-        </div>
-      </section>
-      {/* )} */}
-      {/* {showUserModal && (
-        <UserModal
-          showUserModal={showUserModal}
-          setShowUserModal={setShowUserModal}
-        />
-      )} */}
-    </header>
-  );
+    return (
+        <header
+            className="app-header full"
+            style={{
+                backgroundColor: `${bgColor}`,
+                borderBottom: borderBottom,
+            }}>
+            <section>
+                <Link to="/board">
+                    <span className="logo-icon-img">
+                        <img src={logoImg} alt="" />
+                    </span>
+                    <span className="logo" style={{ color: `${logoColor}` }}>
+                        Frello
+                    </span>
+                </Link>
+                {user && (
+                    <section className="header-right">
+                        <div className="user">
+                            {user.imgUrl && <img src={user.imgUrl}  style={{width:'32px', height:'32px',padding: '4px'}} />}
+                            {!user.imgUrl && <img src="https://res.cloudinary.com/dj7k9bpa3/image/upload/v1631123736/avatar-1577909_1280_v0wz9o.png" />}
+                        </div>
+                    </section>
+                )}
+            </section>
+        </header>
+    )
 }

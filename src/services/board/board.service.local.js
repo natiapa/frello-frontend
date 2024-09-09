@@ -469,7 +469,7 @@ function _createBoards() {
           {
             id: "c101",
             title: "Design wireframes",
-            labels: '',
+            labels: [],
             description: "",
             checklists: [
               {

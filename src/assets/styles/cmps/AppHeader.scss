@@ -12,18 +12,20 @@
 
 .app-header {
   @include flexCenter(space-between);
-  padding: 0 1em;
+  padding: .5rem;
   height: 50px;
   grid-column: 1/-1;
   grid-row: 1;
 
   section {
     &:first-of-type {
-      @include flexCenter(space-between);
-
-      & > * {
-        margin-inline-end: 0.8em;
-      }
+      // @include flexCenter(space-between);
+      display: grid;
+      grid-template-columns: auto auto;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+     
 
       .menu {
         @include btn();

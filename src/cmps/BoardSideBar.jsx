@@ -63,7 +63,7 @@ export function BoardSideBar({ board, bgColor }) {
                 <ul>
                     <li className="header">
                         <div className="logo">
-                            {board.title[0].toUpperCase()}
+                            {board.title[0]?.toUpperCase()}
                         </div>
                         <p>{`${board.title} Workspace`.substring(0, 10)}</p>
                         <div
