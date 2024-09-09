@@ -40,16 +40,13 @@ export function TaskDetailsActions({
   isPopoverOpen,
 }) {
   const { taskId: taskParams } = useParams();
-  const [popoverClosed, setPopoverClosed] = useState(false); // משתנה שיעקוב אחרי סגירת הפופ-אובר
+
 
   function handlePopoverClick(ev) {
     ev.stopPropagation();
   }
 
-  function handleClosePopover() {
-    setIsPopoverOpen(false); // סוגר את הפופ-אובר
-    setPopoverClosed(true); // מעדכן שסגרנו את הפופ-אובר
-  }
+
 
   return (
     <section className="actions" style={{ ...taskPrevActionsModalData }}>
