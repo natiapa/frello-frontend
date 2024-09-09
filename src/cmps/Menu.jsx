@@ -60,7 +60,9 @@ export function Menu({
                 backgroundColor: board?.style?.backgroundColor
                   ? board.style.backgroundColor
                   : "none",
-
+                // background: board?.style?.backgroundColor
+                //   ? `linear-gradient(to bottom right, ${board.style.darkenedColor}, ${board.style.backgroundColor})`
+                //   : "none",
                 backgroundImage: board?.style?.backgroundImage
                   ? `url(${board.style.backgroundImage})`
                   : "none",

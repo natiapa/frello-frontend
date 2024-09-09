@@ -1,5 +1,5 @@
 .task-preview {
-  // position: relative;
+  position: relative;
   display: grid;
   grid-template-rows: max-content 1fr max-content;
   padding: 8px 12px 8px;
@@ -12,6 +12,12 @@
   cursor: pointer;
   // max-width: 256px;
   word-break: break-all;
+  &:hover {
+    .edit-btn {
+      opacity: 1;
+      background-color: #eaeaec;
+    }
+  }
 
   a {
     display: grid;
@@ -43,8 +49,8 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 3px;
+    right: 3px;
     padding: 2px 0 0 0;
     background-color: transparent;
     border-radius: 16px;
@@ -53,11 +59,6 @@
     width: 2em;
     color: #172b4d;
     opacity: 0;
-
-    &:hover {
-      opacity: 1;
-      background-color: #eaeaec;
-    }
   }
 
   &:hover {
@@ -117,6 +118,15 @@
           color: white;
         }
       }
+    }
+  }
+}
+
+@media (width<$mobile-breakpoint) {
+  .task-preview {
+    .edit-btn {
+      opacity: 1;
+      background-color: #eaeaec;
     }
   }
 }

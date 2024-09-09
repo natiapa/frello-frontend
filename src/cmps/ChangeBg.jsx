@@ -141,8 +141,12 @@ export function ChangeBg({
     } else if (type === "bgColor") {
       const boardToUpdate = {
         ...board,
-        style: { backgroundColor: bgType },
+        style: {
+          backgroundColor: bgType,
+          darkenedColor: chroma(bgType).darken(1.5).hex(),
+        },
       };
+
       updateBoard(boardToUpdate);
       setCurrBoardBgStyle(boardToUpdate.style);
     }

@@ -6,6 +6,7 @@
   display: grid;
   grid-template-rows: repeat(3, max-content);
   background-color: #fff;
+  z-index: 2;
 
   .menu-header {
     grid-row: 1;
@@ -309,7 +310,7 @@
   transform: translateX(100%);
 }
 
-@media (width<600px) {
+@media (width<$mobile-breakpoint) {
   .board-details {
     position: relative;
     .menu {
