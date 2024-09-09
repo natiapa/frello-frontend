@@ -195,7 +195,7 @@ export function TaskDetailsActions({
               open={isPopoverOpen}
               anchorEl={anchorEl}
               anchorOrigin={{
-                vertical: "bottom",
+                vertical: "top",
                 horizontal: "left",
               }}
               disablePortal
@@ -307,14 +307,14 @@ export function TaskDetailsActions({
           role="button"
           data-name="cover"
           className={`cover action-btn ${
-            currCover.color ? "cover-selected" : ""
+            currCover?.color ? "cover-selected" : ""
           }`}
           aria-describedby="6"
           onClick={handleClick}
           style={{
-            position: currCover.color ? "absolute" : "relative",
-            top: currCover.color ? "50px" : "auto",
-            zIndex: currCover.color ? 1001 : "auto",
+            position: currCover?.color ? "absolute" : "relative",
+            top: currCover?.color ? "50px" : "auto",
+            zIndex: currCover?.color ? 1001 : "auto",
           }}
         >
           <span className="icon">

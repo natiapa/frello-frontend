@@ -12,7 +12,7 @@ export function LabelList({ taskLabels, labelWidth }) {
           className="label-square"
           style={{
             backgroundColor: label.color,
-            width: "60px",
+            width: labelWidth,
           }}
         >
           <p>{label.title || ""}</p>

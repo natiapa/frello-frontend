@@ -112,7 +112,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
                 <FiEdit2 />
               </button>
               <div className="labels">
-                <LabelList labels={task.labels} labelWidth="40px" />
+                <LabelList taskLabels={task.labels} labelWidth="40px" />
               </div>
 
               <span>{task.title || "New"}</span>

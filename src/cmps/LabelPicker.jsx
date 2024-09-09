@@ -11,6 +11,7 @@ export function LabelPicker({
   task,
   handlePopoverClick,
   setTaskSelectedLabels,
+  setBoardSelectedLabels, 
   boardSelectedLabels,
   setIsPopoverOpen,
   onUpdated,
@@ -76,7 +77,7 @@ export function LabelPicker({
     } catch (error) {
       console.error("Failed to update the board:", error);
     }
-    boardSelectedLabels(updatedLabels);
+    setBoardSelectedLabels(updatedLabels);
     setEditLabel("");
   }
 

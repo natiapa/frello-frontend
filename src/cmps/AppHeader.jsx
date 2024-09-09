@@ -27,15 +27,26 @@ export function AppHeader({ bgColor, borderBottom, logoImg, logoColor }) {
                         Frello
                     </span>
                 </Link>
-                {user && (
-                    <section className="header-right">
-                        <div className="user">
-                            {user.imgUrl && <img src={user.imgUrl}  style={{width:'32px', height:'32px',padding: '4px'}} />}
-                            {!user.imgUrl && <img src="https://res.cloudinary.com/dj7k9bpa3/image/upload/v1631123736/avatar-1577909_1280_v0wz9o.png" />}
-                        </div>
-                    </section>
-                )}
             </section>
+            {user && (
+                <section className="header-right">
+                    <div className="user">
+                        {user.imgUrl && (
+                            <img
+                                src={user.imgUrl}
+                                style={{
+                                    width: '32px',
+                                    height: '32px',
+                                    padding: '4px',
+                                }}
+                            />
+                        )}
+                        {!user.imgUrl && (
+                            <img src="https://res.cloudinary.com/dj7k9bpa3/image/upload/v1631123736/avatar-1577909_1280_v0wz9o.png" />
+                        )}
+                    </div>
+                </section>
+            )}
         </header>
     )
 }

@@ -21,11 +21,13 @@
   section {
     &:first-of-type {
       display: grid;
-      grid-template-columns: 1fr;
 
-      & > * {
-        margin-inline-end: 0.8em;
-      }
+      grid-template-columns: auto auto;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+     
 
       .menu {
         @include btn();
@@ -63,44 +65,56 @@
     }
   }
 
-  section {
-    &:nth-of-type(2) {
-      // @include flexCenter(center);
-      display: grid;
-
-      height: 100%;
-      .login-btn {
-        @include btn();
-        background-color: transparent;
-        font-size: 17px;
-      }
-
-      .signup-btn {
-        @include btn();
-        background-color: $blue1;
-        height: 100%;
-        font-size: 17px;
-        border-radius: 0;
-        color: $white;
-      }
-
-      .profile {
-        display: grid;
-        place-self: center end;
-        width: 2em;
-        height: 2em;
-        border-radius: 50%;
-        color: $white;
-        cursor: pointer;
-
-        span {
-          display: grid;
-          justify-content: center;
-          align-items: center;
-          height: 2em;
-          width: 2em;
-        }
-      }
-    }
+  .header-right {
+    display: grid;
+    justify-items: end;
+    align-items: center;
   }
+
+  .user {
+    display: grid;
+    align-items: center;
+    justify-content: end;
+  }
+
+  // section {
+  //   &:nth-of-type(2) {
+  //     // @include flexCenter(center);
+  //     display: grid;
+
+  //     height: 100%;
+  //     .login-btn {
+  //       @include btn();
+  //       background-color: transparent;
+  //       font-size: 17px;
+  //     }
+
+  //     .signup-btn {
+  //       @include btn();
+  //       background-color: $blue1;
+  //       height: 100%;
+  //       font-size: 17px;
+  //       border-radius: 0;
+  //       color: $white;
+  //     }
+
+  //     .profile {
+  //       display: grid;
+  //       place-self: center end;
+  //       width: 2em;
+  //       height: 2em;
+  //       border-radius: 50%;
+  //       color: $white;
+  //       cursor: pointer;
+
+  //       span {
+  //         display: grid;
+  //         justify-content: center;
+  //         align-items: center;
+  //         height: 2em;
+  //         width: 2em;
+  //       }
+  //     }
+  //   }
+  // }
 }
