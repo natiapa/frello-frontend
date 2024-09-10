@@ -19,6 +19,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
   const group = board?.groups?.find((group) => group.id === groupId);
   const [members, setMembers] = useState(task.members);
   const [newDueDate, setNewDueDate] = useState(task.dueDate);
+  console.log(board);
 
   useEffect(() => {}, [task.members]);
 

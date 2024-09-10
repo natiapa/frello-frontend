@@ -264,33 +264,34 @@ export function TaskDetails() {
             />
           )}
         </form>
-        <form className="task-details-actions">
-          <TaskDetailsActions
-            board={board}
-            group={group}
-            task={task}
-            boardId={board?.id}
-            groupId={group.id}
-            taskId={task.id}
-            setBoardSelectedLabels={setBoardSelectedLabels}
-            setTaskSelectedLabels={setTaskSelectedLabels}
-            onUpdated={onUpdated}
-            setNewDueDate={setNewDueDate}
-            setNewCheckLists={setNewCheckLists}
-            setNewFiles={setNewFiles}
-            setCurrCover={setCurrCover}
-            s
-            currCover={currCover}
-            newFiles={newFiles}
-            handleClick={handleClick}
-            anchorEl={anchorEl}
-            setIsPopoverOpen={setIsPopoverOpen}
-            modalOpenByName={modalOpenByName}
-            isPopoverOpen={isPopoverOpen}
-            setTaskMembers={setTaskMembers}
-            taskMembers={taskMembers}
-            deleteTask={deleteTask}
-          />
+        <form className="actions-container">
+          <div className="task-details-actions">
+            <TaskDetailsActions
+              board={board}
+              group={group}
+              task={task}
+              boardId={board?.id}
+              groupId={group.id}
+              taskId={task.id}
+              setBoardSelectedLabels={setBoardSelectedLabels}
+              setTaskSelectedLabels={setTaskSelectedLabels}
+              onUpdated={onUpdated}
+              setNewDueDate={setNewDueDate}
+              setNewCheckLists={setNewCheckLists}
+              setNewFiles={setNewFiles}
+              setCurrCover={setCurrCover}
+              currCover={currCover}
+              newFiles={newFiles}
+              handleClick={handleClick}
+              anchorEl={anchorEl}
+              setIsPopoverOpen={setIsPopoverOpen}
+              modalOpenByName={modalOpenByName}
+              isPopoverOpen={isPopoverOpen}
+              setTaskMembers={setTaskMembers}
+              taskMembers={taskMembers}
+              deleteTask={deleteTask}
+            />
+          </div>
         </form>
       </dialog>
     </section>
