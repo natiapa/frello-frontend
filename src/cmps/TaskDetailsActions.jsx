@@ -10,7 +10,6 @@ import { DueDatePicker } from "./DueDatePicker";
 import { AttachmentUploader } from "./AttachmentUploader";
 import { FiPaperclip } from "react-icons/fi";
 import { BsArchive } from "react-icons/bs";
-import { ArchiveAction } from "./ArchiveAction.JSX";
 import { CoverPicker } from "./CoverPicker";
 import { BsCardImage } from "react-icons/bs";
 import { useState } from "react";
@@ -41,11 +40,21 @@ export function TaskDetailsActions({
   isPopoverOpen,
   setTaskMembers,
   taskMembers,
+  taskSelectedLabels,
+  deleteTask,
 }) {
   const { taskId: taskParams } = useParams();
+  const [isArchiveClicked, setIsArchiveClicked] = useState(false);
 
   function handlePopoverClick(ev) {
     ev.stopPropagation();
+  }
+
+  function handleArchiveClick(ev) {
+    ev.stopPropagation();
+    const updateArchiveClick = !isArchiveClicked;
+
+    setIsArchiveClicked(updateArchiveClick);
   }
 
   return (
@@ -210,12 +219,14 @@ export function TaskDetailsActions({
               }}
             >
               <LabelPicker
+                board={board}
                 task={task}
                 handlePopoverClick={handlePopoverClick}
                 setTaskSelectedLabels={setTaskSelectedLabels}
                 setBoardSelectedLabels={setBoardSelectedLabels}
                 setIsPopoverOpen={setIsPopoverOpen}
                 onUpdated={onUpdated}
+                taskSelectedLabels={taskSelectedLabels}
               />
             </Popover>
           )}
@@ -258,51 +269,6 @@ export function TaskDetailsActions({
           </div>
         )}
 
-        {/* <div
-          role="button"
-          data-name="cover"
-          className="cover action-btn"
-          aria-describedby="5"
-          onClick={handleClick}
-        >
-          <span className="icon">
-            <BsCardImage />
-          </span>
-          <p>Cover</p>
-
-          {modalOpenByName === "cover" && isPopoverOpen && (
-            <Popover
-              id={isPopoverOpen ? "cover-popover" : undefined}
-              open={isPopoverOpen}
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              disablePortal
-              PaperProps={{
-                sx: {
-
-                  padding: "20px",
-                  boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", 
-                  borderRadius: "8px", 
-                },
-              }}
-            >
-              <CoverPicker 
-                onUpdated={onUpdated}
-                setIsPopoverOpen={setIsPopoverOpen}
-                handlePopoverClick={handlePopoverClick}
-                setCurrCover={setCurrCover}
-                currCover={currCover}
-              />
-            </Popover>
-          )}
-
-
-
-          
-        </div> */}
         <div
           role="button"
           data-name="cover"
@@ -354,46 +320,43 @@ export function TaskDetailsActions({
 
       <>
         {taskParams && <h5>Action</h5>}
-        {taskParams && (
-          <div
-            role="button"
-            data-name="archive"
-            className="archive action-btn"
-            aria-describedby="7"
-            onClick={handleClick}
-          >
-            <span className="icon">
-              <BsArchive />
-            </span>
-            <p>Archive</p>
-
-            {modalOpenByName === "archive" && isPopoverOpen && (
-              <Popover
-                id={isPopoverOpen ? "archive-popover" : undefined}
-                open={isPopoverOpen}
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                disablePortal
-                PaperProps={{
-                  sx: {
-                    width: "400px",
-                    height: "600px",
-                    padding: "20px",
-                  },
-                }}
+        {taskParams &&
+          (!isArchiveClicked ? (
+            <div
+              role="button"
+              data-name="archive"
+              className="archive action-btn"
+              aria-describedby="7"
+              onClick={handleArchiveClick}
+            >
+              <span className="icon">
+                <BsArchive />
+              </span>
+              <p>Archive</p>
+            </div>
+          ) : (
+            <div>
+              <div
+                role="send-back"
+                data-name="send-back"
+                className="send-back action-btn"
+                aria-describedby="8"
+                onClick={handleArchiveClick}
               >
-                <ArchiveAction
-                  onUpdated={onUpdated}
-                  setIsPopoverOpen={setIsPopoverOpen}
-                  handlePopoverClick={handlePopoverClick}
-                />
-              </Popover>
-            )}
-          </div>
-        )}
+                <p>Send to board</p>
+              </div>
+
+              <div
+                role="button"
+                data-name="delete"
+                className="delet action-btn"
+                aria-describedby="9"
+                onClick={deleteTask}
+              >
+                <p>Delete</p>
+              </div>
+            </div>
+          ))}
       </>
       {!taskParams && (
         <Link

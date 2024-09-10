@@ -23,7 +23,7 @@ export const boardService = {
   getEmptyLabel,
   getColorsCover,
   updateActivities,
-  getImgs
+  getImgs,
 };
 window.cs = boardService;
 
@@ -484,8 +484,8 @@ function getAllLabels() {
 }
 
 function getImgs() {
- const imgs = urlImgs
- return imgs
+  const imgs = urlImgs;
+  return imgs;
 }
 
 function _createBoards() {
@@ -500,10 +500,11 @@ function _createBoards() {
       imgUrl: "http://some-img",
     },
     style: {
+      backgroundColor: "#61bd4f",
       backgroundImage:
         "https://cdn.pixabay.com/photo/2024/07/05/22/30/penguin-8875750_1280.jpg",
-      // backgroundColor: "#61bd4f",
     },
+
     labels: [
       {
         id: makeId(),
@@ -562,7 +563,6 @@ function _createBoards() {
         fullname: "Natia ",
         imgUrl: "https://www.google.com",
         color: "#61bd4f",
-        
       },
       {
         id: "u102",
