@@ -34,7 +34,7 @@
     .save-btn {
       position: absolute;
 
-      top: 900px;
+      top: 85px;
       left: 0;
       width: 53px;
       height: 32px;
@@ -66,9 +66,13 @@
     position: relative;
     grid-row: 3;
     display: grid;
-    grid-template-columns: repeat(5, auto);
-    // grid-template-columns: auto 80px;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: auto max-content max-content max-content;
     align-items: center;
+
+    .due-date-container {
+      grid-column: 1;
+    }
 
     .checklists {
       display: grid;
