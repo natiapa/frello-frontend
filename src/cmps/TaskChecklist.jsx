@@ -3,6 +3,7 @@ import { makeId } from "../services/util.service";
 import { ProgressBar } from "./ProgressBar";
 import { boardReducer } from "../store/reducers/board.reducer";
 import { boardService } from "../services/board";
+import { FaRegCheckSquare } from "react-icons/fa";
 
 export function TaskChecklist({
   checklists,
@@ -178,16 +179,23 @@ export function TaskChecklist({
           updatedChecklists.map((checklist) => (
             <li className="checklist" key={checklist.id}>
               <div className="header-and-btns">
+                <FaRegCheckSquare />
                 <h3>
                   <span>{checklist.title}</span>
                 </h3>
-                <button onClick={(ev) => onRemoveChecklist(ev, checklist.id)}>
+                <button
+                  className="delete-checklist-btn"
+                  onClick={(ev) => onRemoveChecklist(ev, checklist.id)}
+                >
                   Delete
                 </button>
               </div>
               <ProgressBar items={checklist.items} />
               {!isAddingItem && (
-                <button onClick={(ev) => onAddItem(ev, checklist)}>
+                <button
+                  className="add-item"
+                  onClick={(ev) => onAddItem(ev, checklist)}
+                >
                   Add an item
                 </button>
               )}

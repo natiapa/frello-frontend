@@ -4,6 +4,7 @@ import { ChangeBg } from "./ChangeBg";
 import SvgIcon from "./SvgIcon";
 import { IoIosArrowBack, IoMdList } from "react-icons/io";
 import { useParams } from "react-router";
+import { FaListCheck } from "react-icons/fa6";
 
 export function Menu({
   board,
@@ -50,7 +51,7 @@ export function Menu({
             className="menu-btn"
             onClick={() => setIsActivitiesOpen(true)}
           >
-            <IoMdList />
+            <FaListCheck />
             <span className="activity-btn">Activity</span>
           </button>
           <button className="menu-btn" onClick={() => setIsChangeBgOpen(true)}>
