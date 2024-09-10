@@ -317,6 +317,7 @@ export function BoardDetails() {
               taskMembers={taskMembers}
               taskSelectedLabels={taskSelectedLabels}
               setNewDueDate={setNewDueDate}
+              deleteTask={deleteTask}
             />
           )}
         </section>
