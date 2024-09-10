@@ -47,9 +47,7 @@ export function BoardDetails() {
   const [taskPrevActionsModalData, setTaskPrevActionsModalData] = useState("");
   const [selectedLabels, setSelectedLabels] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currBoardBgStyle, setCurrBoardBgStyle] = useState(
-    board?.style || "#f8bbd0"
-  );
+  const [currBoardBgStyle, setCurrBoardBgStyle] = useState('')
 
   const [boardSelectedLabels, setBoardSelectedLabels] = useState(board?.labels);
   const [taskSelectedLabels, setTaskSelectedLabels] = useState(currTask.labels);
@@ -61,6 +59,8 @@ export function BoardDetails() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
+
+console.log(currBoardBgStyle)
 
 
   useEffect(() => {
@@ -90,6 +90,10 @@ export function BoardDetails() {
     calculateBgColor();
   }, [board?.style, bgColor, currBoardBgStyle]);
 
+  useEffect(() => {
+    loadBoard(boardId);
+  },[currBoardBgStyle.style]);
+
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
     setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
@@ -97,6 +101,41 @@ export function BoardDetails() {
     setModalOpenByName(currDataName);
 
     console.log("isPopoverOpen", isPopoverOpen);
+  }
+
+  async function deleteTask(ev) {
+    ev.preventDefault();
+
+    try {
+      onUpdated("deleteTask", null);
+      await boardService.updateActivities(
+        board,
+        "",
+        "deleteTask",
+        group,
+        task,
+        "",
+        calculateTaskNumber()
+      );
+      navigate(`/board/${boardId}`);
+    } catch (error) {
+      console.error("Failed to delete task:", error);
+    }
+  }
+
+  function calculateTaskNumber() {
+    let taskNumber = 0;
+
+    for (const grp of board.groups) {
+      if (grp.id === groupId) {
+        const taskIndex = grp.tasks.findIndex((task) => task.id === taskId);
+        taskNumber += taskIndex + 2;
+        break;
+      } else {
+        taskNumber += grp.tasks.length;
+      }
+    }
+    return taskNumber;
   }
 
   async function calculateBgColor() {
@@ -149,42 +188,25 @@ export function BoardDetails() {
     setSelectedLabels(data.task.labels || []);
   }
 
-    // async function onUpdated(name, value) {
-    //   if (!board) return;
-    //   try {
-    //     const updatedBoard = boardService.updateBoard(
-    //       board,
-    //       currGroup.id,
-    //       currTask.id,
-    //       {
-    //         key: name,
-    //         value: value,
-    //       }
-    //     );
-    //     await updateBoard(updatedBoard);
-    //     await loadBoard(boardId);
-    //   } catch (error) {
-    //     console.error("Failed to update the board:", error);
-    //   }
-    // }
-  async function onUpdated(name, value) {
-    try {
-      const updatedBoard = boardService.updateBoard(
-        board,
-        currGroup.id,
-        currTask.id,
-        {
-          key: name,
-          value: value,
-        }
-      );
-
-      await updateBoard(updatedBoard);
-    } catch (error) {
-      console.error("Failed to update the board:", error);
+    async function onUpdated(name, value) {
+      if (!board) return;
+      try {
+        const updatedBoard = boardService.updateBoard(
+          board,
+          currGroup.id,
+          currTask.id,
+          {
+            key: name,
+            value: value,
+          }
+        );
+        await updateBoard(updatedBoard);
+        await loadBoard(boardId);
+      } catch (error) {
+        console.error("Failed to update the board:", error);
+      }
     }
-  }
-
+ 
   function handleSave(ev) {
     ev.preventDefault();
     if (!board) return;
