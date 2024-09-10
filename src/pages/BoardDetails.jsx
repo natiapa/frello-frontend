@@ -28,11 +28,12 @@ import { Activities } from "../cmps/Activities";
 import { MemberList } from "../cmps/MemberList";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { Menu } from "../cmps/Menu";
+import { DueDateDisplay } from "../cmps/DueDateDisplay";
 
 export function BoardDetails() {
   const { boardId, taskId } = useParams();
   const board = useSelector((storeState) => storeState.boardModule.board);
- 
+
   const filterBy = useSelector(
     (storeState) => storeState.boardModule.filterBoard
   );
@@ -51,17 +52,29 @@ export function BoardDetails() {
   );
 
   const [boardSelectedLabels, setBoardSelectedLabels] = useState(board?.labels);
-  const [taskSelectedLabels, setTaskSelectedLabels] = useState(currTask.labels)
-
+  const [taskSelectedLabels, setTaskSelectedLabels] = useState(currTask.labels);
 
   const [newDueDate, setNewDueDate] = useState(currTask.dueDate);
   const [currCover, setCurrCover] = useState(currTask.cover);
-  const [taskMembers, setTaskMembers] = useState(currTask.members);
+  const [taskMembers, setTaskMembers] = useState(currTask?.members);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
 
+
+  useEffect(() => {
+    if (currTask) {
+      setNewDueDate(currTask.dueDate);
+      setCurrCover(currTask.cover);
+      setTaskMembers(currTask.members);
+      
+  console.log("currTask", currTask);
+  console.log("taskMembers", taskMembers);
+
+    }
+  }, [currTask]);
+ 
 
   useEffect(() => {
     eventBus.on("show-task", onPreviewToShow);
@@ -77,15 +90,13 @@ export function BoardDetails() {
     calculateBgColor();
   }, [board?.style, bgColor, currBoardBgStyle]);
 
-
-
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
     setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
     setAnchorEl(ev.currentTarget);
     setModalOpenByName(currDataName);
 
-    console.log('isPopoverOpen',isPopoverOpen)
+    console.log("isPopoverOpen", isPopoverOpen);
   }
 
   async function calculateBgColor() {
@@ -138,31 +149,36 @@ export function BoardDetails() {
     setSelectedLabels(data.task.labels || []);
   }
 
-//   async function onUpdated(name, value) {
-//     if (!board) return;
-//     try {
-//       const updatedBoard = boardService.updateBoard(
-//         board,
-//         currGroup.id,
-//         currTask.id,
-//         {
-//           key: name,
-//           value: value,
-//         }
-//       );
-//       await updateBoard(updatedBoard);
-//       await loadBoard(boardId);
-//     } catch (error) {
-//       console.error("Failed to update the board:", error);
-//     }
-//   }
-async function onUpdated(name, value) {
+    // async function onUpdated(name, value) {
+    //   if (!board) return;
+    //   try {
+    //     const updatedBoard = boardService.updateBoard(
+    //       board,
+    //       currGroup.id,
+    //       currTask.id,
+    //       {
+    //         key: name,
+    //         value: value,
+    //       }
+    //     );
+    //     await updateBoard(updatedBoard);
+    //     await loadBoard(boardId);
+    //   } catch (error) {
+    //     console.error("Failed to update the board:", error);
+    //   }
+    // }
+  async function onUpdated(name, value) {
     try {
-      const updatedBoard = boardService.updateBoard(board, currGroup.id, currTask.id, {
-        key: name,
-        value: value,
-      });
-  
+      const updatedBoard = boardService.updateBoard(
+        board,
+        currGroup.id,
+        currTask.id,
+        {
+          key: name,
+          value: value,
+        }
+      );
+
       await updateBoard(updatedBoard);
     } catch (error) {
       console.error("Failed to update the board:", error);
@@ -246,6 +262,12 @@ async function onUpdated(name, value) {
             <div className="labels">
               <LabelList taskLabels={taskSelectedLabels} labelWidth="40px" />
             </div>
+            <div>
+            <DueDateDisplay
+                dueDate={currTask.dueDate}
+                setNewDueDate={setNewDueDate}
+              />
+            </div>
 
             <div className="details-modal">
               {currTask.checklists && currTask.checklists.length > 0 && (
@@ -295,8 +317,6 @@ async function onUpdated(name, value) {
               taskMembers={taskMembers}
               taskSelectedLabels={taskSelectedLabels}
               setNewDueDate={setNewDueDate}
-             
-           
             />
           )}
         </section>
