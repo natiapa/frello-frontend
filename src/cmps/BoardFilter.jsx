@@ -4,23 +4,16 @@ import { filterBoard } from '../store/actions/board.actions'
 import { useSelector } from 'react-redux'
 import { Checkbox, MenuItem, Select } from '@mui/material'
 import { HiMiniUserCircle } from 'react-icons/hi2'
+import { makeId } from '../services/util.service'
 
 export function BoardFilter() {
     const [filterToEdit, setFilterToEdit] = useState(
         boardService.getDefaultFilter()
     )
+    const labels = useSelector(store => store.boardModule.board.labels)
     const { members } = useSelector(store => store.boardModule.board)
     const { groups } = useSelector(store => store.boardModule.board)
-    var lbls = []
-    groups.map(group =>
-        group.tasks.map(task => {
-            task.labels.forEach(label => {
-                lbls.push(label)
-            })
-        })
-    )
-    const labelsToMap = [...new Set(lbls)]
-    console.log('labelsToMap:', labelsToMap)
+    console.log('groups:', groups)
 
     console.log('members:', members)
     useEffect(() => {
@@ -84,19 +77,27 @@ export function BoardFilter() {
     }
 
     function handleChangeSelectLabel(ev) {
-        const value = ev.target.value
         const name = ev.target.name
-        if (filterToEdit.selectLabel.includes(name)) {
-            const idx = filterToEdit.selectLabel.indexOf(name)
-            filterToEdit.selectLabel.splice(idx, 1)
+        const value = ev.target.checked
+        console.log('name:', name)
+        console.log('value:', value)
+        if (value) {
+            setFilterToEdit({
+                ...filterToEdit,
+                selectLabel: [...filterToEdit.selectLabel, name],
+            })
         } else {
-            filterToEdit.selectLabel.push(name)
+            const idx = filterToEdit.selectLabel.findIndex(
+                label => label === name
+            )
+            filterToEdit.selectLabel.splice(idx, 1)
+            setFilterToEdit({
+                ...filterToEdit,
+                selectLabel: filterToEdit.selectLabel,
+            })
         }
-        setFilterToEdit({
-            ...filterToEdit,
-            selectLabel: filterToEdit.selectLabel,
-        })
     }
+
     const countMembers = filterToEdit.selectMember.length || 0
     return (
         <section className="board-filter" onClick={handlePopoverClick}>
@@ -120,7 +121,13 @@ export function BoardFilter() {
                         onChange={handleChange}
                     />
                     <span>
-                        <HiMiniUserCircle style={{height: '24px', width:'24px', marginTop: '5px'}}/>
+                        <HiMiniUserCircle
+                            style={{
+                                height: '24px',
+                                width: '24px',
+                                marginTop: '5px',
+                            }}
+                        />
                     </span>{' '}
                     No members
                 </label>
@@ -181,16 +188,20 @@ export function BoardFilter() {
                 </label>
 
                 <div className="select-labels">
-                    {labelsToMap.map(label => (
-                        <label key={label}>
+                    {labels.map(label => (
+                        <div className="label-filter">
                             <input
                                 type="checkbox"
-                                name={label}
-                                value={filterToEdit.selectLabel}
+                                name={label.color}
                                 onChange={handleChangeSelectLabel}
                             />
-                            {label}
-                        </label>
+
+                            <label
+                                key={label.id}
+                                style={{
+                                    backgroundColor: label.color,
+                                }}></label>
+                       </div>
                     ))}
                 </div>
             </div>

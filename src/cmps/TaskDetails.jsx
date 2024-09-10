@@ -188,7 +188,7 @@ export function TaskDetails() {
             )}
 
             {/* Label-List */}
-            {taskSelectedLabels.length > 0 && (
+            {taskSelectedLabels?.length > 0 && (
               <ul className="labels">
                 <p className="header">Labels</p>
                 <LabelList taskLabels={taskSelectedLabels} />

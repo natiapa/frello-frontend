@@ -57,6 +57,7 @@ export function BoardDetails() {
     }, [])
 
     useEffect(() => {
+        console.log('filterBy:', filterBy)
         loadBoard(boardId, filterBy)
         if (!preview?.length) return
         setPreview(preview)
@@ -140,7 +141,7 @@ export function BoardDetails() {
                 }
             )
             await updateBoard(updatedBoard)
-            await loadBoard(boardId)
+            await loadBoard(boardId,filterBy)
         } catch (error) {
             console.error('Failed to update the board:', error)
         }

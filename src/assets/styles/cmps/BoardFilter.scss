@@ -30,22 +30,34 @@
     }
   }
 
+  .label-filter{
+    grid-column: 1 / -1;
+    display: grid;
+
+    grid-template-columns: max-content 1fr;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    padding: 0 0 8px 0;
+  }
+  
   input[type='text'] {
     height: 36px;
   }
-
+  
   input[type='checkbox'] {
-
+    
     height: 16px;
     width: 16px;
   }
-
+  
   label {
     display: grid;
     grid-template-columns: max-content max-content 1fr;
     gap: 8px;
     align-items: center;
-    padding: 8px 0 8px 8px;
+    height: 32px;
+    // padding: 8px 0 8px 8px;
     font-size: 14px;
     color: #44546f;
   }
@@ -66,6 +78,7 @@
     gap: 15px;
 
     .select-labels {
+      grid-column: 1 / -1;
       display: grid;
     }
 

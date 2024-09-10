@@ -28,8 +28,9 @@ async function query(filterBy = {}) {
     return httpService.get(`board`, filterBy)
 }
 
-function getById(boardId) {
-    return httpService.get(`board/${boardId}`)
+function getById(boardId, filterBy = {}) {
+    console.log('filterBy:', filterBy)
+    return httpService.get(`board/${boardId}`, filterBy)
 }
 
 async function remove(boardId) {
@@ -329,34 +330,34 @@ function getAllLabels() {
 function getImgs() {
     const urlImgs = [
         {
-          src: "https://cdn.pixabay.com/photo/2024/08/01/10/18/bird-8936789_1280.jpg",
-          color: "#ffedcc", // pastel peach
-          alt: "bird",
+            src: 'https://cdn.pixabay.com/photo/2024/08/01/10/18/bird-8936789_1280.jpg',
+            color: '#ffedcc', // pastel peach
+            alt: 'bird',
         },
         {
-          src: "https://cdn.pixabay.com/photo/2024/07/31/15/13/green-8935080_1280.jpg",
-          color: "#d4f5dc", // pastel mint green
-          alt: "green-swirl",
+            src: 'https://cdn.pixabay.com/photo/2024/07/31/15/13/green-8935080_1280.jpg',
+            color: '#d4f5dc', // pastel mint green
+            alt: 'green-swirl',
         },
         {
-          src: "https://cdn.pixabay.com/photo/2024/02/17/17/20/chess-8579843_1280.jpg",
-          color: "#f4e3ff", // pastel lavender
-          alt: "chess",
+            src: 'https://cdn.pixabay.com/photo/2024/02/17/17/20/chess-8579843_1280.jpg',
+            color: '#f4e3ff', // pastel lavender
+            alt: 'chess',
         },
         {
-          src: "https://cdn.pixabay.com/photo/2013/02/17/07/19/flower-82437_1280.jpg",
-          color: "#ffe6e6", // pastel pink
-          alt: "orange-flower",
+            src: 'https://cdn.pixabay.com/photo/2013/02/17/07/19/flower-82437_1280.jpg',
+            color: '#ffe6e6', // pastel pink
+            alt: 'orange-flower',
         },
         {
-          src: "https://cdn.pixabay.com/photo/2024/08/11/18/15/leaves-8962041_1280.jpg",
-          color: "#d6f5d6", // pastel light green
-          alt: "leafs",
+            src: 'https://cdn.pixabay.com/photo/2024/08/11/18/15/leaves-8962041_1280.jpg',
+            color: '#d6f5d6', // pastel light green
+            alt: 'leafs',
         },
         {
-          src: "https://cdn.pixabay.com/photo/2022/06/23/09/58/the-season-of-ripe-rice-7279448_1280.jpg",
-          color: "#f2e6cc", // pastel cream
-          alt: "the-season-of-ripe-rice",
+            src: 'https://cdn.pixabay.com/photo/2022/06/23/09/58/the-season-of-ripe-rice-7279448_1280.jpg',
+            color: '#f2e6cc', // pastel cream
+            alt: 'the-season-of-ripe-rice',
         },
         // {
         //   src: "https://cdn.pixabay.com/photo/2024/07/05/22/30/penguin-8875750_1280.jpg",
@@ -408,8 +409,7 @@ function getImgs() {
         //   color: "#fff5e6", // pastel apricot
         //   alt: "shell",
         // },
-      ];
+    ]
     const imgs = urlImgs
     return imgs
-   }
-   
+}
