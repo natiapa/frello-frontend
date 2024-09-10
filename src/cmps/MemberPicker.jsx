@@ -10,6 +10,7 @@ export function MemberPicker({
   handlePopoverClick,
   taskMembers,
 }) {
+
   const membersBoard = board.members;
   const availableMembers = membersBoard.filter(
     (boardMember) =>
@@ -18,7 +19,8 @@ export function MemberPicker({
   const [selectedMembers, setSelectedMembers] = useState(availableMembers);
 
   function handleRemoveMember(ev, member) {
-    ev.stopPropagation();
+ 
+    ev.stopPropagation()
     const updateTaskMembers = taskMembers.filter((m) => m.id !== member.id);
     onUpdated("members", updateTaskMembers);
     setTaskMembers(updateTaskMembers);
@@ -28,7 +30,8 @@ export function MemberPicker({
   }
 
   function handleAddMember(ev, member) {
-    ev.stopPropagation();
+
+    ev.stopPropagation()
     const updateBoardMembers = selectedMembers.filter(
       (m) => m.id !== member.id
     );

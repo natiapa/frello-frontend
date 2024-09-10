@@ -46,13 +46,16 @@ export function BoardDetails() {
   const [taskPrevActionsModalData, setTaskPrevActionsModalData] = useState("");
   const [selectedLabels, setSelectedLabels] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currBoardBgStyle, setCurrBoardBgStyle] = useState(
-    board?.style || "#f8bbd0"
-  );
+  const [currBoardBgStyle, setCurrBoardBgStyle] = useState();
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
   const [newDueDate, setNewDueDate] = useState(currTask.dueDate);
+  const [boardSelectedLabels, setBoardSelectedLabels] = useState(board?.labels);
+  const [taskSelectedLabels, setTaskSelectedLabels] = useState(currTask.labels);
+
+  const [currCover, setCurrCover] = useState(currTask.cover);
+  const [taskMembers, setTaskMembers] = useState(currTask?.members);
   console.log(currTask.dueDate);
 
   useEffect(() => {
@@ -70,6 +73,21 @@ export function BoardDetails() {
     calculateBgColor();
   }, [board?.style, bgColor, currBoardBgStyle]);
 
+  useEffect(() => {
+    if (currTask) {
+      setNewDueDate(currTask.dueDate);
+      setCurrCover(currTask.cover);
+      setTaskMembers(currTask.members);
+
+      console.log("currTask", currTask);
+      console.log("taskMembers", taskMembers);
+    }
+  }, [currTask]);
+
+  useEffect(() => {
+    loadBoard(boardId);
+  }, [currBoardBgStyle.style]);
+
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
     setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
@@ -79,6 +97,26 @@ export function BoardDetails() {
     console.log("modalOpenByName:", modalOpenByName);
     console.log("isPopoverOpen:", isPopoverOpen);
     console.log("currDataName:", currDataName);
+  }
+
+  async function deleteTask(ev) {
+    ev.preventDefault();
+
+    try {
+      onUpdated("deleteTask", null);
+      await boardService.updateActivities(
+        board,
+        "",
+        "deleteTask",
+        group,
+        task,
+        "",
+        calculateTaskNumber()
+      );
+      navigate(`/board/${boardId}`);
+    } catch (error) {
+      console.error("Failed to delete task:", error);
+    }
   }
 
   async function calculateBgColor() {
@@ -116,7 +154,7 @@ export function BoardDetails() {
 
     setTaskPrevActionsModalData({
       position: "fixed",
-      left: `${data.elData.left + 275}px `,
+      left: `${data.elData.left + 275}px`,
       top: `${data.elData.top}px`,
       width: `max-content`,
       height: `max-content`,
@@ -239,8 +277,7 @@ export function BoardDetails() {
                 <MemberList members={currTask.members} gridColumnWidth="28px" />
               </ul>
 
-              {/* {/* {newDueDate && ( */}
-              <div className="due-date-container">
+              <div>
                 <DueDateDisplay
                   dueDate={currTask.dueDate}
                   setNewDueDate={setNewDueDate}
@@ -262,21 +299,29 @@ export function BoardDetails() {
 
           {isTaskPrevModalOpen && (
             <TaskDetailsActions
+              taskPrevActionsModalData={taskPrevActionsModalData}
+              setIsTaskPrevModalOpen={setIsTaskPrevModalOpen}
+              board={board}
+              group={currGroup}
+              task={currTask}
               boardId={boardId}
               groupId={currGroup.id}
               taskId={currTask.id}
-              task={currTask}
-              taskPrevActionsModalData={taskPrevActionsModalData}
-              setIsTaskPrevModalOpen={setIsTaskPrevModalOpen}
-              selectedLabels={selectedLabels}
-              setSelectedLabels={setSelectedLabels}
-              setAnchorEl={setAnchorEl}
-              anchorEl={anchorEl}
+              setBoardSelectedLabels={setBoardSelectedLabels}
+              setTaskSelectedLabels={setTaskSelectedLabels}
+              onUpdated={onUpdated}
+              setCurrCover={setCurrCover}
+              currCover={currCover}
               handleClick={handleClick}
-              isPopoverOpen={isPopoverOpen}
+              anchorEl={anchorEl}
               setIsPopoverOpen={setIsPopoverOpen}
               modalOpenByName={modalOpenByName}
+              isPopoverOpen={isPopoverOpen}
+              setTaskMembers={setTaskMembers}
+              taskMembers={taskMembers}
+              taskSelectedLabels={taskSelectedLabels}
               setNewDueDate={setNewDueDate}
+              deleteTask={deleteTask}
             />
           )}
         </section>
