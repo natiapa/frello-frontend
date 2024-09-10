@@ -3,7 +3,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { login, signup } from '../store/actions/user.actions.js'
 import { LoginForm } from './LoginForm.jsx'
 
-export function LoginSignup() {
+export function LoginSignup({setIsLogin}) {
 
     const [isSignup, setIsSignUp] = useState(false)
 
@@ -26,6 +26,7 @@ export function LoginSignup() {
     return (
         <div className="login-page">
             <LoginForm
+                setIsLogin={setIsLogin}
                 onLogin={onLogin}
                 isSignup={isSignup}
             />
