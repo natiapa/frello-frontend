@@ -1,32 +1,88 @@
 .due-date-display {
   font-size: 14px;
   color: #5e6c84;
+  padding-block-start: 12px;
+  // display: grid;
+  // grid-template-rows: max-content max-content;
 
   .date-item {
-    margin-bottom: 8px;
-  }
+    margin-bottom: 0px;
+    display: grid;
+    grid-template-rows: max-content max-content;
 
-  .date-label {
-    font-weight: bold;
-    margin-bottom: 4px;
-    color: #172b4d;
-  }
+    .date-label {
+      grid-row: 1;
+      font-weight: bold;
+      margin-bottom: 4px;
+      color: #172b4d;
+      color: #44546f;
+      font-size: 12px;
+      font-weight: 600;
+      margin: 0 8px 4px 0;
+    }
 
-  .date-value {
-    background-color: rgba(9, 30, 66, 0.08); 
-    padding: 4px 8px;
-    border-radius: 3px;
-    font-weight: 500;
-    color: #172b4d; 
+    .date-container {
+      display: grid;
+      grid-template-rows: max-content;
+      grid-template-columns: max-content max-content max-content;
+      grid-row: 2;
+      width: fit-content;
+      transition: width 3s ease;
+      padding: 6px 7px;
+      font-size: 14px;
+      font-weight: 500;
+      column-gap: 5px;
+
+      color: #172b4d;
+      input[type="checkbox"] {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .date-value {
+        grid-column: 2;
+        grid-row: 1;
+
+        // padding: 4px 8px;
+        border-radius: 3px;
+        font-weight: 500;
+        // background-color: rgba(9, 30, 66, 0.08);
+        // color: #172b4d;
+        &.start-date {
+          background-color: #091e420f;
+        }
+      }
+
+      .date-picker-icon {
+        place-self: center;
+      }
+    }
+
+    .checkbox-icon {
+      display: grid;
+      svg {
+        place-self: center;
+        grid-column: 1;
+        font-size: 16px;
+      }
+    }
   }
 }
 
 .complete-badge {
-  display: inline-block;
-  margin-left: 10px; 
-  padding: 2px 8px;
-  background-color: green;
-  color: white;
-  border-radius: 4px;
-  font-weight: bold;
+  // display: inline-block;
+  // margin-left: 5px;
+  // padding: 6px 0 6px 0;
+  // background-color: green;
+  // color: white;
+  // border-radius: 4px;
+  // font-weight: bold;
+  background-color: #1f845a;
+  color: #ffffff;
+
+  margin: auto 0 auto 8px;
+  padding: 0 4px;
+  border-radius: 2px;
+  font-size: 12px;
+  line-height: 16px;
 }

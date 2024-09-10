@@ -1,9 +1,14 @@
 import { useState } from "react";
+import { BsChevronDown } from "react-icons/bs";
+import { FaRegCheckSquare } from "react-icons/fa";
+import { IoMdCheckboxOutline } from "react-icons/io";
+import { useParams } from "react-router";
 
-export function DueDateDisplay({ dueDate, setNewDueDate }) {
+export function DueDateDisplay({ dueDate, setNewDueDate, onUpdated }) {
+  const { taskId } = useParams();
   const { createdAt, date, time, isComplete, completedAt } = dueDate;
   const [isChecked, setIsChecked] = useState(isComplete || false);
-
+  console.log(isChecked);
   const formatStartDate = createdAt ? formatDateTimeForTask(createdAt) : null;
   const formatDueDate = date ? formatDateTimeForTask(date, time) : null;
 
@@ -32,12 +37,14 @@ export function DueDateDisplay({ dueDate, setNewDueDate }) {
 
     return formattedTime ? `${formattedDate}, ${formattedTime}` : formattedDate;
   }
+
   function handleCompleteChange() {
     const newIsChecked = !isChecked;
     console.log(newIsChecked)
     setIsChecked(newIsChecked);
 
     const updatedDueDate = { ...dueDate, isComplete: newIsChecked };
+    onUpdated("dueDate", updatedDueDate);
     setNewDueDate(updatedDueDate);
 
     if (newIsChecked) {
@@ -50,47 +57,101 @@ export function DueDateDisplay({ dueDate, setNewDueDate }) {
     <div className="due-date-display">
       {createdAt && !date && (
         <div className="date-item">
-          <span className="date-label">Start date :</span>
-          <span className="date-value start-date">{formatStartDate}</span>
+          {taskId && (
+            <span
+              className="date-label"
+              style={{ backgroundColor: "transparent" }}
+            >
+              Start date :
+            </span>
+          )}
+          <section className="date-container">
+            <span className="date-value start-date">{formatStartDate}</span>
+            <BsChevronDown className="date-picker-icon" />
+          </section>
         </div>
       )}
-  
+
       {date && !createdAt && (
         <div className="date-item">
-          <span className="date-label">Due date</span>
-          <>
-            <input
-              type="checkbox"
-              checked={isChecked}
-              onChange={handleCompleteChange}
-            />
+          {taskId && <span className="date-label">Due date</span>}
+          <section
+            className="date-container"
+            style={{
+              backgroundColor: !taskId && isChecked ? "#1f845a" : "#091e420f",
+              color: !taskId && isChecked ? "#fff" : "#172b4d",
+            }}
+          >
+            {isChecked && !taskId && (
+              <span className="checkbox-icon" onClick={handleCompleteChange}>
+                <IoMdCheckboxOutline />
+              </span>
+            )}
+            {taskId && (
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={handleCompleteChange}
+              />
+            )}
+            {!isChecked && !taskId && (
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={handleCompleteChange}
+              />
+            )}
             <span className="date-value due-date">
               {formatDueDate}
-              {isChecked && (
-                <span className="complete-badge">complete</span>
+              {taskId && isChecked && (
+                <span className="complete-badge">Complete</span>
               )}
             </span>
-          </>
+
+            <BsChevronDown className="date-picker-icon" />
+          </section>
         </div>
       )}
-  
+
       {createdAt && date && (
         <div className="date-item">
           <span className="date-label">dates</span>
-          <input
-            type="checkbox"
-            checked={isChecked}
-            onChange={handleCompleteChange}
-          />
-          <span className="date-value">
-            {`${formatStartDate} - ${formatDueDate}`}
-            {isChecked && (
-              <span className="complete-badge">complete</span>
+          <section
+            className="date-container"
+            style={{
+              backgroundColor: !taskId && isChecked ? "#1f845a" : "#091e420f",
+              color: !taskId && isChecked ? "#fff" : "#172b4d",
+            }}
+          >
+            {isChecked && !taskId && (
+              <span className="checkbox-icon" onClick={handleCompleteChange}>
+                <IoMdCheckboxOutline />
+              </span>
             )}
-          </span>
+            {!taskId && (
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={handleCompleteChange}
+              />
+            )}
+            {!isChecked && taskId && (
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={handleCompleteChange}
+              />
+            )}
+            <span className="date-value">
+              {`${formatStartDate} - ${formatDueDate}`}
+              {taskId && isChecked && (
+                <span className="complete-badge">Complete</span>
+              )}
+            </span>
+            <BsChevronDown className="date-picker-icon" />
+          </section>
         </div>
       )}
     </div>
   );
-  
 }

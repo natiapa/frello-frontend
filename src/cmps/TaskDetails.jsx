@@ -155,12 +155,12 @@ export function TaskDetails() {
 
         {currCover.color && (
           <>
-            <CoverDisplay currCover={currCover} />
+            <CoverDisplay currCover={currCover} height="100px" />
           </>
         )}
 
         {currElToEdit !== "title" ? (
-          <header data-name="title" onClick={onEdit}>
+          <form className="header" data-name="title" onClick={onEdit}>
             <FaRegCreditCard />
 
             <section className="titles">
@@ -169,7 +169,7 @@ export function TaskDetails() {
               </span>
               <span className="group-title">in list {group.title}</span>
             </section>
-          </header>
+          </form>
         ) : (
           <Edit
             task={task}
@@ -209,10 +209,11 @@ export function TaskDetails() {
               </div>
             </section>
 
-            <div>
+            <div className="task-details-due-date-container">
               <DueDateDisplay
                 dueDate={task.dueDate}
                 setNewDueDate={setNewDueDate}
+                onUpdated={onUpdated}
               />
             </div>
           </div>

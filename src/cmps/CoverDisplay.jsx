@@ -1,16 +1,15 @@
-export function CoverDisplay({ currCover }) {
-  console.log(currCover);
+export function CoverDisplay({ currCover, height }) {
   return (
     <div
       className="cover-container"
       style={{
+        // gridRow: "1",
         width: "100%",
-        height: "100px",
+        height: height,
         backgroundColor: currCover.color,
         position: "absolute",
         top: 0,
         left: 0,
-        zIndex: 1000,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

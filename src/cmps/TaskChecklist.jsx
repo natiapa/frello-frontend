@@ -4,6 +4,7 @@ import { ProgressBar } from "./ProgressBar";
 import { boardReducer } from "../store/reducers/board.reducer";
 import { boardService } from "../services/board";
 import { FaRegCheckSquare } from "react-icons/fa";
+import { IoMdCheckboxOutline } from "react-icons/io";
 
 export function TaskChecklist({
   checklists,
@@ -179,7 +180,7 @@ export function TaskChecklist({
           updatedChecklists.map((checklist) => (
             <li className="checklist" key={checklist.id}>
               <div className="header-and-btns">
-                <FaRegCheckSquare />
+                <IoMdCheckboxOutline />
                 <h3>
                   <span>{checklist.title}</span>
                 </h3>

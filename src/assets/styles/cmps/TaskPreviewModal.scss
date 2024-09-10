@@ -1,103 +1,142 @@
-.task-preview-modal {
-  position: relative;
-  display: grid;
-  grid-template-rows: max-content 1fr max-content;
-  margin: 0;
-  padding: 8px 12px 4px;
-  border-radius: 8px;
-  border: 1.6px solid transparent;
-  background-color: $bg-color-task-preview;
-  color: $color-task-preview;
-  box-shadow: $box-shadow-task-preview;
-  .modal-form {
-    grid-row: 2;
-    max-width: 232px;
-
-    textarea {
-      grid-row: 2;
-      // height: 100%;
-      width: 100%;
-      color: #172b4d;
-      word-break: break-all;
-      line-height: 1.6;
-      border: none;
-      font-size: 14px;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-        sans-serif;
-      margin: 0;
-      padding: 0;
-      resize: none;
-      outline: none !important;
+.task-preview-modal-container {
+  .actions {
+    grid-template-rows: repeat(5, max-content);
+    .action-btn {
+      cursor: pointer;
     }
+    .members {
+      &.action-btn {
+        grid-row: 1;
+      }
+    }
+    .due-date {
+      &.action-btn {
+        grid-row: 2;
+      }
+    }
+    .labels {
+      &.action-btn {
+        grid-row: 3;
+      }
+    }
+    .cover {
+      &.action-btn {
+        grid-row: 4;
+      }
+    }
+    .open-card {
+      &.action-btn {
+        grid-row: 5;
+      }
+    }
+  }
+  .task-preview-modal {
+    position: relative;
+    display: grid;
+    grid-template-rows: max-content 1fr max-content;
+    margin: 0;
+    padding: 8px 12px 4px;
+    border-radius: 8px;
+    border: 1.6px solid transparent;
+    background-color: $bg-color-task-preview;
+    color: $color-task-preview;
+    box-shadow: $box-shadow-task-preview;
 
-    .save-btn {
-      position: absolute;
+    .modal-form {
+      grid-row: 2;
+      max-width: 232px;
 
-      top: 900px;
-      left: 0;
-      width: 53px;
-      height: 32px;
-      background-color: $blue1;
-      border-radius: 3px;
-      span {
-        color: #ffffff;
+      textarea {
+        grid-row: 2;
+        // height: 100%;
+        width: 100%;
+        color: #172b4d;
+        word-break: break-all;
+        line-height: 1.6;
+        border: none;
         font-size: 14px;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
           Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
           sans-serif;
+        margin: 0;
+        padding: 0;
+        resize: none;
+        outline: none !important;
+      }
+
+      .save-btn {
+        position: absolute;
+
+        top: 85px;
+        left: 0;
+        width: 53px;
+        height: 32px;
+        background-color: $blue1;
+        border-radius: 3px;
+        span {
+          color: #ffffff;
+          font-size: 14px;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+            Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+            sans-serif;
+        }
       }
     }
-  }
 
-  .labels {
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: start;
-    gap: 4px;
-    margin: 0 0 4px;
-    .label-square {
-      margin: 0;
-      height: 8px;
-    }
-  }
-
-  .details-modal {
-    position: relative;
-    grid-row: 3;
-    display: grid;
-    grid-template-columns: repeat(5, auto);
-    // grid-template-columns: auto 80px;
-    align-items: center;
-
-    .checklists {
+    .labels {
       display: grid;
       grid-auto-flow: column;
-      grid-column: 4/5;
-      // place-self: center;
+      justify-content: start;
       gap: 4px;
-      justify-content: end;
-      align-items: center;
-      font-size: 12px;
+      margin: 0 0 4px;
+      .label-square {
+        margin: 0;
+        height: 8px;
+      }
     }
 
-    .members-modal {
-      grid-column: 5;
+    .details-modal {
+      position: relative;
+      grid-row: 4;
       display: grid;
+      grid-template-columns: repeat(3, auto);
+      grid-template-rows: auto max-content max-content max-content;
+      align-items: center;
 
-      justify-content: end;
-      height: 100%;
-      .list-container {
+      .due-date-container {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .checklists {
         display: grid;
-        grid-template-columns: 20px 20px;
-        li {
+        grid-auto-flow: column;
+        grid-column: 4/5;
+        // place-self: center;
+        gap: 4px;
+        justify-content: end;
+        align-items: center;
+        font-size: 12px;
+      }
+
+      .members-modal {
+        grid-column: 5;
+        display: grid;
+
+        justify-content: end;
+        height: 100%;
+        .list-container {
           display: grid;
-          align-content: center;
-          border-radius: 50%;
-          width: 24px;
-          height: 24px;
-          text-align: center;
-          color: white;
+          grid-template-columns: 20px 20px;
+          li {
+            display: grid;
+            align-content: center;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            color: white;
+          }
         }
       }
     }

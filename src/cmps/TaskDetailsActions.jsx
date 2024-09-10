@@ -278,7 +278,7 @@ export function TaskDetailsActions({
           aria-describedby="6"
           onClick={handleClick}
           style={{
-            position: currCover?.color ? "absolute" : "relative",
+            // position: currCover?.color ? "absolute" : "relative",
             top: currCover?.color ? "50px" : "auto",
             zIndex: currCover?.color ? 1001 : "auto",
           }}
