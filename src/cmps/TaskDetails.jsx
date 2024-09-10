@@ -258,16 +258,20 @@ export function TaskDetails() {
             board={board}
             group={group}
             task={task}
+
             boardId={board?.id}
             groupId={group.id}
             taskId={task.id}
+
             setBoardSelectedLabels={setBoardSelectedLabels}
             setTaskSelectedLabels={setTaskSelectedLabels}
+
             onUpdated={onUpdated}
+
             setNewDueDate={setNewDueDate}
             setNewCheckLists={setNewCheckLists}
             setNewFiles={setNewFiles}
-            setCurrCover={setCurrCover}
+            setCurrCover={setCurrCover}s
             currCover={currCover}
             newFiles={newFiles}
             handleClick={handleClick}

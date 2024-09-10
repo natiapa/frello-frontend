@@ -41,6 +41,7 @@ export function TaskDetailsActions({
   isPopoverOpen,
   setTaskMembers,
   taskMembers,
+  taskSelectedLabels
 }) {
   const { taskId: taskParams } = useParams();
 
@@ -210,12 +211,14 @@ export function TaskDetailsActions({
               }}
             >
               <LabelPicker
+              board={board}
                 task={task}
                 handlePopoverClick={handlePopoverClick}
                 setTaskSelectedLabels={setTaskSelectedLabels}
                 setBoardSelectedLabels={setBoardSelectedLabels}
                 setIsPopoverOpen={setIsPopoverOpen}
                 onUpdated={onUpdated}
+                taskSelectedLabels={taskSelectedLabels}
               />
             </Popover>
           )}
