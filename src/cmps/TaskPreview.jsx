@@ -130,7 +130,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
               <div
                 className="labels"
                 style={{
-                  marginTop: task.cover ? "8px" : "",
+                  marginTop: task.cover.color !== "" ? "8px" : "",
                 }}
               >
                 <LabelList taskLabels={task.labels} labelWidth="40px" />
