@@ -1,47 +1,94 @@
-.login-form,
-.signup-form {
-  display: grid;
-  width: min(80%, 300px);
-  margin: auto;
+.login-page {
+  height: 100vh;
+  width: 100vw;
 
-  padding: 1em;
-  // background-color: $clr4;
-}
 
-.signup-form {
-  input {
-    width: 100%;
+
+
+  .login-form,
+  .signup-form {
+    display: grid;
+    margin: 10vh auto;
+    width: 400px;
+    padding: 32px 40px;
+    background: rgb(255, 255, 255);
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+    color: #42526E;
+
+    input {
+      padding: 8px 6px;
+      border: 1px solid #ccc;
+      background-color: transparent;
+      color: inherit;
+      cursor: inherit;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      min-width: 0px;
+      outline: none;
+      width: 100%;
+    }
+
+    .btn {
+      padding: 8px 6px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      min-width: 0px;
+      outline: none;
+      width: 100%;
+      background-color: #0052CC;
+      color: white;
+      cursor: pointer;
+    }
   }
 
-  .admin-toggle {
-    display: flex;
+  .login-btns {
+    display: grid;
+    justify-items: center;
     align-items: center;
-    justify-self: start;
-
-    span {
-      font-size: 0.8em;
-    }
   }
 }
 
-.login-page nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2em;
+//   display: grid;
+//   width: min(80%, 300px);
+//   margin: auto;
 
-  margin-block: 100px 0.5em;
+//   padding: 1em;
+//   // background-color: $clr4;
+// }
 
-  a {
-    font-size: 0.8em;
-    // color: $clr4;
+// .signup-form {
+//   input {
+//     width: 100%;
+//   }
 
-    &:hover {
-      // color: $clr1;
-    }
-  }
-  a.active {
-    text-decoration: underline;
-    // color: $clr2;
-  }
-}
+//   .admin-toggle {
+//     display: flex;
+//     align-items: center;
+//     justify-self: start;
+
+//     span {
+//       font-size: 0.8em;
+//     }
+//   }
+// }
+
+// .login-page nav {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   gap: 2em;
+
+//   margin-block: 100px 0.5em;
+
+//   a {
+//     font-size: 0.8em;
+//     // color: $clr4;
+
+//     &:hover {
+//       // color: $clr1;
+//     }
+//   }
+//   a.active {
+//     text-decoration: underline;
+//     // color: $clr2;
+//   }
+// }

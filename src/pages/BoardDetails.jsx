@@ -86,7 +86,7 @@ export function BoardDetails() {
 
   useEffect(() => {
     loadBoard(boardId);
-  }, [currBoardBgStyle.style]);
+  }, [currBoardBgStyle?.style]);
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { userService } from "../services/user"
 
-export function LoginForm({ onLogin, isSignup }) {
+export function LoginForm({setIsLogin, onLogin, isSignup }) {
 
     const [credentials, setCredentials] = useState(userService.getEmptyUser())
 
@@ -13,6 +13,7 @@ export function LoginForm({ onLogin, isSignup }) {
     function handleSubmit(ev) {
         ev.preventDefault()
         onLogin(credentials)
+        setIsLogin(false)
     }
 
     return (
