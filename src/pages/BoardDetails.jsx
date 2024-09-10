@@ -29,6 +29,7 @@ import { MemberList } from "../cmps/MemberList";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { Menu } from "../cmps/Menu";
 import { DueDateDisplay } from "../cmps/DueDateDisplay";
+import { CoverDisplay } from "../cmps/CoverDisplay";
 
 export function BoardDetails() {
   const { boardId, taskId } = useParams();
@@ -56,7 +57,6 @@ export function BoardDetails() {
 
   const [currCover, setCurrCover] = useState(currTask.cover);
   const [taskMembers, setTaskMembers] = useState(currTask?.members);
-  console.log(currTask.dueDate);
 
   useEffect(() => {
     eventBus.on("show-task", onPreviewToShow);
@@ -67,7 +67,7 @@ export function BoardDetails() {
     loadBoard(boardId, filterBy);
     if (!preview?.length) return;
     setPreview(preview);
-  }, [boardId, preview, filterBy]);
+  }, [boardId, preview, filterBy, currTask]);
 
   useEffect(() => {
     calculateBgColor();
@@ -150,11 +150,15 @@ export function BoardDetails() {
       width: `${data.elData.width}px`,
       height: `${data.elData.heigh + 100}px`,
       zIndex: "1000",
+      gridTemplateRows:
+        currTask?.cover?.color == ""
+          ? "max-content max-content max-content"
+          : "36px max-content max-content max-content",
     });
 
     setTaskPrevActionsModalData({
-      position: "fixed",
-      left: `${data.elData.left + 275}px`,
+      position: "absolute",
+      left: `${data.elData.right + 7}px`,
       top: `${data.elData.top}px`,
       width: `max-content`,
       height: `max-content`,
@@ -259,11 +263,17 @@ export function BoardDetails() {
           ></div>
           <div
             className="task-preview-modal"
-            style={{ ...preview }}
+            style={{
+              ...preview,
+            }}
             method="dialog"
           >
+            {currTask.cover.color !== "" && (
+              <CoverDisplay currCover={currTask.cover} height="36px" />
+            )}
+
             <div className="labels">
-              <LabelList labels={selectedLabels} labelWidth="40px" />
+              <LabelList taskLabels={selectedLabels} labelWidth="40px" />
             </div>
 
             <div className="details-modal">
@@ -292,9 +302,9 @@ export function BoardDetails() {
                 onChange={(ev) => setValue(ev.target.value)}
               />
 
-              {/* <button className="save-btn" type="submit">
+              <button className="save-btn" type="submit">
                 <span>Save</span>
-              </button> */}
+              </button>
             </form>
           </div>
 

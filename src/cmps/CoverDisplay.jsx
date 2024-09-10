@@ -13,6 +13,7 @@ export function CoverDisplay({ currCover, height }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        borderRadius: "8px 8px 0 0",
       }}
     >
       {currCover.img && (
