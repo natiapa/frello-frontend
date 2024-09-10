@@ -102,13 +102,9 @@ export function TaskDetails() {
 
   async function deleteTask(ev) {
     ev.preventDefault();
-    try {
-      const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
-        key: "deleteTask",
-        value: null,
-      });
-      await updateBoard(updatedBoard);
 
+    try {
+      onUpdated("deleteTask", null);
       await boardService.updateActivities(
         board,
         "",
@@ -128,10 +124,6 @@ export function TaskDetails() {
     setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
     setAnchorEl(ev.currentTarget);
     setModalOpenByName(currDataName);
-
-    console.log("modalOpenByName:", modalOpenByName);
-    console.log("isPopoverOpen:", isPopoverOpen);
-    console.log("currDataName:", currDataName);
   }
 
   function handleAddLabel(ev) {
@@ -258,20 +250,17 @@ export function TaskDetails() {
             board={board}
             group={group}
             task={task}
-
             boardId={board?.id}
             groupId={group.id}
             taskId={task.id}
-
             setBoardSelectedLabels={setBoardSelectedLabels}
             setTaskSelectedLabels={setTaskSelectedLabels}
-
             onUpdated={onUpdated}
-
             setNewDueDate={setNewDueDate}
             setNewCheckLists={setNewCheckLists}
             setNewFiles={setNewFiles}
-            setCurrCover={setCurrCover}s
+            setCurrCover={setCurrCover}
+            s
             currCover={currCover}
             newFiles={newFiles}
             handleClick={handleClick}
@@ -281,6 +270,7 @@ export function TaskDetails() {
             isPopoverOpen={isPopoverOpen}
             setTaskMembers={setTaskMembers}
             taskMembers={taskMembers}
+            deleteTask={deleteTask}
           />
         </div>
       </dialog>
