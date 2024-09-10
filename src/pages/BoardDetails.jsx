@@ -86,7 +86,7 @@ export function BoardDetails() {
 
   useEffect(() => {
     loadBoard(boardId);
-  }, [currBoardBgStyle.style]);
+  }, [currBoardBgStyle?.style]);
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
@@ -252,7 +252,7 @@ export function BoardDetails() {
       }}
     >
       {isTaskPrevModalOpen && (
-        <section>
+        <section className="task-preview-modal-container">
           <div
             onClick={handleSave}
             className="task-preview-modal-overlay"
@@ -277,10 +277,11 @@ export function BoardDetails() {
                 <MemberList members={currTask.members} gridColumnWidth="28px" />
               </ul>
 
-              <div>
+              <div className="due-date-container">
                 <DueDateDisplay
                   dueDate={currTask.dueDate}
                   setNewDueDate={setNewDueDate}
+                  onUpdated={onUpdated}
                 />
               </div>
             </div>
@@ -291,9 +292,9 @@ export function BoardDetails() {
                 onChange={(ev) => setValue(ev.target.value)}
               />
 
-              <button className="save-btn" type="submit">
+              {/* <button className="save-btn" type="submit">
                 <span>Save</span>
-              </button>
+              </button> */}
             </form>
           </div>
 

@@ -11,12 +11,13 @@ import { IoMdCheckboxOutline } from "react-icons/io";
 import { Draggable } from "react-beautiful-dnd";
 import { loadBoard, updateBoard } from "../store/actions/board.actions";
 import { boardService } from "../services/board";
+import { CoverDisplay } from "./CoverDisplay";
 
 export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
   const board = useSelector((storeState) => storeState.boardModule.board);
   const group = board?.groups?.find((group) => group.id === groupId);
   const [members, setMembers] = useState(task.members);
-
+  if (task.cover.img !== "" || task.cover.color !== "") console.log(task.cover);
   useEffect(() => {}, [task.members]);
 
   function drop(ev) {
@@ -98,20 +99,40 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
             ...provided.draggableProps.style,
             opacity: snapshot.isDragging ? "0.5" : "1",
             zIndex: "0",
+            paddingBlockStart: task.cover.color == "" ? "0" : "6px",
           }}
           onDragOver={(ev) => allowDrop(ev)}
           onDrop={(ev) => drop(ev)}
         >
           {group && task && (
-            <Link to={`/board/${board._id}/${group.id}/${task.id}`}>
+            <Link
+              to={`/board/${board._id}/${group.id}/${task.id}`}
+              style={{
+                gridTemplateRows:
+                  task.cover.color == ""
+                    ? "max-content 1fr max-content"
+                    : "36px max-content 1fr max-content",
+              }}
+            >
+              {task.cover.color !== "" && (
+                <CoverDisplay currCover={task.cover} height="36px" />
+              )}
+
               <button
                 data-name="title"
                 className="edit-btn"
-                onClick={(e) => handleClick(e)}
+                onClick={(ev) => handleClick(ev)}
+                style={{}}
               >
                 <FiEdit2 />
               </button>
-              <div className="labels">
+
+              <div
+                className="labels"
+                style={{
+                  marginTop: task.cover ? "8px" : "",
+                }}
+              >
                 <LabelList taskLabels={task.labels} labelWidth="40px" />
               </div>
 

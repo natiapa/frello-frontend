@@ -1,8 +1,8 @@
 .task-preview {
   position: relative;
   display: grid;
-  grid-template-rows: max-content 1fr max-content;
-  padding: 8px 12px 8px;
+  // grid-template-rows: 0 max-content 1fr max-content;
+  padding: 6px 12px 8px;
   width: 100%;
   border-radius: 8px;
   border: 1.6px solid transparent;
@@ -12,6 +12,7 @@
   cursor: pointer;
   // max-width: 256px;
   word-break: break-all;
+
   &:hover {
     .edit-btn {
       opacity: 1;
@@ -21,10 +22,17 @@
 
   a {
     display: grid;
+    // grid-template-rows: max-content 1fr max-content;
+    // row-gap: 8px;
+    .cover-container {
+      // grid-row: 1;
+      border-radius: 8px 8px 0 0;
+      // margin-bottom: 8px;
+    }
   }
 
   .labels {
-    grid-row: 1;
+    grid-row: 2;
     display: grid;
     grid-auto-flow: column;
     justify-content: start;
@@ -39,9 +47,8 @@
   }
 
   span {
-    grid-row: 2;
+    grid-row: 3;
     margin: 0 0 4px;
-    // max-width: 232px;
   }
 
   .edit-btn {
@@ -71,7 +78,7 @@
 
   .details {
     // position: relative;
-    grid-row: 3;
+    grid-row: 4;
     display: grid;
     grid-template-columns: repeat(5, auto);
     // grid-template-columns: auto 80px;

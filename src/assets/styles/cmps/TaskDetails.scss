@@ -19,7 +19,7 @@
     position: fixed;
     scrollbar-width: none;
     padding: 0;
-    padding-block-end: 100px;
+    // padding-block-end: 100px;
 
     &::backdrop {
       // display: none;
@@ -60,7 +60,7 @@
       grid-column: 1/-1;
     }
 
-    header {
+    .header {
       grid-column: 1 / -1;
       grid-row: 2;
       display: grid;
@@ -72,7 +72,6 @@
       font-weight: 600;
       color: #172b4d;
       padding-block-start: 1em;
-      margin-block-end: 1.4em;
       svg {
         height: 24px;
         width: 24px;
@@ -104,7 +103,7 @@
       margin-block-start: 0;
       // place-self: ;
       grid-column: 1;
-      grid-row: 3;
+      grid-row: 3/5;
     }
 
     input[type="text"] {
@@ -135,6 +134,10 @@
       grid-template-columns: 70px max-content max-content max-content;
       // gap: 1em;
 
+      .task-details-due-date-container {
+        grid-column: 5;
+      }
+
       .member-list {
         grid-column: 2;
         width: max-content;
@@ -161,6 +164,7 @@
         grid-column: 3;
         display: grid;
         grid-template-columns: max-content max-content;
+        margin-inline-end: 1em;
         // grid-template-rows: max-content max-content;
         // row-gap: 4px;
         .labels {
@@ -224,9 +228,9 @@
     .actions {
       display: grid;
       align-self: start;
-      grid-row: 1/-1;
+      grid-row: 2/5;
       grid-column: 2;
-      padding: 2em 16px 8px 8px;
+      padding: 20px 16px 8px 8px;
       width: 168px;
       font-size: $font-size-task-details-actions;
 
@@ -237,7 +241,7 @@
         align-items: center;
         height: 32px;
         margin: 8px 0 0;
-        padding: 6px 12px;
+        padding: 6px 12px 9px;
         width: 100%;
         font-weight: 500;
         border-radius: 3px;
@@ -250,6 +254,8 @@
           grid-column: 1;
           height: 16px;
           width: 16px;
+          place-self: start;
+          margin-block-start: 1.2px;
         }
 
         p {
