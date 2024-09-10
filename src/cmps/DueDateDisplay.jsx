@@ -51,9 +51,14 @@ export function DueDateDisplay({ dueDate, setNewDueDate, onUpdated }) {
     }
   }
 
+  function handleClick(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+  }
+
   if (!dueDate) return null;
   return (
-    <div className="due-date-display">
+    <div className="due-date-display" onClick={(ev) => handleClick(ev)}>
       {createdAt && !date && (
         <div className="date-item">
           {taskId && (
