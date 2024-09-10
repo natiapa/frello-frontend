@@ -12,12 +12,14 @@ import { Draggable } from "react-beautiful-dnd";
 import { loadBoard, updateBoard } from "../store/actions/board.actions";
 import { boardService } from "../services/board";
 import { CoverDisplay } from "./CoverDisplay";
+import { DueDateDisplay } from "./DueDateDisplay";
 
 export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
   const board = useSelector((storeState) => storeState.boardModule.board);
   const group = board?.groups?.find((group) => group.id === groupId);
   const [members, setMembers] = useState(task.members);
-  if (task.cover.img !== "" || task.cover.color !== "") console.log(task.cover);
+  const [newDueDate, setNewDueDate] = useState(task.dueDate);
+
   useEffect(() => {}, [task.members]);
 
   function drop(ev) {
@@ -99,7 +101,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
             ...provided.draggableProps.style,
             opacity: snapshot.isDragging ? "0.5" : "1",
             zIndex: "0",
-            paddingBlockStart: task.cover.color == "" ? "0" : "6px",
+            paddingBlockStart: task?.cover?.color !== "" ? "0" : "6px",
           }}
           onDragOver={(ev) => allowDrop(ev)}
           onDrop={(ev) => drop(ev)}
@@ -150,6 +152,14 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
                 <ul className="members">
                   <MemberList members={members} gridColumnWidth="28px" />
                 </ul>
+
+                <div className="due-date-container">
+                  <DueDateDisplay
+                    dueDate={task.dueDate}
+                    setNewDueDate={setNewDueDate}
+                    onUpdated={onUpdated}
+                  />
+                </div>
               </div>
             </Link>
           )}

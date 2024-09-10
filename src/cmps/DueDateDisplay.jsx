@@ -8,7 +8,6 @@ export function DueDateDisplay({ dueDate, setNewDueDate, onUpdated }) {
   const { taskId } = useParams();
   const { createdAt, date, time, isComplete, completedAt } = dueDate;
   const [isChecked, setIsChecked] = useState(isComplete || false);
-  console.log(isChecked);
   const formatStartDate = createdAt ? formatDateTimeForTask(createdAt) : null;
   const formatDueDate = date ? formatDateTimeForTask(date, time) : null;
 
@@ -40,7 +39,7 @@ export function DueDateDisplay({ dueDate, setNewDueDate, onUpdated }) {
 
   function handleCompleteChange() {
     const newIsChecked = !isChecked;
-    console.log(newIsChecked)
+    console.log(newIsChecked);
     setIsChecked(newIsChecked);
 
     const updatedDueDate = { ...dueDate, isComplete: newIsChecked };

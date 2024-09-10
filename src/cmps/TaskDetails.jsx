@@ -264,10 +264,7 @@ export function TaskDetails() {
             />
           )}
         </form>
-        <div
-          className="task-details-actions"
-          // style={{ marginTop: currCover.color ? "120px" : "0" }}
-        >
+        <form className="task-details-actions">
           <TaskDetailsActions
             board={board}
             group={group}
@@ -294,7 +291,7 @@ export function TaskDetails() {
             taskMembers={taskMembers}
             deleteTask={deleteTask}
           />
-        </div>
+        </form>
       </dialog>
     </section>
   );
