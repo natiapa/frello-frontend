@@ -6,7 +6,11 @@ import { useParams } from "react-router";
 
 export function DueDateDisplay({ dueDate, setNewDueDate, onUpdated }) {
   const { taskId } = useParams();
-  const { createdAt, date, time, isComplete, completedAt } = dueDate;
+  
+  if (!dueDate) {
+    return null
+  }
+  const { createdAt, date, time, isComplete, completedAt } = dueDate
   const [isChecked, setIsChecked] = useState(isComplete || false);
   const formatStartDate = createdAt ? formatDateTimeForTask(createdAt) : null;
   const formatDueDate = date ? formatDateTimeForTask(date, time) : null;
