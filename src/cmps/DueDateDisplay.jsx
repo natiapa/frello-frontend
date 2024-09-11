@@ -52,6 +52,7 @@ export function DueDateDisplay({ dueDate, setNewDueDate, onUpdated }) {
   }
 
   function handleClick(ev) {
+    if (taskId) return;
     ev.preventDefault();
     ev.stopPropagation();
   }
@@ -127,19 +128,19 @@ export function DueDateDisplay({ dueDate, setNewDueDate, onUpdated }) {
               color: !taskId && isChecked ? "#fff" : "#172b4d",
             }}
           >
-            {isChecked && !taskId && (
+            {!taskId && isChecked && (
               <span className="checkbox-icon" onClick={handleCompleteChange}>
                 <IoMdCheckboxOutline />
               </span>
             )}
-            {!taskId && (
+            {!taskId && !isChecked && (
               <input
                 type="checkbox"
                 checked={isChecked}
                 onChange={handleCompleteChange}
               />
             )}
-            {!isChecked && taskId && (
+            {taskId && (
               <input
                 type="checkbox"
                 checked={isChecked}
