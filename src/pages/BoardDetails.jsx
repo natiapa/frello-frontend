@@ -291,9 +291,9 @@ export function BoardDetails() {
             }}
             method="dialog"
           >
-            {/* {currCover.color && (
-              <CoverDisplay currCover={currCover} height="36px" />
-            )} */}
+            {currTask.cover.color !== "" && (
+              <CoverDisplay currCover={currTask.cover} height="36px" />
+            )}
 
             <div className="labels">
               <LabelList taskLabels={taskSelectedLabels} labelWidth="40px" />
