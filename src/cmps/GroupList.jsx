@@ -20,7 +20,6 @@ export function GroupList({ groups, allowDrop, drop, isActivitiesOpen }) {
   }, [board]);
 
   useEffect(() => {
-    console.log("render!");
   }, [currGroups?.length]);
 
   async function onAddGroup() {
