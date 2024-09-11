@@ -9,7 +9,7 @@ export function AppHeader({ bgColor, borderBottom, logoImg, logoColor }) {
     const [showUserModal, setShowUserModal] = useState(false)
 
     const user = useSelector(storeState => storeState.userModule.user)
-    console.log('user:', user)
+
 
     return (
         <header

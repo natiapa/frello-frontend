@@ -19,11 +19,16 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
   const group = board?.groups?.find((group) => group.id === groupId);
   const [members, setMembers] = useState(task.members);
   const [newDueDate, setNewDueDate] = useState(task.dueDate);
-
+  const [currTask, setCurrTask] = useState(task);
   useEffect(() => {}, [task.members]);
+
+  useEffect(() => {
+    setCurrTask(task); 
+  }, [task]);
 
   function drop(ev) {
     ev.preventDefault();
+
     const data = ev.dataTransfer.getData("text");
     const currDraggedMemberId = data;
 
@@ -85,7 +90,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
     const dataName = ev.currentTarget.getAttribute("data-name");
     const elData = ev.target.closest(".task-preview").getBoundingClientRect();
     if (!elData) return;
-    const previewData = { elData, group, task, dataName };
+    const previewData = { elData, group, task: currTask, dataName };
     eventBus.emit("show-task", previewData);
   }
 

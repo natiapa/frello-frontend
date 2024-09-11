@@ -24,7 +24,6 @@ export function TaskList({ group, allowDrop, drop, draggedMemberId }) {
         }
     }, [isNewTask])
     useEffect(() => {
-        console.log('render!')
     }, [group?.length])
 
     function onAddTask() {
