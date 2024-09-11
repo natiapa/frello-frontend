@@ -44,7 +44,12 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
 
         <h3>Activity</h3>
       </header>
-      <ul className="activities-list">
+      <ul
+        className="activities-list"
+        style={{
+          gridTemplateRows: `repeat(${board.activities.length},max-content)`,
+        }}
+      >
         {board.activities.map((activity) => (
           <li key={activity.id} className="activity">
             <div
@@ -67,6 +72,18 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
 
               {activity.type === "createBoard" && (
                 <span>{activity.title} </span>
+              )}
+
+              {activity.type === "copyBoard" && (
+                <span>
+                  {activity.title} from{" "}
+                  <a
+                    className="link"
+                    onClick={() => navigate(`/board/${originalBoard._id}`)}
+                  >
+                    {activity.originalBoard.title}
+                  </a>
+                </span>
               )}
 
               {activity.type === "addBoard" && (

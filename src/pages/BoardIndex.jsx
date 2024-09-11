@@ -57,18 +57,18 @@ export function BoardIndex() {
       },
     };
     try {
-      const savedBoard = await addBoard(boardToSave);
-      showSuccessMsg(`Board added (id: ${savedBoard._id})`);
       boardService.updateActivities(
-        savedBoard,
+        boardToSave,
         "created this board",
         "createBoard"
       );
       boardService.updateActivities(
-        savedBoard,
+        boardToSave,
         "added this board to",
         "addBoard"
       );
+      const savedBoard = await addBoard(boardToSave);
+      showSuccessMsg(`Board added (id: ${savedBoard._id})`);
 
       // navigate(`/board/${savedBoard._id}`);
     } catch (err) {

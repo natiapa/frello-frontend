@@ -33,7 +33,9 @@
 
 .user-msg.success {
   background-color: rgb(41, 189, 73);
+  z-index: 100000000000000000000;
 }
 .user-msg.error {
   background-color: rgb(216, 59, 59);
+  z-index: 100000000000000000000;
 }

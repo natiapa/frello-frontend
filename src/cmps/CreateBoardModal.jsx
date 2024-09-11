@@ -80,6 +80,7 @@ export function CreateBoardModal({ handleCreateBoard }) {
   }
 
   function handleCreateBtnClick() {
+    if (!boardTitle || !bgImage) return;
     const boardToCreate = {
       ...newBoard,
       backgroundImage: bgImage,
@@ -109,6 +110,7 @@ export function CreateBoardModal({ handleCreateBoard }) {
 
       <label>Board title</label>
       <input
+        type="text"
         value={boardTitle}
         onChange={(e) => setBoardTitle(e.target.value)}
       />

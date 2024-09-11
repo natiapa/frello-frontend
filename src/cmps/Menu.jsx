@@ -7,6 +7,14 @@ import { useParams } from "react-router";
 import { FaListCheck } from "react-icons/fa6";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { IoShareSocialOutline } from "react-icons/io5";
+import { Popover } from "@mui/material";
+import { CopyBoard } from "./CopyBoard";
+import {
+  addBoard,
+  updateBoard,
+  removeBoard,
+  addBoardMsg,
+} from "../store/actions/board.actions";
 
 export function Menu({
   board,
@@ -17,6 +25,30 @@ export function Menu({
   const { taskId } = useParams();
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
   const [isChangeBgOpen, setIsChangeBgOpen] = useState(false);
+  // const [copiedBoard, setCopiedBoard] = useState({});
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [modalOpenByName, setModalOpenByName] = useState(null);
+
+  // const board = useSelector((storeState) => storeState.boardModule.board);
+
+  // function handleCreateBoard(board) {
+  //   console.log(board);
+  //   onAddBoard(board);
+  //   handleClosePopover();
+  // }
+
+  function handleClick(ev) {
+    const currDataName = ev.currentTarget.getAttribute("data-name");
+    setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
+    setAnchorEl(ev.currentTarget);
+    setModalOpenByName(currDataName);
+  }
+
+  function handlePopoverClick(ev) {
+    ev.stopPropagation();
+  }
 
   if (taskId) setIsMenuOpen(false);
   return (
@@ -78,14 +110,49 @@ export function Menu({
             <span className="change-bg-btn">Change background</span>
           </button>
 
-          <button className="copy-board-btn menu-btn">
+          <button
+            data-name="copy-board"
+            aria-describedby="20"
+            className="copy-board-btn menu-btn"
+            onClick={handleClick}
+          >
             <MdOutlineContentCopy />
             <span className="btn">Copy board</span>
+
+            {modalOpenByName === "copy-board" && isPopoverOpen && (
+              <Popover
+                id={isPopoverOpen ? "copy-board" : undefined}
+                open={isPopoverOpen}
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                PaperProps={{
+                  sx: {
+                    width: "320px",
+                    height: "600px",
+                    padding: "20px",
+                    borderRadius: "8px",
+                  },
+                }}
+              >
+                <CopyBoard
+                  board={board}
+                  handlePopoverClick={handlePopoverClick}
+                  setIsPopoverOpen={setIsPopoverOpen}
+                  setIsMenuOpen={setIsMenuOpen}
+                  // onAddBoard={onAddBoard}
+                  // copiedBoard={copiedBoard}
+                  // setCopiedBoard={setCopiedBoard}
+                />
+              </Popover>
+            )}
           </button>
 
           <button className="menu-btn">
-            <IoShareSocialOutline />
-            <span className="btn">Share</span>
+            <IoShareSocialOutline className="shae-icon" />
+            <span className="share-btn btn">Share</span>
           </button>
         </>
       )}

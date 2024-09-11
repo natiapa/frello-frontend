@@ -169,7 +169,8 @@ async function updateActivities(
   checklist,
   taskNumber,
   item,
-  dueDate
+  dueDate,
+  copiedBoard
 ) {
   const activityToAdd = addActivity(
     title,
@@ -179,11 +180,11 @@ async function updateActivities(
     checklist,
     taskNumber,
     item,
-    dueDate
+    dueDate,
+    copiedBoard
   );
 
   await board.activities.unshift(activityToAdd);
-  await save(board);
 }
 
 function addActivity(
@@ -194,7 +195,9 @@ function addActivity(
   checklist,
   taskNumber,
   item,
-  dueDate
+  dueDate,
+  originalBoard,
+
 ) {
   const activity = {
     id: makeId(),
@@ -225,6 +228,10 @@ function addActivity(
       date: dueDate?.date,
       time: dueDate?.time,
     },
+    originalBoard: {
+      _id: originalBoard?._id,
+      title: originalBoard?.title
+    }
   };
 
   return activity;

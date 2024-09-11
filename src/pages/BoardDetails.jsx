@@ -194,8 +194,8 @@ export function BoardDetails() {
   }
 
   async function onUpdated(name, value) {
-    console.log("name", name);
-    console.log("value", value);
+    // console.log("name", name);
+    // console.log("value", value);
 
     if (!board) return;
     try {

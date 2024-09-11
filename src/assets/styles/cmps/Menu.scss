@@ -84,6 +84,7 @@
     display: grid;
     grid-template-columns: 20px 1fr;
     // grid-template-rows: auto auto;
+    align-content: center;
     background-color: transparent;
     height: 32px;
     column-gap: 10px;
@@ -92,6 +93,12 @@
     margin-inline: 0.9em;
     margin-block-end: 5px;
     border-radius: 8px;
+    border: none;
+    outline: none;
+    &:focus {
+      border: none;
+      outline: none;
+    }
     &:hover {
       background-color: #091e420f;
     }
@@ -100,25 +107,20 @@
       margin-block-start: 24px;
     }
 
-    .btn {
-      display: grid;
-      text-align: start;
-      place-self: center start;
-      color: #172b4d;
-      font-weight: 400;
-    }
-
     svg {
       grid-row: 1;
-      font-size: 20px;
+      // font-size: 16px;
+      width: 16px;
+      height: 16px;
       color: #172b4d;
     }
+
     .activity-btn {
       grid-row: 1;
       place-self: center start;
       color: #172b4d;
       font-weight: 400;
-      margin-block-start: 2px;
+      margin-block-start: 3px;
     }
 
     .color-container {
@@ -136,7 +138,20 @@
       place-self: center start;
       color: #172b4d;
       font-weight: 400;
-      // margin-block-start: 2px;
+      margin-block-start: 3px;
+    }
+
+    .shae-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .btn {
+      display: grid;
+      text-align: start;
+      place-self: center start;
+      color: #172b4d;
+      font-weight: 400;
     }
   }
 
