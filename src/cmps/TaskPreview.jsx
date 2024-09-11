@@ -22,10 +22,10 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
 
     useEffect(() => {}, [task.members])
 
-    function drop(ev) {
-        ev.preventDefault()
-        const data = ev.dataTransfer.getData('text')
-        const currDraggedMemberId = data
+  function drop(ev) {
+    ev.preventDefault();
+    const data = ev.dataTransfer.getData("text");
+    const currDraggedMemberId = data;
 
         const draggedMember = board.members.find(
             member => member.id === currDraggedMemberId
@@ -92,7 +92,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
             .closest('.task-preview')
             .getBoundingClientRect()
         if (!elData) return
-        const previewData = { elData, group, task, dataName }
+        const previewData = { elData, group, task: currTask, dataName }
         eventBus.emit('show-task', previewData)
     }
 

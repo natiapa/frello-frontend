@@ -11,6 +11,7 @@ export function DueDatePicker({
   setIsPopoverOpen,
   handlePopoverClick,
   setNewDueDate,
+
 }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedRange, setSelectedRange] = useState({ from: null, to: null });

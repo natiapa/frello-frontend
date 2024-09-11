@@ -55,6 +55,7 @@ export function TaskDetails() {
       dialogRef.current.showModal();
     }
   }, [params]);
+  
 
   function calculateTaskNumber() {
     let taskNumber = 0;
