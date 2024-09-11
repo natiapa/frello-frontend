@@ -278,16 +278,16 @@ export function BoardDetails() {
 
             <div className="details-modal">
               {currTask.checklists && currTask.checklists.length > 0 && (
-                <div className="checklists">
+                <div className="checklists" style={{gridRow:2}}>
                   <IoMdCheckboxOutline />
                   {`${getIsChecked()}/${getChecklists()}`}
                 </div>
               )}
-              <ul className="members-modal">
+              <ul className="members-modal" style={{gridRow:2}}>
                 <MemberList members={currTask.members} gridColumnWidth="28px" />
               </ul>
 
-              <div className="due-date-container">
+              <div className="due-date-container" style={{gridRow:1}}>
                 <DueDateDisplay
                   dueDate={currTask.dueDate}
                   setNewDueDate={setNewDueDate}

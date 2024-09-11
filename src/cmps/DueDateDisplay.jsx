@@ -119,7 +119,7 @@ export function DueDateDisplay({ dueDate, setNewDueDate, onUpdated }) {
 
       {createdAt && date && (
         <div className="date-item">
-          <span className="date-label">dates</span>
+          {taskId && <span className="date-label">dates</span>}
           <section
             className="date-container"
             style={{
