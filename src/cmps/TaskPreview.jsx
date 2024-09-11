@@ -144,44 +144,43 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
 
               <span>{task.title || "New"}</span>
 
-              <div className="details">
-                {task.dueDate && (
-                  <div
-                    className="due-date-container"
-                    style={{
-                      gridRow: 1,
-                      gridColumn: "1/3",
-                      fontSize: "12px",
-                      margin: "0 0 4px",
-                      padding: "2px",
-                    }}
-                  >
-                    <DueDateDisplay
-                      dueDate={task.dueDate}
-                      setNewDueDate={setNewDueDate}
-                      onUpdated={onUpdated}
-                    />
-                  </div>
-                )}
-                {task.checklists && task.checklists.length > 0 && (
-                  <div className="checklists" style={{ gridRow: 2 }}>
-                    <IoMdCheckboxOutline
-                      style={{
-                        height: "14px",
-                        width: "14px",
-                      }}
-                    />
-                    {`${getIsChecked()}/${getChecklists()}`}
-                  </div>
-                )}
-                <ul className="members" style={{ gridRow: 2 }}>
-                  <MemberList members={members} gridColumnWidth="28px" />
-                </ul>
-              </div>
-            </Link>
-          )}
-        </li>
-      )}
-    </Draggable>
-  );
+                            <div className="details">
+                                {task.dueDate && <div className="due-date-container" style={{
+                                    gridRow:1,
+                                    gridColumn:'1/-1',
+                                    fontSize: '12px',
+                                    margin: '0 0 4px',
+                                    padding:'2px'
+                                    }}>
+                                    <DueDateDisplay
+                                        dueDate={task.dueDate}
+                                        setNewDueDate={setNewDueDate}
+                                        onUpdated={onUpdated}
+                                    />
+                                </div>}
+                                {task.checklists &&
+                                    task.checklists.length > 0 && (
+                                        <div className="checklists" style={{gridRow:2}}>
+                                            <IoMdCheckboxOutline
+                                                style={{
+                                                    height: '14px',
+                                                    width: '14px',
+                                                }}
+                                            />
+                                            {`${getIsChecked()}/${getChecklists()}`}
+                                        </div>
+                                    )}
+                                <ul className="members" style={{gridRow:2}}>
+                                    <MemberList
+                                        members={members}
+                                        gridColumnWidth="28px"
+                                    />
+                                </ul>
+                            </div>
+                        </Link>
+                    )}
+                </li>
+            )}
+        </Draggable>
+    )
 }
