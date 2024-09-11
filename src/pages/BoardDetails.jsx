@@ -151,7 +151,7 @@ export function BoardDetails() {
       height: `${data.elData.heigh + 100}px`,
       zIndex: "1000",
       gridTemplateRows:
-        currTask?.cover?.color == ""
+        data.task?.cover?.color === ""
           ? "max-content max-content max-content"
           : "36px max-content max-content max-content",
     });
@@ -278,16 +278,16 @@ export function BoardDetails() {
 
             <div className="details-modal">
               {currTask.checklists && currTask.checklists.length > 0 && (
-                <div className="checklists" style={{gridRow:2}}>
+                <div className="checklists" style={{ gridRow: 2 }}>
                   <IoMdCheckboxOutline />
                   {`${getIsChecked()}/${getChecklists()}`}
                 </div>
               )}
-              <ul className="members-modal" style={{gridRow:2}}>
+              <ul className="members-modal" style={{ gridRow: 2 }}>
                 <MemberList members={currTask.members} gridColumnWidth="28px" />
               </ul>
 
-              <div className="due-date-container" style={{gridRow:1}}>
+              <div className="due-date-container" style={{ gridRow: 1 }}>
                 <DueDateDisplay
                   dueDate={currTask.dueDate}
                   setNewDueDate={setNewDueDate}
