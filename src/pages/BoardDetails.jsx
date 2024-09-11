@@ -147,20 +147,20 @@ export function BoardDetails() {
     }
   }
 
-  async function onUpdated(name, value) {
-    try {
-      const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
-        key: name,
-        value: value,
-      });
-      if (name === "checklists") {
-        setNewCheckLists([...value]);
-      }
-      await updateBoard(updatedBoard);
-    } catch (error) {
-      console.error("Failed to update the board:", error);
-    }
-  }
+  // async function onUpdated(name, value) {
+  //   try {
+  //     const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
+  //       key: name,
+  //       value: value,
+  //     });
+  //     if (name === "checklists") {
+  //       setNewCheckLists([...value]);
+  //     }
+  //     await updateBoard(updatedBoard);
+  //   } catch (error) {
+  //     console.error("Failed to update the board:", error);
+  //   }
+  // }
 
   function onPreviewToShow(data) {
     setPreview({
@@ -291,9 +291,9 @@ export function BoardDetails() {
             }}
             method="dialog"
           >
-            {/* {currCover.color && (
-              <CoverDisplay currCover={currCover} height="36px" />
-            )} */}
+            {currTask.cover.color !== "" && (
+              <CoverDisplay currCover={currTask.cover} height="36px" />
+            )}
 
             <div className="labels">
               <LabelList taskLabels={taskSelectedLabels} labelWidth="40px" />
