@@ -51,19 +51,13 @@ export function BoardDetails() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
-  // const [newDueDate, setNewDueDate] = useState(currTask?.dueDate);
-  // const [boardSelectedLabels, setBoardSelectedLabels] = useState(board?.labels);
-  // const [taskSelectedLabels, setTaskSelectedLabels] = useState(currTask.labels);
-
-  // const [currCover, setCurrCover] = useState(currTask.cover);
-  // const [taskMembers, setTaskMembers] = useState(currTask?.members);
   const [newDueDate, setNewDueDate] = useState(currTask?.dueDate || null);
   const [boardSelectedLabels, setBoardSelectedLabels] = useState(
     board?.labels || []
-  );
+  )
   const [taskSelectedLabels, setTaskSelectedLabels] = useState(
     currTask?.labels || []
-  );
+  )
   const [currCover, setCurrCover] = useState(currTask?.cover || null);
   const [taskMembers, setTaskMembers] = useState(currTask?.members || []);
 
@@ -86,7 +80,7 @@ export function BoardDetails() {
       setNewDueDate(currTask.dueDate);
       setCurrCover(currTask.cover);
       setTaskMembers(currTask.members);
-      setSelectedLabels(currTask.labels || []);
+      setTaskSelectedLabels(currTask.labels || []);
     }
   }, [currTask]);
 
