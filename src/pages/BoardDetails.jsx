@@ -51,19 +51,21 @@ export function BoardDetails() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
-  const [newDueDate, setNewDueDate] = useState(currTask.dueDate);
-  const [boardSelectedLabels, setBoardSelectedLabels] = useState(board?.labels);
-  const [taskSelectedLabels, setTaskSelectedLabels] = useState(currTask.labels);
-
-  const [currCover, setCurrCover] = useState(currTask.cover);
-  const [taskMembers, setTaskMembers] = useState(currTask?.members);
+  const [newDueDate, setNewDueDate] = useState(currTask?.dueDate || null);
+  const [boardSelectedLabels, setBoardSelectedLabels] = useState(
+    board?.labels || []
+  );
+  const [taskSelectedLabels, setTaskSelectedLabels] = useState(
+    currTask?.labels || []
+  );
+  const [currCover, setCurrCover] = useState(currTask?.cover || null);
+  const [taskMembers, setTaskMembers] = useState(currTask?.members || []);
 
   useEffect(() => {
     eventBus.on("show-task", onPreviewToShow);
   }, []);
 
   useEffect(() => {
-    console.log("filterBy:", filterBy);
     loadBoard(boardId, filterBy);
     if (!preview?.length) return;
     setPreview(preview);
@@ -78,9 +80,16 @@ export function BoardDetails() {
       setNewDueDate(currTask.dueDate);
       setCurrCover(currTask.cover);
       setTaskMembers(currTask.members);
+      setTaskSelectedLabels(currTask.labels || []);
+    }
+  }, [currTask]);
 
-      console.log("currTask", currTask);
-      console.log("taskMembers", taskMembers);
+  useEffect(() => {
+    if (isTaskPrevModalOpen) {
+      setNewDueDate(currTask.dueDate);
+      setTaskMembers(currTask.members);
+      setTaskSelectedLabels(currTask.labels);
+      setCurrCover(currTask.cover);
     }
   }, [currTask]);
 
@@ -93,10 +102,6 @@ export function BoardDetails() {
     setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
     setAnchorEl(ev.currentTarget);
     setModalOpenByName(currDataName);
-
-    console.log("modalOpenByName:", modalOpenByName);
-    console.log("isPopoverOpen:", isPopoverOpen);
-    console.log("currDataName:", currDataName);
   }
 
   async function deleteTask(ev) {
@@ -142,6 +147,21 @@ export function BoardDetails() {
     }
   }
 
+  async function onUpdated(name, value) {
+    try {
+      const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
+        key: name,
+        value: value,
+      });
+      if (name === "checklists") {
+        setNewCheckLists([...value]);
+      }
+      await updateBoard(updatedBoard);
+    } catch (error) {
+      console.error("Failed to update the board:", error);
+    }
+  }
+
   function onPreviewToShow(data) {
     setPreview({
       position: "absolute",
@@ -174,6 +194,9 @@ export function BoardDetails() {
   }
 
   async function onUpdated(name, value) {
+    console.log("name", name);
+    console.log("value", value);
+
     if (!board) return;
     try {
       const updatedBoard = boardService.updateBoard(
@@ -202,7 +225,7 @@ export function BoardDetails() {
     }
 
     if (currElToEdit === "labels") {
-      onUpdated("labels", selectedLabels);
+      onUpdated("labels", taskSelectedLabels);
     }
   }
 
@@ -268,12 +291,12 @@ export function BoardDetails() {
             }}
             method="dialog"
           >
-            {currTask.cover.color !== "" && (
-              <CoverDisplay currCover={currTask.cover} height="36px" />
-            )}
+            {/* {currCover.color && (
+              <CoverDisplay currCover={currCover} height="36px" />
+            )} */}
 
             <div className="labels">
-              <LabelList taskLabels={selectedLabels} labelWidth="40px" />
+              <LabelList taskLabels={taskSelectedLabels} labelWidth="40px" />
             </div>
 
             <div className="details-modal">
@@ -283,13 +306,16 @@ export function BoardDetails() {
                   {`${getIsChecked()}/${getChecklists()}`}
                 </div>
               )}
-              <ul className="members-modal" style={{ gridRow: 2 }}>
-                <MemberList members={currTask.members} gridColumnWidth="28px" />
-              </ul>
+
+              {currTask.members.length > 0 && (
+                <ul className="members-modal" style={{ gridRow: 2 }}>
+                  <MemberList members={taskMembers} gridColumnWidth="32px" />
+                </ul>
+              )}
 
               <div className="due-date-container" style={{ gridRow: 1 }}>
                 <DueDateDisplay
-                  dueDate={currTask.dueDate}
+                  dueDate={newDueDate}
                   setNewDueDate={setNewDueDate}
                   onUpdated={onUpdated}
                 />

@@ -22,10 +22,10 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
 
     useEffect(() => {}, [task.members])
 
-    function drop(ev) {
-        ev.preventDefault()
-        const data = ev.dataTransfer.getData('text')
-        const currDraggedMemberId = data
+  function drop(ev) {
+    ev.preventDefault();
+    const data = ev.dataTransfer.getData("text");
+    const currDraggedMemberId = data;
 
         const draggedMember = board.members.find(
             member => member.id === currDraggedMemberId
@@ -161,6 +161,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
                             <div className="details">
                                 {task.dueDate && <div className="due-date-container" style={{
                                     gridRow:1,
+                                    gridColumn:'1/3',
                                     fontSize: '12px',
                                     margin: '0 0 4px',
                                     padding:'2px'

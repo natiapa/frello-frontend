@@ -35,26 +35,11 @@ async function query(filterBy = { txt: "" }) {
 
     await storageService.post(STORAGE_KEY, boards);
   }
-  // const { txt, sortField, sortDir } = filterBy
-
-  // if (txt) {
-  //     const regex = new RegExp(filterBy.txt, 'i')
-  //     boards = boards.filter(board => regex.test(board.title) || regex.test(board.description))
-  // }
-
-  // if (sortField === 'title' || sortField === 'owner') {
-  //     boards.sort((board1, board2) => board1[sortField].localeCompare(board2[sortField]) * +sortDir)
-  // }
-
-  // boards = boards.map(({ _id, title, owner }) => ({ _id, title, owner }))
-  console.log("boards:", boards);
-
   return boards;
 }
 
 async function getById(boardId, filterBy = {}) {
   const board = await storageService.get(STORAGE_KEY, boardId);
-  console.log("filterBy:", filterBy);
   if (filterBy.txt) {
     const regex = new RegExp(filterBy.txt, "i");
     board.groups = board.groups.filter((group) => regex.test(group.title));
@@ -76,7 +61,6 @@ async function getById(boardId, filterBy = {}) {
   }
 
   if (filterBy.selectMember?.length) {
-    console.log("filterBy.selectMember:", filterBy.selectMember);
     board.groups.forEach((group) => {
       group.tasks = group.tasks.filter((task) =>
         task.members.some((member) => filterBy.selectMember.includes(member.id))
@@ -92,7 +76,6 @@ async function getById(boardId, filterBy = {}) {
     });
   }
   if (filterBy.selectLabel?.length) {
-    console.log("filterBy.selectLabel:", filterBy.selectLabel);
     board.groups.forEach((group) => {
       group.tasks = group.tasks.filter((task) =>
         task.labels.some((label) => filterBy.selectLabel.includes(label))
@@ -198,7 +181,6 @@ async function updateActivities(
     item,
     dueDate
   );
-  console.log(activityToAdd);
 
   await board.activities.unshift(activityToAdd);
   await save(board);

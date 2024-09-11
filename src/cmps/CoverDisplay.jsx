@@ -1,4 +1,7 @@
 export function CoverDisplay({ currCover, height }) {
+ if(!currCover){
+  return null
+ }
   return (
     <div
       className="cover-container"
