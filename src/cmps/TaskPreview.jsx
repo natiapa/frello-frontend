@@ -92,7 +92,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
             .closest('.task-preview')
             .getBoundingClientRect()
         if (!elData) return
-        const previewData = { elData, group, task: currTask, dataName }
+        const previewData = { elData, group, task, dataName }
         eventBus.emit('show-task', previewData)
     }
 
