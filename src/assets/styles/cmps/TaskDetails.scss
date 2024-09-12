@@ -149,6 +149,12 @@
         // grid-auto-flow: column;
         gap: 0;
 
+        li {
+          &:hover {
+            opacity: 0.7;
+          }
+        }
+
         .header {
           grid-row: 1;
           font-size: 12px;

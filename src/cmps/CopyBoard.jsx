@@ -55,8 +55,8 @@ export function CopyBoard({
 
     const boardToSave = {
       ...emptyBoard,
-      _id: "",
-      title: board.title,
+      title: boardToCopy.title,
+      createdBy: userService.getLoggedinUser(),
       activities: [],
       members: [
         {
@@ -66,7 +66,7 @@ export function CopyBoard({
           color: "#000",
         },
       ],
-      groups: isKeepCards ? groupsWithoutMembers : [],
+      groups: boardToCopy.isKeepCards ? groupsWithoutMembers : [],
       style: {
         ...emptyBoard.style,
         ...board.style,
@@ -92,7 +92,8 @@ export function CopyBoard({
         "added this board to",
         "addBoard"
       );
-      const savedBoard = await boardService.save(boardToSave);
+      const savedBoard = await addBoard(boardToSave);
+      console.log(savedBoard);
       navigate(`/board/${savedBoard._id}`);
       setIsPopoverOpen(false);
       setIsMenuOpen(false);

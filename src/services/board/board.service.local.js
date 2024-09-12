@@ -288,7 +288,7 @@ async function getEmptyItem() {
 
 function getEmptyBoard() {
   return {
-    _id: "",
+    _id: makeId(),
     title: "",
     isStarred: false,
     // archivedAt: 0,

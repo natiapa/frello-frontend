@@ -55,19 +55,19 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
             <div
               className="member-img"
               style={{
-                backgroundColor: activity.byMember.color
+                backgroundColor: activity.byMember?.color
                   ? activity.byMember.color
                   : "none",
-                // backgroundImage: activity.byMember.imgUrl
-                //   ? `url(${activity.byMember.imgUrl})`
-                //   : "none",
+                backgroundImage: activity.byMember?.imgUrl
+                  ? `url(${activity.byMember.imgUrl})`
+                  : "none",
               }}
             >
-              {activity.byMember.fullname[0]}
+              {activity.byMember?.fullname[0]}
             </div>
             <section className="activity-data" style={{ gridColumn: "2" }}>
               <span className="activity-fullname">
-                {activity.byMember.fullname}{" "}
+                {activity.byMember?.fullname}{" "}
               </span>
 
               {activity.type === "createBoard" && (
