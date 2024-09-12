@@ -1,14 +1,20 @@
-export function CoverDisplay({ currCover, height }) {
- if(!currCover){
-  return null
- }
+export function CoverDisplay({
+  currCover,
+  height,
+  imgWidth,
+  borderRadius,
+  colorHeight,
+}) {
+  if (!currCover) {
+    return null;
+  }
   return (
     <div
       className="cover-container"
       style={{
         // gridRow: "1",
         width: "100%",
-        height: height,
+        height: !currCover.img ? colorHeight : height,
         backgroundColor: currCover.color,
         position: "absolute",
         top: 0,
@@ -16,7 +22,7 @@ export function CoverDisplay({ currCover, height }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: "8px 8px 0 0",
+        borderRadius: borderRadius,
       }}
     >
       {currCover.img && (
@@ -25,8 +31,11 @@ export function CoverDisplay({ currCover, height }) {
           alt="cover"
           style={{
             maxWidth: "100%",
-            maxHeight: "100%",
+            width: imgWidth,
+            // maxHeight: "100%",
+            height: height,
             objectFit: "cover",
+            borderRadius: borderRadius,
           }}
         />
       )}

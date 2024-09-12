@@ -154,9 +154,14 @@ export function TaskDetails() {
         </button>
 
         {currCover.color && (
-          <>
-            <CoverDisplay currCover={currCover} height="100px" />
-          </>
+          <div className="absolute-element" style={{ height: "160px" }}>
+            <CoverDisplay
+              currCover={currCover}
+              height="100px"
+              imgHeight="100px"
+              colorHeight="100px"
+            />
+          </div>
         )}
 
         <form className="header" data-name="title" onClick={onEdit}>

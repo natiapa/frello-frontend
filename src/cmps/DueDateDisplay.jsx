@@ -2,18 +2,20 @@ import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import { FaRegCheckSquare } from "react-icons/fa";
 import { IoMdCheckboxOutline } from "react-icons/io";
+import { LuClock5 } from "react-icons/lu";
 import { useParams } from "react-router";
 
 export function DueDateDisplay({ dueDate, setNewDueDate, onUpdated }) {
   const { taskId } = useParams();
-  
+
   if (!dueDate) {
-    return null
+    return null;
   }
-  const { createdAt, date, time, isComplete, completedAt } = dueDate
+  const { createdAt, date, time, isComplete, completedAt } = dueDate;
   const [isChecked, setIsChecked] = useState(isComplete || false);
   const formatStartDate = createdAt ? formatDateTimeForTask(createdAt) : null;
   const formatDueDate = date ? formatDateTimeForTask(date, time) : null;
+  const [isHovered, setIsHovered] = useState(false);
 
   function formatDateForTask(dateString) {
     const date = new Date(dateString.split("/").reverse().join("-"));
@@ -75,7 +77,13 @@ export function DueDateDisplay({ dueDate, setNewDueDate, onUpdated }) {
             </span>
           )}
           <section className="date-container">
-            <span className="date-value start-date">{formatStartDate}</span>
+            <span
+              className="date-value start-date"
+              style={{ backgroundColor: "transparent" }}
+            >
+              <LuClock5 className="clock" />
+              {formatStartDate}
+            </span>
             <BsChevronDown className="date-picker-icon" />
           </section>
         </div>
@@ -84,18 +92,18 @@ export function DueDateDisplay({ dueDate, setNewDueDate, onUpdated }) {
       {date && !createdAt && (
         <div className="date-item">
           {taskId && <span className="date-label">Due date</span>}
-          <section
-            className="date-container"
-            style={{
-              backgroundColor: !taskId && isChecked ? "#1f845a" : "#091e420f",
-              color: !taskId && isChecked ? "#fff" : "#172b4d",
-            }}
-          >
+          <section className={`date-container ${isChecked ? "green-bg" : ""}`}>
             {isChecked && !taskId && (
-              <span className="checkbox-icon" onClick={handleCompleteChange}>
-                <IoMdCheckboxOutline />
+              <span
+                className="checkbox-icon"
+                onClick={handleCompleteChange}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                {isHovered ? <IoMdCheckboxOutline /> : <LuClock5 />}
               </span>
             )}
+
             {taskId && (
               <input
                 type="checkbox"
@@ -103,13 +111,25 @@ export function DueDateDisplay({ dueDate, setNewDueDate, onUpdated }) {
                 onChange={handleCompleteChange}
               />
             )}
+
             {!isChecked && !taskId && (
-              <input
-                type="checkbox"
-                checked={isChecked}
-                onChange={handleCompleteChange}
-              />
+              <span
+                className="icon-container"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                {isHovered ? (
+                  <input
+                    type="checkbox"
+                    checked={isChecked}
+                    onChange={handleCompleteChange}
+                  />
+                ) : (
+                  <LuClock5 />
+                )}
+              </span>
             )}
+
             <span className="date-value due-date">
               {formatDueDate}
               {taskId && isChecked && (
@@ -126,24 +146,44 @@ export function DueDateDisplay({ dueDate, setNewDueDate, onUpdated }) {
         <div className="date-item">
           {taskId && <span className="date-label">dates</span>}
           <section
-            className="date-container"
-            style={{
-              backgroundColor: !taskId && isChecked ? "#1f845a" : "#091e420f",
-              color: !taskId && isChecked ? "#fff" : "#172b4d",
-            }}
+            className={`date-container ${isChecked ? "green-bg" : ""}`}
+            // style={{
+            //   backgroundColor: !taskId && isChecked ? "#1f845a" : "transparent",
+            //   color: !taskId && isChecked ? "#fff" : "#172b4d",
+            // }}
           >
             {!taskId && isChecked && (
-              <span className="checkbox-icon" onClick={handleCompleteChange}>
-                <IoMdCheckboxOutline />
+              <span
+                className="checkbox-icon"
+                onClick={handleCompleteChange}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                {isHovered ? (
+                  <IoMdCheckboxOutline />
+                ) : (
+                  <LuClock5 className="clock" />
+                )}
               </span>
             )}
             {!taskId && !isChecked && (
-              <input
-                type="checkbox"
-                checked={isChecked}
-                onChange={handleCompleteChange}
-              />
+              <span
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                style={{ margin: "0" }}
+              >
+                {isHovered ? (
+                  <input
+                    type="checkbox"
+                    checked={isChecked}
+                    onChange={handleCompleteChange}
+                  />
+                ) : (
+                  <LuClock5 className="clock" />
+                )}
+              </span>
             )}
+
             {taskId && (
               <input
                 type="checkbox"
