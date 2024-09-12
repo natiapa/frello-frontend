@@ -24,11 +24,11 @@ export function DemoGroups() {
   async function onUpdated(name, value) {
     console.log(value);
     try {
-      const updatedBoard = boardService.updateBoard(board, null, null, {
+     boardService.updateBoard(board, null, null, {
         key: name,
         value: value,
       });
-      await updateBoard(updatedBoard);
+      // await updateBoard(updatedBoard);
     } catch (error) {
       console.error("Failed to update the board:", error);
     }

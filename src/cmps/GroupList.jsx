@@ -59,12 +59,12 @@ export function GroupList({ groups, allowDrop, drop, isActivitiesOpen }) {
 
   async function onUpdated(name, value, groupId, taskId) {
     try {
-      const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
+     await boardService.updateBoard(board, groupId, taskId, {
         key: name,
         value: value,
       });
 
-      await updateBoard(updatedBoard);
+      // await updateBoard(updatedBoard);
     } catch (error) {
       console.error("Failed to update the board:", error);
     }
