@@ -25,6 +25,7 @@ export async function loadBoard(boardId, filterBy = {}) {
 
 export async function removeBoard(boardId) {
     try {
+        console.log(boardId)
         await boardService.remove(boardId)
         store.dispatch(getCmdRemoveBoard(boardId))
     } catch (err) {

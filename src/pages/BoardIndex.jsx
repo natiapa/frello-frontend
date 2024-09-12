@@ -68,6 +68,7 @@ export function BoardIndex() {
         "addBoard"
       );
       const savedBoard = await addBoard(boardToSave);
+      console.log(savedBoard);
       showSuccessMsg(`Board added (id: ${savedBoard._id})`);
 
       // navigate(`/board/${savedBoard._id}`);

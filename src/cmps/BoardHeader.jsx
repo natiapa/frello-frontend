@@ -21,6 +21,8 @@ export function BoardHeader({
   setIsMenuOpen,
   isMenuOpen,
 }) {
+  const board = useSelector((storeState) => storeState.boardModule.board);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
@@ -45,7 +47,7 @@ export function BoardHeader({
         columnGap: isMenuOpen ? "1em" : "",
       }}
     >
-      <div className="board-header-title">Frello</div>
+      <div className="board-header-title">{board?.title}</div>
       {/* <div className="board-header-actions"></div> */}
       <div
         className="filter"
