@@ -72,16 +72,33 @@ export function TaskDetails() {
     return taskNumber;
   }
 
+  // async function onUpdated(name, value) {
+  //   try {
+  //     boardService.updateBoard(board, groupId, taskId, {
+  //       key: name,
+  //       value: value,
+  //     });
+
+  //     if (name === "checklists") {
+  //       setNewCheckLists([...value]);
+  //     }
+  //     await updateBoard(updatedBoard);
+  //   } catch (error) {
+  //     console.error("Failed to update the board:", error);
+  //   }
+  // }
   async function onUpdated(name, value) {
     try {
-      const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
+      console.log('label',{name,value})
+
+      boardService.updateBoard(board, groupId, taskId, {
         key: name,
         value: value,
       });
       if (name === "checklists") {
         setNewCheckLists([...value]);
       }
-      await updateBoard(updatedBoard);
+      // await updateBoard(updatedBoard);
     } catch (error) {
       console.error("Failed to update the board:", error);
     }
