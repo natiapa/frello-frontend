@@ -147,20 +147,6 @@ export function BoardDetails() {
     }
   }
 
-  // async function onUpdated(name, value) {
-  //   try {
-  //     const updatedBoard = boardService.updateBoard(board, groupId, taskId, {
-  //       key: name,
-  //       value: value,
-  //     });
-  //     if (name === "checklists") {
-  //       setNewCheckLists([...value]);
-  //     }
-  //     await updateBoard(updatedBoard);
-  //   } catch (error) {
-  //     console.error("Failed to update the board:", error);
-  //   }
-  // }
 
   function onPreviewToShow(data) {
     setPreview({
@@ -208,7 +194,7 @@ export function BoardDetails() {
           value: value,
         }
       );
-      await updateBoard(updatedBoard);
+      // await updateBoard(updatedBoard);
       await loadBoard(boardId, filterBy);
     } catch (error) {
       console.error("Failed to update the board:", error);

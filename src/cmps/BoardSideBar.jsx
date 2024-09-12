@@ -10,7 +10,7 @@ export function BoardSideBar({ board, bgColor }) {
 
     async function onUpdateBoard(board, newStarredStatus) {
         try {
-            const updatedBoard = await boardService.updateBoard(
+         await boardService.updateBoard(
                 board,
                 null,
                 null,
@@ -19,7 +19,7 @@ export function BoardSideBar({ board, bgColor }) {
                     value: newStarredStatus,
                 }
             )
-            await updateBoard(updatedBoard)
+            // await updateBoard(updatedBoard)
         } catch (error) {
             console.error('Failed to update the board:', error)
         }

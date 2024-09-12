@@ -33,11 +33,13 @@ export function LabelPicker({
     )
       ? localTaskSelectedLabels.filter((l) => l.id !== label.id)
       : [...localTaskSelectedLabels, label];
+
     setLocalTaskSelectedLabels(updatedTaskLabels);
     setTaskSelectedLabels(updatedTaskLabels);
   }
 
   useEffect(() => {
+    console.log(localTaskSelectedLabels)
     onUpdated("labels", localTaskSelectedLabels);
   }, [localTaskSelectedLabels]);
 
@@ -69,11 +71,11 @@ export function LabelPicker({
 
   async function onUpdatedBoard(updatedLabels) {
     try {
-      const updatedBoard = boardService.updateBoard(board, null, null, {
+    await  boardService.updateBoard(board, null, null, {
         key: "labels",
         value: updatedLabels,
       });
-      await updateBoard(updatedBoard);
+      // await updateBoard(updatedBoard);
       setEditLabel("");
     } catch (error) {
       console.error("Failed to update the board:", error);

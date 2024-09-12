@@ -21,11 +21,11 @@ export function BoardPreview({ board }) {
 
   async function onUpdateBoard(board, newStarredStatus) {
     try {
-      const updatedBoard = await boardService.updateBoard(board, null, null, {
+     await boardService.updateBoard(board, null, null, {
         key: "isStarred",
         value: newStarredStatus,
       });
-      await updateBoard(updatedBoard);
+      // await updateBoard(updatedBoard);
     } catch (error) {
       console.error("Failed to update the board:", error);
     }

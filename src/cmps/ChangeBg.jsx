@@ -169,7 +169,7 @@ export function ChangeBg({
             value: value,
           }
         );
-        await updateBoard(updatedBoard);
+     
         // await loadBoard(boardId);
       } catch (error) {
         console.error("Failed to update the board:", error);

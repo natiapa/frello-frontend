@@ -1,7 +1,7 @@
 import { httpService } from '../http.service'
 import { userService } from '../user'
 import { makeId, sortColorsByHue } from '../util.service'
-
+import { updateBoard as updateCurrBoard } from '../../store/actions/board.actions'
 export const boardService = {
     query,
     getById,
@@ -30,7 +30,6 @@ async function query(filterBy = {}) {
 }
 
 function getById(boardId, filterBy = {}) {
-    console.log('filterBy:', filterBy)
     return httpService.get(`board/${boardId}`, filterBy)
 }
 
@@ -40,6 +39,7 @@ async function remove(boardId) {
 async function save(board) {
     var savedBoard
     if (board._id) {
+        console.log(board._id)
         savedBoard = await httpService.put(`board/${board._id}`, board)
     } else {
         savedBoard = await httpService.post('board', board)
@@ -72,6 +72,9 @@ async function updateBoard(
     { key, value },
     activity = ''
 ) {
+    console.log('board before servis', board, groupId, taskId, { key, value }
+
+    )
     const gIdx = board?.groups?.findIndex(group => group.id === groupId)
     const tIdx = board?.groups[gIdx]?.tasks.findIndex(
         task => task.id === taskId
@@ -103,6 +106,7 @@ async function updateBoard(
     } catch (err) {
         console.log('err:', err)
     }
+    console.log('borad after servis', board)
 
     return board
 }
