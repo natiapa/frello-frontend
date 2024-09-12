@@ -66,22 +66,28 @@
         justify-self: end;
 
         .close-btn {
+          opacity: 0;
           position: absolute;
-          top: 0;
-          right: 10px;
+          top: 4.5em;
+          right: 25px;
           display: flex;
           justify-content: center;
           align-items: center;
           width: 20px;
           height: 20px;
           padding: 10px 10px 11px 11px;
-          background-color: $blue4;
-          border: 1px solid black;
+          // background-color: $blue4;
+          background-color: inherit;
+          // border: 1px solid black;
+          border: none;
           color: #fff;
         }
       }
 
       &:hover {
+        .close-btn {
+          opacity: 1;
+        }
         .starred-btn {
           .not-starred {
             opacity: 1;

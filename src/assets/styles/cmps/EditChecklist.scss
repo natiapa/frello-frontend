@@ -5,6 +5,10 @@
 
     label {
         display: grid;
+        .title-pop{
+            width: max-content;
+            grid-column: 1/-1;
+        }
         input{
             padding: 8px 12px;
         }

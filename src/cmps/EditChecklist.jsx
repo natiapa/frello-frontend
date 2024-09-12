@@ -53,9 +53,9 @@ export function EditChecklist({
 
   return (
     <div className="edit-checklist" onClick={handlePopoverClick}>
-      <h2>Checklist span</h2>
+      <h2>Checklist</h2>
       <label>
-        <span>title</span>
+        <span className="title-pop">title</span>
         <input type="text" value={title} onChange={handleChange} />
       </label>
       <div className="edit-checklist-btn" onClick={onAddChecklist}>

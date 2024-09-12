@@ -201,7 +201,7 @@ export function TaskChecklist({
                 </button>
               )}
               {isAddingItem && checklist.isAddingItem && (
-                <div>
+                <div className="add-an-item-form">
                   <input
                     type="text"
                     onChange={handleChangeTextItem}

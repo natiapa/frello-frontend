@@ -12,7 +12,8 @@ export function Edit({
   const [value, setValue] = useState(task[currElToEdit]);
   const board = useSelector((storeState) => storeState.boardModule.board);
 
-  const { groupId } = useParams();
+  const { groupId, taskId } = useParams();
+
   const group = board?.groups?.find((group) => group.id === groupId);
 
   function handleSave() {
@@ -40,15 +41,16 @@ export function Edit({
           onBlur={handleBlur}
           autoFocus
           style={{
+            height: taskId ? "32px" : "none",
             border: "1px solid #0C66E4",
             outline: "#0C66E4",
             color: "#172b4d",
             backgroundColor: "",
-            fontSize: "14px",
+            fontSize: taskId ?"20px": "14px",
             fontWeight: "600",
             borderRadius: "6px",
-            margin: "0px 4px 1.2px 0px ",
-            padding: "6px 8px 6px 11px",
+            margin: taskId ? "0":"0px 4px 1.2px 0px ",
+            padding: taskId ? "0 0 0 12px":"6px 8px 6px 11px",
             fontFamily:
               "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
           }}

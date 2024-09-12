@@ -165,18 +165,18 @@ export function BoardFilter() {
                     No due date
                 </label>
 
-                <label>
+                {/* <label>
                     <input
                         type="checkbox"
                         name="overdue"
                         value={filterToEdit.overdue}
                         onChange={handleChange}
                     />
-                </label>
+                </label> */}
             </div>
 
             <div className="actions">
-                <h3>Labels</h3>
+                <h3 style={{gridRow:1,gridColumn:1}}>Labels</h3>
                 <label>
                     <input
                         type="checkbox"
