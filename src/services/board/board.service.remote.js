@@ -1,4 +1,5 @@
 import { httpService } from '../http.service'
+import { userService } from '../user'
 import { makeId, sortColorsByHue } from '../util.service'
 
 export const boardService = {
@@ -105,6 +106,36 @@ async function updateBoard(
     return board
 }
 
+
+async function updateActivities(
+    board,
+    title,
+    type,
+    group,
+    task,
+    checklist,
+    taskNumber,
+    item,
+    dueDate,
+    copiedBoard
+) {
+    const activityToAdd = addActivity(
+        title,
+        type,
+        group,
+        task,
+        checklist,
+        taskNumber,
+        item,
+        dueDate,
+        copiedBoard
+    )
+
+
+    await board.activities.unshift(activityToAdd)
+    // await save(board)
+}
+
 function addActivity(
     title,
     type,
@@ -113,19 +144,16 @@ function addActivity(
     checklist,
     taskNumber,
     item,
-    dueDate
+    dueDate,
+    originalBoard,
+
 ) {
-    const activity = {
+    var activity = {
         id: makeId(),
         title,
         type,
         createdAt: Date.now(),
-        byMember: {
-            id: 'u101',
-            fullname: 'Abi Abambi',
-            imgUrl: 'http://some-img',
-            color: '#000',
-        },
+        byMember: userService.getLoggedinUser(),
         group: {
             id: group?.id,
             title: group?.title,
@@ -144,36 +172,13 @@ function addActivity(
             date: dueDate?.date,
             time: dueDate?.time,
         },
-    }
+        originalBoard: {
+            _id: originalBoard?._id,
+            title: originalBoard?.title
+        }
+    };
 
-    return activity
-}
-
-async function updateActivities(
-    board,
-    title,
-    type,
-    group,
-    task,
-    checklist,
-    taskNumber,
-    item,
-    dueDate
-) {
-    const activityToAdd = addActivity(
-        title,
-        type,
-        group,
-        task,
-        checklist,
-        taskNumber,
-        item,
-        dueDate
-    )
-    console.log(activityToAdd)
-
-    await board.activities.unshift(activityToAdd)
-    await save(board)
+    return activity;
 }
 
 function getEmptyGroup() {
