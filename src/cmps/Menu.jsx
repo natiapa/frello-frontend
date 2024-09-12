@@ -15,6 +15,7 @@ import {
   removeBoard,
   addBoardMsg,
 } from "../store/actions/board.actions";
+import { ShareExportPrintBoard } from "./ShareExportPrintBoard";
 
 export function Menu({
   board,
@@ -131,7 +132,7 @@ export function Menu({
                 PaperProps={{
                   sx: {
                     width: "320px",
-                    height: "600px",
+                    height: "400px",
                     padding: "20px",
                     borderRadius: "8px",
                   },
@@ -150,9 +151,41 @@ export function Menu({
             )}
           </button>
 
-          <button className="menu-btn">
+          <button
+            className="menu-btn"
+            data-name="share-board"
+            aria-describedby="20"
+            onClick={handleClick}
+          >
             <IoShareSocialOutline className="shae-icon" />
-            <span className="share-btn btn">Share</span>
+            <span className="share-btn btn">Print, export, and share</span>
+
+            {modalOpenByName === "share-board" && isPopoverOpen && (
+              <Popover
+                id={isPopoverOpen ? "share-board" : undefined}
+                open={isPopoverOpen}
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                PaperProps={{
+                  sx: {
+                    width: "320px",
+                    height: "400px",
+                    padding: "20px",
+                    borderRadius: "8px",
+                  },
+                }}
+              >
+                <ShareExportPrintBoard
+                  board={board}
+                  handlePopoverClick={handlePopoverClick}
+                  setIsPopoverOpen={setIsPopoverOpen}
+                  setIsMenuOpen={setIsMenuOpen}
+                />
+              </Popover>
+            )}
           </button>
         </>
       )}

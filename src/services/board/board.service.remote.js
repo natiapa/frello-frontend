@@ -103,6 +103,7 @@ async function updateBoard(
     } catch (err) {
         console.log('err:', err)
     }
+
     return board
 }
 
