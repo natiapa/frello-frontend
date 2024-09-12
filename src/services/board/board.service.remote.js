@@ -72,7 +72,7 @@ async function updateBoard(
     { key, value },
     activity = ''
 ) {
-    console.log('board before servis',board,groupId,taskId,{ key, value }
+    console.log('board before servis', board, groupId, taskId, { key, value }
 
     )
     const gIdx = board?.groups?.findIndex(group => group.id === groupId)
@@ -106,7 +106,7 @@ async function updateBoard(
     } catch (err) {
         console.log('err:', err)
     }
-    console.log('borad after servis',board)
+    console.log('borad after servis', board)
 
     return board
 }
