@@ -46,24 +46,19 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
         onUpdated('members', membersToUpdate)
     }
 
-    async function onUpdated(name, value) {
-        if (!board) return
-        try {
-            const updatedBoard = boardService.updateBoard(
-                board,
-                group.id,
-                task.id,
-                {
-                    key: name,
-                    value: value,
-                }
-            )
-            updateBoard(updatedBoard)
-            // await loadBoard(board._id);
-        } catch (error) {
-            console.error('Failed to update the board:', error)
-        }
+  async function onUpdated(name, value) {
+    if (!board) return;
+    try {
+      const updatedBoard = await boardService.updateBoard(board, group.id, task.id, {
+        key: name,
+        value: value,
+      });
+      await updateBoard(updatedBoard);
+      // await loadBoard(board._id);
+    } catch (error) {
+      console.error("Failed to update the board:", error);
     }
+  }
 
     function getChecklists() {
         const checklists = task.checklists

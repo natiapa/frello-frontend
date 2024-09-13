@@ -73,14 +73,15 @@ export function TaskDetails() {
 
   async function onUpdated(name, value) {
     try {
-      boardService.updateBoard(board, groupId, taskId, {
+      const updatedBoard = await boardService.updateBoard(board, groupId, taskId, {
         key: name,
         value: value,
       });
       if (name === "checklists") {
         setNewCheckLists([...value]);
       }
-      // await updateBoard(updatedBoard)
+      console.log('updatedBoard',updatedBoard)
+      await updateBoard(updatedBoard)
     } catch (error) {
       console.error("Failed to update the board:", error);
     }

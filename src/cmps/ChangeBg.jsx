@@ -136,8 +136,8 @@ export function ChangeBg({
         ...board,
         style: { backgroundImage: bgType },
       };
-      console.log(boardToUpdate.style)
-      onUpdated('style',boardToUpdate.style);
+      console.log(boardToUpdate.style);
+      onUpdated("style", boardToUpdate.style);
       setCurrBoardBgStyle(boardToUpdate.style);
     } else if (type === "bgColor") {
       const boardToUpdate = {
@@ -146,11 +146,10 @@ export function ChangeBg({
           backgroundColor: bgType,
           darkenedColor: chroma(bgType).darken(1.5).hex(),
         },
-        
       };
-      console.log(boardToUpdate.style)
+      console.log(boardToUpdate.style);
 
-      onUpdated('style',boardToUpdate.style);
+      onUpdated("style", boardToUpdate.style);
       setCurrBoardBgStyle(boardToUpdate.style);
     }
     setTimeout(() => {
@@ -160,17 +159,11 @@ export function ChangeBg({
     async function onUpdated(name, value) {
       if (!board) return;
       try {
-        const updatedBoard = boardService.updateBoard(
-          board,
-          null,
-         null,
-          {
-            key: name,
-            value: value,
-          }
-        );
-     
-        // await loadBoard(boardId);
+        const updatedBoard = await boardService.updateBoard(board, null, null, {
+          key: name,
+          value: value,
+        });
+        await updateBoard(updatedBoard);
       } catch (error) {
         console.error("Failed to update the board:", error);
       }
