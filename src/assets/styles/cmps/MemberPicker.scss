@@ -1,31 +1,117 @@
-.member-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    background-color: white;
-    border-radius: 4px;
-    margin-bottom: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    white-space: nowrap; /* מונע ירידת שורה */
+.members-container {
+  .card-members {
+    display: grid;
+    span.card-members-title {
+      margin-block: 10px;
+    }
+
+    .member-item {
+      display: grid;
+      grid-template-columns: max-content 1fr max-content;
+      align-items: center;
+      // justify-content: space-between;
+      padding: 4px 8px 4px 4px;
+      background-color: white;
+      border-radius: 4px;
+      // margin-bottom: 8px;
+      // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      // white-space: nowrap; /* מונע ירידת שורה */
+      color: #172b4d;
+
+      >* {
+        grid-row: 1;
+      }
+
+      .img {
+        display: grid;
+        place-self: center;
+        justify-items: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 8px;
+        color: #fff;
+      }
+
+      span.member-name {
+        grid-column: 2;
+        font-size: 14px;
+        color: #172b4d;
+        // white-space: nowrap; /* מונע ירידת שורה */
+      }
+
+      .remove-member-btn {
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: #172b4d;
+        font-size: 14px;
+        transition: color 0.2s ease;
+      }
+
+      &:hover {
+        background-color: #091e420f;
+      }
+    }
   }
-  
-  .member-name {
-    font-size: 14px;
-    color: #333;
-    white-space: nowrap; /* מונע ירידת שורה */
+
+  .board-members {
+    display: grid;
+
+    .member-item {
+      display: grid;
+      grid-template-columns: max-content 1fr max-content;
+      align-items: center;
+      // justify-content: space-between;
+      padding: 4px 8px 4px 4px;
+      background-color: white;
+      border-radius: 4px;
+      // margin-bottom: 8px;
+      // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      // white-space: nowrap; /* מונע ירידת שורה */
+      color: #172b4d;
+
+      >* {
+        grid-row: 1;
+      }
+
+      .img {
+        display: grid;
+        place-self: center;
+        justify-items: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 8px;
+        color: #fff;
+      }
+
+      span.member-name {
+        grid-column: 2;
+        font-size: 14px;
+        color: #172b4d;
+        // white-space: nowrap; /* מונע ירידת שורה */
+      }
+
+      .remove-member-btn {
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: #172b4d;
+        font-size: 14px;
+        transition: color 0.2s ease;
+      }
+
+      &:hover {
+        background-color: #091e420f;
+      }
+    }
+
   }
-  
-  .remove-member-btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: #d32f2f;
-    font-size: 14px;
-    transition: color 0.2s ease;
-  }
-  
-  .remove-member-btn:hover {
-    color: #f44336;
-  }
-  
+}

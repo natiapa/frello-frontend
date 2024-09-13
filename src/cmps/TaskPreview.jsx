@@ -172,7 +172,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
                                         className="due-date-container"
                                         style={{
                                             gridRow: 1,
-                                            gridColumn: '1/2',
+                                            gridColumn: '1 span2',
                                             fontSize: '12px',
                                             margin: '0 0 4px',
                                             padding: '2px',
