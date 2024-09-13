@@ -52,7 +52,7 @@ export function GroupPreview({ group, gIndex, allowDrop, drop }) {
 
     async function onUpdated(name, value) {
         try {
-          await boardService.updateBoard(
+         const updatedBoard = await boardService.updateBoard(
                 board,
                 group.id,
                 null,
@@ -61,7 +61,7 @@ export function GroupPreview({ group, gIndex, allowDrop, drop }) {
                     value: value,
                 }
             )
-            // await updateBoard(updatedBoard)
+            await updateBoard(updatedBoard)
         } catch (error) {
             console.error('Failed to update the board:', error)
         }
