@@ -72,9 +72,9 @@ async function updateBoard(
     { key, value },
     activity = ''
 ) {
-    console.log('board before servis', board, groupId, taskId, { key, value }
+ 
 
-    )
+
     const gIdx = board?.groups?.findIndex(group => group.id === groupId)
     const tIdx = board?.groups[gIdx]?.tasks.findIndex(
         task => task.id === taskId
@@ -101,12 +101,12 @@ async function updateBoard(
     if (activity) {
         activity = addActivity(activity)
     }
-    try {
-        await save(board)
-    } catch (err) {
-        console.log('err:', err)
-    }
-    console.log('borad after servis', board)
+    // try {
+    //     await save(board)
+    // } catch (err) {
+    //     console.log('err:', err)
+    // }
+  
 
     return board
 }

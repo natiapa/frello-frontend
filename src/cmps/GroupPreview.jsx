@@ -23,7 +23,7 @@ export function GroupPreview({ group, gIndex, allowDrop, drop }) {
         ev.preventDefault()
 
         try {
-            await boardService.updateBoard(
+            const newBoard = await boardService.updateBoard(
                 board,
                 group.id,
                 null,
@@ -32,7 +32,7 @@ export function GroupPreview({ group, gIndex, allowDrop, drop }) {
                     value: null,
                 }
             )
-            // await updateBoard(newBoard)
+            await updateBoard(newBoard)
             await boardService.updateActivities(board, '', 'deleteGroup', group)
         } catch (error) {
             console.error('Failed to update the board:', error)

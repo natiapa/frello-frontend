@@ -48,11 +48,11 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
   async function onUpdated(name, value) {
     if (!board) return;
     try {
-      const updatedBoard = boardService.updateBoard(board, group.id, task.id, {
+      const updatedBoard = await boardService.updateBoard(board, group.id, task.id, {
         key: name,
         value: value,
       });
-      updateBoard(updatedBoard);
+      await updateBoard(updatedBoard);
       // await loadBoard(board._id);
     } catch (error) {
       console.error("Failed to update the board:", error);

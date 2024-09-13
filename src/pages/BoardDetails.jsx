@@ -109,6 +109,7 @@ export function BoardDetails() {
 
     try {
       onUpdated("deleteTask", null);
+      
       await boardService.updateActivities(
         board,
         "",
@@ -180,16 +181,15 @@ export function BoardDetails() {
   }
 
   async function onUpdated(name, value) {
-    // console.log("name", name);
-    // console.log("value", value);
 
+    console.log(name,value)
     if (!board) return;
     try {
-      boardService.updateBoard(board, currGroup.id, currTask.id, {
+      const updatedBoard = await boardService.updateBoard(board, currGroup.id, currTask.id, {
         key: name,
         value: value,
       });
-      // await updateBoard(updatedBoard);
+      await updateBoard(updatedBoard);
       await loadBoard(boardId, filterBy);
     } catch (error) {
       console.error("Failed to update the board:", error);
