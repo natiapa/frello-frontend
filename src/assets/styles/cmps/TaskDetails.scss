@@ -67,7 +67,8 @@
       display: grid;
       grid-template-columns: 60px auto max-content;
       grid-template-rows: max-content max-content;
-      cursor: pointer;
+
+      cursor: default;
       min-height: 32px;
       font-size: 20px;
       font-weight: 600;
@@ -92,6 +93,7 @@
 
           grid-column: 1;
           grid-row: 1;
+          cursor: pointer;
         }
         .group-title {
           padding: 0 0 0 13px;
