@@ -110,11 +110,62 @@
       // grid-template-columns: auto 80px;
       align-items: end;
       justify-content: space-between;
-
       .due-date-container {
-        // grid-column: 1;
-        // grid-row: 1;
-        // grid-row: 2;
+        margin: 0 !important;
+        .due-date-display {
+          .date-item .date-container {
+            background-color: transparent;
+            display: grid;
+            grid-template-columns: 16px max-content max-content;
+            height: 23px;
+
+            // padding: 0;
+            padding: 2px 4px;
+            border-radius: 3px;
+            span {
+              &:first-of-type {
+                place-self: center;
+                display: grid;
+                justify-content: center;
+
+                svg {
+                  margin-block-end: 1px;
+                }
+              }
+            }
+            &.green-bg {
+              background-color: #1f845a;
+              color: #fff;
+            }
+
+            .checkbox-icon {
+              // display: grid;
+              padding: 0;
+              margin: 2px 0 0 0;
+            }
+            input[type="checkbox"] {
+              padding: 0;
+              margin: 0;
+            }
+
+            // span {
+            //   margin: 0;
+            // }
+            .checkbox-icon {
+              // display: grid;
+              margin: 0 0 0.53px 0;
+            }
+            .date-value {
+              place-self: center;
+              font-size: 12px;
+              padding: 0;
+              margin: 0;
+            }
+            .date-picker-icon {
+              display: none;
+            }
+          }
+        }
       }
 
       .checklists {

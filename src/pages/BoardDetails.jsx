@@ -147,8 +147,8 @@ export function BoardDetails() {
     }
   }
 
-
   function onPreviewToShow(data) {
+    console.log(data.task?.cover?.color);
     setPreview({
       position: "absolute",
       left: `${data.elData.left}px`,
@@ -157,9 +157,9 @@ export function BoardDetails() {
       height: `${data.elData.heigh + 100}px`,
       zIndex: "1000",
       gridTemplateRows:
-        data.task?.cover?.color === ""
+        data.task?.cover?.color === undefined
           ? "max-content max-content max-content"
-          : "36px max-content max-content max-content",
+          : "max-content max-content max-content max-content",
     });
 
     setTaskPrevActionsModalData({
@@ -185,15 +185,10 @@ export function BoardDetails() {
 
     if (!board) return;
     try {
-      const updatedBoard = boardService.updateBoard(
-        board,
-        currGroup.id,
-        currTask.id,
-        {
-          key: name,
-          value: value,
-        }
-      );
+      boardService.updateBoard(board, currGroup.id, currTask.id, {
+        key: name,
+        value: value,
+      });
       // await updateBoard(updatedBoard);
       await loadBoard(boardId, filterBy);
     } catch (error) {
@@ -277,8 +272,19 @@ export function BoardDetails() {
             }}
             method="dialog"
           >
-            {currTask.cover.color !== "" && (
-              <CoverDisplay currCover={currTask.cover} height="36px" />
+            {currTask.cover.color !== undefined && (
+              <div
+                className="absolute-element"
+                style={{ height: !currTask.cover.img ? "36px" : "200px" }}
+              >
+                <CoverDisplay
+                  currCover={currTask.cover}
+                  height={!currTask.cover.img ? "36px" : "200px"}
+                  borderRadius="8px 8px 0 0"
+                  imgWidth="100%"
+                  colorHeight="36px"
+                />
+              </div>
             )}
 
             <div className="labels">
@@ -354,6 +360,7 @@ export function BoardDetails() {
         bgColor={bgColor}
         logoImg="https://www.pngkey.com/png/full/213-2134177_import-boards-from-trello-trello-logo-white.png"
         logoColor="#fff"
+        link="http://localhost:5173/board"
       />
       {/* {board?.members && board.members.length && ( */}
       <BoardHeader

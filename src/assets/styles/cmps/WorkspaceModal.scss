@@ -1,0 +1,46 @@
+.workspace-container {
+  height: 100%;
+  overflow: hidden;
+  h2 {
+    margin: 16px 20px 8px 20px;
+    color: #44546f;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+  }
+
+  a {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    margin: 0 12px 4px;
+    padding: 8px;
+    border-radius: 5px;
+    &:hover {
+      background-color: #091e420f;
+    }
+    .color {
+      background: linear-gradient(#028559, #1bd899);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 40px;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: bold;
+      border-radius: 3px;
+    }
+    span {
+      place-self: center start;
+      margin-bottom: 0;
+      margin-left: 12px;
+      overflow: hidden;
+      font-size: 14px;
+      font-weight: 500;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #172b4d;
+    }
+  }
+}

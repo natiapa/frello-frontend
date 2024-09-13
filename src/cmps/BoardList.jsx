@@ -147,7 +147,7 @@ export function BoardList({
               vertical: "bottom",
               horizontal: "left",
             }}
-            disablePortal
+            // disablePortal
           >
             <CreateBoardModal handleCreateBoard={handleCreateBoard} />
           </Popover>

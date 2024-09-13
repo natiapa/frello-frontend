@@ -110,12 +110,13 @@ export function BoardIndex() {
         borderBottom="1px solid #ddd"
         logoImg="https://cdn.icon-icons.com/icons2/2699/PNG/512/trello_logo_icon_167765.png"
         logoColor="#0c66e4"
+        link="http://localhost:5173/"
       />
       <section
         className="board-index"
         style={{
-          backgroundImage: `url(https://cdn.pixabay.com/photo/2017/02/19/11/19/background-2079405_1280.jpg)`,
-          backgroundSize: "cover",
+          // backgroundImage: `url(https://cdn.pixabay.com/photo/2017/02/19/11/19/background-2079405_1280.jpg)`,
+          // backgroundSize: "cover",
           gridTemplateColumns:
             boards.length > 0
               ? `minmax(1rem, 1fr) auto minmax(1rem, 1fr)`
