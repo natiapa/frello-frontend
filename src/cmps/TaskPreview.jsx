@@ -46,19 +46,24 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
         onUpdated('members', membersToUpdate)
     }
 
-  async function onUpdated(name, value) {
-    if (!board) return;
-    try {
-      const updatedBoard = await boardService.updateBoard(board, group.id, task.id, {
-        key: name,
-        value: value,
-      });
-      await updateBoard(updatedBoard);
-      // await loadBoard(board._id);
-    } catch (error) {
-      console.error("Failed to update the board:", error);
+    async function onUpdated(name, value) {
+        if (!board) return
+        try {
+            const updatedBoard = await boardService.updateBoard(
+                board,
+                group.id,
+                task.id,
+                {
+                    key: name,
+                    value: value,
+                }
+            )
+            await updateBoard(updatedBoard)
+            // await loadBoard(board._id);
+        } catch (error) {
+            console.error('Failed to update the board:', error)
+        }
     }
-  }
 
     function getChecklists() {
         const checklists = task.checklists
@@ -179,30 +184,51 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
                                         />
                                     </div>
                                 )}
-                                 {task.description && <VscListFlat style={{gridRow:1}}/>}
+                                {task.description && (
+                                    <VscListFlat style={{ gridRow: 1 }} />
+                                )}
                                 {task.checklists &&
                                     task.checklists.length > 0 && (
-                                        <div
-                                            className="checklists"
-                                            style={{
-                                               gridRow: task.dueDate && task.description ? '2' : '1', 
-                                              }}
-                                            >
-                                            <IoMdCheckboxOutline
-                                                style={{
-                                                    height: '14px',
-                                                    width: '14px',
-                                                }}
-                                            />
-                                            {`${getIsChecked()}/${getChecklists()}`}
+                                        <div className="checklist-container" style={{
+                                          gridRow:
+                                              task.dueDate &&
+                                              task.description
+                                                  ? '2'
+                                                  : '1',
+                                      }}>
+                                            <div
+                                                className={`checklists ${
+                                                    getChecklists() ===
+                                                    getIsChecked()
+                                                        ? 'green-bg'
+                                                        : ''
+                                                }`}
+                                                >
+                                                <IoMdCheckboxOutline
+                                                    style={{
+                                                        height: '14px',
+                                                        width: '14px',
+                                                    }}
+                                                />
+                                                {`${getIsChecked()}/${getChecklists()}`}
+                                            </div>
                                         </div>
                                     )}
-                                   
-                                <ul className="members" style={{ 
-                                  gridRow:task.members.length > 1 || task.dueDate && task.checklists?.length > 1 ? 2 : 1,
-                                  gridColumn:task.members.length > 1 ? '2/3' : '3', 
 
-                                }}>
+                                <ul
+                                    className="members"
+                                    style={{
+                                        gridRow:
+                                            task.members.length > 1 ||
+                                            (task.dueDate &&
+                                                task.checklists?.length > 1)
+                                                ? 2
+                                                : 1,
+                                        gridColumn:
+                                            task.members.length > 1
+                                                ? '2/3'
+                                                : '3',
+                                    }}>
                                     <MemberList
                                         members={members}
                                         gridColumnWidth="28px"

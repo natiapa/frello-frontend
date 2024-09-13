@@ -24,6 +24,7 @@
 
   a {
     display: grid;
+
     // grid-template-rows: max-content 1fr max-content;
     // row-gap: 8px;
     .cover-container {
@@ -87,15 +88,17 @@
     // padding-inline: 12px;
     grid-row: 4;
     display: grid;
-    padding-block-start:12px ;
+    padding-block-start: 12px;
     // grid-template-columns: repeat(3, 1fr);
     // grid-row: 1fr 1fr;
     // grid-template-columns: auto 80px;
     align-items: center;
+
     // justify-content: space-between;
     // column-gap: 10px;
     .due-date-container {
-      margin: 0 !important;
+      margin: 0 0 4px;
+
       .due-date-display {
         .date-item .date-container {
           background-color: transparent;
@@ -106,6 +109,11 @@
           // padding: 0;
           padding: 2px 4px;
           border-radius: 3px;
+
+          .date-label {
+            display: none !important;
+          }
+
           span {
             &:first-of-type {
               place-self: center;
@@ -118,6 +126,7 @@
               }
             }
           }
+
           &.green-bg {
             background-color: #1f845a;
             color: #fff;
@@ -128,6 +137,7 @@
             padding: 0;
             margin: 2px 0 0 0;
           }
+
           input[type="checkbox"] {
             padding: 0;
             margin: 0;
@@ -140,33 +150,48 @@
             // display: grid;
             margin: 0 0 0.53px 0;
           }
+
           .date-value {
             place-self: center;
             font-size: 12px;
             padding: 0;
             margin: 0;
           }
+
           .date-picker-icon {
             display: none;
           }
         }
       }
     }
-    .checklists {
+
+    .checklist-container {
       display: grid;
-      grid-auto-flow: column;
-      grid-template-columns: max-content max-content;
-      // grid-column: 2;
-      margin-bottom: 2px;
-      padding: 2px 6px;
-      place-self: start;
-      // margin: 0 0 4px;
-      // grid-column: 4/5;
-      // place-self: center;
-      gap: 4px;
-      justify-content: end;
-      align-items: center;
-      font-size: 12px;
+      margin: 0 0 4px;
+      padding-top: 1px;
+      .checklists {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: max-content max-content;
+        // grid-column: 2;
+        // margin-bottom: 2px;
+        padding: 2px 4px;
+        place-self: start;
+        // margin: 0 0 4px;
+        // grid-column: 4/5;
+        // place-self: center;
+        gap: 4px;
+        justify-content: end;
+        align-items: center;
+        font-size: 12px;
+        border-radius: 3px;
+        font-weight: 500;
+
+        &.green-bg {
+          background-color: #1f845a;
+          color: #fff;
+        }
+      }
     }
 
     .members {
@@ -196,6 +221,7 @@
           height: 24px;
           text-align: center;
           color: white;
+
           &:hover {
             opacity: 0.7;
           }
