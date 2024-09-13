@@ -96,7 +96,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
         const previewData = { elData, group, task, dataName }
         eventBus.emit('show-task', previewData)
     }
-
+    const isItems = task.checklists?.some(checklist => checklist.items?.length)
     return (
         <Draggable key={task.id} draggableId={task.id} index={tIndex}>
             {(provided, snapshot) => (
@@ -187,29 +187,30 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
                                 {task.description && (
                                     <VscListFlat style={{ gridRow: 1 }} />
                                 )}
-                                {task.checklists &&
-                                    task.checklists.length > 0 && (
-                                        <div className="checklist-container" style={{
-                                          gridRow:
-                                              task.dueDate &&
-                                              task.description
-                                                  ? '2'
-                                                  : '1',
-                                      }}>
+                                {isItems && (
+                                        <div
+                                            className="checklist-container"
+                                            style={{
+                                                gridRow:
+                                                    task.dueDate &&
+                                                    task.description
+                                                        ? '2'
+                                                        : '1',
+                                            }}>
                                             <div
                                                 className={`checklists ${
                                                     getChecklists() ===
                                                     getIsChecked()
                                                         ? 'green-bg'
                                                         : ''
-                                                }`}
-                                                >
+                                                }`}>
                                                 <IoMdCheckboxOutline
                                                     style={{
                                                         height: '14px',
                                                         width: '14px',
                                                     }}
                                                 />
+
                                                 {`${getIsChecked()}/${getChecklists()}`}
                                             </div>
                                         </div>
@@ -219,9 +220,9 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
                                     className="members"
                                     style={{
                                         gridRow:
-                                            task.members.length > 1 ||
+                                            task.members.length > 1 &&
                                             (task.dueDate &&
-                                                task.checklists?.length > 1)
+                                                isItems)
                                                 ? 2
                                                 : 1,
                                         gridColumn:
