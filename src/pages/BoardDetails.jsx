@@ -70,20 +70,20 @@ export function BoardDetails() {
   const [taskMembers, setTaskMembers] = useState(currTask?.members || []);
   const [groups, setGroups] = useState(board?.groups || []);
 
-  useEffect(() => {
-    socketService.emit("joinBoard", boardId);
-    console.log("Joining board room:", boardId);
+  // useEffect(() => {
+  //   socketService.emit("joinBoard", boardId);
+  //   console.log("Joining board room:", boardId);
 
-    socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
-      console.log("Received updated groups:", updatedGroups);
+  //   socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
+  //     console.log("Received updated groups:", updatedGroups);
 
-      setGroups(updatedGroups);
-    });
+  //     setGroups(updatedGroups);
+  //   });
 
-    return () => {
-      socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
-    };
-  }, [boardId]);
+  //   return () => {
+  //     socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
+  //   };
+  // }, [boardId]);
 
   useEffect(() => {
     eventBus.on("show-task", onPreviewToShow);
@@ -424,9 +424,8 @@ export function BoardDetails() {
           isActivitiesOpen={isMenuOpen}
         />
       )}
-
-      <App />
-      <MouseTracker boardId={boardId} />
+      {/* <App />
+      <MouseTracker boardId={boardId} /> */}
 
       {/* {taskId && <TaskDetails board={board} group={group} task={task} onUpdateBoard={onUpdateBoard} />} */}
 
