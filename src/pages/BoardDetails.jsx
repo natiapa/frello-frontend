@@ -89,11 +89,17 @@ export function BoardDetails() {
     eventBus.on("show-task", onPreviewToShow);
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   loadBoard(boardId, filterBy);
+  //   if (!preview?.length) return;
+  //   setPreview(preview);
+  // }, [boardId, preview, filterBy, currTask, groups]);
+
+    useEffect(() => {
     loadBoard(boardId, filterBy);
     if (!preview?.length) return;
     setPreview(preview);
-  }, [boardId, preview, filterBy, currTask, groups]);
+  }, [boardId, preview, filterBy, currTask]);
 
   useEffect(() => {
     calculateBgColor();
@@ -416,10 +422,19 @@ export function BoardDetails() {
         />
       )}
 
-      {board && <BoardSideBar board={board} bgColor={bgColor} />}
+      {/* {board && <BoardSideBar board={board} bgColor={bgColor} />}
       {board && (
         <GroupList
           groups={groups}
+          allowDrop={allowDrop}
+          isActivitiesOpen={isMenuOpen}
+        />
+      )} */}
+
+{board && <BoardSideBar board={board} bgColor={bgColor} />}
+      {board && (
+        <GroupList
+          groups={board.groups}
           allowDrop={allowDrop}
           isActivitiesOpen={isMenuOpen}
         />
