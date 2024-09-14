@@ -6,14 +6,17 @@ import { loadBoard, updateBoard } from "../store/actions/board.actions";
 import { AddingForm } from "./AddingForm";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
+
 export function GroupList({ groups, allowDrop, drop, isActivitiesOpen }) {
   const board = useSelector((storeState) => storeState.boardModule.board);
 
   const [isNewGroup, setIsNewGroup] = useState(false);
   const [newGroup, setNewGroup] = useState(boardService.getEmptyGroup());
   const [currGroups, setCurrGroups] = useState(groups);
-  // const [currTasks, setCurrTasks] = useState("");
+  const [currTasks, setCurrTasks] = useState("");
   const currBoard = useSelector((state) => state.boardModule.board);
+
+
 
   useEffect(() => {
     if (board?.groups) setCurrGroups(groups);
@@ -63,6 +66,7 @@ export function GroupList({ groups, allowDrop, drop, isActivitiesOpen }) {
         key: name,
         value: value,
       });
+
 
       await updateBoard(updatedBoard);
     } catch (error) {

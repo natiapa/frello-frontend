@@ -9,13 +9,15 @@ export const SOCKET_EVENT_USER_UPDATED = 'user-updated'
 export const SOCKET_EVENT_REVIEW_ADDED = 'review-added'
 export const SOCKET_EVENT_REVIEW_REMOVED = 'review-removed'
 export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you'
+export const SOCKET_EVENT_GROUPS_UPDATED = 'groupsUpdated'
+export const SOCKET_EVENT_MOUSE_MOVE = 'mouseMove'
 
 const SOCKET_EMIT_LOGIN = 'set-user-socket'
 const SOCKET_EMIT_LOGOUT = 'unset-user-socket'
 
 
 const baseUrl = (process.env.NODE_ENV === 'production') ? '' : '//localhost:3030'
-// export const socketService = createSocketService()
+export const socketService = createSocketService()
 // export const socketService = createDummySocketService()
 
 // for debugging from console
@@ -51,6 +53,9 @@ function createSocketService() {
     },
     terminate() {
       socket = null
+    },
+    getSocketId() {
+      return socket.id;  
     },
 
   }
