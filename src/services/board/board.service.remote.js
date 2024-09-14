@@ -72,7 +72,7 @@ async function updateBoard(
     { key, value },
     activity = ''
 ) {
- 
+
 
 
     const gIdx = board?.groups?.findIndex(group => group.id === groupId)
@@ -106,7 +106,7 @@ async function updateBoard(
     // } catch (err) {
     //     console.log('err:', err)
     // }
-  
+
 
     return board
 }
@@ -138,7 +138,6 @@ async function updateActivities(
 
 
     await board.activities.unshift(activityToAdd)
-    // await save(board)
 }
 
 function addActivity(

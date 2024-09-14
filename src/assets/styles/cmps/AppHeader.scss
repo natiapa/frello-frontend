@@ -22,9 +22,9 @@
   nav {
     display: grid;
 
-    grid-template-columns: repeat(3, max-content);
+    grid-template-columns: repeat(4, max-content);
     // justify-content: space-between;
-    column-gap: 1em;
+    column-gap: 0.5em;
     align-items: center;
     width: 100%;
 
@@ -54,13 +54,15 @@
       }
     }
 
-    .workspace-btn {
+    .workspace-btn,
+    .starred-btn {
       display: grid;
       grid-template-columns: repeat(2, max-content);
       background-color: transparent;
       height: 32px;
-      margin-right: 4px;
-      padding-right: 10px;
+      margin-inline-end: 4px;
+      margin-inline-start: 0;
+      padding-inline-end: 10px;
       color: #44546f;
       padding: 6px 12px;
       border-radius: 3px;
@@ -82,7 +84,7 @@
       // line-height: 32px;
       // white-space: nowrap;
       &:hover {
-        background-color: #caccd1;
+        background-color: #caccd140;
       }
     }
 
@@ -92,6 +94,10 @@
       height: 32px;
       color: $white;
       background-color: $blue1;
+      margin-inline-start: 1em;
+      &:hover {
+        background-color: #287bef;
+      }
     }
   }
 

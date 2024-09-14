@@ -12,8 +12,18 @@ import { WorkspaceModal } from "./WorkspaceModal.jsx";
 import { addBoard } from "../store/actions/board.actions.js";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 import { boardService } from "../services/board";
+import { StarredBoardsModal } from "./StarredBoardsModal.jsx";
 
-export function AppHeader({ bgColor, borderBottom, logoImg, logoColor, link }) {
+export function AppHeader({
+  starredBoards,
+  bgColor,
+  borderBottom,
+  logoImg,
+  logoColor,
+  link,
+  textColor,
+  createBtnColor,
+}) {
   const [showUserModal, setShowUserModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -45,7 +55,6 @@ export function AppHeader({ bgColor, borderBottom, logoImg, logoColor, link }) {
         "addBoard"
       );
       const savedBoard = await addBoard(boardToSave);
-      console.log(savedBoard);
       navigate(`/board/${savedBoard._id}`);
       showSuccessMsg(`Board added (id: ${savedBoard._id})`);
     } catch (err) {
@@ -97,11 +106,16 @@ export function AppHeader({ bgColor, borderBottom, logoImg, logoColor, link }) {
         <button
           className="workspace-btn"
           data-name="workspace"
-          aria-describedby="20"
+          aria-describedby="21"
           onClick={handleClick}
         >
-          <span className="btn">Workspace</span>
-          <BsChevronDown className="date-picker-icon" />
+          <span className="btn" style={{ color: textColor }}>
+            Workspace
+          </span>
+          <BsChevronDown
+            className="date-picker-icon"
+            style={{ color: textColor }}
+          />
           {modalOpenByName === "workspace" && isPopoverOpen && (
             <Popover
               id={isPopoverOpen ? "workspace" : undefined}
@@ -115,43 +129,66 @@ export function AppHeader({ bgColor, borderBottom, logoImg, logoColor, link }) {
                 sx: {
                   width: "304px",
                   height: "104px",
-                  // padding: "20px",
                   borderRadius: "8px",
                 },
               }}
             >
-              <WorkspaceModal setIsPopoverOpen={setIsPopoverOpen} />
+              <WorkspaceModal
+                setIsPopoverOpen={setIsPopoverOpen}
+                handlePopoverClick={handlePopoverClick}
+              />
             </Popover>
           )}
         </button>
-        {/* <button
-          className="create-btn"
-          data-name="create"
-          aria-describedby="20"
+
+        <button
+          className="starred-btn"
+          data-name="starred"
+          aria-describedby="22"
           onClick={handleClick}
         >
-          <span className="btn">Create</span>
-          {modalOpenByName === "create" && isPopoverOpen && (
+          <span className="btn" style={{ color: textColor }}>
+            Starred
+          </span>
+          <BsChevronDown
+            className="date-picker-icon"
+            style={{ color: textColor }}
+          />
+          {modalOpenByName === "starred" && isPopoverOpen && (
             <Popover
-              id={isPopoverOpen ? "create" : undefined}
+              id={isPopoverOpen ? "starred" : undefined}
               open={isPopoverOpen}
-              onClose={handleClosePopover}
               anchorEl={anchorEl}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "left",
               }}
-              disablePortal
+              PaperProps={{
+                sx: {
+                  width: "304px",
+                  height: "fit-content",
+
+                  borderRadius: "8px",
+                },
+              }}
             >
-              <CreateBoardModal handleCreateBoard={handleCreateBoard} />
+              <StarredBoardsModal
+                starredBoards={starredBoards}
+                setIsPopoverOpen={setIsPopoverOpen}
+                handlePopoverClick={handlePopoverClick}
+              />
             </Popover>
           )}
-        </button> */}
+        </button>
+
         <button
-          aria-describedby="21"
+          aria-describedby="23"
           data-name="add-board"
           className="create-btn"
           onClick={handleClick}
+          style={{
+            backgroundColor: createBtnColor,
+          }}
         >
           Create
         </button>
@@ -164,6 +201,11 @@ export function AppHeader({ bgColor, borderBottom, logoImg, logoColor, link }) {
             anchorOrigin={{
               vertical: "bottom",
               horizontal: "left",
+            }}
+            PaperProps={{
+              sx: {
+                borderRadius: "8px",
+              },
             }}
             // disablePortal
           >

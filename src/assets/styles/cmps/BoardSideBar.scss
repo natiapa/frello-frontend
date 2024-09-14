@@ -115,6 +115,10 @@
         background-color: transparent;
         // backdrop-filter: blur(0px);
         // background: #0000003d;
+        transition: scale 0.15s ease;
+        &:hover {
+          scale: 1.2;
+        }
 
         svg {
           stroke: currentcolor;

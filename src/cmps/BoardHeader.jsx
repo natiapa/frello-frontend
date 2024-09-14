@@ -6,12 +6,13 @@ import { useState } from "react";
 import { BoardFilter } from "./BoardFilter";
 import { boardService } from "../services/board";
 import { useSelector } from "react-redux";
-import { filterBoard } from "../store/actions/board.actions";
+import { filterBoard, updateBoard } from "../store/actions/board.actions";
 import { RxDotsHorizontal } from "react-icons/rx";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { useParams } from "react-router";
 import { Activities } from "./Activities";
 import { TbDots } from "react-icons/tb";
+import { FaRegStar, FaStar } from "react-icons/fa";
 
 export function BoardHeader({
   members,
@@ -25,6 +26,7 @@ export function BoardHeader({
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   function handleFilterClick(ev) {
     setAnchorEl(ev.currentTarget);
@@ -39,6 +41,31 @@ export function BoardHeader({
     filterBoard(boardService.getDefaultFilter());
   }
 
+  async function onUpdated(name, value) {
+    if (!board) return;
+    try {
+      const updatedBoard = await boardService.updateBoard(board, null, null, {
+        key: name,
+        value: value,
+      });
+      await updateBoard(updatedBoard);
+    } catch (error) {
+      console.error("Failed to update the board:", error);
+    }
+  }
+
+  function setStarred() {
+    if (board.isStarred) return false;
+    else return true;
+  }
+
+  function handleIsStarred(ev) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    setStarred();
+    onUpdated("isStarred", setStarred());
+  }
+
   return (
     <section
       className="board-header"
@@ -48,6 +75,14 @@ export function BoardHeader({
       }}
     >
       <div className="board-header-title">{board?.title}</div>
+      <div
+        className="starred"
+        onClick={(ev) => handleIsStarred(ev)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {!board.isStarred || isHovered ? <FaRegStar /> : <FaStar />}
+      </div>
       {/* <div className="board-header-actions"></div> */}
       <div
         className="filter"

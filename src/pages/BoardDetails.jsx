@@ -37,6 +37,11 @@ export function BoardDetails() {
   const filterBy = useSelector(
     (storeState) => storeState.boardModule.filterBoard
   );
+  const boards = useSelector((storeState) => storeState.boardModule.boards);
+  const starredBoards = Array.isArray(boards)
+    ? boards.filter((board) => board.isStarred)
+    : [];
+
   const [bgColor, setBgColor] = useState("");
   const [currGroup, setCurrGroup] = useState("");
   const [currTask, setCurrTask] = useState("");
@@ -59,6 +64,7 @@ export function BoardDetails() {
     currTask?.labels || []
   );
   const [currCover, setCurrCover] = useState(currTask?.cover || null);
+  const [newCover, setNewCover] = useState(currTask?.cover || null);
   const [taskMembers, setTaskMembers] = useState(currTask?.members || []);
 
   useEffect(() => {
@@ -109,7 +115,7 @@ export function BoardDetails() {
 
     try {
       onUpdated("deleteTask", null);
-      
+
       await boardService.updateActivities(
         board,
         "",
@@ -181,14 +187,18 @@ export function BoardDetails() {
   }
 
   async function onUpdated(name, value) {
-
-    console.log(name,value)
+    console.log(name, value);
     if (!board) return;
     try {
-      const updatedBoard = await boardService.updateBoard(board, currGroup.id, currTask.id, {
-        key: name,
-        value: value,
-      });
+      const updatedBoard = await boardService.updateBoard(
+        board,
+        currGroup.id,
+        currTask.id,
+        {
+          key: name,
+          value: value,
+        }
+      );
       await updateBoard(updatedBoard);
       await loadBoard(boardId, filterBy);
     } catch (error) {
@@ -275,11 +285,13 @@ export function BoardDetails() {
             {currTask.cover.color !== undefined && (
               <div
                 className="absolute-element"
-                style={{ height: !currTask.cover.img ? "36px" : "200px" }}
+                style={{
+                  height: currTask.cover.img === undefined ? "36px" : "200px",
+                }}
               >
                 <CoverDisplay
-                  currCover={currTask.cover}
-                  height={!currTask.cover.img ? "36px" : "200px"}
+                  currCover={newCover || currTask.cover}
+                  height={currTask.cover.img === undefined ? "36px" : "200px"}
                   borderRadius="8px 8px 0 0"
                   imgWidth="100%"
                   colorHeight="36px"
@@ -350,6 +362,7 @@ export function BoardDetails() {
               taskMembers={taskMembers}
               taskSelectedLabels={taskSelectedLabels}
               setNewDueDate={setNewDueDate}
+              setNewCover={setNewCover}
               deleteTask={deleteTask}
             />
           )}
@@ -357,10 +370,13 @@ export function BoardDetails() {
       )}
 
       <AppHeader
+        starredBoards={starredBoards}
         bgColor={bgColor}
         logoImg="https://www.pngkey.com/png/full/213-2134177_import-boards-from-trello-trello-logo-white.png"
         logoColor="#fff"
         link="http://localhost:5173/board"
+        textColor="#fff"
+        createBtnColor="#caccd140"
       />
       {/* {board?.members && board.members.length && ( */}
       <BoardHeader

@@ -33,6 +33,20 @@
     color: #fff;
   }
 
+  .starred {
+    grid-row: 1;
+    grid-column: 2;
+    color: #fff;
+    place-self: center start;
+    margin-inline-start: 1em;
+    font-size: 16px;
+    cursor: pointer;
+    transition: scale 0.15s ease;
+    &:hover {
+      scale: 1.2;
+    }
+  }
+
   .board-header-icon {
     font-size: 14px;
     padding: 6px 12px 6px 8px;

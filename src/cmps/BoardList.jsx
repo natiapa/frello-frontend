@@ -147,7 +147,11 @@ export function BoardList({
               vertical: "bottom",
               horizontal: "left",
             }}
-            // disablePortal
+            PaperProps={{
+              sx: {
+                borderRadius: "8px",
+              },
+            }}
           >
             <CreateBoardModal handleCreateBoard={handleCreateBoard} />
           </Popover>

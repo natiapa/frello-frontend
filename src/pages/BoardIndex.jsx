@@ -107,6 +107,7 @@ export function BoardIndex() {
   return (
     <>
       <AppHeader
+        starredBoards={starredBoards}
         borderBottom="1px solid #ddd"
         logoImg="https://cdn.icon-icons.com/icons2/2699/PNG/512/trello_logo_icon_167765.png"
         logoColor="#0c66e4"

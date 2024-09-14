@@ -68,7 +68,7 @@
 
       &:hover {
         .close-btn {
-         opacity:1 ;
+          opacity: 1;
         }
         .starred-btn {
           .not-starred {
@@ -103,6 +103,10 @@
       color: #f1f2f4;
       font-size: 16px;
       font-weight: bold;
+      transition: scale 0.15s ease;
+      &:hover {
+        scale: 1.2;
+      }
       .starred {
         color: $tr-icon-star;
       }

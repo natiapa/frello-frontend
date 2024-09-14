@@ -42,6 +42,7 @@ export function TaskDetailsActions({
   taskMembers,
   taskSelectedLabels,
   deleteTask,
+  setNewCover,
 }) {
   const { taskId: taskParams } = useParams();
   const [isArchiveClicked, setIsArchiveClicked] = useState(false);
@@ -312,6 +313,7 @@ export function TaskDetailsActions({
                 handlePopoverClick={handlePopoverClick}
                 setCurrCover={setCurrCover}
                 currCover={currCover}
+                setNewCover={setNewCover}
               />
             </Popover>
           )}

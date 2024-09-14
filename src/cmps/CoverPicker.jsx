@@ -7,6 +7,7 @@ export function CoverPicker({
   handlePopoverClick,
   setCurrCover,
   currCover,
+  setNewCover,
 }) {
   const coverColors = boardService.getColorsCover();
   const coverImgs = boardService.getImgs();
@@ -17,16 +18,17 @@ export function CoverPicker({
     const updateColor = { ...currCover, color: color, img: img };
     onUpdated("cover", updateColor);
     setCurrCover(updateColor);
+    setNewCover(updateColor);
   }
 
   return (
     <div className="cover-picker-container">
       <button
-          className="close-cover-btn"
-          onClick={() => setIsPopoverOpen(false)}
-        >
-          <SvgIcon iconName="close" />
-        </button>
+        className="close-cover-btn"
+        onClick={() => setIsPopoverOpen(false)}
+      >
+        <SvgIcon iconName="close" />
+      </button>
       <div className="cover-picker-header">
         <span className="cover-picker-title">Cover</span>
       </div>
@@ -81,4 +83,3 @@ export function CoverPicker({
     </div>
   );
 }
-

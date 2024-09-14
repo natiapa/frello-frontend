@@ -5,6 +5,8 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 
 export function BoardPreview({ board }) {
   const [isStarred, setIsStarred] = useState(board.isStarred || false);
+  const [isHovered, setIsHovered] = useState(false);
+
   useEffect(() => {
     setIsStarred(board.isStarred);
   }, [board.isStarred]);
@@ -41,8 +43,13 @@ export function BoardPreview({ board }) {
           </div>
         )}
         {board.isStarred && (
-          <div className="starred" onClick={(ev) => handleIsStarred(ev)}>
-            <FaStar />
+          <div
+            className="starred"
+            onClick={(ev) => handleIsStarred(ev)}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {isHovered ? <FaRegStar /> : <FaStar />}
           </div>
         )}
       </button>
