@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import {
   showSuccessMsg,
@@ -9,11 +9,15 @@ import {
   eventBus,
 } from "../services/event-bus.service";
 import { loadBoard, addBoardMsg } from "../store/actions/board.actions";
+import { boardService } from "../services/board";
+import { updateBoard } from "../store/actions/board.actions";
+import {
+  socketService,
+  SOCKET_EVENT_GROUPS_UPDATED,
+} from "../services/socket.service";
 
 import { GroupList } from "../cmps/GroupList";
-import { SideBar } from "../cmps/Sidebar";
 import { BoardHeader } from "../cmps/BoardHeader";
-// import { Outlet } from "react-router-dom"
 import { BoardSideBar } from "../cmps/BoardSideBar";
 import { AppHeader } from "../cmps/AppHeader";
 import { TaskDetailsActions } from "../cmps/TaskDetailsActions";
@@ -21,15 +25,14 @@ import { TaskDetailsActions } from "../cmps/TaskDetailsActions";
 import { FastAverageColor } from "fast-average-color";
 import chroma from "chroma-js";
 
-import { updateBoard } from "../store/actions/board.actions";
 import { LabelList } from "../cmps/LabelList";
-import { boardService } from "../services/board";
-import { Activities } from "../cmps/Activities";
 import { MemberList } from "../cmps/MemberList";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { Menu } from "../cmps/Menu";
 import { DueDateDisplay } from "../cmps/DueDateDisplay";
 import { CoverDisplay } from "../cmps/CoverDisplay";
+import { App } from "../cmps/App";
+import { MouseTracker } from "../cmps/MouseTracker";
 
 export function BoardDetails() {
   const { boardId, taskId } = useParams();
@@ -60,6 +63,22 @@ export function BoardDetails() {
   );
   const [currCover, setCurrCover] = useState(currTask?.cover || null);
   const [taskMembers, setTaskMembers] = useState(currTask?.members || []);
+  const [groups, setGroups] = useState(board?.groups || []);
+
+  useEffect(() => {
+    socketService.emit("joinBoard", boardId);
+    console.log("Joining board room:", boardId);
+
+    socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
+      console.log("Received updated groups:", updatedGroups);
+
+      setGroups(updatedGroups);
+    });
+
+    return () => {
+      socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
+    };
+  }, [boardId]);
 
   useEffect(() => {
     eventBus.on("show-task", onPreviewToShow);
@@ -69,7 +88,7 @@ export function BoardDetails() {
     loadBoard(boardId, filterBy);
     if (!preview?.length) return;
     setPreview(preview);
-  }, [boardId, preview, filterBy, currTask]);
+  }, [boardId, preview, filterBy, currTask, groups]);
 
   useEffect(() => {
     calculateBgColor();
@@ -109,7 +128,7 @@ export function BoardDetails() {
 
     try {
       onUpdated("deleteTask", null);
-      
+
       await boardService.updateActivities(
         board,
         "",
@@ -181,14 +200,19 @@ export function BoardDetails() {
   }
 
   async function onUpdated(name, value) {
-
-    console.log(name,value)
+    console.log(name, value);
     if (!board) return;
     try {
-      const updatedBoard = await boardService.updateBoard(board, currGroup.id, currTask.id, {
-        key: name,
-        value: value,
-      });
+      const updatedBoard = await boardService.updateBoard(
+        board,
+        currGroup.id,
+        currTask.id,
+        {
+          key: name,
+          value: value,
+        }
+      );
+      console.log(updatedBoard);
       await updateBoard(updatedBoard);
       await loadBoard(boardId, filterBy);
     } catch (error) {
@@ -384,11 +408,14 @@ export function BoardDetails() {
       {board && <BoardSideBar board={board} bgColor={bgColor} />}
       {board && (
         <GroupList
-          groups={board.groups}
+          groups={groups}
           allowDrop={allowDrop}
           isActivitiesOpen={isMenuOpen}
         />
       )}
+
+      <App />
+      {/* <MouseTracker/> */}
 
       {/* {taskId && <TaskDetails board={board} group={group} task={task} onUpdateBoard={onUpdateBoard} />} */}
 
