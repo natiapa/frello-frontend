@@ -54,6 +54,9 @@ function createSocketService() {
     terminate() {
       socket = null
     },
+    getSocketId() {
+      return socket.id;  
+    },
 
   }
   return socketService

@@ -32,7 +32,7 @@ import { Menu } from "../cmps/Menu";
 import { DueDateDisplay } from "../cmps/DueDateDisplay";
 import { CoverDisplay } from "../cmps/CoverDisplay";
 import { App } from "../cmps/App";
-import { MouseTracker } from "../cmps/MouseTracker";
+import {MouseTracker } from "../cmps/MouseTracker";
 
 export function BoardDetails() {
   const { boardId, taskId } = useParams();
@@ -415,7 +415,7 @@ export function BoardDetails() {
       )}
 
       <App />
-      {/* <MouseTracker/> */}
+      <MouseTracker boardId={boardId} />
 
       {/* {taskId && <TaskDetails board={board} group={group} task={task} onUpdateBoard={onUpdateBoard} />} */}
 
