@@ -67,7 +67,6 @@ export function BoardDetails() {
     currTask?.labels || []
   );
   const [currCover, setCurrCover] = useState(currTask?.cover || null);
-  const [newCover, setNewCover] = useState(currTask?.cover || null);
   const [taskMembers, setTaskMembers] = useState(currTask?.members || []);
   const [groups, setGroups] = useState(board?.groups || []);
 
@@ -306,15 +305,12 @@ export function BoardDetails() {
               <div
                 className="absolute-element"
                 style={{
-                  height:
-                    !newCover?.img && !currTask.cover.img ? "36px" : "200px",
+                  height: !currCover?.img ? "36px" : "200px",
                 }}
               >
                 <CoverDisplay
-                  currCover={newCover || currTask.cover}
-                  height={
-                    !newCover?.img && !currTask.cover.img ? "36px" : "200px"
-                  }
+                  currCover={currCover}
+                  height={!currCover?.img ? "36px" : "200px"}
                   borderRadius="8px 8px 0 0"
                   imgWidth="100%"
                   colorHeight="36px"
@@ -385,7 +381,7 @@ export function BoardDetails() {
               taskMembers={taskMembers}
               taskSelectedLabels={taskSelectedLabels}
               setNewDueDate={setNewDueDate}
-              setNewCover={setNewCover}
+              // setNewCover={setNewCover}
               deleteTask={deleteTask}
             />
           )}
