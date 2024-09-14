@@ -286,12 +286,15 @@ export function BoardDetails() {
               <div
                 className="absolute-element"
                 style={{
-                  height: currTask.cover.img === undefined ? "36px" : "200px",
+                  height:
+                    !newCover?.img && !currTask.cover.img ? "36px" : "200px",
                 }}
               >
                 <CoverDisplay
                   currCover={newCover || currTask.cover}
-                  height={currTask.cover.img === undefined ? "36px" : "200px"}
+                  height={
+                    !newCover?.img && !currTask.cover.img ? "36px" : "200px"
+                  }
                   borderRadius="8px 8px 0 0"
                   imgWidth="100%"
                   colorHeight="36px"
