@@ -32,7 +32,7 @@ import { Menu } from "../cmps/Menu";
 import { DueDateDisplay } from "../cmps/DueDateDisplay";
 import { CoverDisplay } from "../cmps/CoverDisplay";
 import { App } from "../cmps/App";
-import {MouseTracker } from "../cmps/MouseTracker";
+import { MouseTracker } from "../cmps/MouseTracker";
 
 export function BoardDetails() {
   const { boardId, taskId } = useParams();
@@ -95,7 +95,7 @@ export function BoardDetails() {
   //   setPreview(preview);
   // }, [boardId, preview, filterBy, currTask, groups]);
 
-    useEffect(() => {
+  useEffect(() => {
     loadBoard(boardId, filterBy);
     if (!preview?.length) return;
     setPreview(preview);
@@ -139,7 +139,6 @@ export function BoardDetails() {
 
     try {
       onUpdated("deleteTask", null);
-
 
       await boardService.updateActivities(
         board,
@@ -431,7 +430,7 @@ export function BoardDetails() {
         />
       )} */}
 
-{board && <BoardSideBar board={board} bgColor={bgColor} />}
+      {board && <BoardSideBar board={board} bgColor={bgColor} />}
       {board && (
         <GroupList
           groups={board.groups}
