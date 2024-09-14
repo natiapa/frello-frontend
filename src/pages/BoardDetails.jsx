@@ -91,6 +91,10 @@ export function BoardDetails() {
   }, [currTask]);
 
   useEffect(() => {
+    setNewCover(currTask.cover);
+  }, [newCover]);
+
+  useEffect(() => {
     if (isTaskPrevModalOpen) {
       setNewDueDate(currTask.dueDate);
       setTaskMembers(currTask.members);
@@ -287,7 +291,7 @@ export function BoardDetails() {
                 className="absolute-element"
                 style={{
                   height:
-                    !newCover?.img && !currTask.cover.img ? "36px" : "200px",
+                    !newCover?.img && currTask.cover.img ? "36px" : "200px",
                 }}
               >
                 <CoverDisplay
