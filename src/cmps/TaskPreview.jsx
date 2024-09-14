@@ -193,9 +193,10 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
                                             style={{
                                                 gridRow:
                                                     task.dueDate &&
-                                                    task.description
+                                                    task.description && task.members.length > 1
                                                         ? '2'
                                                         : '1',
+                                                gridColumn:'-2'
                                             }}>
                                             <div
                                                 className={`checklists ${
@@ -221,8 +222,7 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
                                     style={{
                                         gridRow:
                                             task.members.length > 1 &&
-                                            (task.dueDate &&
-                                                isItems)
+                                            (task.dueDate)
                                                 ? 2
                                                 : 1,
                                         gridColumn:
