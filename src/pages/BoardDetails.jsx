@@ -91,10 +91,6 @@ export function BoardDetails() {
   }, [currTask]);
 
   useEffect(() => {
-    setNewCover(currTask.cover);
-  }, [newCover]);
-
-  useEffect(() => {
     if (isTaskPrevModalOpen) {
       setNewDueDate(currTask.dueDate);
       setTaskMembers(currTask.members);
@@ -291,7 +287,7 @@ export function BoardDetails() {
                 className="absolute-element"
                 style={{
                   height:
-                    !newCover?.img && currTask.cover.img ? "36px" : "200px",
+                    !newCover?.img && !currTask.cover.img ? "36px" : "200px",
                 }}
               >
                 <CoverDisplay
@@ -383,7 +379,7 @@ export function BoardDetails() {
         logoColor="#fff"
         link="http://localhost:5173/board"
         textColor="#fff"
-        createBtnColor="#caccd140"
+        // createBtnColor="#caccd140"
       />
       {/* {board?.members && board.members.length && ( */}
       <BoardHeader

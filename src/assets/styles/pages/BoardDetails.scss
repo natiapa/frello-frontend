@@ -8,6 +8,13 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+
+  .app-header {
+    .create-btn {
+      background-color: #caccd140;
+      &:hover {
+        background-color: #ffffff40;
+      }
+    }
+  }
 }
-
-
