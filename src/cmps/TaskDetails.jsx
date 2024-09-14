@@ -220,7 +220,10 @@ export function TaskDetails() {
               </div>
             </section>
 
-            <div className="task-details-due-date-container">
+            <div className="task-details-due-date-container" style={{
+              gridRow:taskSelectedLabels?.length > 0 && task.members.length > 1 ? 2 : 1,
+              gridColumn:taskSelectedLabels?.length > 0 && task.members.length > 1 ? '2/4':5,
+            }}>
               <DueDateDisplay
                 dueDate={task.dueDate}
                 setNewDueDate={setNewDueDate}
