@@ -30,7 +30,7 @@ export function StarredBoardsList({ starredBoards, onRemoveBoard }) {
     <section className="starred-board-list-container">
       {starredBoards && starredBoards.length > 0 && (
         <h3 className="starred-board-list-title">
-          <span className="star" onClick={(ev) => handleIsStarred(ev)}>
+          <span className="star">
             <FaRegStar />
           </span>
           <span className="title">Starred boards</span>
