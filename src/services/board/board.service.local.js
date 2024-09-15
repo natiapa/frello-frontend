@@ -550,19 +550,19 @@ function _createBoards() {
       {
         id: "u101",
         fullname: "Natia ",
-        imgUrl: "https://www.google.com",
+        imgUrl: "https://res.cloudinary.com/dmdgdpxtu/image/upload/v1726415931/WhatsApp_Image_2024-09-15_at_18.55.20_atp7ne.jpg",
         color: "#61bd4f",
       },
       {
         id: "u102",
         fullname: "Avi",
-        imgUrl: "https://www.google.com",
+        imgUrl: "https://res.cloudinary.com/dmdgdpxtu/image/upload/v1726415721/WhatsApp_Image_2024-09-15_at_18.54.43_jkgmah.jpg",
         color: "#f2d600",
       },
       {
         id: "u103",
         fullname: "Yana",
-        imgUrl: "https://www.google.com",
+        imgUrl: "https://res.cloudinary.com/dmdgdpxtu/image/upload/v1726415729/WhatsApp_Image_2024-09-15_at_18.54.43_1_sftvw6.jpg",
         color: "#f3a600",
       },
     ],

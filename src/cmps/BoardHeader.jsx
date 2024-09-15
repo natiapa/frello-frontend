@@ -23,7 +23,7 @@ export function BoardHeader({
   isMenuOpen,
 }) {
   const board = useSelector((storeState) => storeState.boardModule.board);
-
+  console.log(members);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -133,14 +133,15 @@ export function BoardHeader({
             draggable={true}
             onDragStart={(ev) => drag(ev)}
             style={{
-              backgroundColor: member.color || "#FFA500",
               gridColumn: `${idx + 1}`,
               marginLeft: idx * -0.1 + "px",
               zIndex: members.length - idx,
+              borderRadius: "50%",
+              backgroundImage: member.imgUrl ? `url(${member.imgUrl})` : "none",
+              backgroundColor: !member.imgUrl ? member.color : "transparent",
+              backgroundSize: "cover",
             }}
-          >
-            {member.fullname[0]}
-          </li>
+          ></li>
         ))}
       </ul>
 

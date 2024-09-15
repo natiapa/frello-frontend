@@ -30,6 +30,7 @@ export function AppHeader({
   const [modalOpenByName, setModalOpenByName] = useState(null);
 
   const user = useSelector((storeState) => storeState.userModule.user);
+  console.log(user);
 
   const navigate = useNavigate();
 
@@ -223,6 +224,7 @@ export function AppHeader({
                   width: "32px",
                   height: "32px",
                   padding: "4px",
+                  borderRadius: "50%",
                 }}
               />
             )}

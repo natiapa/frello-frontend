@@ -14,7 +14,15 @@ export function MemberList({ members, gridColumnWidth }) {
           key={member.fullname}
           style={{ backgroundColor: member.color, gridColumn: `${idx + 1}` }}
         >
-          {member.fullname[0].toUpperCase()}
+          {member.imgUrl && (
+            <img src={member.imgUrl} style={{ borderRadius: "50%" }} />
+          )}
+          {!member.imgUrl && (
+            <span style={{ backgroundColor: member.color }}>
+              {member.fullname[0]}
+            </span>
+          )}
+          {/* {member.fullname[0].toUpperCase()} */}
         </li>
       ))}
     </div>
