@@ -21,7 +21,9 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
   const [members, setMembers] = useState(task.members);
   const [newDueDate, setNewDueDate] = useState(task.dueDate);
 
-  useEffect(() => {}, [task.members]);
+  useEffect(() => {
+    setMembers(task.members);
+  }, [task.members]);
 
   function drop(ev) {
     ev.preventDefault();

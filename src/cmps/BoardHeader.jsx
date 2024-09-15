@@ -121,7 +121,7 @@ export function BoardHeader({
         onDragOver={(ev) => allowDrop(ev)}
         style={{
           gridColumn: isMenuOpen ? "4" : "3",
-          gridTemplateColumns: `repeat(${members.length}, 20px)`,
+          gridTemplateColumns: `repeat(${members.length}, 26px)`,
           placeSelf: "center end",
         }}
       >
