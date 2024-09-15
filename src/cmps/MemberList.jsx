@@ -1,7 +1,5 @@
 export function MemberList({ members, gridColumnWidth }) {
-  // if (members) console.log(members);
-  // if (!members) return <div>Loading...</div>;
-  return (
+ return (
     <div
       className="list-container"
       style={{
@@ -22,7 +20,6 @@ export function MemberList({ members, gridColumnWidth }) {
               {member.fullname[0]}
             </span>
           )}
-          {/* {member.fullname[0].toUpperCase()} */}
         </li>
       ))}
     </div>

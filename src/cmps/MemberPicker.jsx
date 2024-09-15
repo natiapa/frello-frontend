@@ -12,8 +12,7 @@ export function MemberPicker({
 }) {
     const membersBoard = board.members
     const availableMembers = membersBoard.filter(
-        boardMember =>
-            !taskMembers.some(taskMember => taskMember.id === boardMember.id)
+        boardMember => !taskMembers.some(taskMember => taskMember.id === boardMember.id)
     )
     const [selectedMembers, setSelectedMembers] = useState(availableMembers)
 
@@ -29,9 +28,7 @@ export function MemberPicker({
 
     function handleAddMember(ev, member) {
         ev.stopPropagation()
-        const updateBoardMembers = selectedMembers.filter(
-            m => m.id !== member.id
-        )
+        const updateBoardMembers = selectedMembers.filter(m => m.id !== member.id)
         setSelectedMembers(updateBoardMembers)
 
         const updateTaskMembers = [...taskMembers, member]
@@ -50,14 +47,22 @@ export function MemberPicker({
                     {taskMembers.length > 0
                         ? taskMembers.map((member, idx) => (
                               <li className="member-item" key={member.id}>
-                                  <span
-                                      className="img"
-                                      style={{ backgroundColor: member.color }}>
-                                      {member.fullname[0]}
-                                  </span>
-                                  <span className="member-name">
-                                      {member.fullname}
-                                  </span>
+                                  {member.imgUrl && (
+                                      <img
+                                          src={member.imgUrl}
+                                          style={{
+                                              borderRadius: '50%',
+                                              width: '24px',
+                                              marginInlineEnd: '10px',
+                                          }}
+                                      />
+                                  )}
+                                  {!member.imgUrl && (
+                                      <span style={{ backgroundColor: member.color }}>
+                                          {member.fullname[0]}
+                                      </span>
+                                  )}
+                                  <span className="member-name">{member.fullname}</span>
                                   <button
                                       className="remove-member-btn"
                                       onClick={event =>
@@ -79,15 +84,22 @@ export function MemberPicker({
                             className="member-item"
                             key={member.id}
                             onClick={event => handleAddMember(event, member)}>
-                            <span
-                                className="img"
-                                style={{ backgroundColor: member.color }}>
-                                {member.fullname[0]}
-                            </span>
-
-                            <span className="member-name">
-                                {member.fullname}
-                            </span>
+                            {member.imgUrl && (
+                                <img
+                                    src={member.imgUrl}
+                                    style={{
+                                        borderRadius: '50%',
+                                        width: '24px',
+                                        marginInlineEnd: '10px',
+                                    }}
+                                />
+                            )}
+                            {!member.imgUrl && (
+                                <span style={{ backgroundColor: member.color }}>
+                                    {member.fullname[0]}
+                                </span>
+                            )}
+                            <span className="member-name">{member.fullname}</span>
                         </li>
                     ))}
                 </ul>
