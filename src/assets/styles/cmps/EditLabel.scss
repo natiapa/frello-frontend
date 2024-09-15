@@ -15,6 +15,22 @@
 .label-edit-container {
   display: flex;
   flex-direction: column;
+  .header-edit-label{
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+    .close-btn{
+      margin: 0;
+      padding: 0;
+    }
+    .back-btn{
+      margin-top: 2px;
+      padding: 0;
+      background-color: transparent;
+    }
+  }
+  input.title-label-input{
+    padding: 5px !important;
+  }
 }
 
 .label-edit-container h4 {
@@ -26,7 +42,7 @@
 .label-edit-container .label-preview {
   height: 30px;
   border-radius: 4px;
-  margin-bottom: 10px;
+  margin-block: 10px;
   display: flex;
   align-items: center;
   padding: 0 10px;
@@ -49,7 +65,7 @@
 }
 
 .label-edit-container .color-item {
-  width: 100%; /* הגדרה שתאפשר התאמה אוטומטית לרוחב העמודה */
+  width: 50px; /* הגדרה שתאפשר התאמה אוטומטית לרוחב העמודה */
   height: 30px;
   border-radius: 4px;
   cursor: pointer;
@@ -72,7 +88,7 @@
 .action-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
 .action-buttons button {

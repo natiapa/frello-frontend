@@ -12,7 +12,7 @@ import { FiPaperclip } from "react-icons/fi";
 import { BsArchive } from "react-icons/bs";
 import { CoverPicker } from "./CoverPicker";
 import { BsCardImage } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MemberPicker } from "./MemberPicker";
 
 export function TaskDetailsActions({
@@ -46,6 +46,10 @@ export function TaskDetailsActions({
 }) {
   const { taskId: taskParams } = useParams();
   const [isArchiveClicked, setIsArchiveClicked] = useState(false);
+  
+
+ 
+  
 
   function handlePopoverClick(ev) {
     ev.stopPropagation();
@@ -84,11 +88,15 @@ export function TaskDetailsActions({
                 vertical: "bottom",
                 horizontal: "left",
               }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left", // אפשר גם לנסות 'center' או 'right' לפי המקרה
+              }}
               disablePortal
               PaperProps={{
                 sx: {
-                  width: "400px",
-                  height: "600px",
+                  width: "304px",
+                  height: "max-content",
                   padding: "20px",
                 },
               }}
@@ -168,8 +176,8 @@ export function TaskDetailsActions({
               disablePortal
               PaperProps={{
                 sx: {
-                  width: "400px",
-                  height: "600px",
+                  width: "max-content",
+                  height: "max-content",
                   padding: "20px",
                 },
               }}
@@ -205,15 +213,19 @@ export function TaskDetailsActions({
               open={isPopoverOpen}
               anchorEl={anchorEl}
               anchorOrigin={{
-                vertical: "top",
+                vertical: -100 ,
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: -100, // מספר שלילי ימקם את הפופ גבוה יותר
                 horizontal: "left",
               }}
               disablePortal
               PaperProps={{
                 sx: {
                   width: "auto",
-                  maxWidth: "400px",
-                  maxHeight: "90vh",
+                  // maxWidth: "400px",
+                  // maxHeight: "90vh",
                   overflow: "auto",
                   padding: "10px",
                 },

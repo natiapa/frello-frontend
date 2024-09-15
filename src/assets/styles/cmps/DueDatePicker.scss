@@ -1,5 +1,5 @@
 .due-date-picker {
-  padding: 16px;
+  // padding: 16px;
   border-radius: 8px;
   max-width: 320px;
   font-family: "Helvetica Neue", Arial, sans-serif;
@@ -10,6 +10,22 @@
     margin-bottom: 12px;
     font-weight: 600;
   }
+
+  /* CSS */
+  .rdp-day {
+    width: 40px;
+    /* רוחב הכפתורים */
+    height: 30px;
+    /* גובה הכפתורים */
+    font-size: 14px;
+  
+  }
+
+  .rdp-root button{
+    height: 30px;
+    width: 40px;
+  }
+
 
   .date-options {
     list-style-type: none;

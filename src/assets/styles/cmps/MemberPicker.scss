@@ -1,8 +1,11 @@
 .members-container {
+.members-title{
+  text-align: center;
+}
   .card-members {
     display: grid;
     span.card-members-title {
-      margin-block: 10px;
+      margin:16px 0 8px;
     }
 
     .member-item {
@@ -60,6 +63,9 @@
 
   .board-members {
     display: grid;
+    span.board-members-title {
+      margin:16px 0 8px;
+    }
 
     .member-item {
       display: grid;

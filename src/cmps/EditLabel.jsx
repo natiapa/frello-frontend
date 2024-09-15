@@ -72,7 +72,7 @@ export function EditLabel({
         </section>
       ) : (
         <section className="label-edit-container">
-          <div className="header">
+          <div className="header-edit-label">
             <button className="back-btn" onClick={handleBack}>
               <IoArrowBackOutline />
             </button>
@@ -95,6 +95,7 @@ export function EditLabel({
 
           <label>Title</label>
           <input
+            className="title-label-input"
             type="text"
             name="title"
             value={labelToEdit.title || ""}
