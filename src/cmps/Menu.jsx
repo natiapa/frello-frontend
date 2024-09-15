@@ -53,7 +53,7 @@ export function Menu({
 
   if (taskId) setIsMenuOpen(false);
   return (
-    <aside className="menu">
+    <aside className="menu" style={{ transform: "translateX(0)" }}>
       {isActivitiesOpen && !isChangeBgOpen && (
         <Activities
           board={board}
@@ -172,7 +172,7 @@ export function Menu({
                 PaperProps={{
                   sx: {
                     width: "320px",
-                    height: "400px",
+                    height: "350px",
                     padding: "20px",
                     borderRadius: "8px",
                   },

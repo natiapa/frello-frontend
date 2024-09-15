@@ -10,7 +10,8 @@
   padding: 0 12px;
   font-size: 12px;
   color: white;
-  height: 24px;
+  height: 32px;
+  width: 48px;
   line-height: 24px;
   display: inline-block;
   text-align: center;
@@ -18,12 +19,12 @@
 
 .add-label-button {
   place-self: end;
-  margin-block-end: 5px;
+  margin-block-end: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 24px;
+  height: 32px;
+  width: 48px;
   background-color: #ebecf0;
   border-radius: 4px;
   cursor: pointer;
