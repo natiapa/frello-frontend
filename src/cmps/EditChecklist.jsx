@@ -63,7 +63,7 @@ export function EditChecklist({
       <h2>Checklist</h2>
       <label>
         <span className="title-pop">title</span>
-        <input type="text" value={title} onChange={handleChange} onKeyDown={handleKeyDown}/>
+        <input type="text" value={title} onChange={handleChange} onKeyDown={handleKeyDown} autoFocus/>
       </label>
       <div className="edit-checklist-btn" onClick={onAddChecklist}>
         Add

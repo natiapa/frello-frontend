@@ -214,6 +214,7 @@ export function TaskChecklist({
                     onChange={handleChangeTextItem}
                     placeholder="Add an item"
                     onKeyDown={(ev) => handleKeyDown(ev, checklist.id)} // מאזין ללחיצת Enter
+                    autoFocus
                   />
                   <button onClick={(ev) => onSaveItem(ev, checklist.id)}>
                     Add

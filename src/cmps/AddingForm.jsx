@@ -1,6 +1,7 @@
 import { IoMdClose } from "react-icons/io";
 import { boardService } from "../services/board";
 import { useSelector } from "react-redux";
+import { on } from "ws";
 
 export function AddingForm({
   setIsNew,
@@ -39,6 +40,12 @@ export function AddingForm({
     setIsNew(false);
     updateBoard(board);
   }
+  function handleKeyDown(ev) {
+    if (ev.key === "Enter") {
+      ev.preventDefault(); // מונע מהטופס להישלח אם יש אחד
+      onSave(ev);
+    }
+  }
   return (
     <form className="adding-form" onSubmit={onSave}>
       <textarea
@@ -47,6 +54,7 @@ export function AddingForm({
         cols="1"
         name="title"
         placeholder="Enter list name…"
+        onKeyDown={handleKeyDown}
         autoFocus
       ></textarea>
       <button className="save-group-btn">Add list</button>
