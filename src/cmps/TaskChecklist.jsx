@@ -173,6 +173,13 @@ export function TaskChecklist({
     setIsAddingItem(false);
   }
 
+  function handleKeyDown(ev, checklistId) {
+    if (ev.key === "Enter") {
+      ev.preventDefault(); // מונע שליחה של טופס ברירת מחדל אם יש אחד
+      onSaveItem(ev, checklistId); // שמירת הפריט עם לחיצת Enter
+    }
+  }
+
   return (
     <div className="task-checklist">
       <ul className="checklists">
@@ -206,6 +213,7 @@ export function TaskChecklist({
                     type="text"
                     onChange={handleChangeTextItem}
                     placeholder="Add an item"
+                    onKeyDown={(ev) => handleKeyDown(ev, checklist.id)} // מאזין ללחיצת Enter
                   />
                   <button onClick={(ev) => onSaveItem(ev, checklist.id)}>
                     Add

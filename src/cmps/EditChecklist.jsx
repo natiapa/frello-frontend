@@ -51,12 +51,19 @@ export function EditChecklist({
     setIsPopoverOpen(false);
   }
 
+  function handleKeyDown(ev) {
+    if (ev.key === "Enter") {
+      ev.preventDefault(); // מונע מהטופס להישלח אם יש אחד
+      onAddChecklist();
+    }
+  }
+
   return (
     <div className="edit-checklist" onClick={handlePopoverClick}>
       <h2>Checklist</h2>
       <label>
         <span className="title-pop">title</span>
-        <input type="text" value={title} onChange={handleChange} />
+        <input type="text" value={title} onChange={handleChange} onKeyDown={handleKeyDown}/>
       </label>
       <div className="edit-checklist-btn" onClick={onAddChecklist}>
         Add
