@@ -8,6 +8,7 @@ export function ShareExportPrintBoard({
   handlePopoverClick,
 }) {
   function handlePrint() {
+    setIsMenuOpen(false);
     window.print();
   }
 
@@ -61,7 +62,10 @@ export function ShareExportPrintBoard({
     link.click();
     document.body.removeChild(link);
   }
- console.log(' import.meta.env.VITE_APP_BASE_URL;:',  import.meta.env.VITE_SERVER)
+  console.log(
+    " import.meta.env.VITE_APP_BASE_URL;:",
+    import.meta.env.VITE_SERVER
+  );
   return (
     <div className="share-board-container" onClick={handlePopoverClick}>
       <header className="share-board-header">
@@ -72,7 +76,10 @@ export function ShareExportPrintBoard({
       </header>
       <section className="link">
         <span className="link-title">Link to this board:</span>
-        <input type="text" value=  {`${import.meta.env.VITE_DEV_SERVER}/board/${board._id}`} />
+        <input
+          type="text"
+          value={`${import.meta.env.VITE_DEV_SERVER}/board/${board._id}`}
+        />
         <span className="text">
           <RiGroupLine />
           <span>All members of the Workspace can see and edit this board.</span>
