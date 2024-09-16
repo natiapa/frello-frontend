@@ -10,7 +10,7 @@ import {
     SET_FILTER,
 } from '../reducers/board.reducer'
 
-export async function loadBoards(filterBy) {
+export async function loadBoards(filterBy = {}) {
     try {
         const boards = await boardService.query(filterBy)
         store.dispatch(getCmdSetBoards(boards))

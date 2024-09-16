@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { loadBoard, addBoardMsg, updateBoard } from "../store/actions/board.actions";
+import { loadBoard, addBoardMsg, updateBoard, loadBoards } from "../store/actions/board.actions";
 import { boardService } from "../services/board";
 
 import {
@@ -85,6 +85,7 @@ useEffect(() => {
 
 // Listen for task preview events from the event bus
 useEffect(() => {
+  loadBoards()
   eventBus.on("show-task", onPreviewToShow);
 }, []);
 
