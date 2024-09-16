@@ -429,7 +429,7 @@ return (
         setCurrBoardBgStyle={setCurrBoardBgStyle}
       />
     )}
-
+    
     {/* Board Sidebar */}
     {board && <BoardSideBar board={board} bgColor={bgColor} />}
 
