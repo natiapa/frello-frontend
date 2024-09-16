@@ -229,7 +229,7 @@ function onPreviewToShow(data) {
     top: `${data.elData.top}px`,
     width: `max-content`,
     height: `max-content`,
-    zIndex: `1000`,
+    zIndex: "1000",
   });
   setIsTaskPrevModalOpen((isOpenModal) => !isOpenModal);
 
@@ -429,7 +429,7 @@ return (
         setCurrBoardBgStyle={setCurrBoardBgStyle}
       />
     )}
-    
+
     {/* Board Sidebar */}
     {board && <BoardSideBar board={board} bgColor={bgColor} />}
 

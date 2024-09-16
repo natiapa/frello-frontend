@@ -23,7 +23,7 @@ export async function loadBoards(filterBy) {
 export async function loadBoard(boardId, filterBy = {}) {
   try {
     const board = await boardService.getById(boardId, filterBy);
-    console.log("Board data to dispatch:", board)
+    console.log("Board data to dispatch:", board);
     store.dispatch(getCmdSetBoard(board));
   } catch (err) {
     console.log("Cannot load board", err);
@@ -34,23 +34,11 @@ export async function removeBoard(boardId) {
   try {
     console.log(boardId);
     await boardService.remove(boardId);
-    console.log("Board data to dispatch:", board)
+    console.log("Board data to dispatch:", board);
     store.dispatch(getCmdRemoveBoard(boardId));
   } catch (err) {
     console.log("Cannot remove board", err);
     throw err;
-  }
-}
-
-export async function updateGroups(board) {
-  try {
-   console.log(board)
-      const updatedBoard =await boardService.save(board);
-      console.log("updateGroups Board data to dispatch:", updatedBoard)
-      store.dispatch(getCmdUpdateBoard(updatedBoard));
-  } catch (err) {
-      console.log("Failed to update groups", err);
-      throw err;
   }
 }
 
@@ -68,9 +56,9 @@ export async function addBoard(board) {
 export async function updateBoard(board) {
   try {
     const savedBoard = await boardService.save(board);
- 
+
     store.dispatch(getCmdUpdateBoard(savedBoard));
-    console.log("Dispatched UPDATE_BOARD with board:", savedBoard)
+    console.log("Dispatched UPDATE_BOARD with board:", savedBoard);
   } catch (err) {
     console.log("Cannot save board", err);
     throw err;
