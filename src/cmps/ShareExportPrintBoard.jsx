@@ -8,8 +8,8 @@ export function ShareExportPrintBoard({
   handlePopoverClick,
 }) {
   function handlePrint() {
-    setIsMenuOpen(false);
     window.print();
+    setIsMenuOpen(false);
   }
 
   function getAsCSV() {
