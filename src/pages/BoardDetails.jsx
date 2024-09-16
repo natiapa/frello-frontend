@@ -30,6 +30,7 @@ import { CoverDisplay } from "../cmps/CoverDisplay";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { FastAverageColor } from "fast-average-color";
 import chroma from "chroma-js";
+import { MouseTracker } from "../cmps/MouseTracker";
 
 export function BoardDetails() {
   // Import necessary hooks
@@ -369,7 +370,7 @@ return (
             </button>
           </form>
         </div>
-
+          
         {/* Task Details Actions */}
         {isTaskPrevModalOpen && (
           <TaskDetailsActions
@@ -433,6 +434,8 @@ return (
 
     {/* Board Sidebar */}
     {board && <BoardSideBar board={board} bgColor={bgColor} />}
+    
+    <MouseTracker boardId={boardId}/>
 
     {/* Group List */}
     {board && (

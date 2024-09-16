@@ -50,6 +50,7 @@ export function MouseTracker({boardId}) {
                 color: "black",
                 fontSize: "24px", 
                 pointerEvents: "none",
+                zIndex: 9999,
               }}
             />
           ))}
