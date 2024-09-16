@@ -64,7 +64,7 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
                 backgroundSize: "cover",
               }}
             >
-              {activity.byMember.color && (
+              {activity.byMember?.color && (
                 <span>{activity.byMember?.fullname[0]}</span>
               )}
             </div>
