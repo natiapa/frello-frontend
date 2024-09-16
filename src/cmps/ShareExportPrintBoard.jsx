@@ -6,9 +6,13 @@ export function ShareExportPrintBoard({
   board,
   setIsPopoverOpen,
   handlePopoverClick,
+  setIsMenuOpen,
 }) {
   function handlePrint() {
-    window.print();
+    setIsMenuOpen(false);
+    setTimeout(() => {
+      window.print();
+    }, 0);
   }
 
   function getAsCSV() {
@@ -24,7 +28,7 @@ export function ShareExportPrintBoard({
         const description = task.description
           ? task.description
           : "no description";
-        const csvLine = `\n${group.title}, ${task.title}, ${dueDate}, ${description},`;
+        const csvLine = `\n${group.title}, ${task.title}, ${dueDate}, ${description}`;
         csvStr += csvLine;
       });
     });
@@ -61,7 +65,12 @@ export function ShareExportPrintBoard({
     link.click();
     document.body.removeChild(link);
   }
- console.log(' import.meta.env.VITE_APP_BASE_URL;:',  import.meta.env.VITE_SERVER)
+  // console.log(
+  //   " import.meta.env.VITE_APP_BASE_URL;:",
+  //   // import.meta.env.VITE_SERVER
+  //   import.meta.env.Dev
+  // );
+
   return (
     <div className="share-board-container" onClick={handlePopoverClick}>
       <header className="share-board-header">
@@ -72,7 +81,10 @@ export function ShareExportPrintBoard({
       </header>
       <section className="link">
         <span className="link-title">Link to this board:</span>
-        <input type="text" value=  {`${import.meta.env.VITE_DEV_SERVER}/board/${board._id}`} />
+        <input
+          type="text"
+          value={`${import.meta.env.VITE_SERVER}/board/${board._id}`}
+        />
         <span className="text">
           <RiGroupLine />
           <span>All members of the Workspace can see and edit this board.</span>
@@ -80,9 +92,7 @@ export function ShareExportPrintBoard({
       </section>
       <section className="btns">
         <button onClick={handlePrint}>Print</button>
-        <button onClick={handleDownloadCSV} download="exported-data.csv">
-          Export as CSV
-        </button>
+        <button onClick={handleDownloadCSV}>Export as CSV</button>
         <button onClick={handleExportJSON}>Export as JSON</button>
       </section>
     </div>
