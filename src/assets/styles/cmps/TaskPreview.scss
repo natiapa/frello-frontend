@@ -100,66 +100,71 @@
       margin: 0 0 4px;
 
       .due-date-display {
-        .date-item .date-container {
-          background-color: transparent;
-          display: grid;
-          grid-template-columns: 16px max-content max-content;
-          height: 23px;
-
-          // padding: 0;
-          padding: 2px 4px;
-          border-radius: 3px;
-
+        .date-item {
           .date-label {
-            display: none !important;
+            display: none;
           }
+          .date-container {
+            background-color: transparent;
+            display: grid;
+            grid-template-columns: 16px max-content max-content;
+            height: 23px;
 
-          span {
-            &:first-of-type {
-              place-self: center;
-              display: grid;
-              grid-auto-flow: column;
-              justify-content: center;
+            // padding: 0;
+            padding: 2px 4px;
+            border-radius: 3px;
 
-              svg {
-                margin-block-end: 1px;
+            .date-label {
+              display: none !important;
+            }
+
+            span {
+              &:first-of-type {
+                place-self: center;
+                display: grid;
+                grid-auto-flow: column;
+                justify-content: center;
+
+                svg {
+                  margin-block-end: 1px;
+                }
               }
             }
-          }
 
-          &.green-bg {
-            background-color: #1f845a;
-            color: #fff;
-          }
+            &.green-bg {
+              background-color: #1f845a;
+              color: #fff;
+            }
 
-          .checkbox-icon {
-            // display: grid;
-            padding: 0;
-            margin: 2px 0 0 0;
-          }
+            .checkbox-icon {
+              // display: grid;
+              padding: 0;
+              margin: 2px 0 0 0;
+            }
 
-          input[type="checkbox"] {
-            padding: 0;
-            margin: 0;
-          }
+            input[type="checkbox"] {
+              padding: 0;
+              margin: 0;
+            }
 
-          // span {
-          //   margin: 0;
-          // }
-          .checkbox-icon {
-            // display: grid;
-            margin: 0 0 0.53px 0;
-          }
+            // span {
+            //   margin: 0;
+            // }
+            .checkbox-icon {
+              // display: grid;
+              margin: 0 0 0.53px 0;
+            }
 
-          .date-value {
-            place-self: center;
-            font-size: 12px;
-            padding: 0;
-            margin: 0;
-          }
+            .date-value {
+              place-self: center;
+              font-size: 12px;
+              padding: 0;
+              margin: 0;
+            }
 
-          .date-picker-icon {
-            display: none;
+            .date-picker-icon {
+              display: none;
+            }
           }
         }
       }
