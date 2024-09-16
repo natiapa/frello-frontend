@@ -7,7 +7,7 @@ export function CoverPicker({
   handlePopoverClick,
   setCurrCover,
   currCover,
-  setNewCover,
+  // setNewCover,
 }) {
   const coverColors = boardService.getColorsCover();
   const coverImgs = boardService.getImgs();
@@ -18,7 +18,7 @@ export function CoverPicker({
     const updateColor = { ...currCover, color: color, img: img };
     onUpdated("cover", updateColor);
     setCurrCover(updateColor);
-    setNewCover(updateColor);
+    // setNewCover(updateColor);
   }
 
   return (

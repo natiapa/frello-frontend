@@ -13,4 +13,4 @@ export const boardService = { ...service }
 // Easy access to this service from the dev tools console
 // when using script - dev / dev:local
 
-if (DEV) window.boardService = boardService
+// if (DEV) window.boardService = boardService
