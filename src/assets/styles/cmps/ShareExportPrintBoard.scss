@@ -11,18 +11,18 @@
     grid-row: 1;
 
     display: grid;
-    grid-template-rows: 1fr 0;
+    grid-template-rows: 30px 0;
     grid-template-columns: minmax(0, 30px) 1fr minmax(10px, 30px);
     padding-inline: 12px;
     padding-block-end: 1em;
+    margin-inline: -20px;
 
     h3 {
       grid-column: 2;
       place-self: center;
-      font-weight: 500;
-      font-size: 16px;
-      color: #172b4d;
-      // margin: 1em;
+      font-weight: 600;
+      font-size: 14px;
+      color: #44546f;
     }
 
     .close-btn {
@@ -36,8 +36,7 @@
       border-radius: 8px;
 
       &:hover {
-        background-color: #0000003d;
-        // background-color: #091e420f;
+        background-color: #b5bbc680;
       }
       i {
         display: grid;
@@ -49,6 +48,82 @@
           height: 16px;
           color: #626f86;
         }
+      }
+    }
+  }
+
+  .link {
+    display: grid;
+    margin-block-end: 1em;
+
+    &::after {
+      content: "";
+      grid-column: 1 / -1;
+      margin-top: 0em;
+      height: 1px;
+      width: 100%;
+      background-color: #dddee1;
+    }
+    .link-title {
+      color: #44546f;
+      font-size: 14px;
+      // margin  4px 0 8px;
+      font-weight: 600;
+    }
+    input[type="text"] {
+      // box-shadow: inset 0 0 0 2px #091e4224;
+      place-self: center;
+      line-height: 20px;
+      height: 36px;
+      padding: 8px 10px;
+      outline: none;
+      border-radius: 3px;
+      color: #172b4d;
+      font-size: 14px;
+      font-weight: 400;
+      border: none;
+      width: 100%;
+      box-shadow: inset 0 0 0 2px #67686a90;
+      margin: 4px 0 12px;
+
+      &:hover {
+        box-shadow: none;
+        padding: 8px 9px;
+        border: 0.1px solid #3e3e3e;
+      }
+    }
+
+    .text {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      color: #44546f;
+      font-size: 14px;
+      font-weight: 400;
+      column-gap: 5px;
+      margin-block-end: 10px;
+      svg {
+        grid-column: 1;
+        margin-block-start: 5.1px;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .btns {
+    display: grid;
+    grid-template-rows: repeat(3, 32px);
+    row-gap: 5px;
+    button {
+      color: #172b4d;
+      cursor: pointer;
+      font-weight: 400;
+      margin: 0 -20px;
+      padding: 6px 20px;
+      background-color: transparent;
+      text-align: start;
+      &:hover {
+        background-color: #b5bbc680;
+        // opacity: 14%;
       }
     }
   }

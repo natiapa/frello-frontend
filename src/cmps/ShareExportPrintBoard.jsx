@@ -1,5 +1,6 @@
 import { IoQrCodeOutline } from "react-icons/io5";
 import SvgIcon from "./SvgIcon";
+import { RiGroupLine } from "react-icons/ri";
 
 export function ShareExportPrintBoard({
   board,
@@ -10,55 +11,52 @@ export function ShareExportPrintBoard({
     window.print();
   }
 
-  function handleExportCSV(board) {
-    // Assuming the board has groups and tasks
-    if (!board || !board.groups) return;
+  function getAsCSV() {
+    if (!board || !board.groups) return "";
 
-    const headers = ["Group Name", "Task Name", "Task Description"];
-    const rows = [];
-
-    // Loop through groups and tasks to prepare CSV rows
+    let csvStr = `Group, Task, Due Date, Description`;
     board.groups.forEach((group) => {
       group.tasks.forEach((task) => {
-        rows.push([
-          group.name,
-          task.title,
-          task.description || "No description",
-        ]);
+        const dueDate = task.dueDate
+          ? new Date(task.dueDate).toDateString()
+          : "No due date";
+
+        const description = task.description
+          ? task.description
+          : "no description";
+        const csvLine = `\n${group.title}, ${task.title}, ${dueDate}, ${description},`;
+        csvStr += csvLine;
       });
     });
+    return csvStr;
+  }
 
-    // Convert the data into CSV format
-    const csvContent =
-      "\uFEFFdata:text/csv;charset=utf-8," +
-      [headers.join(","), ...rows.map((row) => row.join(","))].join("\n");
+  function handleDownloadCSV() {
+    const csvContent = getAsCSV();
+    if (!csvContent) return;
 
-    // Create a link to download the CSV file
-    const encodedUri = encodeURI(csvContent);
+    const blob = new Blob([csvContent], { type: "text/csv" });
     const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `${board.title || "board"}.csv`);
-    document.body.appendChild(link);
 
-    link.click(); // Trigger the download
-    document.body.removeChild(link); // Clean up
+    link.href = URL.createObjectURL(blob);
+    link.download = `${board.title || "board"}.csv`;
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 
   function handleExportJSON() {
     if (!board) return;
 
-    // Convert the board object to a JSON string
-    const jsonContent = JSON.stringify(board, null, 2); // Pretty print with 2-space indentation
+    const jsonContent = JSON.stringify(board, null, 2);
 
-    // Create a Blob from the JSON string
     const blob = new Blob([jsonContent], { type: "application/json" });
     const link = document.createElement("a");
 
-    // Create a URL for the Blob and set it as the href attribute of the link
     link.href = URL.createObjectURL(blob);
-    link.download = `${board.title || "board"}.json`; // Set the default filename
+    link.download = `${board.title || "board"}.json`;
 
-    // Append the link to the body, trigger the download, and clean up
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -73,13 +71,18 @@ export function ShareExportPrintBoard({
         <h3>Print, export, and share</h3>
       </header>
       <section className="link">
-        <span>Link to this board:</span>
-        <p>{`board/${board._id}`}</p>
-        {/* <p>{`http://localhost:5173/board/${board._id}`}</p> */}
+        <span className="link-title">Link to this board:</span>
+        <input type="text" value={`http://localhost:5173/board/${board._id}`} />
+        <span className="text">
+          <RiGroupLine />
+          <span>All members of the Workspace can see and edit this board.</span>
+        </span>
       </section>
       <section className="btns">
         <button onClick={handlePrint}>Print</button>
-        <button onClick={handleExportCSV}>Export as CSV</button>
+        <button onClick={handleDownloadCSV} download="exported-data.csv">
+          Export as CSV
+        </button>
         <button onClick={handleExportJSON}>Export as JSON</button>
       </section>
     </div>

@@ -61,9 +61,12 @@ export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
                 backgroundImage: activity.byMember?.imgUrl
                   ? `url(${activity.byMember.imgUrl})`
                   : "none",
+                backgroundSize: "cover",
               }}
             >
-              {activity.byMember?.fullname[0]}
+              {activity.byMember.color && (
+                <span>{activity.byMember?.fullname[0]}</span>
+              )}
             </div>
             <section className="activity-data" style={{ gridColumn: "2" }}>
               <span className="activity-fullname">

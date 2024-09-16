@@ -207,7 +207,7 @@ function addActivity(
     byMember: {
       _id: "u101",
       fullname: "Abi Abambi",
-      imgUrl: "http://some-img",
+      img: "",
       color: "#000",
     },
     group: {
@@ -1183,7 +1183,7 @@ function _createBoards() {
         byMember: {
           _id: "u101",
           fullname: "Abi Abambi",
-          imgUrl: "http://some-img",
+          imgUrl: "",
           color: "#000",
         },
         group: {
