@@ -7,7 +7,7 @@ import { AddingForm } from "./AddingForm";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 
-export function GroupList({ groups, allowDrop, drop, isActivitiesOpen }) {
+export function GroupList({ groups, allowDrop, drop,isClickedLabel,setIsClickedLabel, isActivitiesOpen }) {
   const board = useSelector((storeState) => storeState.boardModule.board);
 
   const [isNewGroup, setIsNewGroup] = useState(false);
@@ -97,6 +97,8 @@ export function GroupList({ groups, allowDrop, drop, isActivitiesOpen }) {
                   gIndex={gIndex}
                   allowDrop={allowDrop}
                   drop={drop}
+                  isClickedLabel={isClickedLabel}
+                  setIsClickedLabel={setIsClickedLabel}
                 />
               ))}
               {isNewGroup && (

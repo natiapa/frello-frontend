@@ -1,27 +1,26 @@
-import { IoAddOutline } from "react-icons/io5";
+import { IoAddOutline } from 'react-icons/io5'
 
-export function LabelList({ taskLabels, labelWidth }) {
-  if (!taskLabels) return null;
+export function LabelList({ taskLabels, labelWidth, labelHight, setIsClickedLabel }) {
+    if (!taskLabels) return null
 
-
-  return (
-    <div className="label-container">
-      {taskLabels.map((label, index) => (
-        <div
-          key={index}
-          className="label-square"
-          style={{
-            backgroundColor: label.color,
-            width: labelWidth,
-          }}
-        >
-          <p>{label.title || ""}</p>
+    return (
+        <div className="label-container">
+            {taskLabels.map((label, index) => (
+                <div
+                    key={index}
+                    className="label-square"
+                    style={{
+                        backgroundColor: label.color,
+                        width: labelWidth,
+                        height: labelHight,
+                    }}
+                    onClick={() => setIsClickedLabel(isClicked => !isClicked)}
+                    >
+                    <p className='label-header'>{label.title || ''}</p>
+                </div>
+            ))}
         </div>
-        
-      ))}
-    
-    </div>
-  );
+    )
 }
 
 // export function LabelList({ taskLabels, boardLabels,labelWidth }) {

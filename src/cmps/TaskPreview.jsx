@@ -15,7 +15,7 @@ import { CoverDisplay } from "./CoverDisplay";
 import { DueDateDisplay } from "./DueDateDisplay";
 import { VscListFlat } from "react-icons/vsc";
 
-export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
+export function TaskPreview({ groupId, task, tIndex, allowDrop, drop,isClickedLabel,setIsClickedLabel, }) {
   const board = useSelector((storeState) => storeState.boardModule.board);
   const group = board?.groups?.find((group) => group.id === groupId);
   const [members, setMembers] = useState(task.members);
@@ -98,6 +98,12 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
     const previewData = { elData, group, task, dataName };
     eventBus.emit("show-task", previewData);
   }
+
+  function handleClickLabel(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    // setIsClickedLabel(isClickedLabel => !isClickedLabel)
+  }
   const isItems = task.checklists?.some((checklist) => checklist.items?.length);
   return (
     <Draggable key={task.id} draggableId={task.id} index={tIndex}>
@@ -159,8 +165,9 @@ export function TaskPreview({ groupId, task, tIndex, allowDrop, drop }) {
                 style={{
                   marginTop: task.cover.color !== "" ? "8px" : "",
                 }}
+                onClick={handleClickLabel}
               >
-                <LabelList taskLabels={task.labels} labelWidth="40px" />
+                <LabelList taskLabels={task.labels} labelWidth="40px" setIsClickedLabel={setIsClickedLabel} labelHight={isClickedLabel ? '16px' : '8px'} />
               </div>
 
               <span>{task.title || "New"}</span>

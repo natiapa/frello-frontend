@@ -62,6 +62,8 @@ const [newDueDate, setNewDueDate] = useState(currTask?.dueDate || null);
 const [currCover, setCurrCover] = useState(currTask?.cover || null);
 const [taskMembers, setTaskMembers] = useState(currTask?.members || []);
 const [selectedLabels, setSelectedLabels] = useState([]);
+const [isClickedLabel, setIsClickedLabel] = useState(false);
+
 
 // State variables for managing menu, board background style, and background color
 const [currBoardBgStyle, setCurrBoardBgStyle] = useState();
@@ -443,6 +445,8 @@ return (
         groups={board.groups}
         allowDrop={allowDrop}
         isActivitiesOpen={isMenuOpen}
+        isClickedLabel={isClickedLabel}
+        setIsClickedLabel={setIsClickedLabel}
       />
     )}
 

@@ -6,7 +6,7 @@ import { AddingForm } from './AddingForm'
 import { Link } from 'react-router-dom'
 import { Droppable } from 'react-beautiful-dnd'
 
-export function TaskList({ group, allowDrop, drop, draggedMemberId }) {
+export function TaskList({ group, allowDrop, drop, draggedMemberId,isClickedLabel,setIsClickedLabel, }) {
     const { tasks } = group
 
     const [isNewTask, setIsNewTask] = useState(false)
@@ -50,6 +50,8 @@ export function TaskList({ group, allowDrop, drop, draggedMemberId }) {
                                 tIndex={tIndex}
                                 allowDrop={allowDrop}
                                 drop={drop}
+                                isClickedLabel={isClickedLabel}
+                                setIsClickedLabel={setIsClickedLabel}
                             />
                         ))}
                         {provided.placeholder}

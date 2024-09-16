@@ -5,6 +5,7 @@
 }
 
 .label-square {
+  display: grid;
   background-color: #ccc;
   border-radius: 4px;
   padding: 0 12px;
@@ -15,6 +16,9 @@
   line-height: 24px;
   display: inline-block;
   text-align: center;
+  .label-header{
+    font-size: 12px;
+  }
 }
 
 .add-label-button {
