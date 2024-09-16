@@ -26,7 +26,7 @@ import { updateBoard } from "./store/actions/board.actions.js";
 import { Provider } from "react-redux";
 import { store } from "./store/store.js";
 
-import { DemoGroups } from "./cmps/DemoGroups.jsx";
+
 
 export function RootCmp() {
   return (
@@ -46,10 +46,7 @@ export function RootCmp() {
             <Route path="board/:boardId" element={<BoardDetails />}>
               <Route path=":groupId/:taskId" element={<TaskDetails />} />
             </Route>
-            <Route
-              path="board/:boardId/:demo-groups"
-              element={<DemoGroups />}
-            />
+          
 
             <Route path="user/:id" element={<UserDetails />} />
             {/* <Route path="review" element={<ReviewIndex />} /> */}

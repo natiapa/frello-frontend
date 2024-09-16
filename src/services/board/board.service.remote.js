@@ -73,7 +73,7 @@ async function updateBoard(
     activity = ''
 ) {
 
-
+console.log(board,groupId,taskId,{ key, value })
 
     const gIdx = board?.groups?.findIndex(group => group.id === groupId)
     const tIdx = board?.groups[gIdx]?.tasks.findIndex(

@@ -13,13 +13,13 @@ export function GroupList({ groups, allowDrop, drop, isActivitiesOpen }) {
   const [isNewGroup, setIsNewGroup] = useState(false);
   const [newGroup, setNewGroup] = useState(boardService.getEmptyGroup());
   const [currGroups, setCurrGroups] = useState(groups);
-  const [currTasks, setCurrTasks] = useState("");
   const currBoard = useSelector((state) => state.boardModule.board);
 
 
 
+
   useEffect(() => {
-    if (board?.groups) setCurrGroups(groups);
+    if (board?.groups) setCurrGroups(board.groups);
   }, [board]);
 
   useEffect(() => {
@@ -27,7 +27,9 @@ export function GroupList({ groups, allowDrop, drop, isActivitiesOpen }) {
 
   async function onAddGroup() {
     setIsNewGroup(true);
-    setNewGroup(boardService.getEmptyGroup());
+    const newGroup = boardService.getEmptyGroup()
+    setNewGroup(newGroup);
+
   }
 
   function handleOnDragEnd(result) {

@@ -1,8 +1,4 @@
 import { boardService } from "../../services/board";
-import {
-  socketService,
-  SOCKET_EVENT_GROUPS_UPDATED,
-} from "../../services/socket.service";
 import { store } from "../store";
 import {
   ADD_BOARD,
@@ -27,6 +23,7 @@ export async function loadBoards(filterBy) {
 export async function loadBoard(boardId, filterBy = {}) {
   try {
     const board = await boardService.getById(boardId, filterBy);
+    console.log("Board data to dispatch:", board);
     store.dispatch(getCmdSetBoard(board));
   } catch (err) {
     console.log("Cannot load board", err);
@@ -37,6 +34,7 @@ export async function removeBoard(boardId) {
   try {
     console.log(boardId);
     await boardService.remove(boardId);
+    console.log("Board data to dispatch:", board);
     store.dispatch(getCmdRemoveBoard(boardId));
   } catch (err) {
     console.log("Cannot remove board", err);
@@ -58,8 +56,9 @@ export async function addBoard(board) {
 export async function updateBoard(board) {
   try {
     const savedBoard = await boardService.save(board);
-    // socketService.emit(SOCKET_EVENT_GROUPS_UPDATED, savedBoard.groups)
+
     store.dispatch(getCmdUpdateBoard(savedBoard));
+    console.log("Dispatched UPDATE_BOARD with board:", savedBoard);
   } catch (err) {
     console.log("Cannot save board", err);
     throw err;
