@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { socketService, SOCKET_EVENT_MOUSE_MOVE } from "../services/socket.service";
+import { socketService, SOCKET_EVENT_MOUSE_MOVE, SOCKET_EVENT_USER_LEFT } from "../services/socket.service";
 import { FaMousePointer } from "react-icons/fa";
 
 export function MouseTracker({boardId}) {
 
   const [myCursor, setMyCursor] = useState({ x: 0, y: 0 });
-  const [otherCursors, setOtherCursors] = useState([]);
+  const [otherCursors, setOtherCursors] = useState({});
+
+  const [componentKey, setComponentKey] = useState(0);
 
 
 
@@ -29,17 +31,28 @@ export function MouseTracker({boardId}) {
           [cursorData.id]: cursorData, 
         }));
       });
+
+      socketService.on(SOCKET_EVENT_USER_LEFT,(userId)=>{
+        setOtherCursors(prevCursors =>{
+          const updateCurosers = {...prevCursors}
+          delete updateCurosers[userId]
+
+          setComponentKey((prevKey) => prevKey + 1)
+          return updateCurosers
+        })
+      })
   
       return () => {
         window.removeEventListener("mousemove", handleMouseMove);
         socketService.off(SOCKET_EVENT_MOUSE_MOVE);
+        socketService.off(SOCKET_EVENT_USER_LEFT)
       };
     }, [boardId]); 
 
     const filteredCursors = Object.values(otherCursors).filter(cursor => cursor.id !== socketService.getSocketId());
     
     return (
-        <div>
+        <div key={componentKey} >
           {filteredCursors.map((cursor, index) => (
             <FaMousePointer
               key={index}

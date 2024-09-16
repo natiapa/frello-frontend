@@ -3,6 +3,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { login, signup } from '../store/actions/user.actions.js'
 import { LoginForm } from './LoginForm.jsx'
 
+
 export function LoginSignup({setIsLogin}) {
 
     const [isSignup, setIsSignUp] = useState(false)
@@ -12,6 +13,7 @@ export function LoginSignup({setIsLogin}) {
     }
 
     function _login(credentials) {
+        console.log(credentials)
         login(credentials)
             .then(() => { showSuccessMsg('Logged in successfully') })
             .catch((err) => { showErrorMsg('Oops try again') })
