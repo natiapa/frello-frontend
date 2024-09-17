@@ -23,7 +23,7 @@ export function BoardHeader({
     isMenuOpen,
 }) {
     const board = useSelector(storeState => storeState.boardModule.board)
-    console.log(members)
+    // console.log(members)
     const [anchorEl, setAnchorEl] = useState(null)
     const [isPopoverOpen, setIsPopoverOpen] = useState(false)
     const [isHovered, setIsHovered] = useState(false)

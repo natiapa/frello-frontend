@@ -30,7 +30,7 @@ export function AppHeader({
   const [modalOpenByName, setModalOpenByName] = useState(null);
 
   const user = useSelector((storeState) => storeState.userModule.user);
-  console.log(user);
+  // console.log(user);
 
   const navigate = useNavigate();
 
