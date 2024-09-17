@@ -7,8 +7,6 @@ import { useParams } from "react-router";
 export function EditChecklist({
   board,
   group,
-  groupId,
-  taskId,
   task,
   onUpdated,
   setIsPopoverOpen,
@@ -46,7 +44,7 @@ export function EditChecklist({
     console.log(localChecklists)
     localChecklists.push({ ...boardService.getEmptyChecklist(), title });
     const updatedChecklists = localChecklists;
-    setLocalChecklists(updatedChecklists)
+
     setNewCheckLists(updatedChecklists)
     console.log(updatedChecklists)
     

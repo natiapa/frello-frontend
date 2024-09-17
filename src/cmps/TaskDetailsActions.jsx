@@ -137,8 +137,6 @@ export function TaskDetailsActions({
                 <EditChecklist
                   board={board}
                   group={group}
-                  groupId={groupId}
-                  taskId={taskId}
                   task={task}
                   onUpdated={onUpdated}
                   setIsPopoverOpen={setIsPopoverOpen}
