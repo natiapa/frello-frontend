@@ -41,8 +41,6 @@ export function BoardFilter() {
                 break
         }
 
-        console.log('field:', field)
-        console.log('value:', value)
         setFilterToEdit({
             ...filterToEdit,
             [field]: value,
@@ -53,14 +51,6 @@ export function BoardFilter() {
         setFilterToEdit({
             ...filterToEdit,
             txt: '',
-        })
-    }
-
-    function clearSort() {
-        setFilterToEdit({
-            ...filterToEdit,
-            sortField: '',
-            sortDir: '',
         })
     }
 
@@ -79,8 +69,6 @@ export function BoardFilter() {
     function handleChangeSelectLabel(ev) {
         const name = ev.target.name
         const value = ev.target.checked
-        console.log('name:', name)
-        console.log('value:', value)
         if (value) {
             setFilterToEdit({
                 ...filterToEdit,
@@ -97,7 +85,7 @@ export function BoardFilter() {
             })
         }
     }
-
+    console.log('labels:', labels)
     const countMembers = filterToEdit.selectMember.length || 0
     return (
         <section className="board-filter" onClick={handlePopoverClick}>
@@ -132,8 +120,6 @@ export function BoardFilter() {
                     No members
                 </label>
 
-                {/* <input type="checkbox" name="allMembers" value={filterToEdit.allMembers} onChange={handleChange} checked={!!filterToEdit.allMembers} /> */}
-
                 <Select
                     className="select-input"
                     name="selectMember"
@@ -164,15 +150,6 @@ export function BoardFilter() {
                     />
                     No due date
                 </label>
-
-                {/* <label>
-                    <input
-                        type="checkbox"
-                        name="overdue"
-                        value={filterToEdit.overdue}
-                        onChange={handleChange}
-                    />
-                </label> */}
             </div>
 
             <div className="actions">
@@ -200,7 +177,7 @@ export function BoardFilter() {
                                 key={label.id}
                                 style={{
                                     backgroundColor: label.color,
-                                }}></label>
+                                }}>{label.title || ''}</label>
                        </div>
                     ))}
                 </div>

@@ -1,6 +1,4 @@
-import { IoAddOutline } from 'react-icons/io5'
-
-export function LabelList({ taskLabels, labelWidth, labelHight, setIsClickedLabel }) {
+export function LabelList({ taskLabels, labelWidth, labelHight, labelPadding, setIsClickedLabel }) {
     if (!taskLabels) return null
 
     return (
@@ -13,38 +11,12 @@ export function LabelList({ taskLabels, labelWidth, labelHight, setIsClickedLabe
                         backgroundColor: label.color,
                         width: labelWidth,
                         height: labelHight,
+                        padding: labelPadding
                     }}
-                    onClick={() => setIsClickedLabel(isClicked => !isClicked)}
-                    >
-                    <p className='label-header'>{label.title || ''}</p>
+                    onClick={() => setIsClickedLabel(isClicked => !isClicked)}>
+                    <span className="label-header">{label.title || ''}</span>
                 </div>
             ))}
         </div>
     )
 }
-
-// export function LabelList({ taskLabels, boardLabels,labelWidth }) {
-// console.log(taskLabels)
-// console.log(boardLabels)
-// return (
-//   <div>
-//     <h1>list</h1>
-//   </div>
-// )
-//   return labels.map((label, index) => {
-//     const labelItem = labelsList.find((item) => item.label === label);
-
-//     if (labelItem) {
-//       return (
-//         <div
-//           key={index}
-//           className="label-square"
-//           style={{
-//             backgroundColor: labelItem.color,
-//             width: labelWidth,
-//           }}
-//         ></div>
-//       );
-//     }
-//   });
-// }
