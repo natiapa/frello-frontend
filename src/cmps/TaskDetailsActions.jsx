@@ -135,6 +135,8 @@ export function TaskDetailsActions({
                 disablePortal
               >
                 <EditChecklist
+                  board={board}
+                  group={group}
                   groupId={groupId}
                   taskId={taskId}
                   task={task}

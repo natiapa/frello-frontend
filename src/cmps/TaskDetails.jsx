@@ -87,9 +87,9 @@ export function TaskDetails() {
           value: value,
         }
       );
-      if (name === "checklists") {
-        setNewCheckLists([...value]);
-      }
+      // if (name === "checklists") {
+      //   setNewCheckLists([...value]);
+      // }
       if (name === "members") {
         setTaskMembers([...value]);
       }
@@ -295,8 +295,7 @@ export function TaskDetails() {
               task={task}
               group={group}
               board={board}
-              groupId={groupId}
-              boardId={boardId}
+          
             />
           )}
         </form>

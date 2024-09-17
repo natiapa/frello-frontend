@@ -89,7 +89,7 @@ export function BoardDetails() {
     console.log("Joining board room:", boardId);
 
     socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
-      console.log("Received updated groups:", updatedGroups);
+    
       loadBoard(boardId);
     });
 

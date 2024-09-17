@@ -13,16 +13,21 @@ export function TaskChecklist({
   group,
   board,
 }) {
+  console.log('checklists from TaskChecklist', checklists )
+
   const [updatedChecklists, setUpdatedChecklists] = useState([...checklists]);
   const [isAddingItem, setIsAddingItem] = useState(false);
-  // const [currItemIsEditing, setCurrItemIsEditing] = useState(false);
   const [itemText, setItemText] = useState("");
   const [textItemToEdit, setTextItemToEdit] = useState("");
 
+  // useEffect(() => {
+  //   // console.log("render!");
+  //   setUpdatedChecklists(task.checklists);
+  // }, [updatedChecklists]);
+  
   useEffect(() => {
-    console.log("render!");
-    setUpdatedChecklists(task.checklists);
-  }, [updatedChecklists]);
+    setUpdatedChecklists(checklists);
+  }, [checklists]);
 
   async function onRemoveChecklist(ev, checklistId) {
     ev.preventDefault();
