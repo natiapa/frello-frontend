@@ -89,7 +89,7 @@ export function BoardDetails() {
     console.log("Joining board room:", boardId);
 
     socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
-    
+      console.log("Received updated groups:", updatedGroups);
       loadBoard(boardId);
     });
 
@@ -147,7 +147,7 @@ export function BoardDetails() {
     loadBoard(boardId);
   }, [currBoardBgStyle?.style]);
 
-  function handleClick(ev) {
+  function handlePopoverToggle(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
     setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
     setAnchorEl(ev.currentTarget);
@@ -421,7 +421,7 @@ export function BoardDetails() {
               onUpdated={onUpdated}
               setCurrCover={setCurrCover}
               currCover={currCover}
-              handleClick={handleClick}
+              handleClick={handlePopoverToggle}
               anchorEl={anchorEl}
               setIsPopoverOpen={setIsPopoverOpen}
               modalOpenByName={modalOpenByName}
