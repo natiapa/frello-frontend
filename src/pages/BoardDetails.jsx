@@ -304,6 +304,7 @@ export function BoardDetails() {
 
   // Return early if there is no board or no board style
   if (!board || !board.style) return;
+  console.log(currCover);
   return (
     <section
       className="board-details"
@@ -338,11 +339,23 @@ export function BoardDetails() {
             {currTask.cover.color !== undefined && (
               <div
                 className="absolute-element"
-                style={{ height: !currCover?.img ? "36px" : "200px" }}
+                style={{
+                  height: !currCover?.img
+                    ? !currCover?.color
+                      ? "0"
+                      : "36px"
+                    : "200px",
+                }}
               >
                 <CoverDisplay
                   currCover={currCover}
-                  height={!currCover?.img ? "36px" : "200px"}
+                  height={
+                    !currCover?.img
+                      ? !currCover?.color
+                        ? "0"
+                        : "36px"
+                      : "200px"
+                  }
                   borderRadius="8px 8px 0 0"
                   imgWidth="100%"
                   colorHeight="36px"
