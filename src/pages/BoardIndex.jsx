@@ -103,7 +103,7 @@ export function BoardIndex() {
   }
 
   if (!boards || !boards.length) return;
-
+  console.log(import.meta.env.VITE_SERVER);
   return (
     <>
       <AppHeader
@@ -111,7 +111,7 @@ export function BoardIndex() {
         borderBottom="1px solid #ddd"
         logoImg="https://cdn.icon-icons.com/icons2/2699/PNG/512/trello_logo_icon_167765.png"
         logoColor="#0c66e4"
-        link="http://localhost:5173/"
+        link={`/${import.meta.env.VITE_SERVER}/`}
       />
       <section
         className="board-index"
