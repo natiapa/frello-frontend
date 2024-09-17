@@ -15,7 +15,7 @@ export function TaskChecklist({
 }) {
   const [updatedChecklists, setUpdatedChecklists] = useState([...checklists]);
   const [isAddingItem, setIsAddingItem] = useState(false);
-  const [currItemIsEditing, setCurrItemIsEditing] = useState(false);
+  // const [currItemIsEditing, setCurrItemIsEditing] = useState(false);
   const [itemText, setItemText] = useState("");
   const [textItemToEdit, setTextItemToEdit] = useState("");
 
@@ -114,9 +114,11 @@ export function TaskChecklist({
     ev.preventDefault();
     const updatedChecklistsList = updatedChecklists.map((checklist) => {
       const updatedItems = checklist.items.map((currItem) => {
+        currItem.edit = false;
         if (currItem.id === item.id) {
-          setCurrItemIsEditing(true);
-          item.edit = true;
+          // setCurrItemIsEditing(true);
+          // item.edit = true;
+          currItem.edit = true;
           setTextItemToEdit(item.text);
           return { ...currItem, text: textItemToEdit };
         }
@@ -131,8 +133,9 @@ export function TaskChecklist({
 
     const updatedChecklistsList = updatedChecklists.map((checklist) => {
       const updatedItems = checklist.items.map((currItem) => {
+        currItem.edit = false;
         if (currItem.id === item.id) {
-          item.edit = false;
+          // item.edit = false;
           setTextItemToEdit(ev.target.value);
           console.log("textItemToEdit:", textItemToEdit);
           return { ...currItem, text: textItemToEdit };
@@ -142,7 +145,7 @@ export function TaskChecklist({
       return { ...checklist, items: updatedItems };
     });
     setUpdatedChecklists(updatedChecklistsList);
-    setCurrItemIsEditing(false);
+    // setCurrItemIsEditing(false);
     onUpdated("checklists", updatedChecklistsList);
   }
   function closeForm(ev, item) {
@@ -158,7 +161,7 @@ export function TaskChecklist({
       return { ...checklist, items: updatedItems };
     });
     setUpdatedChecklists(updatedChecklistsList);
-    setCurrItemIsEditing(false);
+    // setCurrItemIsEditing(false);
   }
 
   function onAddItem(ev, checklist) {
@@ -216,12 +219,15 @@ export function TaskChecklist({
                     onKeyDown={(ev) => handleKeyDown(ev, checklist.id)} // מאזין ללחיצת Enter
                     autoFocus
                   />
-                  <button onClick={(ev) => onSaveItem(ev, checklist.id)}>
+                  <div className="btns">
+                  <button className="save-item-btn" onClick={(ev) => onSaveItem(ev, checklist.id)}>
                     Add
                   </button>
                   <button onClick={(ev) => oncancel(ev, checklist)}>
                     Cancel
                   </button>
+
+                  </div>
                 </div>
               )}
               <ul className="items">
@@ -247,11 +253,14 @@ export function TaskChecklist({
                           onChange={handleEditTextItem}
                           value={textItemToEdit}
                         />
-                        <button onClick={(ev) => saveEditingItem(ev, item)}>
+                        <div className="btns">
+
+                        <button className="save-edit-btn" onClick={(ev) => saveEditingItem(ev, item)}>
                           Save
                         </button>
                         <button onClick={(ev) => closeForm(ev, item)}>X</button>
                       </div>
+                        </div>
                     )}
                   </li>
                 ))}
