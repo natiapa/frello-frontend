@@ -56,6 +56,7 @@
         margin: 0;
       }
       .add-an-item-form {
+        grid-row: 4;
         grid-column: 2;
       }
 
@@ -81,7 +82,7 @@
           }
 
           p {
-            width: max-content;  
+            width: max-content;
             font-size: 14px;
             margin: 0 0 0 -8px;
             overflow-wrap: break-word;
