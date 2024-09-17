@@ -11,20 +11,11 @@ export function MemberPicker({
     handlePopoverClick,
     taskMembers,
 }) {
-    const boards = useSelector(state => state.boardModule.boards)
-    const allMembers = boards.reduce((acc, board) => {
-        return [...acc, ...board.members]
-    }, [])
-    const availableMembersFromAllBoards = allMembers.filter(
-        member => !taskMembers.some(taskMember => taskMember.id === member.id)
-    )
-    console.log('allMembers:', allMembers)
     const membersBoard = board.members
     const availableMembers = membersBoard.filter(
         boardMember => !taskMembers.some(taskMember => taskMember.id === boardMember.id)
     )
     const [selectedMembers, setSelectedMembers] = useState(availableMembers)
-    const [selectedFromAllMembers, setSelectedFromAllMembers] = useState(availableMembersFromAllBoards)
 
     function handleRemoveMember(ev, member) {
         ev.stopPropagation()
@@ -42,18 +33,6 @@ export function MemberPicker({
         setSelectedMembers(updateBoardMembers)
 
         const updateTaskMembers = [...taskMembers, member]
-        onUpdated('members', updateTaskMembers)
-        setTaskMembers(updateTaskMembers)
-    }
-
-    function handleAddFromAllMembers(ev, member) {
-        ev.stopPropagation()
-        const updateAllMembers = allMembers.filter(m => m.id !== member.id)
-        const updateBoardMembers = selectedMembers.filter(m => m.id !== member.id)
-        const updateTaskMembers = [...taskMembers, member]
-        
-        setSelectedFromAllMembers(updateAllMembers)
-        setSelectedMembers(updateBoardMembers)
         onUpdated('members', updateTaskMembers)
         setTaskMembers(updateTaskMembers)
     }
@@ -126,34 +105,6 @@ export function MemberPicker({
                     ))}
                 </ul>
             </div>
-           {!selectedMembers.length > 0 && <div className="all-members">
-                <span className="all-members-title">All Members</span>
-                <ul className="members-list">
-                    {selectedFromAllMembers.length > 0 && selectedFromAllMembers.map((member, idx) => (
-                        <li
-                            className="member-item"
-                            key={member.id}
-                            onClick={event => handleAddFromAllMembers(event, member)}>
-                            {member.imgUrl && (
-                                <img
-                                    src={member.imgUrl}
-                                    style={{
-                                        borderRadius: '50%',
-                                        width: '24px',
-                                        marginInlineEnd: '10px',
-                                    }}
-                                />
-                            )}
-                            {!member.imgUrl && (
-                                <span style={{ backgroundColor: member.color }}>
-                                    {member.fullname[0]}
-                                </span>
-                            )}
-                            <span className="member-name">{member.fullname}</span>
-                        </li>
-                    ))}
-                </ul>
-            </div>}
         </div>
     )
 }
