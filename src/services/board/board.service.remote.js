@@ -39,7 +39,7 @@ async function remove(boardId) {
 async function save(board) {
     var savedBoard
     if (board._id) {
-     
+
         savedBoard = await httpService.put(`board/${board._id}`, board)
     } else {
         savedBoard = await httpService.post('board', board)
@@ -73,7 +73,7 @@ async function updateBoard(
     activity = ''
 ) {
 
-console.log(board,groupId,taskId,{ key, value })
+    console.log(board, groupId, taskId, { key, value })
 
     const gIdx = board?.groups?.findIndex(group => group.id === groupId)
     const tIdx = board?.groups[gIdx]?.tasks.findIndex(
@@ -190,16 +190,16 @@ function getEmptyGroup() {
         id: makeId(),
         title: '',
         tasks: [
-            {
-                id: makeId(),
-                title: '',
-                labels: [],
-                members: [],
-                attachments: [],
-                comments: [],
-                cover: '',
-                dueDate: '',
-            },
+            // {
+            //     id: makeId(),
+            //     title: '',
+            //     labels: [],
+            //     members: [],
+            //     attachments: [],
+            //     comments: [],
+            //     cover: '',
+            //     dueDate: '',
+            // },
         ],
         style: {},
     }

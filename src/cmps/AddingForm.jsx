@@ -1,4 +1,3 @@
-
 import { IoMdClose } from "react-icons/io";
 import { boardService } from "../services/board";
 import { useSelector } from "react-redux";
@@ -12,6 +11,7 @@ export function AddingForm({
   updated,
   groupId,
   tasks,
+  setIsNewGroupAdded,
 }) {
   function handelChange(ev) {
     const { name, value } = ev.target;
@@ -20,16 +20,21 @@ export function AddingForm({
 
   function onCloseForm() {
     setIsNew(false);
+    // setIsNewGroupAdded(false);
   }
 
   async function onSave(ev) {
     ev.preventDefault();
+    setIsNewGroupAdded(true);
+
     const board = { ...currBoard };
+    if (!updated.title) return onCloseForm();
     if (updated.tasks) {
       board.groups.push(updated);
       boardService.updateActivities(board, "", "addGroup", updated);
     } else {
       ev.preventDefault();
+
       const group = board?.groups?.find((group) => group.id === groupId);
 
       boardService.updateBoard(board, groupId, null, {
@@ -41,9 +46,10 @@ export function AddingForm({
     setIsNew(false);
     updateBoard(board);
   }
+
   function handleKeyDown(ev) {
     if (ev.key === "Enter") {
-      ev.preventDefault(); // מונע מהטופס להישלח אם יש אחד
+      ev.preventDefault();
       onSave(ev);
     }
   }

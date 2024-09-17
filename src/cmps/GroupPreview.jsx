@@ -10,7 +10,16 @@ import { Draggable } from "react-beautiful-dnd";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { Popover } from "@mui/material";
 
-export function GroupPreview({ group, gIndex, allowDrop, drop,isClickedLabel,setIsClickedLabel, }) {
+export function GroupPreview({
+  group,
+  gIndex,
+  allowDrop,
+  drop,
+  isClickedLabel,
+  setIsClickedLabel,
+  isNewGroupAdded,
+  setIsNewGroupAdded,
+}) {
   const board = useSelector((storeState) => storeState.boardModule.board);
 
   const [currElToEdit, setCurrElToEdit] = useState("");
@@ -111,7 +120,15 @@ export function GroupPreview({ group, gIndex, allowDrop, drop,isClickedLabel,set
               )}
             </div>
           </div>
-          <TaskList group={group} allowDrop={allowDrop} drop={drop} isClickedLabel={isClickedLabel} setIsClickedLabel={setIsClickedLabel} />
+          <TaskList
+            isNewGroupAdded={isNewGroupAdded}
+            setIsNewGroupAdded={setIsNewGroupAdded}
+            group={group}
+            allowDrop={allowDrop}
+            drop={drop}
+            isClickedLabel={isClickedLabel}
+            setIsClickedLabel={setIsClickedLabel}
+          />
         </li>
       )}
     </Draggable>

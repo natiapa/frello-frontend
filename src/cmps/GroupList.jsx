@@ -6,30 +6,32 @@ import { loadBoard, updateBoard } from "../store/actions/board.actions";
 import { AddingForm } from "./AddingForm";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
-
-export function GroupList({ groups, allowDrop, drop,isClickedLabel,setIsClickedLabel, isActivitiesOpen }) {
+export function GroupList({
+  groups,
+  allowDrop,
+  drop,
+  isClickedLabel,
+  setIsClickedLabel,
+  isActivitiesOpen,
+}) {
   const board = useSelector((storeState) => storeState.boardModule.board);
 
   const [isNewGroup, setIsNewGroup] = useState(false);
   const [newGroup, setNewGroup] = useState(boardService.getEmptyGroup());
   const [currGroups, setCurrGroups] = useState(groups);
+  const [isNewGroupAdded, setIsNewGroupAdded] = useState(false);
   const currBoard = useSelector((state) => state.boardModule.board);
-
-
-
 
   useEffect(() => {
     if (board?.groups) setCurrGroups(board.groups);
   }, [board]);
 
-  useEffect(() => {
-  }, [currGroups?.length]);
+  useEffect(() => {}, [currGroups?.length]);
 
   async function onAddGroup() {
     setIsNewGroup(true);
-    const newGroup = boardService.getEmptyGroup()
+    const newGroup = boardService.getEmptyGroup();
     setNewGroup(newGroup);
-
   }
 
   function handleOnDragEnd(result) {
@@ -64,11 +66,15 @@ export function GroupList({ groups, allowDrop, drop,isClickedLabel,setIsClickedL
 
   async function onUpdated(name, value, groupId, taskId) {
     try {
-      const updatedBoard = await boardService.updateBoard(board, groupId, taskId, {
-        key: name,
-        value: value,
-      });
-
+      const updatedBoard = await boardService.updateBoard(
+        board,
+        groupId,
+        taskId,
+        {
+          key: name,
+          value: value,
+        }
+      );
 
       await updateBoard(updatedBoard);
     } catch (error) {
@@ -99,6 +105,9 @@ export function GroupList({ groups, allowDrop, drop,isClickedLabel,setIsClickedL
                   drop={drop}
                   isClickedLabel={isClickedLabel}
                   setIsClickedLabel={setIsClickedLabel}
+                  isNewGroup={isNewGroup}
+                  isNewGroupAdded={isNewGroupAdded}
+                  setIsNewGroupAdded={setIsNewGroupAdded}
                 />
               ))}
               {isNewGroup && (
@@ -110,6 +119,7 @@ export function GroupList({ groups, allowDrop, drop,isClickedLabel,setIsClickedL
                   updated={newGroup}
                   groupId={null}
                   tasks={null}
+                  setIsNewGroupAdded={setIsNewGroupAdded}
                 />
               )}
               <button
