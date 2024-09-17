@@ -71,7 +71,6 @@
       margin: 0;
       padding: 0;
       padding-inline-end: 10px;
-      padding-block-start: 2px;
 
       font-size: 14px;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -80,7 +79,6 @@
       font-weight: 500;
 
       span {
-        margin-top: 1px;
         display: grid;
         svg {
           place-self: center;
