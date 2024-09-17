@@ -1,49 +1,49 @@
-import { useState } from 'react'
-import { MdClose } from 'react-icons/md'
-import { useSelector } from 'react-redux'
+import { useState } from 'react';
+import { MdClose } from 'react-icons/md';
 
 export function MemberPicker({
     board,
     task,
-    setIsPopoverOpen,
     onUpdated,
     setTaskMembers,
-    handlePopoverClick,
     taskMembers,
 }) {
-    const membersBoard = board.members
+    const membersBoard = board.members;
     const availableMembers = membersBoard.filter(
         boardMember => !taskMembers.some(taskMember => taskMember.id === boardMember.id)
-    )
-    const [selectedMembers, setSelectedMembers] = useState(availableMembers)
+    );
+    const [selectedMembers, setSelectedMembers] = useState(availableMembers);
 
     function handleRemoveMember(ev, member) {
-        ev.stopPropagation()
-        const updateTaskMembers = taskMembers.filter(m => m.id !== member.id)
-        onUpdated('members', updateTaskMembers)
-        setTaskMembers(updateTaskMembers)
+        ev.stopPropagation();
+        const updateTaskMembers = taskMembers.filter(m => m.id !== member.id);
+        onUpdated('members', updateTaskMembers);
+        setTaskMembers(updateTaskMembers);
 
-        const updateBoardMembers = [...selectedMembers, member]
-        setSelectedMembers(updateBoardMembers)
+        const updateBoardMembers = [...selectedMembers, member];
+        setSelectedMembers(updateBoardMembers);
     }
 
     function handleAddMember(ev, member) {
-        ev.stopPropagation()
-        const updateBoardMembers = selectedMembers.filter(m => m.id !== member.id)
-        setSelectedMembers(updateBoardMembers)
+        ev.stopPropagation();
+        const updateBoardMembers = selectedMembers.filter(m => m.id !== member.id);
+        setSelectedMembers(updateBoardMembers);
 
-        const updateTaskMembers = [...taskMembers, member]
-        onUpdated('members', updateTaskMembers)
-        setTaskMembers(updateTaskMembers)
+        const updateTaskMembers = [...taskMembers, member];
+        onUpdated('members', updateTaskMembers);
+        setTaskMembers(updateTaskMembers);
     }
 
-    console.log(taskMembers)
+    console.log(taskMembers);
     return (
         <div className="members-container">
             <h5 className="members-title">Members</h5>
 
+            {/* Card Members Section */}
             <div className="card-members">
-                <span className="card-members-title">Card Members</span>
+                {taskMembers.length > 0 && (
+                    <span className="card-members-title">Card Members</span>
+                )}
                 <ul className="members-list">
                     {taskMembers.length > 0
                         ? taskMembers.map((member, idx) => (
@@ -77,8 +77,11 @@ export function MemberPicker({
                 </ul>
             </div>
 
+            {/* Board Members Section */}
             <div className="board-members">
-                <span className="board-members-title">Board Members</span>
+                {selectedMembers.length > 0 && (
+                    <span className="board-members-title">Board Members</span>
+                )}
                 <ul className="members-list">
                     {selectedMembers.map((member, idx) => (
                         <li
@@ -106,5 +109,5 @@ export function MemberPicker({
                 </ul>
             </div>
         </div>
-    )
+    );
 }

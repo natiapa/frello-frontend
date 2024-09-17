@@ -12,8 +12,9 @@ import { FiPaperclip } from "react-icons/fi";
 import { BsArchive, BsPersonPlus } from "react-icons/bs";
 import { CoverPicker } from "./CoverPicker";
 import { BsCardImage } from "react-icons/bs";
-import {  useState } from "react";
+import { useState } from "react";
 import { MemberPicker } from "./MemberPicker";
+import { FaTrashAlt, FaUndoAlt } from "react-icons/fa";
 
 // --- TaskDetailsActions Component ---
 export function TaskDetailsActions({
@@ -78,7 +79,7 @@ export function TaskDetailsActions({
           onClick={handleClick}
         >
           <span className="icon">
-          <BsPersonPlus  />
+            <BsPersonPlus />
           </span>
           <p>Members</p>
 
@@ -346,7 +347,7 @@ export function TaskDetailsActions({
 
       {/* Action Section */}
       <>
-        {taskParams && <h5>Action</h5>}
+        {taskParams && <h5 style={{ margin: "20px 0" }}>Action</h5>}
         {taskParams &&
           (!isArchiveClicked ? (
             <div
@@ -355,6 +356,16 @@ export function TaskDetailsActions({
               className="archive action-btn"
               aria-describedby="7"
               onClick={handleArchiveClick}
+              style={{
+                color: "#172b4d",
+                borderRadius: "4px",
+                padding: "10px",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                transition: "background-color 0.3s",
+              }}
             >
               <span className="icon">
                 <BsArchive />
@@ -370,7 +381,20 @@ export function TaskDetailsActions({
                 className="send-back action-btn"
                 aria-describedby="8"
                 onClick={handleArchiveClick}
+                style={{
+                  color: "#172b4d",
+                  borderRadius: "4px",
+                  padding: "10px",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  transition: "background-color 0.3s",
+                }}
               >
+                <span className="icon">
+                  <FaUndoAlt />
+                </span>
                 <p>Send to board</p>
               </div>
 
@@ -378,10 +402,24 @@ export function TaskDetailsActions({
               <div
                 role="button"
                 data-name="delete"
-                className="delet action-btn"
+                className="delete action-btn"
                 aria-describedby="9"
                 onClick={deleteTask}
+                style={{
+                  backgroundColor: "#ff7878",
+                  color: "#fff",
+                  borderRadius: "4px",
+                  padding: "10px",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  transition: "background-color 0.3s",
+                }}
               >
+                <span className="icon">
+                  <FaTrashAlt />
+                </span>
                 <p>Delete</p>
               </div>
             </div>
@@ -405,8 +443,46 @@ export function TaskDetailsActions({
   );
 }
 
-             
+// {taskParams && <h5>Action</h5>}
+// {taskParams &&
+//   (!isArchiveClicked ? (
+//     <div
+//       role="button"
+//       data-name="archive"
+//       className="archive action-btn"
+//       aria-describedby="7"
+//       onClick={handleArchiveClick}
+//     >
+//       <span className="icon">
+//         <BsArchive />
+//       </span>
+//       <p>Archive</p>
+//     </div>
+//   ) : (
+//     <div>
+//       {/* Send to Board */}
+//       <div
+//         role="send-back"
+//         data-name="send-back"
+//         className="send-back action-btn"
+//         aria-describedby="8"
+//         onClick={handleArchiveClick}
+//       >
+//         <p>Send to board</p>
+//       </div>
 
+//       {/* Delete Button */}
+//       <div
+//         role="button"
+//         data-name="delete"
+//         className="delet action-btn"
+//         aria-describedby="9"
+//         onClick={deleteTask}
+//       >
+//         <p>Delete</p>
+//       </div>
+//     </div>
+//   ))}
 
 // import { Popover } from "@mui/material";
 // import { CgCreditCard } from "react-icons/cg";
