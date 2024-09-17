@@ -46,10 +46,6 @@ export function TaskDetailsActions({
 }) {
   const { taskId: taskParams } = useParams();
   const [isArchiveClicked, setIsArchiveClicked] = useState(false);
-  
-
- 
-  
 
   function handlePopoverClick(ev) {
     ev.stopPropagation();
@@ -213,7 +209,7 @@ export function TaskDetailsActions({
               open={isPopoverOpen}
               anchorEl={anchorEl}
               anchorOrigin={{
-                vertical: -100 ,
+                vertical: -100,
                 horizontal: "left",
               }}
               transformOrigin={{

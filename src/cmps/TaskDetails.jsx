@@ -168,7 +168,7 @@ export function TaskDetails() {
         </button>
 
         {currCover.color && (
-          <div className="absolute-element" style={{ height: "160px" }}>
+          <div className="absolute-element" style={{ height: "100px" }}>
             <CoverDisplay
               currCover={currCover}
               height="100px"

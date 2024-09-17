@@ -16,14 +16,14 @@
   line-height: 24px;
   display: inline-block;
   text-align: center;
-  .label-header{
+  .label-header {
     font-size: 8px;
   }
 }
 
 .add-label-button {
   place-self: end;
-  margin-block-end: 2px;
+  // margin-block-end: 2px;
   display: flex;
   align-items: center;
   justify-content: center;

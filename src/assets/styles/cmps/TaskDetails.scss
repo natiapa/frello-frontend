@@ -180,6 +180,7 @@
           gap: 4px;
         }
       }
+
       .labels-container {
         grid-column: 3;
         display: grid;
@@ -255,8 +256,8 @@
         border: none;
         outline: none;
         box-shadow: 0 0 0 1px inset #091e4224;
-        &:focus{
-          box-shadow: 0 0 0 2px inset #1D7AFC;
+        &:focus {
+          box-shadow: 0 0 0 2px inset #1d7afc;
         }
       }
       ::placeholder {
@@ -439,6 +440,14 @@
         }
       }
 
+      .information {
+        display: block;
+        padding-inline: 4em 2em;
+        margin-block-end: 2em;
+
+        .label-container {
+        }
+      }
       .description-container {
         padding-inline-end: 2em;
       }

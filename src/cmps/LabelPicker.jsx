@@ -39,7 +39,7 @@ export function LabelPicker({
   }
 
   useEffect(() => {
-    console.log(localTaskSelectedLabels)
+    console.log(localTaskSelectedLabels);
     onUpdated("labels", localTaskSelectedLabels);
   }, [localTaskSelectedLabels]);
 
@@ -71,7 +71,7 @@ export function LabelPicker({
 
   async function onUpdatedBoard(updatedLabels) {
     try {
-    await  boardService.updateBoard(board, null, null, {
+      await boardService.updateBoard(board, null, null, {
         key: "labels",
         value: updatedLabels,
       });
@@ -126,7 +126,7 @@ export function LabelPicker({
                       backgroundColor: label.color,
                     }}
                   >
-                    <p>{label.title}</p>
+                    <p className="chosen-label-title">{label.title}</p>
                   </div>
 
                   <span className="edit-icon">
@@ -147,4 +147,3 @@ export function LabelPicker({
     </div>
   );
 }
-

@@ -1,6 +1,7 @@
 .edit-task-modal-content {
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
   // padding: 0.5em 1em 2em 1em;
   color: #44546f;
   // width: 285px;
@@ -40,26 +41,34 @@
 
   p {
     &.labels-title {
-      display: block;
+      // display: block;
+      display: grid;
+      grid-auto-flow: row;
       color: #44546f;
       font-size: 12px;
-      line-height: 16px;
+      // line-height: 16px;
       font-weight: 600;
-      margin-top: 12px;
-      margin: 0 0 8px;
-      margin-top: 12px;
+      // margin-top: 12px;
+      // margin: 0 0 8px;
+      // margin-top: 12px;
       // margin-inline-start: 1em;
       text-align: start;
+      // height: max-content;
+      // min-height: 32px;
+      // line-height: 10px;
     }
   }
 
   .labels-container {
-    display: flex;
-    justify-content: center;
-    width: fit-content;
+    display: grid;
+    grid-auto-flow: row;
+    // justify-content: center;
+    // width: fit-content;
   }
 
   ul {
+    display: grid;
+    grid-auto-flow: row;
     width: fit-content;
     margin-inline-end: 1.3em;
 
@@ -79,6 +88,16 @@
 
       .label-color {
         border-radius: 3px;
+        height: max-content;
+        min-height: 32px;
+        display: flex;
+        align-items: center;
+
+        .chosen-label-title {
+          line-height: 1.1em;
+          height: max-content;
+          word-break: normal;
+        }
       }
 
       .icon {
