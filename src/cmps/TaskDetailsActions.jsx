@@ -135,8 +135,8 @@ export function TaskDetailsActions({
                 disablePortal
               >
                 <EditChecklist
-                  groupId={groupId}
-                  taskId={taskId}
+                  board={board}
+                  group={group}
                   task={task}
                   onUpdated={onUpdated}
                   setIsPopoverOpen={setIsPopoverOpen}
