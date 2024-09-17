@@ -1,4 +1,4 @@
-export function LabelList({ taskLabels, labelWidth, labelHight, labelPadding, setIsClickedLabel }) {
+export function LabelList({ taskLabels, labelWidth, labelHight, labelPadding, setIsClickedLabel,showTitle }) {
     if (!taskLabels) return null
 
     return (
@@ -14,7 +14,7 @@ export function LabelList({ taskLabels, labelWidth, labelHight, labelPadding, se
                         padding: labelPadding
                     }}
                     onClick={() => setIsClickedLabel(isClicked => !isClicked)}>
-                    <span className="label-header">{label.title || ''}</span>
+                    {showTitle &&<span className="label-header">{label.title || ''}</span>}
                 </div>
             ))}
         </div>

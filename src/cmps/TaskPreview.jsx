@@ -177,6 +177,7 @@ export function TaskPreview({
                                     setIsClickedLabel={setIsClickedLabel}
                                     labelHight={isClickedLabel ? '16px' : '8px'}
                                     labelPadding={isClickedLabel ? '0 8px' : '0'}
+                                    showTitle={isClickedLabel}
                                 />
                             </div>
 
