@@ -114,7 +114,8 @@ export function BoardDetails() {
   useEffect(() => {
     loadBoard(boardId, filterBy);
     if (!preview?.length) return;
-    setPreview(preview);
+    // setPreview(preview);
+    loadPreview();
   }, [boardId, preview, filterBy, currTask]);
 
   // Calculate background color when board style or bgColor changes
@@ -125,22 +126,34 @@ export function BoardDetails() {
   // Update task details when current task changes
   useEffect(() => {
     if (currTask) {
-      setNewDueDate(currTask.dueDate);
-      setCurrCover(currTask.cover);
-      setTaskMembers(currTask.members);
-      setTaskSelectedLabels(currTask.labels || []);
+      // setNewDueDate(currTask.dueDate);
+      // setCurrCover(currTask.cover);
+      // setTaskMembers(currTask.members);
+      // setTaskSelectedLabels(currTask.labels || []);
+      loadUpdate();
     }
   }, [currTask]);
 
+  function loadUpdate() {
+    setNewDueDate(currTask.dueDate);
+    setCurrCover(currTask.cover);
+    setTaskMembers(currTask.members);
+    setTaskSelectedLabels(currTask.labels || []);
+  }
+
+  function loadPreview() {
+    setPreview(preview);
+  }
+
   // Update task details if the task preview modal is open
-  useEffect(() => {
-    if (isTaskPrevModalOpen && currTask) {
-      setNewDueDate(currTask.dueDate);
-      setTaskMembers(currTask.members);
-      setTaskSelectedLabels(currTask.labels);
-      setCurrCover(currTask.cover);
-    }
-  }, [currTask, isTaskPrevModalOpen]);
+  // useEffect(() => {
+  //   if (isTaskPrevModalOpen && currTask) {
+  //     setNewDueDate(currTask.dueDate);
+  //     setTaskMembers(currTask.members);
+  //     setTaskSelectedLabels(currTask.labels);
+  //     setCurrCover(currTask.cover);
+  //   }
+  // }, [currTask, isTaskPrevModalOpen]);
 
   // Reload board when the background style changes
   useEffect(() => {
@@ -395,10 +408,18 @@ export function BoardDetails() {
 
             {/* Save Form */}
             <form className="modal-form" onSubmit={handleSave}>
-              <textarea
+              {/* <textarea
                 value={value || ""}
                 onChange={(ev) => setValue(ev.target.value)}
-              />
+              /> */}
+              <div
+                className="prev-title-edit"
+                contentEditable
+                onInput={(ev) => setValue(ev.target.innerText)}
+                onBlur={(ev) => setValue(ev.target.innerText)}
+              >
+                {currTask.title}
+              </div>
               <button className="save-btn" type="submit">
                 <span>Save</span>
               </button>

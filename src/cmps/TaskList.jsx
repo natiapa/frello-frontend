@@ -14,10 +14,12 @@ export function TaskList({
   draggedMemberId,
   isClickedLabel,
   setIsClickedLabel,
+  isNewGroupAdded,
+  setIsNewGroupAdded,
 }) {
   const { tasks } = group;
 
-  const [isNewTask, setIsNewTask] = useState(false);
+  const [isNewTask, setIsNewTask] = useState(isNewGroupAdded ? true : false);
   const [newTask, setNewTask] = useState(boardService.getEmptyTask());
   const board = useSelector((state) => state.boardModule.board);
   const taskListRef = useRef(null);
@@ -73,6 +75,8 @@ export function TaskList({
                   updated={newTask}
                   groupId={group.id}
                   tasks={group.tasks}
+                  setIsNewGroupAdded={setIsNewGroupAdded}
+                  // setIsNewTask={setIsNewTask}
                 />
               </div>
             )}
