@@ -160,7 +160,7 @@ export function BoardDetails() {
     loadBoard(boardId);
   }, [currBoardBgStyle?.style]);
 
-  function handlePopoverToggle(ev) {
+  function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
     setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
     setAnchorEl(ev.currentTarget);
@@ -442,7 +442,7 @@ export function BoardDetails() {
               onUpdated={onUpdated}
               setCurrCover={setCurrCover}
               currCover={currCover}
-              handleClick={handlePopoverToggle}
+              handleClick={handleClick}
               anchorEl={anchorEl}
               setIsPopoverOpen={setIsPopoverOpen}
               modalOpenByName={modalOpenByName}
