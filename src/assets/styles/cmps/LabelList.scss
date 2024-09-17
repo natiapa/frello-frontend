@@ -5,7 +5,9 @@
 }
 
 .label-square {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #ccc;
   border-radius: 4px;
   padding: 0 12px;
@@ -13,11 +15,12 @@
   color: white;
   height: 32px;
   width: 48px;
-  line-height: 24px;
-  display: inline-block;
-  text-align: center;
+  line-height: 6px;
+  // display: inline-block;
+  // text-align: center;
   .label-header {
-    font-size: 8px;
+    font-size: 9px;
+    word-break: normal;
   }
 }
 
