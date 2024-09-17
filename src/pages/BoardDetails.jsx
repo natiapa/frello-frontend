@@ -429,7 +429,7 @@ export function BoardDetails() {
         bgColor={bgColor}
         logoImg="https://www.pngkey.com/png/full/213-2134177_import-boards-from-trello-trello-logo-white.png"
         logoColor="#fff"
-        link={`/${import.meta.env.VITE_SERVER}/board`}
+        link={`${import.meta.env.VITE_SERVER}/board`}
         textColor="#fff"
       />
 
