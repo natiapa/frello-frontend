@@ -35,16 +35,19 @@ export function TaskPreview({
 
   function drop(ev) {
     ev.preventDefault();
+
     const data = ev.dataTransfer.getData("text");
     const currDraggedMemberId = data;
+    console.log(data);
 
     const draggedMember = board.members.find(
-      (member) => member.id === currDraggedMemberId
+      (member) => member._id === currDraggedMemberId
     );
+    console.log(draggedMember);
 
     if (
       !draggedMember ||
-      task.members.some((member) => member.id === currDraggedMemberId)
+      task.members.some((member) => member._id === currDraggedMemberId)
     ) {
       return;
     }

@@ -316,7 +316,7 @@ export function TaskDetails() {
               board={board}
               group={group}
               task={task}
-              boardId={board?.id}
+              boardId={board?._id}
               groupId={group.id}
               taskId={task.id}
               setBoardSelectedLabels={setBoardSelectedLabels}

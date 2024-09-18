@@ -63,7 +63,7 @@ async function getById(boardId, filterBy = {}) {
   if (filterBy.selectMember?.length) {
     board.groups.forEach((group) => {
       group.tasks = group.tasks.filter((task) =>
-        task.members.some((member) => filterBy.selectMember.includes(member.id))
+        task.members.some((member) => filterBy.selectMember.includes(member._id))
       );
     });
   }

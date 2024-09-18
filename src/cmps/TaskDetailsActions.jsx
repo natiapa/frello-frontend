@@ -212,13 +212,13 @@ export function TaskDetailsActions({
               open={isPopoverOpen}
               anchorEl={anchorEl}
               anchorOrigin={{
-                vertical: -100,
+                vertical: "top",
                 horizontal: "left",
               }}
-              transformOrigin={{
-                vertical: -100, // מספר שלילי ימקם את הפופ גבוה יותר
-                horizontal: "left",
-              }}
+              // transformOrigin={{
+              //   vertical: -100, // מספר שלילי ימקם את הפופ גבוה יותר
+              //   horizontal: "left",
+              // }}
               disablePortal
               PaperProps={{
                 sx: {
@@ -362,16 +362,18 @@ export function TaskDetailsActions({
                 <p>Send to board</p>
               </div>
 
-              <div 
+              <div
                 role="button"
                 data-name="delete"
                 className="delet action-btn"
                 aria-describedby="9"
                 onClick={deleteTask}
-                style={{ backgroundColor: "#C9372C", color:"#fff" }}
+                style={{ backgroundColor: "#C9372C", color: "#fff" }}
               >
-                <span className="icon" >
-                  <IoRemoveOutline  style={{fontWeight:"bold", color:"#fff"}} />
+                <span className="icon">
+                  <IoRemoveOutline
+                    style={{ fontWeight: "bold", color: "#fff" }}
+                  />
                 </span>
                 <p>Delete</p>
               </div>
