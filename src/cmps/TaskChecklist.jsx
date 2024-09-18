@@ -281,11 +281,12 @@ export function TaskChecklist({
                         </p>
                       )}
                       {item.edit && (
-                        <div className="edit-item">
+                        <div className="edit-item" onBlur={(ev) => saveEditingItem(ev, item)}>
                           <input
                             type="text"
                             onChange={handleEditTextItem}
                             value={textItemToEdit}
+                            autoFocus
                           />
                           <div className="btns">
                             <button

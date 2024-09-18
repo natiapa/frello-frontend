@@ -54,7 +54,7 @@ export function AddingForm({
     }
   }
   return (
-    <form className="adding-form" onSubmit={onSave}>
+    <form className="adding-form" onSubmit={onSave} onBlur={onSave}>
       <textarea
         onChange={handelChange}
         rows="2"
