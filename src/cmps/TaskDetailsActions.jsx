@@ -10,7 +10,7 @@ import { LuClock5 } from "react-icons/lu";
 import { DueDatePicker } from "./DueDatePicker";
 import { AttachmentUploader } from "./AttachmentUploader";
 import { FiPaperclip } from "react-icons/fi";
-import { BsArchive } from "react-icons/bs";
+import { BsArchive, BsPersonPlus } from "react-icons/bs";
 import { CoverPicker } from "./CoverPicker";
 import { BsCardImage } from "react-icons/bs";
 
