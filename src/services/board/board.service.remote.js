@@ -214,7 +214,7 @@ function getEmptyTask() {
         members: [],
         attachments: [],
         comments: [],
-        cover: '',
+        cover: { color: "", img: "" },
         dueDate: '',
     }
 }
@@ -240,11 +240,7 @@ function getEmptyBoard() {
         title: '',
         isStarred: false,
         // archivedAt: 0,
-        createdBy: {
-            id: 'u102',
-            fullname: '',
-            imgUrl: '',
-        },
+        createdBy: userService.getLoggedinUser(),
         style: {
             backgroundImage: '',
             backgroundColor: '',

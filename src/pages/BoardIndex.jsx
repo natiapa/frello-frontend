@@ -19,6 +19,7 @@ import { SideBar } from "../cmps/Sidebar";
 import { AppHeader } from "../cmps/AppHeader";
 import { useNavigate } from "react-router";
 import { StarredBoardsList } from "../cmps/StarredBoardsList";
+import { loadUsers } from "../store/actions/user.actions";
 
 export function BoardIndex() {
   const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter());
@@ -29,6 +30,7 @@ export function BoardIndex() {
 
   useEffect(() => {
     loadBoards();
+    loadUsers();
   }, [boards.length]);
 
   useEffect(() => {
@@ -50,12 +52,14 @@ export function BoardIndex() {
     const emptyBoard = boardService.getEmptyBoard();
     const boardToSave = {
       ...emptyBoard,
+      members: [...emptyBoard.members, emptyBoard.createdBy],
       title: board.title,
       style: {
         ...emptyBoard.style,
         backgroundImage: board.backgroundImage,
       },
     };
+    console.log(boardToSave);
     try {
       boardService.updateActivities(
         boardToSave,

@@ -36,6 +36,7 @@ import { IoMdCheckboxOutline } from "react-icons/io";
 import { FastAverageColor } from "fast-average-color";
 import chroma from "chroma-js";
 import { MouseTracker } from "../cmps/MouseTracker";
+import { VscListFlat } from "react-icons/vsc";
 
 export function BoardDetails() {
   // Import necessary hooks
@@ -76,7 +77,7 @@ export function BoardDetails() {
   const [taskMembers, setTaskMembers] = useState(currTask?.members || []);
   const [selectedLabels, setSelectedLabels] = useState([]);
   const [isClickedLabel, setIsClickedLabel] = useState(false);
-
+  const [newBoardMembers, setNewBoardMembers] = useState(board?.members);
   // State variables for managing menu, board background style, and background color
   const [currBoardBgStyle, setCurrBoardBgStyle] = useState();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -89,7 +90,6 @@ export function BoardDetails() {
     console.log("Joining board room:", boardId);
 
     socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
-    
       loadBoard(boardId);
     });
 
@@ -382,6 +382,8 @@ export function BoardDetails() {
 
             <div className="details-modal">
               {/* Checklists Display */}
+              {currTask.description && <VscListFlat style={{ gridRow: 1 }} />}
+
               {currTask.checklists && currTask.checklists.length > 0 && (
                 <div className="checklists" style={{ gridRow: 2 }}>
                   <IoMdCheckboxOutline />
@@ -391,13 +393,25 @@ export function BoardDetails() {
 
               {/* Members Display */}
               {currTask.members.length > 0 && (
-                <ul className="members-modal" style={{ gridRow: 2 }}>
+                <ul
+                  className="members-modal"
+                  style={{ gridRow: "2", gridColumn: "5" }}
+                >
                   <MemberList members={taskMembers} gridColumnWidth="32px" />
                 </ul>
               )}
 
               {/* Due Date Display */}
-              <div className="due-date-container" style={{ gridRow: 1 }}>
+              <div
+                className="due-date-container"
+                style={{
+                  gridRow: 1,
+                  gridColumn: "1 span2",
+                  fontSize: "12px",
+                  margin: "0 0 4px",
+                  padding: "2px",
+                }}
+              >
                 <DueDateDisplay
                   dueDate={newDueDate}
                   setNewDueDate={setNewDueDate}
@@ -475,6 +489,7 @@ export function BoardDetails() {
         drag={drag}
         setIsMenuOpen={setIsMenuOpen}
         isMenuOpen={isMenuOpen}
+        setNewBoardMembers={setNewBoardMembers}
       />
 
       {/* Menu */}

@@ -1,31 +1,29 @@
 import { useEffect, useState } from "react";
-import { socketService, SOCKET_EVENT_MOUSE_MOVE, SOCKET_EVENT_USER_LEFT } from "../services/socket.service";
+import {
+  socketService,
+  SOCKET_EVENT_MOUSE_MOVE,
+  SOCKET_EVENT_USER_LEFT,
+} from "../services/socket.service";
 import { FaMousePointer } from "react-icons/fa";
 
 export function MouseTracker({ boardId }) {
   const [myCursor, setMyCursor] = useState({ x: 0, y: 0 });
   const [otherCursors, setOtherCursors] = useState({});
 
-
   useEffect(() => {
-
     window.addEventListener("mousemove", handleMouseMove);
 
-
     socketService.on(SOCKET_EVENT_MOUSE_MOVE, handleMouseMoveFromOthers);
-
 
     socketService.on(SOCKET_EVENT_USER_LEFT, handleUserLeft);
 
     return () => {
-
       socketService.emit("leaveBoard", boardId);
       socketService.off(SOCKET_EVENT_MOUSE_MOVE);
       socketService.off(SOCKET_EVENT_USER_LEFT, handleUserLeft);
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, [boardId]);
-
 
   function handleMouseMove(ev) {
     const mouseData = {
@@ -38,7 +36,6 @@ export function MouseTracker({ boardId }) {
     socketService.emit(SOCKET_EVENT_MOUSE_MOVE, mouseData);
   }
 
-
   function handleMouseMoveFromOthers(cursorData) {
     setOtherCursors((prevCursors) => ({
       ...prevCursors,
@@ -46,9 +43,8 @@ export function MouseTracker({ boardId }) {
     }));
   }
 
-
   function handleUserLeft(user) {
-    const userId = user.id;
+    const userId = user._id;
     setOtherCursors((prevCursors) => {
       const updatedCursors = { ...prevCursors };
       if (userId in updatedCursors) {
@@ -60,10 +56,9 @@ export function MouseTracker({ boardId }) {
     });
   }
 
-
   const filteredCursors = Object.values(otherCursors).filter(
     (cursor) => cursor.id !== socketService.getSocketId()
-  )
+  );
 
   return (
     <div>
@@ -84,7 +79,6 @@ export function MouseTracker({ boardId }) {
     </div>
   );
 }
-
 
 // import { useEffect, useState } from "react";
 // import { socketService, SOCKET_EVENT_MOUSE_MOVE, SOCKET_EVENT_USER_LEFT } from "../services/socket.service";
@@ -168,4 +162,3 @@ export function MouseTracker({ boardId }) {
 //     </div>
 //   );
 // }
-
