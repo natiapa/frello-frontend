@@ -1,4 +1,3 @@
-
 import { Popover } from "@mui/material";
 import { CgCreditCard } from "react-icons/cg";
 import { IoMdCheckboxOutline } from "react-icons/io";
@@ -16,6 +15,8 @@ import { BsCardImage } from "react-icons/bs";
 
 import { useState } from "react";
 import { MemberPicker } from "./MemberPicker";
+import { FaUndo } from "react-icons/fa";
+import { IoRemoveOutline } from "react-icons/io5";
 
 export function TaskDetailsActions({
   board,
@@ -73,7 +74,7 @@ export function TaskDetailsActions({
           onClick={handleClick}
         >
           <span className="icon">
-          <BsPersonPlus />
+            <BsPersonPlus />
           </span>
           <p>Members</p>
 
@@ -355,16 +356,23 @@ export function TaskDetailsActions({
                 aria-describedby="8"
                 onClick={handleArchiveClick}
               >
+                <span className="icon">
+                  <FaUndo style={{ color: "#44546F" }} />
+                </span>
                 <p>Send to board</p>
               </div>
 
-              <div
+              <div 
                 role="button"
                 data-name="delete"
                 className="delet action-btn"
                 aria-describedby="9"
                 onClick={deleteTask}
+                style={{ backgroundColor: "#C9372C", color:"#fff" }}
               >
+                <span className="icon" >
+                  <IoRemoveOutline  style={{fontWeight:"bold", color:"#fff"}} />
+                </span>
                 <p>Delete</p>
               </div>
             </div>
