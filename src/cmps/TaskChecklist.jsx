@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { makeId } from "../services/util.service";
 import { ProgressBar } from "./ProgressBar";
+import { boardReducer } from "../store/reducers/board.reducer";
 import { boardService } from "../services/board";
+import { FaRegCheckSquare } from "react-icons/fa";
 import { IoMdCheckboxOutline } from "react-icons/io";
 
 export function TaskChecklist({
@@ -11,26 +13,22 @@ export function TaskChecklist({
   group,
   board,
 }) {
-  console.log("checklists from TaskChecklist", checklists);
+  console.log('checklists from TaskChecklist', checklists )
 
-  // --- State Initialization ---
   const [updatedChecklists, setUpdatedChecklists] = useState([...checklists]);
   const [isAddingItem, setIsAddingItem] = useState(false);
   const [itemText, setItemText] = useState("");
   const [textItemToEdit, setTextItemToEdit] = useState("");
-  const [hideCheckedItems, setHideCheckedItems] = useState(false);
 
-  // --- useEffect for updating checklists state ---
+  // useEffect(() => {
+  //   // console.log("render!");
+  //   setUpdatedChecklists(task.checklists);
+  // }, [updatedChecklists]);
+  
   useEffect(() => {
     setUpdatedChecklists(checklists);
   }, [checklists]);
 
-  // --- Handle Hide/Show Checked Items ---
-  function handleHideItems() {
-    setHideCheckedItems(!hideCheckedItems);
-  }
-
-  // --- Remove a Checklist ---
   async function onRemoveChecklist(ev, checklistId) {
     ev.preventDefault();
     const deletedChecklist = checklists.find(
@@ -53,8 +51,8 @@ export function TaskChecklist({
     );
   }
 
-  // --- Handle Checkbox Change ---
   async function handleChangeCheckbox({ target }, item, checklistId) {
+    // console.log(item);
     const { name, checked } = target;
 
     const checklistToUpdate = updatedChecklists.find(
@@ -79,6 +77,7 @@ export function TaskChecklist({
     );
 
     const updatedChecklist = { ...checklistToUpdate, items: updatedItems };
+
     const updatedChecklistsList = updatedChecklists.map((cl) =>
       cl.id === checklistId ? updatedChecklist : cl
     );
@@ -87,10 +86,6 @@ export function TaskChecklist({
     onUpdated("checklists", updatedChecklistsList);
   }
 
- 
-
-
-  // --- Save a New Item to Checklist ---
   function onSaveItem(ev, checklistId) {
     ev.preventDefault();
 
@@ -111,24 +106,23 @@ export function TaskChecklist({
     setIsAddingItem(false);
   }
 
-  // --- Handle Text Change for New Item ---
   function handleChangeTextItem(ev) {
     setItemText(ev.target.value);
   }
 
-  // --- Edit Text of Existing Item ---
   function handleEditTextItem(ev) {
     ev.preventDefault();
     setTextItemToEdit(ev.target.value);
   }
 
-  // --- Enable Editing Mode for an Item ---
   function onEditingTextItem(ev, item) {
     ev.preventDefault();
     const updatedChecklistsList = updatedChecklists.map((checklist) => {
       const updatedItems = checklist.items.map((currItem) => {
         currItem.edit = false;
         if (currItem.id === item.id) {
+          // setCurrItemIsEditing(true);
+          // item.edit = true;
           currItem.edit = true;
           setTextItemToEdit(item.text);
           return { ...currItem, text: textItemToEdit };
@@ -139,8 +133,6 @@ export function TaskChecklist({
     });
     setUpdatedChecklists(updatedChecklistsList);
   }
-
-  // --- Save Edited Item ---
   function saveEditingItem(ev, item) {
     ev.preventDefault();
 
@@ -148,7 +140,9 @@ export function TaskChecklist({
       const updatedItems = checklist.items.map((currItem) => {
         currItem.edit = false;
         if (currItem.id === item.id) {
+          // item.edit = false;
           setTextItemToEdit(ev.target.value);
+          console.log("textItemToEdit:", textItemToEdit);
           return { ...currItem, text: textItemToEdit };
         }
         return currItem;
@@ -156,10 +150,9 @@ export function TaskChecklist({
       return { ...checklist, items: updatedItems };
     });
     setUpdatedChecklists(updatedChecklistsList);
+    // setCurrItemIsEditing(false);
     onUpdated("checklists", updatedChecklistsList);
   }
-
-  // --- Cancel Editing Mode ---
   function closeForm(ev, item) {
     ev.preventDefault();
     const updatedChecklistsList = updatedChecklists.map((checklist) => {
@@ -173,31 +166,28 @@ export function TaskChecklist({
       return { ...checklist, items: updatedItems };
     });
     setUpdatedChecklists(updatedChecklistsList);
+    // setCurrItemIsEditing(false);
   }
 
-  // --- Add Item to Checklist ---
   function onAddItem(ev, checklist) {
     ev.preventDefault();
     checklist.isAddingItem = true;
     setIsAddingItem(true);
   }
 
-  // --- Cancel Adding New Item ---
-  function onCancel(ev, checklist) {
+  function oncancel(ev, checklist) {
     ev.preventDefault();
     checklist.isAddingItem = false;
     setIsAddingItem(false);
   }
 
-  // --- Handle Enter Key for Adding Item ---
   function handleKeyDown(ev, checklistId) {
     if (ev.key === "Enter") {
-      ev.preventDefault(); // Prevent form submission
-      onSaveItem(ev, checklistId); // Save item on Enter press
+      ev.preventDefault(); // מונע שליחה של טופס ברירת מחדל אם יש אחד
+      onSaveItem(ev, checklistId); // שמירת הפריט עם לחיצת Enter
     }
   }
 
-  // --- JSX Return ---
   return (
     <div className="task-checklist">
       <ul className="checklists">
@@ -215,13 +205,6 @@ export function TaskChecklist({
                 >
                   Delete
                 </button>
-                {checklist.items.some((item) => item.isChecked) && (
-                  <button type="button" onClick={handleHideItems}>
-                    {hideCheckedItems
-                      ? "Show checked items"
-                      : "Hide checked items"}
-                  </button>
-                )}
               </div>
               <ProgressBar items={checklist.items} />
               {!isAddingItem && (
@@ -238,70 +221,54 @@ export function TaskChecklist({
                     type="text"
                     onChange={handleChangeTextItem}
                     placeholder="Add an item"
-                    onKeyDown={(ev) => handleKeyDown(ev, checklist.id)}
+                    onKeyDown={(ev) => handleKeyDown(ev, checklist.id)} // מאזין ללחיצת Enter
                     autoFocus
                   />
                   <div className="btns">
-                    <button
-                      className="save-item-btn"
-                      onClick={(ev) => onSaveItem(ev, checklist.id)}
-                    >
-                      Add
-                    </button>
-                    <button onClick={(ev) => onCancel(ev, checklist)}>
-                      Cancel
-                    </button>
+                  <button className="save-item-btn" onClick={(ev) => onSaveItem(ev, checklist.id)}>
+                    Add
+                  </button>
+                  <button onClick={(ev) => oncancel(ev, checklist)}>
+                    Cancel
+                  </button>
+
                   </div>
                 </div>
               )}
               <ul className="items">
-                {checklist.items
-                  .filter((item) => !hideCheckedItems || !item.isChecked)
-                  .map((item) => (
-                    <li className="item" key={item.id}>
-                      <input
-                        name="isChecked"
-                        checked={item.isChecked}
-                        type="checkbox"
-                        onChange={(ev) =>
-                          handleChangeCheckbox(ev, item, checklist.id)
-                        }
-                      />
-                      {!item.edit && (
-                        <p
-                          onClick={(ev) => onEditingTextItem(ev, item)}
-                          style={{
-                            textDecoration: item.isChecked
-                              ? "line-through"
-                              : "none",
-                            color: item.isChecked ? "#aaa" : "inherit",
-                          }}
-                        >
-                          {item.text}
-                        </p>
-                      )}
-                      {item.edit && (
-                        <div className="edit-item">
-                          <input
-                            type="text"
-                            onChange={handleEditTextItem}
-                            value={textItemToEdit}
-                          />
-                          <div className="btns">
-                            <button
-                              className="save-edit-btn"
-                              onClick={(ev) => saveEditingItem(ev, item)}
-                            >
-                              Save
-                            </button>
-                            <button onClick={(ev) => closeForm(ev, item)}>
-                              X
-                            </button>
-                          </div>
+                {checklist.items.map((item) => (
+                  <li className="item" key={item.id}>
+                    <input
+                      name="isChecked"
+                      checked={item.isChecked}
+                      type="checkbox"
+                      onChange={(ev) =>
+                        handleChangeCheckbox(ev, item, checklist.id)
+                      }
+                    />
+                    {!item.edit && (
+                      <p onClick={(ev) => onEditingTextItem(ev, item)}>
+                        {item.text}
+                      </p>
+                    )}
+                    {item.edit && (
+                      <div className="edit-item">
+                        <input
+                          type="text"
+                          onChange={handleEditTextItem}
+                          value={textItemToEdit}
+                        />
+                        <div className="btns">
+
+                        <button className="save-edit-btn" onClick={(ev) => saveEditingItem(ev, item)}>
+                          Save
+                        </button>
+                        <button onClick={(ev) => closeForm(ev, item)}>X</button>
+                      </div>
                         </div>
-                      )}
-                    </li>
-                  ))}
+                    )}
+                  </li>
+                ))}
               </ul>
             </li>
           ))}
@@ -309,6 +276,7 @@ export function TaskChecklist({
     </div>
   );
 }
+
 
 // import { useEffect, useState } from "react";
 // import { makeId } from "../services/util.service";
