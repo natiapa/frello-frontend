@@ -164,17 +164,16 @@
         .add-member-button {
           margin-inline-start: 4px;
           padding: 6px 8px;
-            place-self: end;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 32px;
-            width: 32px;
-            background-color: #ebecf0;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.2s;
-      
+          place-self: end;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 32px;
+          width: 32px;
+          background-color: #ebecf0;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: background-color 0.2s;
         }
 
         li {
@@ -218,6 +217,7 @@
 
           .label-container {
             grid-row: 2;
+            align-items: end;
           }
         }
       }

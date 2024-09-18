@@ -138,17 +138,18 @@ export function TaskChecklist({
     });
     setUpdatedChecklists(updatedChecklistsList);
   }
+
   function saveEditingItem(ev, item) {
     ev.preventDefault();
-
+    const newText = textItemToEdit;
     const updatedChecklistsList = updatedChecklists.map((checklist) => {
       const updatedItems = checklist.items.map((currItem) => {
         currItem.edit = false;
         if (currItem.id === item.id) {
           // item.edit = false;
           setTextItemToEdit(ev.target.value);
-          console.log("textItemToEdit:", textItemToEdit);
-          return { ...currItem, text: textItemToEdit };
+          console.log("textItemToEdit:", textItemToEdit, newText);
+          return { ...currItem, text: newText };
         }
         return currItem;
       });
@@ -188,8 +189,15 @@ export function TaskChecklist({
 
   function handleKeyDown(ev, checklistId) {
     if (ev.key === "Enter") {
-      ev.preventDefault(); // מונע שליחה של טופס ברירת מחדל אם יש אחד
-      onSaveItem(ev, checklistId); // שמירת הפריט עם לחיצת Enter
+      ev.preventDefault();
+      onSaveItem(ev, checklistId);
+    }
+  }
+
+  function handleEditingSaveKeyDown(ev, item) {
+    if (ev.key === "Enter") {
+      ev.preventDefault();
+      saveEditingItem(ev, item);
     }
   }
 
@@ -289,6 +297,9 @@ export function TaskChecklist({
                             type="text"
                             onChange={handleEditTextItem}
                             value={textItemToEdit}
+                            onKeyDown={(ev) =>
+                              handleEditingSaveKeyDown(ev, item)
+                            }
                             autoFocus
                           />
                           <div className="btns">
