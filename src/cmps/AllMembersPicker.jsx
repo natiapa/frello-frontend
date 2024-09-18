@@ -20,33 +20,36 @@ export function AllMembersPicker({
   }
   return (
     <div>
-      <h1>members</h1>
-      <ul>
-        {availableUsers.map((user) => (
-          <li
-            className="member-item"
-            key={user._id}
-            onClick={(ev) => handleAddUserToBoard(ev, user)}
-          >
-            {user.imgUrl && (
-              <img
-                src={user.imgUrl}
-                style={{
-                  borderRadius: "50%",
-                  width: "24px",
-                  marginInlineEnd: "10px",
-                }}
-              />
-            )}
-            {!user.imgUrl && (
-              <span style={{ backgroundColor: user.color }}>
-                {user.fullname[0]}
-              </span>
-            )}
-            <span className="member-name">{user.fullname}</span>
-          </li>
-        ))}
-      </ul>
+      {/* <h1>members</h1> */}
+      {availableUsers.length > 0 && (
+        <ul>
+          {availableUsers.map((user) => (
+            <li
+              className="member-item"
+              key={user._id}
+              onClick={(ev) => handleAddUserToBoard(ev, user)}
+            >
+              {user.imgUrl && (
+                <img
+                  src={user.imgUrl}
+                  style={{
+                    borderRadius: "50%",
+                    width: "24px",
+                    marginInlineEnd: "10px",
+                  }}
+                />
+              )}
+              {!user.imgUrl && (
+                <span style={{ backgroundColor: user.color }}>
+                  {user.fullname[0]}
+                </span>
+              )}
+              <span className="member-name">{user.fullname}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      {!availableUsers.length > 0 && <div>No more users to add</div>}
     </div>
   );
 }

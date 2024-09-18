@@ -126,10 +126,6 @@ export function BoardDetails() {
   // Update task details when current task changes
   useEffect(() => {
     if (currTask) {
-      // setNewDueDate(currTask.dueDate);
-      // setCurrCover(currTask.cover);
-      // setTaskMembers(currTask.members);
-      // setTaskSelectedLabels(currTask.labels || []);
       loadUpdate();
     }
   }, [currTask]);

@@ -1,9 +1,7 @@
 .attachment-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
+  display: grid;
+  flex-direction: column;
+  gap: 10px;
   .attachment-item {
     display: flex;
     align-items: center;
@@ -11,49 +9,48 @@
     border: 1px solid #dfe1e6;
     border-radius: 5px;
     background-color: #f4f5f7;
+    .attachment-thumbnail {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      margin-right: 10px;
+      object-fit: cover;
+    }
+
+    .attachment-info {
+      display: flex;
+      flex-direction: column;
+    }
   }
-  
-  .attachment-thumbnail {
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
-    margin-right: 10px;
-    object-fit: cover;
-  }
-  
-  .attachment-icon {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
-    color: #5e6c84;
-  }
-  
-  .attachment-info {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .attachment-name {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #172b4d;
-  }
-  
-  .remove-btn {
-    background-color: #ff4d4f;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    margin-top: 5px;
-  }
-  
-  .remove-btn:hover {
-    background-color: #d32f2f;
-  }
-  
+}
+
+.attachment-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  color: #5e6c84;
+}
+
+.attachment-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #172b4d;
+}
+
+.remove-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.remove-btn:hover {
+  background-color: #d32f2f;
+}

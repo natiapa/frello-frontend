@@ -16,6 +16,7 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 import { BsPersonPlus } from "react-icons/bs";
 import { MemberPicker } from "./MemberPicker";
 import { AllMembersPicker } from "./AllMembersPicker";
+import { RiUserAddLine } from "react-icons/ri";
 
 export function BoardHeader({
   members,
@@ -111,12 +112,17 @@ export function BoardHeader({
       <div
         role="button"
         data-name="members"
-        className="members action-btn"
+        className="members all-members-btn"
         aria-describedby="30"
         onClick={handleClick}
-        style={{ gridColumn: 2, placeSelf: "center", backgroundColor: "#fff" }}
+        style={{
+          placeSelf: "center",
+          backgroundColor: "#fff",
+          gridColumn: isMenuOpen ? "5" : "4",
+        }}
       >
-        <p>Share</p>
+        <RiUserAddLine />
+        <span>Share</span>
 
         {modalOpenByName === "members" && isPopoverOpen && (
           <Popover
@@ -149,13 +155,13 @@ export function BoardHeader({
         data-name="filter"
         onClick={handleFilterClick}
         style={{
-          gridColumn: isMenuOpen ? "3" : "2",
+          gridColumn: "2",
         }}
       >
         <p
-          style={{
-            paddingInlineEnd: isMenuOpen ? "0" : "10px",
-          }}
+        // style={{
+        //   paddingInlineEnd: isMenuOpen ? "0" : "10px",
+        // }}
         >
           <span>
             <MdOutlineFilterList />
