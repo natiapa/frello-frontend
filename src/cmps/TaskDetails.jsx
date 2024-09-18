@@ -208,6 +208,18 @@ export function TaskDetails() {
                 {task.members && (
                   <MemberList members={taskMembers} gridColumnWidth="32px" />
                 )}
+                <div
+                  className="add-member-button"
+                  data-name="members"
+                  onClick={handleAddLabel}
+                >
+                  <IoAddOutline
+                    style={{
+                      fontSize: "20px",
+                      color: "#0079bf",
+                    }}
+                  />
+                </div>
               </ul>
             )}
 
@@ -295,7 +307,6 @@ export function TaskDetails() {
               task={task}
               group={group}
               board={board}
-          
             />
           )}
         </form>

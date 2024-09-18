@@ -237,7 +237,7 @@ export function TaskChecklist({
               )}
               <ul className="items">
                 {checklist.items
-                  .filter((item) => !hideCheckedItems || !item.isChecked)
+                  // .filter((item) => !hideCheckedItems || !item.isChecked)
                   .map((item) => (
                     <li className="item" key={item.id}>
                       <input
