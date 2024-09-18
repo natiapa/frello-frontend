@@ -19,6 +19,7 @@ export function TaskChecklist({
   const [isAddingItem, setIsAddingItem] = useState(false);
   const [itemText, setItemText] = useState("");
   const [textItemToEdit, setTextItemToEdit] = useState("");
+  const [hideCheckedItems, setHideCheckedItems] = useState(false);
 
   // useEffect(() => {
   //   // console.log("render!");
@@ -84,6 +85,10 @@ export function TaskChecklist({
 
     setUpdatedChecklists(updatedChecklistsList);
     onUpdated("checklists", updatedChecklistsList);
+  }
+
+  function handleHideItems() {
+    setHideCheckedItems(!hideCheckedItems);
   }
 
   function onSaveItem(ev, checklistId) {
@@ -199,8 +204,15 @@ export function TaskChecklist({
                 <h3>
                   <span>{checklist.title}</span>
                 </h3>
+                {checklist.items.some((item) => item.isChecked) && (
+                  <button className="hide-btn" type="button" onClick={handleHideItems}>
+                    {hideCheckedItems
+                      ? "Show checked items"
+                      : "Hide checked items"}
+                  </button>)}
                 <button
                   className="delete-checklist-btn"
+                  style={{gridColumn: '4'}}
                   onClick={(ev) => onRemoveChecklist(ev, checklist.id)}
                 >
                   Delete
@@ -221,7 +233,7 @@ export function TaskChecklist({
                     type="text"
                     onChange={handleChangeTextItem}
                     placeholder="Add an item"
-                    onKeyDown={(ev) => handleKeyDown(ev, checklist.id)} // מאזין ללחיצת Enter
+                    onKeyDown={(ev) => handleKeyDown(ev, checklist.id)} 
                     autoFocus
                   />
                   <div className="btns">

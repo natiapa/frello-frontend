@@ -137,7 +137,8 @@ async function updateActivities(
     )
 
 
-    await board.activities.unshift(activityToAdd)
+    await board?.activities?.unshift(activityToAdd)
+    // await board.activities.unshift(activityToAdd)
 }
 
 function addActivity(
