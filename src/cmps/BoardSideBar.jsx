@@ -57,8 +57,9 @@ export function BoardSideBar({ board, bgColor }) {
                     opacity: isOpen ? 0.8 : 1,
                     backgroundColor: bgColor,
                     width: isOpen ? '260px' : '0px',
-                    transform: isOpen ? 'translateX(0)' : 'translateX(-180px)',
-                    transition: 'transform 0.3s ease',
+                    transform: isOpen ? 'translateX(0)' : 'translateX(-260px)',
+                    transition:'0.3s',
+                    //  'transform 0.3s ease',
                 }}>
                 <ul>
                     <li className="header">
@@ -82,7 +83,7 @@ export function BoardSideBar({ board, bgColor }) {
                                     ? board.style.backgroundImage
                                     : board.style.backgroundColor
                             }
-                            alt=""
+                            // alt=""
                         />
                         <p>{board.title}</p>
                         <button className="starred-btn">
