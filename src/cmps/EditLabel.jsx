@@ -88,7 +88,7 @@ export function EditLabel({
 
           <div
             className="label-preview"
-            style={{ backgroundColor: labelToEdit.color || "#f0f0f0" }}
+            style={{ backgroundColor: labelToEdit.color || "#f0f0f0",  color: boardService.isColorDark( labelToEdit.color) ? "#fff" : "#000"}}
           >
             {labelToEdit.title}
           </div>
