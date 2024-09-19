@@ -23,6 +23,7 @@ export const boardService = {
     getAllLabels,
     addActivity,
     getImgs,
+    isColorDark
 }
 
 async function query(filterBy = {}) {
@@ -328,6 +329,23 @@ function getColorsCover() {
         { id: 'Z1X2C', color: '#579DFF' },
     ]
 }
+
+function isColorDark (color) {
+    console.log(color)
+ 
+    const hex = color.replace('#', '');
+ 
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+  
+
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+  
+
+    return brightness < 128;
+  };
+  
 function getAllLabels() {
     const allLabels = colors
     return sortColorsByHue(allLabels)
