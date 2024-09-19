@@ -41,10 +41,7 @@ export function TaskDetails() {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
 
-  const user = userService.getLoggedinUser(); 
-  if (user) {
-   console.log(user)
-  }
+
 
   useEffect(() => {
     if (task) {
