@@ -13,11 +13,9 @@ import { DueDateDisplay } from "./DueDateDisplay";
 import { AttachmentList } from "./AttachmentList";
 import { IoAddOutline } from "react-icons/io5";
 import { CoverDisplay } from "./CoverDisplay";
-import { RxIdCard } from "react-icons/rx";
-import { BsCardText } from "react-icons/bs";
-import { FaCreditCard, FaRegCreditCard } from "react-icons/fa";
+import { FaRegCreditCard } from "react-icons/fa";
 import { VscListFlat } from "react-icons/vsc";
-import { userService } from "../services/user";
+
 
 export function TaskDetails() {
   const dialogRef = useRef(null);

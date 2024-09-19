@@ -13,7 +13,7 @@
 .label-edit-container {
   display: grid;
   grid-auto-flow: row;
-  // flex-direction: column;
+
   .header-edit-label {
     display: grid;
     grid-template-columns: max-content 1fr max-content;
@@ -133,4 +133,53 @@
   font-size: 24px;
   margin-bottom: 10px;
   font-weight: bold;
+}
+
+.label-delete-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto; 
+  text-align: center;
+}
+
+.label-delete-container h5 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.label-delete-container p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.label-delete-container button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 10px; 
+}
+
+.confirm-delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.confirm-delete-btn:hover {
+  background-color: #c82333;
+}
+
+.cancel-btn {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.cancel-btn:hover {
+  background-color: #5a6268;
 }
