@@ -137,18 +137,20 @@ async function updateActivities(
         copiedBoard
     )
 
-    const updatedActivities = [activityToAdd, ...(board?.activities || [])];
+    // const updatedActivities = [activityToAdd, ...(board?.activities || [])];
 
-    // Return or set the updated board
-    const updatedBoard = {
-        ...board,
-        activities: updatedActivities
-    };
+    // const updatedBoard = {
+    //     ...board,
+    //     activities: updatedActivities
+    // };
+
+    // return updateCurrBoard(updatedBoard);
 
     // Return or save this updatedBoard
-    return updatedBoard;
+    // await save(updatedBoard)
 
-    // await board?.activities?.unshift(activityToAdd)
+    await board?.activities?.unshift(activityToAdd)
+    console.log(board)
     // await board.activities.unshift(activityToAdd)
 }
 

@@ -1,6 +1,8 @@
 import { storageService } from "../async-storage.service";
 import { getRandomColor, makeId, sortColorsByHue } from "../util.service";
 import { userService } from "../user";
+import { updateBoard as updateCurrBoard } from '../../store/actions/board.actions'
+
 
 const STORAGE_KEY = "board";
 
@@ -183,6 +185,16 @@ async function updateActivities(
     dueDate,
     copiedBoard
   );
+
+
+  // const updatedActivities = [activityToAdd, ...(board?.activities || [])];
+
+  // const updatedBoard = {
+  //   ...board,
+  //   activities: updatedActivities
+  // };
+
+  // return updateCurrBoard(updatedBoard);
 
   await board.activities.unshift(activityToAdd);
 }
