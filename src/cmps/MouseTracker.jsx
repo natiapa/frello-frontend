@@ -69,7 +69,12 @@ export function MouseTracker({ boardId }) {
         return (
           <div
             key={index}
-            style={{ position: "absolute", top: cursor.y, left: cursor.x }}
+            style={{
+              position: "absolute",
+              top: cursor.y,
+              left: cursor.x,
+              zIndex: "1000000",
+            }}
           >
             <FaMousePointer
               style={{
