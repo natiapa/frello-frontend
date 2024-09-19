@@ -37,9 +37,6 @@ function createSocketService() {
       socket.on(eventName, cb);
     },
     off(eventName, cb = null) {
-      console.log(eventName);
-      console.log(socket);
-      console.log(cb);
       if (!socket) return;
 
       if (!cb) socket.removeAllListeners(eventName);

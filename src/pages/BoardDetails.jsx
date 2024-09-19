@@ -37,6 +37,7 @@ import { FastAverageColor } from "fast-average-color";
 import chroma from "chroma-js";
 import { MouseTracker } from "../cmps/MouseTracker";
 import { VscListFlat } from "react-icons/vsc";
+import { userService } from "../services/user";
 
 export function BoardDetails() {
   // Import necessary hooks
@@ -84,9 +85,14 @@ export function BoardDetails() {
   const [bgColor, setBgColor] = useState("");
   const [value, setValue] = useState("");
 
+  const currUser = userService.getLoggedinUser();
+
+
+
   // Join the board room via socket and listen for group updates
   useEffect(() => {
-    socketService.emit("joinBoard", boardId);
+    if(!currUser) return
+    socketService.emit("joinBoard", {boardId,currUser});
     console.log("Joining board room:", boardId);
 
     socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
@@ -313,7 +319,7 @@ export function BoardDetails() {
 
   // Return early if there is no board or no board style
   if (!board || !board.style) return;
-  console.log(currCover);
+  
   return (
     <section
       className="board-details"

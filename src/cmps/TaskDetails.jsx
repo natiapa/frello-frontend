@@ -41,6 +41,11 @@ export function TaskDetails() {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
 
+  const user = userService.getLoggedinUser(); 
+  if (user) {
+   console.log(user)
+  }
+
   useEffect(() => {
     if (task) {
       loadTask();
@@ -100,6 +105,8 @@ export function TaskDetails() {
     }
   }
 
+
+  
   function onEdit(ev) {
     const dataName = ev.currentTarget.getAttribute("data-name");
     setCurrElToEdit(dataName);
