@@ -243,7 +243,7 @@ export function TaskPreview({
                 <ul
                   className="members"
                   style={{
-                    gridRow: task.members.length > 1 && task.dueDate ? 2 : 1,
+                    gridRow: "2",
                     gridColumn: task.members.length > 1 ? "2/3" : "3",
                   }}
                 >
