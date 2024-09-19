@@ -17,6 +17,7 @@ import { RxIdCard } from "react-icons/rx";
 import { BsCardText } from "react-icons/bs";
 import { FaCreditCard, FaRegCreditCard } from "react-icons/fa";
 import { VscListFlat } from "react-icons/vsc";
+import { userService } from "../services/user";
 
 export function TaskDetails() {
   const dialogRef = useRef(null);
@@ -41,9 +42,9 @@ export function TaskDetails() {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
 
-  const user = userService.getLoggedinUser(); 
+  const user = userService.getLoggedinUser();
   if (user) {
-   console.log(user)
+    console.log(user);
   }
 
   useEffect(() => {
@@ -105,8 +106,6 @@ export function TaskDetails() {
     }
   }
 
-
-  
   function onEdit(ev) {
     const dataName = ev.currentTarget.getAttribute("data-name");
     setCurrElToEdit(dataName);
