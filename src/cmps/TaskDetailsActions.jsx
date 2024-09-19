@@ -292,7 +292,9 @@ export function TaskDetailsActions({
           style={{
             position: currCover?.color ? "absolute" : "relative",
             top: currCover?.color ? "50px" : "auto",
+            right: currCover?.color ? "0" : "auto",
             zIndex: currCover?.color ? 1001 : "auto",
+            width: currCover?.color ? "max-content" : "100%",
           }}
         >
           <span className="icon">
