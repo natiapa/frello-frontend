@@ -244,7 +244,7 @@ export function TaskPreview({
                   className="members"
                   style={{
                     gridRow: "2",
-                    gridColumn: task.members.length > 1 ? "2/3" : "3",
+                    gridColumn: task.members.length > 0 ? "2/3" : "3",
                   }}
                 >
                   <MemberList members={members} gridColumnWidth="28px" />
