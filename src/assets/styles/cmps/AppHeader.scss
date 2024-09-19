@@ -96,6 +96,7 @@
       color: $white;
       background-color: $blue1;
       margin-inline-start: 1em;
+      margin-top: 7px;
       &:hover {
         background-color: #287bef;
       }
@@ -117,20 +118,27 @@
 
 @media (max-width: $mobile-breakpoint) {
   .app-header {
+    .header-right{
+      // justify-items: start;
+      padding-inline: 18px;
+    }
     nav {
       column-gap: 0;
 
       .workspace-btn,
       .starred-btn {
+        display: none;
         margin-inline-end: 0;
         font-size: 10px;
+        padding: 6px 6px;
       }
 
       .starred-btn {
         width: 80px;
       }
       .create-btn {
-        margin-inline: 5px 0;
+        display: none;
+        margin-inline:0;
         width: 55px;
         padding: 9.5px 0;
       }
