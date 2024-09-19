@@ -137,8 +137,18 @@ async function updateActivities(
         copiedBoard
     )
 
+    const updatedActivities = [activityToAdd, ...(board?.activities || [])];
 
-    await board?.activities?.unshift(activityToAdd)
+    // Return or set the updated board
+    const updatedBoard = {
+        ...board,
+        activities: updatedActivities
+    };
+
+    // Return or save this updatedBoard
+    return updatedBoard;
+
+    // await board?.activities?.unshift(activityToAdd)
     // await board.activities.unshift(activityToAdd)
 }
 
@@ -330,22 +340,22 @@ function getColorsCover() {
     ]
 }
 
-function isColorDark (color) {
+function isColorDark(color) {
     console.log(color)
- 
+
     const hex = color.replace('#', '');
- 
+
     const r = parseInt(hex.substring(0, 2), 16);
     const g = parseInt(hex.substring(2, 4), 16);
     const b = parseInt(hex.substring(4, 6), 16);
-  
+
 
     const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-  
+
 
     return brightness < 128;
-  };
-  
+};
+
 function getAllLabels() {
     const allLabels = colors
     return sortColorsByHue(allLabels)
