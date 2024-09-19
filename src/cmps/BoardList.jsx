@@ -109,12 +109,12 @@ export function BoardList({
                 <BoardPreview board={board} />
 
                 <div className="actions">
-                  <button
+                  {/* <button
                     className="close-btn"
                     onClick={(ev) => onRemoveBoard(ev, board._id)}
                   >
                     x
-                  </button>
+                  </button> */}
                 </div>
               </li>
             </Link>
