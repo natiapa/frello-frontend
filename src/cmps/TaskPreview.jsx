@@ -217,7 +217,8 @@ export function TaskPreview({
                       gridRow:
                         task.dueDate &&
                         task.description &&
-                        task.members.length > 1
+                        task.members.length > 0 ||
+                        task.dueDate && task.description 
                           ? "2"
                           : "1",
                       gridColumn: "-2",
