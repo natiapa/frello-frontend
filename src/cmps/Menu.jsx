@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Activities } from "./Activities";
 import { ChangeBg } from "./ChangeBg";
 import SvgIcon from "./SvgIcon";
