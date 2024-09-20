@@ -2,26 +2,15 @@ import { useEffect, useState } from "react";
 import { Activities } from "./Activities";
 import { ChangeBg } from "./ChangeBg";
 import SvgIcon from "./SvgIcon";
-import { IoIosArrowBack, IoMdList } from "react-icons/io";
 import { useParams } from "react-router";
 import { FaListCheck } from "react-icons/fa6";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { Popover } from "@mui/material";
 import { CopyBoard } from "./CopyBoard";
-import {
-  addBoard,
-  updateBoard,
-  removeBoard,
-  addBoardMsg,
-  loadBoard,
-} from "../store/actions/board.actions";
+
 import { ShareExportPrintBoard } from "./ShareExportPrintBoard";
 import { userService } from "../services/user";
-import {
-  socketService,
-  SOCKET_EVENT_ACTIVITIES_UPDATED,
-} from "../services/socket.service";
 
 export function Menu({
   board,
@@ -45,24 +34,6 @@ export function Menu({
   //   onAddBoard(board);
   //   handleClosePopover();
   // }
-
-  // useEffect(() => {
-  //   if (!currUser) return;
-  //   socketService.emit("joinBoard", { boardId, currUser });
-  //   console.log("Joining board room:", boardId);
-
-  //   // socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
-  //   //   loadBoard(boardId);
-  //   // });
-  //   socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, (updatedActivities) => {
-  //     loadBoard(boardId);
-  //   });
-
-  //   return () => {
-  //     // socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
-  //     socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED);
-  //   };
-  // }, [boardId]);
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");
