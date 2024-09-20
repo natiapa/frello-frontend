@@ -163,7 +163,7 @@ export function BoardFilter() {
 
         <div className="select-labels">
           {labels?.map((label) => (
-            <div className="label-filter">
+            <div className="label-filter" key={label.id}>
               <input
                 type="checkbox"
                 name={label.color}
