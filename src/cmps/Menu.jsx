@@ -17,6 +17,7 @@ import {
   loadBoard,
 } from "../store/actions/board.actions";
 import { ShareExportPrintBoard } from "./ShareExportPrintBoard";
+import { userService } from "../services/user";
 
 export function Menu({
   board,
