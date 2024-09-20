@@ -46,23 +46,23 @@ export function Menu({
   //   handleClosePopover();
   // }
 
-  useEffect(() => {
-    if (!currUser) return;
-    socketService.emit("joinBoard", { boardId, currUser });
-    console.log("Joining board room:", boardId);
+  // useEffect(() => {
+  //   if (!currUser) return;
+  //   socketService.emit("joinBoard", { boardId, currUser });
+  //   console.log("Joining board room:", boardId);
 
-    // socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
-    //   loadBoard(boardId);
-    // });
-    socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, (updatedActivities) => {
-      loadBoard(boardId);
-    });
+  //   // socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
+  //   //   loadBoard(boardId);
+  //   // });
+  //   socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, (updatedActivities) => {
+  //     loadBoard(boardId);
+  //   });
 
-    return () => {
-      // socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
-      socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED);
-    };
-  }, [boardId]);
+  //   return () => {
+  //     // socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
+  //     socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED);
+  //   };
+  // }, [boardId]);
 
   function handleClick(ev) {
     const currDataName = ev.currentTarget.getAttribute("data-name");

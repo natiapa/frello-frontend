@@ -19,6 +19,7 @@ import {
 import {
   socketService,
   SOCKET_EVENT_GROUPS_UPDATED,
+  SOCKET_EVENT_ACTIVITIES_UPDATED,
 } from "../services/socket.service";
 
 import { GroupList } from "../cmps/GroupList";
@@ -96,15 +97,33 @@ export function BoardDetails() {
     socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
       loadBoard(boardId);
     });
-    // socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, (updatedActivities) => {
-    //   loadBoard(boardId);
-    // });
+    socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, (updatedActivities) => {
+      loadBoard(boardId);
+    });
 
     return () => {
       socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
-      // socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED);
+      socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED);
     };
   }, [boardId]);
+
+  // useEffect(() => {
+  //   if (!currUser) return;
+  //   socketService.emit("joinBoard", { boardId, currUser });
+  //   console.log("Joining board room:", boardId);
+
+  //   // socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
+  //   //   loadBoard(boardId);
+  //   // });
+  //   socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, (updatedActivities) => {
+  //     loadBoard(boardId);
+  //   });
+
+  //   return () => {
+  //     // socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
+  //     socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED);
+  //   };
+  // }, [boardId]);
 
   // Listen for task preview events from the event bus
   useEffect(() => {
