@@ -18,6 +18,10 @@ import {
 } from "../store/actions/board.actions";
 import { ShareExportPrintBoard } from "./ShareExportPrintBoard";
 import { userService } from "../services/user";
+import {
+  socketService,
+  SOCKET_EVENT_ACTIVITIES_UPDATED,
+} from "../services/socket.service";
 
 export function Menu({
   board,
