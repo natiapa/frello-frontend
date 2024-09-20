@@ -32,7 +32,7 @@ export function Menu({
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [modalOpenByName, setModalOpenByName] = useState(null);
-
+  const currUser = userService.getLoggedinUser();
   // const board = useSelector((storeState) => storeState.boardModule.board);
 
   // function handleCreateBoard(board) {
