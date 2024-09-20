@@ -66,12 +66,12 @@ export function StarredBoardsList({ starredBoards, onRemoveBoard }) {
               <BoardPreview board={starredBoard} />
 
               <div className="actions">
-                <button
+                {/* <button
                   className="close-btn"
                   onClick={(ev) => onRemoveBoard(ev, starredBoard._id)}
                 >
                   x
-                </button>
+                </button> */}
               </div>
             </li>
           </Link>

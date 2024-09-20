@@ -87,20 +87,22 @@ export function BoardDetails() {
 
   const currUser = userService.getLoggedinUser();
 
-
-
   // Join the board room via socket and listen for group updates
   useEffect(() => {
-    if(!currUser) return
-    socketService.emit("joinBoard", {boardId,currUser});
+    if (!currUser) return;
+    socketService.emit("joinBoard", { boardId, currUser });
     console.log("Joining board room:", boardId);
 
     socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
       loadBoard(boardId);
     });
+    // socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, (updatedActivities) => {
+    //   loadBoard(boardId);
+    // });
 
     return () => {
       socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
+      // socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED);
     };
   }, [boardId]);
 
@@ -319,7 +321,7 @@ export function BoardDetails() {
 
   // Return early if there is no board or no board style
   if (!board || !board.style) return;
-  
+
   return (
     <section
       className="board-details"

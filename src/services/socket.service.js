@@ -10,6 +10,7 @@ export const SOCKET_EVENT_REVIEW_ADDED = "review-added";
 export const SOCKET_EVENT_REVIEW_REMOVED = "review-removed";
 export const SOCKET_EVENT_REVIEW_ABOUT_YOU = "review-about-you";
 export const SOCKET_EVENT_GROUPS_UPDATED = "groupsUpdated";
+export const SOCKET_EVENT_ACTIVITIES_UPDATED = "activitiesUpdated";
 export const SOCKET_EVENT_MOUSE_MOVE = "mouseMove";
 export const SOCKET_EVENT_USER_LEFT = "userLeft";
 
@@ -30,7 +31,7 @@ function createSocketService() {
   const socketService = {
     setup() {
       socket = io(baseUrl);
-      const user = userService.getLoggedinUser(); 
+      const user = userService.getLoggedinUser();
       if (user) this.login(user._id);
     },
     on(eventName, cb) {
