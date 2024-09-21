@@ -105,7 +105,7 @@ export function BoardDetails() {
       socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
       socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED);
     };
-  }, [boardId]);
+  }, [boardId, currUser]);
 
   // Listen for task preview events from the event bus
   useEffect(() => {
