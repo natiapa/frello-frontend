@@ -5,9 +5,10 @@ import { loadBoard } from "../store/actions/board.actions";
 import { useNavigate } from "react-router";
 
 export function Activities({ board, setIsActivitiesOpen, setIsMenuOpen }) {
-  useEffect(() => {
-    loadBoard();
-  }, [board?.activities?.length]);
+  // useEffect(() => {
+  //   loadBoard();
+  // }, [board?.activities?.length]);
+
   const navigate = useNavigate();
   function formatDateForTask(dateString) {
     const date = new Date(dateString.split("/").reverse().join("-"));
