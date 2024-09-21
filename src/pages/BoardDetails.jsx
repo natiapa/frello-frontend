@@ -97,12 +97,30 @@ export function BoardDetails() {
     socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
       loadBoard(boardId);
     });
+    // socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, (updatedActivities) => {
+    //   loadBoard(boardId);
+    // });
+
+    return () => {
+      socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
+      // socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED);
+    };
+  }, [boardId]);
+
+  useEffect(() => {
+    if (!currUser) return;
+    socketService.emit("joinBoard", { boardId, currUser });
+    console.log("Joining board room:", boardId);
+
+    // socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
+    //   loadBoard(boardId);
+    // });
     socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, (updatedActivities) => {
       loadBoard(boardId);
     });
 
     return () => {
-      socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
+      // socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
       socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED);
     };
   }, [boardId]);
@@ -117,7 +135,7 @@ export function BoardDetails() {
   useEffect(() => {
     if (!boardId || board?._id === boardId) return;
     loadBoard(boardId);
-  }, [boardId, board, board?.activities?.length]);
+  }, [boardId, board]);
 
   // Load board data and update preview if necessary
   useEffect(() => {
