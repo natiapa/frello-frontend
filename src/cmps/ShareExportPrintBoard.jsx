@@ -84,6 +84,7 @@ export function ShareExportPrintBoard({
         <input
           type="text"
           value={`${import.meta.env.VITE_SERVER}/board/${board._id}`}
+          readOnly
         />
         <span className="text">
           <RiGroupLine />

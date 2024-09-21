@@ -14,7 +14,7 @@
   // grid-auto-flow: column;
   grid-template-columns: max-content minmax(0, 1fr) repeat(3, max-content);
   position: relative;
-  column-gap: 7px;
+  column-gap: 5px;
 
   &::after {
     opacity: 0.5;
@@ -130,7 +130,7 @@
     column-gap: 3px;
     max-width: 400px;
     height: 32px;
-    margin-right: 4px;
+    margin-right: 0;
     margin-bottom: 0px;
     padding-left: 8px;
     overflow: hidden;
@@ -163,12 +163,12 @@
     cursor: pointer;
     background-color: transparent;
     margin: 0;
-    margin-inline-start: 4px;
+    // margin-inline-start: 4px;
     width: 32px;
     height: 32px;
     border-radius: 3px;
     &:hover {
-      background-color: #d1cece3d;
+      background-color: #f7f3f33d;
     }
 
     span {

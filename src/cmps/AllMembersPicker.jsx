@@ -19,7 +19,7 @@ export function AllMembersPicker({
     onUpdated("members", membersToUpdate);
   }
   return (
-    <div>
+    <div className="all-members-picker">
       {/* <h1>members</h1> */}
       {availableUsers.length > 0 && (
         <ul>

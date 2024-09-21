@@ -1,0 +1,20 @@
+.all-members-picker {
+  height: 100%;
+  ul {
+    li {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      margin-block-end: 0.5em;
+      padding: 4px;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: #b5bbc680;
+      }
+
+      img {
+        place-self: center;
+      }
+    }
+  }
+}
