@@ -28,7 +28,7 @@ export function TaskChecklist({
 
   useEffect(() => {
     setUpdatedChecklists(checklists);
-  }, [checklists.length]);
+  }, [checklists?.length]);
 
   async function onRemoveChecklist(ev, checklistId) {
     ev.preventDefault();
