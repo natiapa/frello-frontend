@@ -49,6 +49,7 @@ export function BoardDetails() {
     (storeState) => storeState.boardModule.filterBoard
   );
 
+  console.log(board);
   // Filter starred boards
   const starredBoards = Array.isArray(boards)
     ? boards.filter((board) => board.isStarred)
@@ -94,20 +95,22 @@ export function BoardDetails() {
     socketService.emit("joinBoard", { boardId, currUser });
     console.log("Joining board room:", boardId);
 
-    socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
+    const handleGroupsUpdated = () => {
       loadBoard(boardId);
-    });
+    };
 
-    console.log("activities-update");
-    socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, (updatedActivities) => {
+    const handleActivitiesUpdated = () => {
       loadBoard(boardId);
-    });
+    };
+
+    socketService.on(SOCKET_EVENT_GROUPS_UPDATED, handleGroupsUpdated);
+    socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, handleActivitiesUpdated);
 
     return () => {
       socketService.off(SOCKET_EVENT_GROUPS_UPDATED);
       socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED);
     };
-  }, [boardId]);
+  }, [boardId, , currUser]);
 
   // Listen for task preview events from the event bus
   useEffect(() => {
