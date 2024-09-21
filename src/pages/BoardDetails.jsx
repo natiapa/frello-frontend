@@ -117,7 +117,7 @@ export function BoardDetails() {
   useEffect(() => {
     if (!boardId || board?._id === boardId) return;
     loadBoard(boardId);
-  }, [boardId, board]);
+  }, [boardId, board, board?.activities?.length]);
 
   // Load board data and update preview if necessary
   useEffect(() => {
