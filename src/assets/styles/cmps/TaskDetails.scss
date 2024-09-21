@@ -432,19 +432,21 @@
               grid-row: 5;
             }
           }
-          .archive {
-            &.action-btn {
-              grid-column: 1;
-              grid-row: 7;
-            }
-          }
+
           .cover {
             &.action-btn {
+              grid-row: 6;
               &.cover-selected {
                 width: 100px;
                 right: 0;
                 background-color: transparent;
               }
+            }
+          }
+          .archive {
+            &.action-btn {
+              grid-column: 1;
+              grid-row: 8;
             }
           }
         }
@@ -460,9 +462,6 @@
         display: block;
         padding-inline: 4em 2em;
         margin-block-end: 2em;
-
-        .label-container {
-        }
       }
       .description-container {
         padding-inline-end: 2em;
@@ -472,6 +471,14 @@
       }
       .checklist {
         padding-inline-end: 2em;
+        .header-and-btns {
+          margin-block-end: 2px;
+          h3 {
+            span {
+              color: pink;
+            }
+          }
+        }
       }
     }
   }
