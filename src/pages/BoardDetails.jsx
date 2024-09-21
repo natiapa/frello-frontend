@@ -97,6 +97,8 @@ export function BoardDetails() {
     socketService.on(SOCKET_EVENT_GROUPS_UPDATED, (updatedGroups) => {
       loadBoard(boardId);
     });
+
+    console.log("activities-update");
     socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, (updatedActivities) => {
       loadBoard(boardId);
     });
