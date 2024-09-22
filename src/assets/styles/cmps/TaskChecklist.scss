@@ -72,8 +72,7 @@
             sans-serif;
           border-radius: 3px;
 
-          &:hover {
-          }
+
         }
       }
 
@@ -82,13 +81,13 @@
         grid-column: 2;
         margin: 8px 0 0;
         padding: 9px 12px 9px;
-        // width: 100%;
         font-weight: 500;
         border-radius: 3px;
         font-size: 14px;
         background-color: rgba(9, 30, 66, 0.0588235294);
         color: #172b4d;
         cursor: pointer;
+
         &:hover {
           background-color: rgba(9, 30, 66, 0.1411764706);
         }
@@ -98,9 +97,11 @@
         grid-row: 4;
         grid-column: 2;
         display: grid;
+
         .btns {
           display: grid;
           grid-template-columns: max-content max-content;
+
           .save-item-btn {
             background-color: #0c66e4;
             color: white;
@@ -111,7 +112,6 @@
       }
 
       .items {
-        // grid-column: 1/3;
         margin-block-start: 10px;
 
         .item {
@@ -128,7 +128,6 @@
             height: 16px;
             place-self: center;
             cursor: pointer;
-            // margin-right: 0.5rem;
           }
 
           p {
@@ -146,7 +145,6 @@
             margin-block-end: 15px;
 
             input {
-              // grid-column: 2;
               grid-column: 1/3;
               width: 525px;
             }
@@ -154,6 +152,7 @@
             .btns {
               display: grid;
               grid-template-columns: max-content max-content;
+
               .save-edit-btn {
                 background-color: #0c66e4;
                 color: white;
@@ -174,13 +173,16 @@
       .checklist {
         .header-and-btns {
           grid-template-columns: 70px max-content max-content;
+
           h3 {
             grid-column: 2/3;
           }
+
           .hide-btn {
             grid-column: 3;
             grid-row: 2;
           }
+
           .delete-checklist-btn {
             grid-row: 2;
             grid-column: 2 !important;
