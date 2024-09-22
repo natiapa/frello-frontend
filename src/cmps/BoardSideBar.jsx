@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { FaRegStar, FaStar } from 'react-icons/fa'
 import { updateBoard } from '../store/actions/board.actions'
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr'
-import { blue } from '@mui/material/colors'
 import { boardService } from '../services/board'
 
 export function BoardSideBar({ board, bgColor }) {
@@ -60,7 +59,6 @@ export function BoardSideBar({ board, bgColor }) {
                     width: isOpen ? '260px' : '0px',
                     transform: isOpen ? 'translateX(0)' : 'translateX(-260px)',
                     transition:'0.3s',
-                    //  'transform 0.3s ease',
                 }}>
                 <ul>
                     <li className="header">
@@ -84,7 +82,6 @@ export function BoardSideBar({ board, bgColor }) {
                                     ? board.style.backgroundImage
                                     : board.style.backgroundColor
                             }
-                            // alt=""
                         />}
                         {board?.style?.backgroundColor && (
                             <div

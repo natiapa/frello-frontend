@@ -27,7 +27,6 @@
       font-size: 18px;
       padding: 10px 12px;
       border-bottom: 1px solid #dfe1e63d;
-      // background-color: inherit;
       overflow: break-word;
 
       .logo {
@@ -59,7 +58,6 @@
         grid-column: 3;
         color: white;
         border-radius: 4px;
-        // opacity: 0;
         cursor: pointer;
 
         &:hover {
@@ -71,7 +69,6 @@
     .footer {
       display: grid;
       padding: 11px 10px 11px 16px;
-      // background-color: inherit;
 
       h2 {
         font-size: 12px;
@@ -118,7 +115,6 @@
           sans-serif;
         font-weight: 400;
         text-overflow: ellipsis;
-        // word-break: break-all;
         transition: 0.5s;
       }
 
@@ -129,8 +125,6 @@
         margin: 0;
         margin-top: 2px;
         background-color: transparent;
-        // backdrop-filter: blur(0px);
-        // background: #0000003d;
         transition: scale 0.15s ease;
 
         &:hover {
@@ -158,8 +152,9 @@
         }
       }
     }
+
     &:hover {
-      .starred-btn{
+      .starred-btn {
         display: grid;
       }
     }
