@@ -77,14 +77,21 @@ export function BoardSideBar({ board, bgColor }) {
                         <h2>Your boards</h2>
                     </li>
                     <li className="item">
-                        <img
+                        {board?.style?.backgroundImage && <img
                             src={
                                 board.style?.backgroundImage
                                     ? board.style.backgroundImage
                                     : board.style.backgroundColor
                             }
                             // alt=""
-                        />
+                        />}
+                        {board?.style?.backgroundColor && (
+                            <div
+                                className="color"
+                                style={{
+                                    backgroundColor: board.style.backgroundColor,
+                                }}></div>
+                        )}
                         <p>{board.title}</p>
                         <button className="starred-btn">
                             {!board.isStarred && (
