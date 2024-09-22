@@ -3,6 +3,7 @@ import { FaRegStar, FaStar } from 'react-icons/fa'
 import { updateBoard } from '../store/actions/board.actions'
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr'
 import { blue } from '@mui/material/colors'
+import { boardService } from '../services/board'
 
 export function BoardSideBar({ board, bgColor }) {
     const [isStarred, setIsStarred] = useState(board.isStarred || false)
@@ -10,7 +11,7 @@ export function BoardSideBar({ board, bgColor }) {
 
     async function onUpdateBoard(board, newStarredStatus) {
         try {
-         await boardService.updateBoard(
+         const updatedBoard = await boardService.updateBoard(
                 board,
                 null,
                 null,
@@ -19,7 +20,7 @@ export function BoardSideBar({ board, bgColor }) {
                     value: newStarredStatus,
                 }
             )
-            // await updateBoard(updatedBoard)
+            await updateBoard(updatedBoard)
         } catch (error) {
             console.error('Failed to update the board:', error)
         }
