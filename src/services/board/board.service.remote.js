@@ -1,7 +1,6 @@
 import { httpService } from '../http.service'
 import { userService } from '../user'
 import { makeId, sortColorsByHue } from '../util.service'
-import { updateBoard as updateCurrBoard } from '../../store/actions/board.actions'
 export const boardService = {
     query,
     getById,
@@ -23,7 +22,7 @@ export const boardService = {
     getAllLabels,
     addActivity,
     getImgs,
-    isColorDark
+    isColorDark,
 }
 
 async function query(filterBy = {}) {
@@ -40,7 +39,6 @@ async function remove(boardId) {
 async function save(board) {
     var savedBoard
     if (board._id) {
-
         savedBoard = await httpService.put(`board/${board._id}`, board)
     } else {
         savedBoard = await httpService.post('board', board)
@@ -66,20 +64,9 @@ function getDefaultFilter() {
     }
 }
 
-async function updateBoard(
-    board,
-    groupId,
-    taskId,
-    { key, value },
-    activity = ''
-) {
-
-    // console.log(board, groupId, taskId, { key, value })
-
+async function updateBoard(board, groupId, taskId, { key, value }, activity = '') {
     const gIdx = board?.groups?.findIndex(group => group.id === groupId)
-    const tIdx = board?.groups[gIdx]?.tasks.findIndex(
-        task => task.id === taskId
-    )
+    const tIdx = board?.groups[gIdx]?.tasks.findIndex(task => task.id === taskId)
 
     if (tIdx >= 0) {
         if (key === 'deleteTask') {
@@ -102,16 +89,9 @@ async function updateBoard(
     if (activity) {
         activity = addActivity(activity)
     }
-    // try {
-    //     await save(board)
-    // } catch (err) {
-    //     console.log('err:', err)
-    // }
-
 
     return board
 }
-
 
 async function updateActivities(
     board,
@@ -137,7 +117,6 @@ async function updateActivities(
         copiedBoard
     )
 
-
     board?.activities?.unshift(activityToAdd)
 }
 
@@ -150,8 +129,7 @@ function addActivity(
     taskNumber,
     item,
     dueDate,
-    originalBoard,
-
+    originalBoard
 ) {
     var activity = {
         id: makeId(),
@@ -179,29 +157,18 @@ function addActivity(
         },
         originalBoard: {
             _id: originalBoard?._id,
-            title: originalBoard?.title
-        }
-    };
+            title: originalBoard?.title,
+        },
+    }
 
-    return activity;
+    return activity
 }
 
 function getEmptyGroup() {
     return {
         id: makeId(),
         title: '',
-        tasks: [
-            // {
-            //     id: makeId(),
-            //     title: '',
-            //     labels: [],
-            //     members: [],
-            //     attachments: [],
-            //     comments: [],
-            //     cover: '',
-            //     dueDate: '',
-            // },
-        ],
+        tasks: [],
         style: {},
     }
 }
@@ -214,7 +181,7 @@ function getEmptyTask() {
         members: [],
         attachments: [],
         comments: [],
-        cover: { color: "", img: "" },
+        cover: { color: '', img: '' },
         dueDate: '',
     }
 }
@@ -330,20 +297,16 @@ function getColorsCover() {
 }
 
 function isColorDark(color) {
-    console.log(color)
+    const hex = color.replace('#', '')
 
-    const hex = color.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16)
+    const g = parseInt(hex.substring(2, 4), 16)
+    const b = parseInt(hex.substring(4, 6), 16)
 
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000
 
-
-    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-
-
-    return brightness < 128;
-};
+    return brightness < 128
+}
 
 function getAllLabels() {
     const allLabels = colors

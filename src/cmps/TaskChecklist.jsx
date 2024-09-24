@@ -3,16 +3,17 @@ import { makeId } from '../services/util.service'
 import { ProgressBar } from './ProgressBar'
 import { boardService } from '../services/board'
 import { IoMdCheckboxOutline } from 'react-icons/io'
+import { ChecklistItems } from './ChecklistItems'
 
 export function TaskChecklist({ checklists, onUpdated = () => {}, task, group, board }) {
-    const [updatedChecklists, setUpdatedChecklists] = useState([...checklists])
+    const [updatedCl, setUpdatedCl] = useState([...checklists])
     const [isAddingItem, setIsAddingItem] = useState(false)
     const [itemText, setItemText] = useState('')
     const [textItemToEdit, setTextItemToEdit] = useState('')
     const [hideCheckedItems, setHideCheckedItems] = useState(false)
 
     useEffect(() => {
-        setUpdatedChecklists(checklists)
+        setUpdatedCl(checklists)
     }, [checklists?.length])
 
     async function onRemoveChecklist(ev, checklistId) {
@@ -21,11 +22,11 @@ export function TaskChecklist({ checklists, onUpdated = () => {}, task, group, b
             checklist => checklist.id === checklistId
         )
 
-        const checklistsToSave = updatedChecklists.filter(
+        const checklistsToSave = updatedCl.filter(
             checklist => checklist.id !== checklistId
         )
 
-        setUpdatedChecklists(checklistsToSave)
+        setUpdatedCl(checklistsToSave)
         onUpdated('checklists', checklistsToSave)
         await boardService.updateActivities(
             board,
@@ -40,7 +41,7 @@ export function TaskChecklist({ checklists, onUpdated = () => {}, task, group, b
     async function handleChangeCheckbox({ target }, item, checklistId) {
         const { name, checked } = target
 
-        const checklistToUpdate = updatedChecklists.find(
+        const checklistToUpdate = updatedCl.find(
             checklist => checklist.id === checklistId
         )
         const updatedItems = checklistToUpdate.items.map(currItem =>
@@ -61,11 +62,11 @@ export function TaskChecklist({ checklists, onUpdated = () => {}, task, group, b
 
         const updatedChecklist = { ...checklistToUpdate, items: updatedItems }
 
-        const updatedChecklistsList = updatedChecklists.map(cl =>
+        const updatedChecklistsList = updatedCl.map(cl =>
             cl.id === checklistId ? updatedChecklist : cl
         )
 
-        setUpdatedChecklists(updatedChecklistsList)
+        setUpdatedCl(updatedChecklistsList)
         onUpdated('checklists', updatedChecklistsList)
     }
 
@@ -76,7 +77,7 @@ export function TaskChecklist({ checklists, onUpdated = () => {}, task, group, b
     function onSaveItem(ev, checklistId) {
         ev.preventDefault()
 
-        const updatedChecklistsList = updatedChecklists.map(checklist => {
+        const updatedChecklist = updatedCl.map(checklist => {
             if (checklist.id === checklistId) {
                 checklist.isAddingItem = false
                 const updatedItems = [
@@ -88,8 +89,8 @@ export function TaskChecklist({ checklists, onUpdated = () => {}, task, group, b
             return checklist
         })
 
-        setUpdatedChecklists(updatedChecklistsList)
-        onUpdated('checklists', updatedChecklistsList)
+        setUpdatedCl(updatedChecklist)
+        onUpdated('checklists', updatedChecklist)
         setIsAddingItem(false)
     }
 
@@ -104,7 +105,7 @@ export function TaskChecklist({ checklists, onUpdated = () => {}, task, group, b
 
     function onEditingTextItem(ev, item) {
         ev.preventDefault()
-        const updatedChecklistsList = updatedChecklists.map(checklist => {
+        const updatedChecklist = updatedCl.map(checklist => {
             const updatedItems = checklist.items.map(currItem => {
                 currItem.edit = false
                 if (currItem.id === item.id) {
@@ -116,13 +117,13 @@ export function TaskChecklist({ checklists, onUpdated = () => {}, task, group, b
             })
             return { ...checklist, items: updatedItems }
         })
-        setUpdatedChecklists(updatedChecklistsList)
+        setUpdatedCl(updatedChecklist)
     }
 
     function saveEditingItem(ev, item) {
         ev.preventDefault()
         const newText = textItemToEdit
-        const updatedChecklistsList = updatedChecklists.map(checklist => {
+        const updatedChecklist = updatedCl.map(checklist => {
             const updatedItems = checklist.items.map(currItem => {
                 currItem.edit = false
                 if (currItem.id === item.id) {
@@ -133,12 +134,12 @@ export function TaskChecklist({ checklists, onUpdated = () => {}, task, group, b
             })
             return { ...checklist, items: updatedItems }
         })
-        setUpdatedChecklists(updatedChecklistsList)
-        onUpdated('checklists', updatedChecklistsList)
+        setUpdatedCl(updatedChecklist)
+        onUpdated('checklists', updatedChecklist)
     }
     function closeForm(ev, item) {
         ev.preventDefault()
-        const updatedChecklistsList = updatedChecklists.map(checklist => {
+        const updatedChecklist = updatedCl.map(checklist => {
             const updatedItems = checklist.items.map(currItem => {
                 if (currItem.id === item.id) {
                     item.edit = false
@@ -148,7 +149,7 @@ export function TaskChecklist({ checklists, onUpdated = () => {}, task, group, b
             })
             return { ...checklist, items: updatedItems }
         })
-        setUpdatedChecklists(updatedChecklistsList)
+        setUpdatedCl(updatedChecklist)
     }
 
     function onAddItem(ev, checklist) {
@@ -180,8 +181,8 @@ export function TaskChecklist({ checklists, onUpdated = () => {}, task, group, b
     return (
         <div className="task-checklist">
             <ul className="checklists">
-                {updatedChecklists &&
-                    updatedChecklists.map(checklist => (
+                {updatedCl &&
+                    updatedCl.map(checklist => (
                         <li className="checklist" key={checklist.id}>
                             <div className="header-and-btns">
                                 <IoMdCheckboxOutline />
@@ -234,70 +235,16 @@ export function TaskChecklist({ checklists, onUpdated = () => {}, task, group, b
                                     </div>
                                 </div>
                             )}
-                            <ul className="items">
-                                {checklist.items.map(item => (
-                                    <li className="item" key={item.id}>
-                                        <input
-                                            name="isChecked"
-                                            checked={item.isChecked}
-                                            type="checkbox"
-                                            onChange={ev =>
-                                                handleChangeCheckbox(
-                                                    ev,
-                                                    item,
-                                                    checklist.id
-                                                )
-                                            }
-                                        />
-                                        {!item.edit && (
-                                            <p
-                                                onClick={ev =>
-                                                    onEditingTextItem(ev, item)
-                                                }
-                                                style={{
-                                                    textDecoration: item.isChecked
-                                                        ? 'line-through'
-                                                        : 'none',
-                                                    color: item.isChecked
-                                                        ? '#aaa'
-                                                        : 'inherit',
-                                                }}>
-                                                {item.text}
-                                            </p>
-                                        )}
-                                        {item.edit && (
-                                            <div
-                                                className="edit-item"
-                                                onBlur={ev => saveEditingItem(ev, item)}>
-                                                <input
-                                                    type="text"
-                                                    onChange={handleEditTextItem}
-                                                    value={textItemToEdit}
-                                                    onKeyDown={ev =>
-                                                        handleEditingSaveKeyDown(ev, item)
-                                                    }
-                                                    autoFocus
-                                                />
-                                                <div className="btns">
-                                                    <button
-                                                        className="save-edit-btn"
-                                                        onClick={ev =>
-                                                            saveEditingItem(ev, item)
-                                                        }>
-                                                        Save
-                                                    </button>
-                                                    <button
-                                                        onClick={ev =>
-                                                            closeForm(ev, item)
-                                                        }>
-                                                        X
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </li>
-                                ))}
-                            </ul>
+                            <ChecklistItems
+                                checklist={checklist}
+                                handleChangeCheckbox={handleChangeCheckbox}
+                                onEditingTextItem={onEditingTextItem}
+                                handleEditTextItem={handleEditTextItem}
+                                textItemToEdit={textItemToEdit}
+                                saveEditingItem={saveEditingItem}
+                                handleEditingSaveKeyDown={handleEditingSaveKeyDown}
+                                closeForm={closeForm}
+                            />
                         </li>
                     ))}
             </ul>
