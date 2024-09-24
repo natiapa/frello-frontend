@@ -115,10 +115,14 @@ export function BoardDetails() {
 
     // Load board data and update preview if necessary
     useEffect(() => {
-        loadBoard(boardId, filterBy)
         if (!preview?.length) return
         loadPreview()
     }, [boardId, preview, filterBy, currTask])
+    
+    useEffect(() => {
+        loadBoard(boardId, filterBy)
+    }, [filterBy])
+
 
     // Calculate background color when board style or bgColor changes
     useEffect(() => {
@@ -145,7 +149,7 @@ export function BoardDetails() {
 
     // Reload board when the background style changes
     useEffect(() => {
-        loadBoard(boardId)
+        // loadBoard(boardId)
     }, [currBoardBgStyle?.style])
 
     function handleClick(ev) {
@@ -170,7 +174,7 @@ export function BoardDetails() {
                 }
             )
             await updateBoard(updatedBoard)
-            await loadBoard(boardId, filterBy)
+            // await loadBoard(boardId, filterBy)
         } catch (error) {
             console.error('Failed to update the board:', error)
         }
