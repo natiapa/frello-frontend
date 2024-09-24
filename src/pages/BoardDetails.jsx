@@ -82,7 +82,6 @@ export function BoardDetails() {
     useEffect(() => {
         if (!currUser) return
         socketService.emit('joinBoard', { boardId, currUser })
-        console.log('Joining board room:', boardId)
 
         const handleGroupsUpdated = () => {
             loadBoard(boardId)
