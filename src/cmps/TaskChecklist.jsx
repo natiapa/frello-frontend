@@ -62,12 +62,12 @@ export function TaskChecklist({ checklists, onUpdated = () => {}, task, group, b
 
         const updatedChecklist = { ...checklistToUpdate, items: updatedItems }
 
-        const updatedChecklistsList = updatedCl.map(cl =>
+        const updatedChecklists = updatedCl.map(cl =>
             cl.id === checklistId ? updatedChecklist : cl
         )
 
-        setUpdatedCl(updatedChecklistsList)
-        onUpdated('checklists', updatedChecklistsList)
+        setUpdatedCl(updatedChecklists)
+        onUpdated('checklists', updatedChecklists)
     }
 
     function handleHideItems() {
