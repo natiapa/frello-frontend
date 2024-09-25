@@ -16,6 +16,12 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
     color: #42526E;
 
+    /* מסתיר את האלמנט שמכיל את הטקסט הדינמי */
+    // כלל זה יסתיר את ההודעה 'Sign in as...'
+    
+
+
+
     input {
       padding: 8px 6px;
       border: 1px solid #ccc;
@@ -46,6 +52,7 @@
     align-items: center;
   }
 }
+
 
 //   display: grid;
 //   width: min(80%, 300px);

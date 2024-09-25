@@ -64,6 +64,14 @@ export function LoginForm({setIsLogin, onLogin, isSignup }) {
                 required
                 autoComplete="off"
             />
+            {isSignup && <input
+                type="text"
+                name="fullname"
+                value={credentials.fullname}
+                placeholder="Full name"
+                onChange={handleChange}
+                required
+            />}
             <GoogleOAuthProvider clientId={clientId}>
                     <GoogleLogin
                         buttonText='Login with Google'
@@ -73,21 +81,14 @@ export function LoginForm({setIsLogin, onLogin, isSignup }) {
                         theme='outline'
                         size='large'
                         cookiePolicy={'single_host_origin'}
-                        isSignedIn={true}
-                        style={{ 
-                            display: 'grid',
-                            width: '100%' 
-                        }}
+                        text='signin_with'
+                        isSignedIn={false}
+                        // style={{ 
+                        //     display: 'grid',
+                        //     width: '100%' 
+                        // }}
                     />
                 </GoogleOAuthProvider>
-            {isSignup && <input
-                type="text"
-                name="fullname"
-                value={credentials.fullname}
-                placeholder="Full name"
-                onChange={handleChange}
-                required
-            />}
             <button className="btn">{isSignup ? 'Signup' : 'Login'}</button>
         </form>
     )
