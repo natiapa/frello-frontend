@@ -1,9 +1,14 @@
 import { useState } from "react"
 import { userService } from "../services/user"
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
+import { googleLogin } from "../store/actions/user.actions"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
+import { useNavigate } from "react-router"
 
 export function LoginForm({setIsLogin, onLogin, isSignup }) {
 
     const [credentials, setCredentials] = useState(userService.getEmptyUser())
+    const navigate = useNavigate()
 
     function handleChange({ target }) {
         const { name: field, value } = target
@@ -15,6 +20,29 @@ export function LoginForm({setIsLogin, onLogin, isSignup }) {
         onLogin(credentials)
         setIsLogin(false)
     }
+
+    async function onSuccess(response) {
+        const { credential } = response 
+        try {
+            const res = await googleLogin(credential)
+            if (res) {
+                setIsLogin(false)
+                navigate('/board')
+                showSuccessMsg('Logged in successfully')
+            } else {
+                showErrorMsg('Login failed')
+            }
+        } catch (err) {
+            console.error('Error during Google login:', err)
+            showErrorMsg('Oops, something went wrong!')
+        }
+    }
+    function onFailure(res) {
+        console.log('Login failed: res:', res)
+    }
+    const clientId =
+        '922679906339-r3kj2mljtkelfcijme0kmclt1al1nfrk.apps.googleusercontent.com'
+ 
 
     return (
         <form className="login-form" onSubmit={handleSubmit}>
@@ -36,6 +64,22 @@ export function LoginForm({setIsLogin, onLogin, isSignup }) {
                 required
                 autoComplete="off"
             />
+            <GoogleOAuthProvider clientId={clientId}>
+                    <GoogleLogin
+                        buttonText='Login with Google'
+                        onSuccess={onSuccess}
+                        onFailure={onFailure}
+                        shape='rectangular'
+                        theme='outline'
+                        size='large'
+                        cookiePolicy={'single_host_origin'}
+                        isSignedIn={true}
+                        style={{ 
+                            display: 'grid',
+                            width: '100%' 
+                        }}
+                    />
+                </GoogleOAuthProvider>
             {isSignup && <input
                 type="text"
                 name="fullname"

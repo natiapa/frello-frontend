@@ -28,6 +28,21 @@ export async function removeUser(userId) {
     }
 }
 
+export async function googleLogin(credential) {
+    try {
+        const user = await userService.googleLogin(credential)
+        store.dispatch({
+            type: SET_USER,
+            user
+        })
+        // socketService.login(user._id)
+        return user
+    } catch (err) {
+        console.log('Cannot login with google', err)
+        throw err
+    }
+}
+
 export async function login(credentials) {
     try {
         const user = await userService.login(credentials)

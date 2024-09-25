@@ -3,6 +3,7 @@ import { httpService } from '../http.service'
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
 export const userService = {
+    googleLogin,
     login,
     logout,
     signup,
@@ -37,11 +38,17 @@ async function update({ _id, score }) {
     return user
 }
 
+async function googleLogin(credential) {
+    console.log('credential:', credential)
+    const user = await httpService.post('auth/google', {token: credential})
+    if (user) return saveLoggedinUser(user)
+}
+
 async function login(userCred) {
     // if (userCred.fullname === "yana") userCred.imgUrl = "https://res.cloudinary.com/dmdgdpxtu/image/upload/v1726413924/WhatsApp_Image_2024-08-28_at_23.31.20_dwuw0l.jpg"
     // if (userCred.fullname === "avi") userCred.imgUrl = "https://res.cloudinary.com/dmdgdpxtu/image/upload/v1726415721/WhatsApp_Image_2024-09-15_at_18.54.43_jkgmah.jpg"
     // if (userCred.fullname === "natia") userCred.imgUrl = "https://res.cloudinary.com/dmdgdpxtu/image/upload/v1726415931/WhatsApp_Image_2024-09-15_at_18.55.20_atp7ne.jpg"
-
+    console.log('userCred:', userCred)
     const user = await httpService.post('auth/login', userCred)
     if (user) return saveLoggedinUser(user)
 }
@@ -69,13 +76,13 @@ function getLoggedinUser() {
 }
 
 function saveLoggedinUser(user) {
-    user = {
-        _id: user._id,
-        fullname: user.fullname,
-        imgUrl: user.imgUrl,
-        score: user.score,
-        isAdmin: user.isAdmin,
-    }
+    // user = {
+    //     _id: user._id,
+    //     fullname: user.fullname || user.name,
+    //     imgUrl: user.imgUrl,
+    //     score: user.score,
+    //     isAdmin: user.isAdmin,
+    // }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }

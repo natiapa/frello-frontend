@@ -30,7 +30,7 @@ export function AppHeader({
   const [modalOpenByName, setModalOpenByName] = useState(null);
 
   const user = useSelector((storeState) => storeState.userModule.user);
-  // console.log(user);
+ console.log('user:', user)
 
   const navigate = useNavigate();
 
@@ -228,7 +228,18 @@ export function AppHeader({
                 }}
               />
             )}
-            {!user.imgUrl && (
+            {user.picture && (
+              <img
+                src={user.picture}
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  padding: "4px",
+                  borderRadius: "50%",
+                }}
+              />
+            )}
+            {!user.imgUrl && !user.picture && (
               <img src="https://res.cloudinary.com/dj7k9bpa3/image/upload/v1631123736/avatar-1577909_1280_v0wz9o.png" />
             )}
           </div>
