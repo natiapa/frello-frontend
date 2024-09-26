@@ -2,9 +2,6 @@
   height: 100vh;
   width: 100vw;
 
-
-
-
   .login-form,
   .signup-form {
     display: grid;
@@ -15,12 +12,6 @@
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
     color: #42526E;
-
-    /* מסתיר את האלמנט שמכיל את הטקסט הדינמי */
-    // כלל זה יסתיר את ההודעה 'Sign in as...'
-    
-
-
 
     input {
       padding: 8px 6px;
@@ -52,50 +43,3 @@
     align-items: center;
   }
 }
-
-
-//   display: grid;
-//   width: min(80%, 300px);
-//   margin: auto;
-
-//   padding: 1em;
-//   // background-color: $clr4;
-// }
-
-// .signup-form {
-//   input {
-//     width: 100%;
-//   }
-
-//   .admin-toggle {
-//     display: flex;
-//     align-items: center;
-//     justify-self: start;
-
-//     span {
-//       font-size: 0.8em;
-//     }
-//   }
-// }
-
-// .login-page nav {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   gap: 2em;
-
-//   margin-block: 100px 0.5em;
-
-//   a {
-//     font-size: 0.8em;
-//     // color: $clr4;
-
-//     &:hover {
-//       // color: $clr1;
-//     }
-//   }
-//   a.active {
-//     text-decoration: underline;
-//     // color: $clr2;
-//   }
-// }

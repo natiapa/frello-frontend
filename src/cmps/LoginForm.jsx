@@ -83,10 +83,6 @@ export function LoginForm({setIsLogin, onLogin, isSignup }) {
                         cookiePolicy={'single_host_origin'}
                         text='signin_with'
                         isSignedIn={false}
-                        // style={{ 
-                        //     display: 'grid',
-                        //     width: '100%' 
-                        // }}
                     />
                 </GoogleOAuthProvider>
             <button className="btn">{isSignup ? 'Signup' : 'Login'}</button>

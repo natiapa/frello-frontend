@@ -28,25 +28,27 @@ export function HomePage() {
         <>
             {/* <AppHeader borderBottom="1px solid #ddd" /> */}
 
-            <div className="home-page-header">
-               {!isLogin && <a>
-                    <span className="logo-icon-img">
-                        <img
-                            src="https://cdn.icon-icons.com/icons2/2699/PNG/512/trello_logo_icon_167765.png"
-                            alt=""
-                        />
-                    </span>
-                    <span className="logo">Frello</span>
-                </a>}
+            <div className='home-page-header'>
+                {!isLogin && (
+                    <a>
+                        <span className='logo-icon-img'>
+                            <img
+                                src='https://cdn.icon-icons.com/icons2/2699/PNG/512/trello_logo_icon_167765.png'
+                                alt=''
+                            />
+                        </span>
+                        <span className='logo'>Frello</span>
+                    </a>
+                )}
                 {!isLogin && !user && (
-                    <button className="login-btn" onClick={onLogin}>
+                    <button className='login-btn' onClick={onLogin}>
                         Log in
                     </button>
                 )}
                 {isLogin && <LoginSignup setIsLogin={setIsLogin} />}
                 {user && (
                     <>
-                        <button className="login-btn" onClick={onLogout}>
+                        <button className='login-btn' onClick={onLogout}>
                             Logout
                         </button>
                     </>
@@ -54,9 +56,9 @@ export function HomePage() {
             </div>
 
             {!isLogin && (
-                <section className="home-page ">
-                    <section className="guest-home-page">
-                        <div className="text-container">
+                <section className='home-page '>
+                    <section className='guest-home-page'>
+                        <div className='text-container'>
                             <h1>
                                 Trello brings all your tasks, teammates, and tools
                                 together
@@ -65,14 +67,14 @@ export function HomePage() {
                                 Keep everything in the same place-even if your team isn’t.
                             </p>
 
-                            <div className="demo-btn-container">
-                                <Link to="board">
+                            <div className='demo-btn-container'>
+                                <Link to='board'>
                                     <button>Try demo - it's free!</button>
                                 </Link>
                             </div>
                         </div>
-                        <div className="homepage-img-container">
-                            <img src={HomeImg} alt="" />
+                        <div className='homepage-img-container'>
+                            <img src={HomeImg} alt='' />
                         </div>
                     </section>
                 </section>
