@@ -33,9 +33,9 @@ export function CoverPicker({
 
   function handleSelectAtt(ev, img) {
     ev.stopPropagation()
-    const updateAtt = { ...currCover, color: '', img: img }
-    onUpdated('cover', updateAtt)
-    setCurrCover(updateAtt)
+    setCurrCover({ ...currCover, color: '', img: img })
+    onUpdated('cover', { ...currCover, color: '', img: img })
+    console.log('currCover:', currCover)
   }
 
   async function handleSelectFile(ev) {
@@ -46,14 +46,11 @@ export function CoverPicker({
     console.log('file:', file)
 
     try {
-      const res = await boardService.uploadImageToCloudinary(file)
+      const res = await boardService.uploadImageToCloud(file)
       console.log('res:', res)
 
       const updateFile = { ...currCover, color: '', img: res.secure_url }
       setAttachments([...attachments, { name: file.name, url: res.secure_url }])
-
-      console.log('updateFile:', updateFile)
-      console.log('currCover:', currCover)
     } catch (err) {
       console.log('err:', err)
     }

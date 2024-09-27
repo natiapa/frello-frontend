@@ -24,7 +24,7 @@ export const boardService = {
   addActivity,
   getImgs,
   isColorDark,
-  uploadImageToCloudinary,
+  uploadImageToCloud,
 }
 const CLOUDINARY_KEY = '929267318661154'
 const CLOUDINARY_SECRET = 'F488b_zzRLS3Sh2Efrfr-8_oHLI'
@@ -55,7 +55,7 @@ async function addBoardMsg(boardId, txt) {
   return savedMsg
 }
 
-async function uploadImageToCloudinary(file) {
+async function uploadImageToCloud(file) {
     const formData = new FormData()
     formData.append('file', file)
     formData.append('upload_preset', 'koabaxcv')
