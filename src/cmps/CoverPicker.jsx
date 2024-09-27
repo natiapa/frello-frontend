@@ -48,9 +48,13 @@ export function CoverPicker({
     try {
       const res = await boardService.uploadImageToCloud(file)
       console.log('res:', res)
+      console.log('attachments:', attachments)
+      const id = makeId()
 
-      const updateFile = { ...currCover, color: '#f2e6cc', img: res.secure_url }
-      setAttachments([...attachments, { name: file.name, url: res.secure_url }])
+      // const updateFile = { ...currCover, color: '#f2e6cc', img: res.secure_url }
+      setAttachments([...attachments, {id:id, name: file.name, url: res.secure_url }])
+      onUpdated('attachments', [...attachments, {id:id, name: file.name, url: res.secure_url }])
+      console.log('attachments:', attachments)
     } catch (err) {
       console.log('err:', err)
     }
