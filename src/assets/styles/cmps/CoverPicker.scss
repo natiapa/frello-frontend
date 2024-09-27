@@ -63,6 +63,14 @@
   margin-bottom: 8px;
 }
 
+.attachment-imgs-list{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
 .cover-images-list {
   display: grid;
@@ -83,7 +91,8 @@
 }
 
 .cover-color-item,
-.cover-img-item {
+.cover-img-item,
+.attachment-img-item {
   cursor: pointer;
   border-radius: 4px;
   overflow: hidden;

@@ -1,5 +1,7 @@
 import { SvgIcon } from '@mui/material'
 import { boardService } from '../services/board'
+import { useState } from 'react'
+import { makeId } from '../services/util.service'
 
 export function CoverPicker({
   onUpdated,
@@ -7,10 +9,12 @@ export function CoverPicker({
   handlePopoverClick,
   setCurrCover,
   currCover,
+  task,
   // setNewCover,
 }) {
   const coverColors = boardService.getColorsCover()
   const coverImgs = boardService.getImgs()
+  const [attachments, setAttachments] = useState(task?.attachments || [])
 
   function handleCoverSelection(ev, color, img) {
     ev.stopPropagation()
@@ -18,7 +22,41 @@ export function CoverPicker({
     const updateColor = { ...currCover, color: color, img: img }
     onUpdated('cover', updateColor)
     setCurrCover(updateColor)
+    console.log('currCover:', currCover)
     // setNewCover(updateColor);
+  }
+
+  function onUploadCover(ev) {
+    ev.stopPropagation()
+    console.log('upload cover')
+  }
+
+  function handleSelectAtt(ev, img) {
+    ev.stopPropagation()
+    const updateAtt = { ...currCover, color: '', img: img }
+    onUpdated('cover', updateAtt)
+    setCurrCover(updateAtt)
+  }
+
+  async function handleSelectFile(ev) {
+    ev.stopPropagation()
+    ev.preventDefault()
+    console.log('currCover:', currCover)
+    const file = ev.target.files[0]
+    console.log('file:', file)
+
+    try {
+      const res = await boardService.uploadImageToCloudinary(file)
+      console.log('res:', res)
+
+      const updateFile = { ...currCover, color: '', img: res.secure_url }
+      setAttachments([...attachments, { name: file.name, url: res.secure_url }])
+
+      console.log('updateFile:', updateFile)
+      console.log('currCover:', currCover)
+    } catch (err) {
+      console.log('err:', err)
+    }
   }
 
   return (
@@ -52,6 +90,33 @@ export function CoverPicker({
             </li>
           ))}
         </ul>
+      </div>
+
+      <div className='attachment-imgs-section'>
+        <span className='section-title'>Attachment photos</span>
+        <ul className='attachment-imgs-list'>
+          {attachments &&
+            attachments.length > 0 &&
+            attachments.map(attachment => (
+              <li
+                key={makeId()}
+                className='attachment-img-item'
+                onClick={ev => handleSelectAtt(ev, attachment.url)}>
+                <img
+                  src={attachment.url}
+                  alt={attachment.name}
+                  className='attachment-img-thumbnail'
+                />
+              </li>
+            ))}
+        </ul>
+      </div>
+
+      <div className='upload-cover'>
+        <label className='upload-cover-btn' onClick={onUploadCover}>
+          <input type='file' onChange={handleSelectFile} hidden />
+          Upload photo
+        </label>
       </div>
 
       <div className='cover-images-section'>

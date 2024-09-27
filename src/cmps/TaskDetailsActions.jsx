@@ -334,6 +334,7 @@ export function TaskDetailsActions({
                 setCurrCover={setCurrCover}
                 currCover={currCover}
                 setNewCover={setNewCover}
+                task={task}
               />
             </Popover>
           )}
