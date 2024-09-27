@@ -22,7 +22,6 @@ export function CoverPicker({
     const updateColor = { ...currCover, color: color, img: img }
     onUpdated('cover', updateColor)
     setCurrCover(updateColor)
-    console.log('currCover:', currCover)
     // setNewCover(updateColor);
   }
 
@@ -35,7 +34,6 @@ export function CoverPicker({
     ev.stopPropagation()
     setCurrCover({ ...currCover, color: '#f2e6cc', img: img })
     onUpdated('cover', { ...currCover, color: '#f2e6cc', img: img })
-    console.log('currCover:', currCover)
   }
 
   async function handleSelectFile(ev) {
@@ -43,8 +41,6 @@ export function CoverPicker({
     ev.preventDefault()
     console.log('currCover:', currCover)
     const file = ev.target.files[0]
-    console.log('file:', file)
-
     try {
       const res = await boardService.uploadImageToCloud(file)
       console.log('res:', res)
@@ -52,9 +48,12 @@ export function CoverPicker({
       const id = makeId()
 
       // const updateFile = { ...currCover, color: '#f2e6cc', img: res.secure_url }
-      setAttachments([...attachments, {id:id, name: file.name, url: res.secure_url }])
-      onUpdated('attachments', [...attachments, {id:id, name: file.name, url: res.secure_url }])
-      console.log('attachments:', attachments)
+      setAttachments([...attachments, { id: id, name: file.name, url: res.secure_url }])
+      onUpdated('attachments', [
+        ...attachments,
+        { id: id, name: file.name, url: res.secure_url },
+      ])
+      console.log('task.attachments:', task.attachments)
     } catch (err) {
       console.log('err:', err)
     }
