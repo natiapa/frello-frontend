@@ -33,8 +33,8 @@ export function CoverPicker({
 
   function handleSelectAtt(ev, img) {
     ev.stopPropagation()
-    setCurrCover({ ...currCover, color: '', img: img })
-    onUpdated('cover', { ...currCover, color: '', img: img })
+    setCurrCover({ ...currCover, color: '#f2e6cc', img: img })
+    onUpdated('cover', { ...currCover, color: '#f2e6cc', img: img })
     console.log('currCover:', currCover)
   }
 
@@ -49,7 +49,7 @@ export function CoverPicker({
       const res = await boardService.uploadImageToCloud(file)
       console.log('res:', res)
 
-      const updateFile = { ...currCover, color: '', img: res.secure_url }
+      const updateFile = { ...currCover, color: '#f2e6cc', img: res.secure_url }
       setAttachments([...attachments, { name: file.name, url: res.secure_url }])
     } catch (err) {
       console.log('err:', err)
