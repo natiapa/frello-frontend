@@ -1,7 +1,8 @@
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useParams, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { debounce } from 'lodash'
 
 import {
   loadBoard,
@@ -80,6 +81,13 @@ export function BoardDetails() {
 
   const currUser = userService.getLoggedinUser()
 
+  const debouncedLoadBoard = useCallback(
+    debounce((boardId) => {
+      loadBoard(boardId).finally(() => setIsBoardLoading(false));
+    }, 500), 
+    []
+  )
+
   // Join the board room via socket and listen for group updates
   // useEffect(() => {
   //   if (!currUser) return
@@ -109,14 +117,14 @@ export function BoardDetails() {
     const handleGroupsUpdated = () => {
       if (!isBoardLoading) {
         setIsBoardLoading(true);
-        loadBoard(boardId).finally(() => setIsBoardLoading(false));
+        debouncedLoadBoard(boardId);
       }
     };
 
     const handleActivitiesUpdated = () => {
       if (!isBoardLoading) {
         setIsBoardLoading(true);
-        loadBoard(boardId).finally(() => setIsBoardLoading(false));
+        debouncedLoadBoard(boardId);
       }
     };
 
@@ -127,7 +135,7 @@ export function BoardDetails() {
       socketService.off(SOCKET_EVENT_GROUPS_UPDATED, handleGroupsUpdated);
       socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED, handleActivitiesUpdated);
     };
-  }, [boardId, currUser, isBoardLoading]);
+  }, [boardId, currUser, isBoardLoading, debouncedLoadBoard]);
 
   
 

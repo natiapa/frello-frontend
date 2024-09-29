@@ -26,6 +26,7 @@
         "color-namer": "^1.4.0",
         "dayjs": "^1.11.13",
         "fast-average-color": "^9.4.0",
+        "lodash": "^4.17.21",
         "nearest-color": "^0.4.4",
         "react": "^18.2.0",
         "react-beautiful-dnd": "^13.1.1",
