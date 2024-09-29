@@ -66,7 +66,7 @@ async function uploadImageToCloud(file) {
       )
       return res.data
     } catch (err) {
-        console.error('Error uploading to Cloudinary:', err.response ? err.response.data : err)
+        console.error('Error uploading to Cloud:', err.response ? err.response.data : err)
     }
   }
   
