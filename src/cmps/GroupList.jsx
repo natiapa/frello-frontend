@@ -6,6 +6,7 @@ import { loadBoard, updateBoard } from '../store/actions/board.actions'
 import { AddingForm } from './AddingForm'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { RingLoader } from 'react-spinners'
+import { Accordion } from 'react-accessible-accordion'
 
 export function GroupList({
   groups,
