@@ -5,11 +5,13 @@ export const ADD_BOARD = 'ADD_BOARD'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
 export const ADD_BOARD_MSG = 'ADD_BOARD_MSG'
 export const SET_FILTER = 'SET_FILTER'
+export const SET_LOADING = 'SET_LOADING'
 
 const initialState = {
     boards: [],
     board: null,
     filterBoard: {},
+    isLoading: false,
 }
 
 export function boardReducer(state = initialState, action) {
@@ -50,7 +52,11 @@ export function boardReducer(state = initialState, action) {
         case SET_FILTER:
             newState = { ...state, filterBoard: action.filterBy }
             break
+        case SET_LOADING:
+            newState = { ...state, isLoading: action.isLoading }
+            break
         default:
+            state
     }
     return newState
 }

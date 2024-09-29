@@ -37,6 +37,7 @@ import chroma from 'chroma-js'
 import { MouseTracker } from '../cmps/MouseTracker'
 import { VscListFlat } from 'react-icons/vsc'
 import { userService } from '../services/user'
+import { ClipLoader, RingLoader } from 'react-spinners'
 
 export function BoardDetails() {
   // Import necessary hooks
@@ -44,6 +45,7 @@ export function BoardDetails() {
   const board = useSelector(storeState => storeState.boardModule.board)
   const boards = useSelector(storeState => storeState.boardModule.boards)
   const filterBy = useSelector(storeState => storeState.boardModule.filterBoard)
+  const isLoading = useSelector(storeState => storeState.boardModule.isLoading)
 
   // Filter starred boards
   const starredBoards = Array.isArray(boards)
@@ -344,6 +346,8 @@ export function BoardDetails() {
   }
 
   // Return early if there is no board or no board style
+  // if (isLoading) return <div className='loader'>{<RingLoader color="#0079bf" />}</div>
+  
   if (!board || !board.style) return
 
   return (
