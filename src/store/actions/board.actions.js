@@ -37,7 +37,7 @@ export async function loadBoard(boardId, filterBy = {}) {
   } finally {
     setTimeout(() => {
     store.dispatch({ type: SET_LOADING, isLoading: false })
-    }, 2000)
+    }, 1000)
   }
 }
 
