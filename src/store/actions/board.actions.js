@@ -28,16 +28,15 @@ export async function loadBoards(filterBy = {}) {
 
 export async function loadBoard(boardId, filterBy = {}) {
   store.dispatch({ type: SET_LOADING, isLoading: true })
-  console.log('loadBoard')
   try {
     const board = await boardService.getById(boardId, filterBy)
     store.dispatch(getCmdSetBoard(board))
   } catch (err) {
     console.log('Cannot load board', err)
   } finally {
-    setTimeout(() => {
+    // setTimeout(() => {
     store.dispatch({ type: SET_LOADING, isLoading: false })
-    }, 1000)
+    // }, 1000)
   }
 }
 

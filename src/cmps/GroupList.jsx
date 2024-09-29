@@ -74,7 +74,8 @@ export function GroupList({
     }
   }
 
-  if (isLoading) return <div className='loader'>{<RingLoader color='black' />}</div>
+  // if (isLoading) return 
+  // <div className='loader'>{<RingLoader color='black' />}</div>
   if (!currGroups) return <div>Loading...</div>
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
