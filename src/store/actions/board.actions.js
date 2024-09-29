@@ -10,7 +10,6 @@ import {
   SET_FILTER,
   SET_LOADING,
 } from '../reducers/board.reducer'
-import { set } from 'lodash'
 
 export async function loadBoards(filterBy = {}) {
   store.dispatch({ type: SET_LOADING, isLoading: true })
