@@ -102,32 +102,32 @@ export function BoardDetails() {
   //   }
   // }, [boardId, currUser])
 
-  useEffect(() => {
-    if (!currUser) return;
-    socketService.emit('joinBoard', { boardId, currUser });
+  // useEffect(() => {
+  //   if (!currUser) return;
+  //   socketService.emit('joinBoard', { boardId, currUser });
 
-    const handleGroupsUpdated = () => {
-      if (!isBoardLoading) {
-        setIsBoardLoading(true);
-        loadBoard(boardId).finally(() => setIsBoardLoading(false));
-      }
-    };
+  //   const handleGroupsUpdated = () => {
+  //     if (!isBoardLoading) {
+  //       setIsBoardLoading(true);
+  //       loadBoard(boardId).finally(() => setIsBoardLoading(false));
+  //     }
+  //   };
 
-    const handleActivitiesUpdated = () => {
-      if (!isBoardLoading) {
-        setIsBoardLoading(true);
-        loadBoard(boardId).finally(() => setIsBoardLoading(false));
-      }
-    };
+  //   const handleActivitiesUpdated = () => {
+  //     if (!isBoardLoading) {
+  //       setIsBoardLoading(true);
+  //       loadBoard(boardId).finally(() => setIsBoardLoading(false));
+  //     }
+  //   };
 
-    socketService.on(SOCKET_EVENT_GROUPS_UPDATED, handleGroupsUpdated);
-    socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, handleActivitiesUpdated);
+  //   socketService.on(SOCKET_EVENT_GROUPS_UPDATED, handleGroupsUpdated);
+  //   socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, handleActivitiesUpdated);
 
-    return () => {
-      socketService.off(SOCKET_EVENT_GROUPS_UPDATED, handleGroupsUpdated);
-      socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED, handleActivitiesUpdated);
-    };
-  }, [boardId, currUser, isBoardLoading]);
+  //   return () => {
+  //     socketService.off(SOCKET_EVENT_GROUPS_UPDATED, handleGroupsUpdated);
+  //     socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED, handleActivitiesUpdated);
+  //   };
+  // }, [boardId, currUser, isBoardLoading]);
 
   
 
