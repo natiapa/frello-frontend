@@ -97,7 +97,7 @@ export function BoardDetails() {
   const debouncedLoadBoard = useCallback(
     debounce((boardId) => {
       loadBoard(boardId).finally(() => setIsBoardLoading(false));
-    }, 500),
+    }, 750),
     []
   );
 
