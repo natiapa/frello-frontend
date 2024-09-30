@@ -20,10 +20,12 @@ import { AppHeader } from "../cmps/AppHeader";
 import { useNavigate } from "react-router";
 import { StarredBoardsList } from "../cmps/StarredBoardsList";
 import { loadUsers } from "../store/actions/user.actions";
+import { CircleLoader, ClipLoader, RingLoader, RotateLoader } from "react-spinners";
 
 export function BoardIndex() {
   const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter());
   const boards = useSelector((storeState) => storeState.boardModule.boards);
+  const isLoading = useSelector((storeState) => storeState.boardModule.isLoading);
   const starredBoards = Array.isArray(boards)
     ? boards.filter((board) => board.isStarred)
     : [];
@@ -106,6 +108,7 @@ export function BoardIndex() {
     setModalOpenByName(null);
   }
 
+  if (isLoading) return <div className="loader">{<RingLoader color="#0079bf" />}</div>;
   if (!boards || !boards.length) return;
   console.log(import.meta.env.VITE_SERVER);
   return (

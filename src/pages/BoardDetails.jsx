@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react'
 import { useParams, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -38,6 +37,7 @@ import chroma from 'chroma-js'
 import { MouseTracker } from '../cmps/MouseTracker'
 import { VscListFlat } from 'react-icons/vsc'
 import { userService } from '../services/user'
+import { ClipLoader, RingLoader } from 'react-spinners'
 
 export function BoardDetails() {
   // Import necessary hooks
@@ -45,6 +45,7 @@ export function BoardDetails() {
   const board = useSelector(storeState => storeState.boardModule.board)
   const boards = useSelector(storeState => storeState.boardModule.boards)
   const filterBy = useSelector(storeState => storeState.boardModule.filterBoard)
+  const isLoading = useSelector(storeState => storeState.boardModule.isLoading)
 
   // Filter starred boards
   const starredBoards = Array.isArray(boards)
@@ -78,14 +79,14 @@ export function BoardDetails() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [bgColor, setBgColor] = useState('')
   const [value, setValue] = useState('')
-  const [isBoardLoading, setIsBoardLoading] = useState(false);
+  const [isBoardLoading, setIsBoardLoading] = useState(false)
 
   const currUser = userService.getLoggedinUser()
 
   const debouncedLoadBoard = useCallback(
-    debounce((boardId) => {
-      loadBoard(boardId).finally(() => setIsBoardLoading(false));
-    }, 500), 
+    debounce(boardId => {
+      loadBoard(boardId).finally(() => setIsBoardLoading(false))
+    }, 500),
     []
   )
 
@@ -112,33 +113,31 @@ export function BoardDetails() {
   // }, [boardId, currUser])
 
   useEffect(() => {
-    if (!currUser) return;
-    socketService.emit('joinBoard', { boardId, currUser });
+    if (!currUser) return
+    socketService.emit('joinBoard', { boardId, currUser })
 
     const handleGroupsUpdated = () => {
       if (!isBoardLoading) {
-        setIsBoardLoading(true);
-        debouncedLoadBoard(boardId);
+        setIsBoardLoading(true)
+        debouncedLoadBoard(boardId)
       }
-    };
+    }
 
     const handleActivitiesUpdated = () => {
       if (!isBoardLoading) {
-        setIsBoardLoading(true);
-        debouncedLoadBoard(boardId);
+        setIsBoardLoading(true)
+        debouncedLoadBoard(boardId)
       }
-    };
+    }
 
-    socketService.on(SOCKET_EVENT_GROUPS_UPDATED, handleGroupsUpdated);
-    socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, handleActivitiesUpdated);
+    socketService.on(SOCKET_EVENT_GROUPS_UPDATED, handleGroupsUpdated)
+    socketService.on(SOCKET_EVENT_ACTIVITIES_UPDATED, handleActivitiesUpdated)
 
     return () => {
-      socketService.off(SOCKET_EVENT_GROUPS_UPDATED, handleGroupsUpdated);
-      socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED, handleActivitiesUpdated);
-    };
-  }, [boardId, currUser, isBoardLoading, debouncedLoadBoard]);
-
-  
+      socketService.off(SOCKET_EVENT_GROUPS_UPDATED, handleGroupsUpdated)
+      socketService.off(SOCKET_EVENT_ACTIVITIES_UPDATED, handleActivitiesUpdated)
+    }
+  }, [boardId, currUser, isBoardLoading, debouncedLoadBoard])
 
   // Listen for task preview events from the event bus
   useEffect(() => {
@@ -345,6 +344,8 @@ export function BoardDetails() {
   }
 
   // Return early if there is no board or no board style
+  // if (isLoading) return <div className='loader'>{<RingLoader color="#0079bf" />}</div>
+
   if (!board || !board.style) return
 
   return (
@@ -526,9 +527,6 @@ export function BoardDetails() {
     </section>
   )
 }
-
-
-
 
 // import { useState, useEffect } from 'react'
 // import { useParams, Outlet } from 'react-router-dom'
