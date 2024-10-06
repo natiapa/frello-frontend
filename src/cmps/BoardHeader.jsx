@@ -29,12 +29,13 @@ export function BoardHeader({
 }) {
   const board = useSelector(storeState => storeState.boardModule.board)
   const users = useSelector(storeState => storeState.userModule.users)
+  
   const [anchorEl, setAnchorEl] = useState(null)
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const [isClearFilter, setIsClearFilter] = useState(false)
   const [modalOpenByName, setModalOpenByName] = useState(null)
-  // const [isShareOpen, setIsShareOpen] = useState(false);
+
   function handleFilterClick(ev) {
     const currDataName = ev.currentTarget.getAttribute('data-name')
     setIsClearFilter(true)
@@ -50,10 +51,6 @@ export function BoardHeader({
     setAnchorEl(ev.currentTarget)
     setModalOpenByName(currDataName)
     console.log(currDataName)
-  }
-
-  function handlePopoverClick(ev) {
-    ev.stopPropagation()
   }
 
   function handleMenuBtnClick() {

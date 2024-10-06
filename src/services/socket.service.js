@@ -42,7 +42,7 @@ function createSocketService() {
 
       if (!cb) socket.removeAllListeners(eventName);
       else {
-        console.log(socket);
+        // console.log(socket);
         socket.off(eventName, cb);
       }
     },

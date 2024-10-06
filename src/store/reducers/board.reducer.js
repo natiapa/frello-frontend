@@ -5,16 +5,19 @@ export const ADD_BOARD = 'ADD_BOARD'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
 export const ADD_BOARD_MSG = 'ADD_BOARD_MSG'
 export const SET_FILTER = 'SET_FILTER'
+export const SET_FILTER_BOARDS = 'SET_FILTER_BOARDS'
 export const SET_LOADING = 'SET_LOADING'
 
 const initialState = {
     boards: [],
     board: null,
+    filterBoards: null,
     filterBoard: {},
     isLoading: false,
 }
 
 export function boardReducer(state = initialState, action) {
+    // console.log('action:', action)
     var newState = state
     var boards
     switch (action.type) {
@@ -48,6 +51,9 @@ export function boardReducer(state = initialState, action) {
                     msgs: [...(state.board.msgs || []), action.msg],
                 },
             }
+            break
+        case SET_FILTER_BOARDS:
+            newState = { ...state, filterBoards: action.filterBy }
             break
         case SET_FILTER:
             newState = { ...state, filterBoard: action.filterBy }

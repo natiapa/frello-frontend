@@ -7,7 +7,7 @@ import { boardService as remote } from './board.service.remote'
 
 const service = VITE_LOCAL === 'true' ? local : remote
 // const service = local 
-console.log(VITE_LOCAL)
+// console.log(VITE_LOCAL)
 export const boardService = { ...service }
 
 // Easy access to this service from the dev tools console

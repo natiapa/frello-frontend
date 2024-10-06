@@ -1,147 +1,131 @@
-import { useState, useEffect } from "react";
-import { boardService } from "../services/board";
-import { filterBoard } from "../store/actions/board.actions";
-import { useSelector } from "react-redux";
-import { Checkbox, MenuItem, Select } from "@mui/material";
-import { HiMiniUserCircle } from "react-icons/hi2";
-import { makeId } from "../services/util.service";
+import { useState, useEffect } from 'react'
+import { boardService } from '../services/board'
+import { filterBoard } from '../store/actions/board.actions'
+import { useSelector } from 'react-redux'
+import { Checkbox, MenuItem, Select } from '@mui/material'
+import { HiMiniUserCircle } from 'react-icons/hi2'
+import { makeId } from '../services/util.service'
 
 export function BoardFilter() {
-  const [filterToEdit, setFilterToEdit] = useState(
-    boardService.getDefaultFilter()
-  );
-  const labels = useSelector((store) => store.boardModule.board.labels);
-  const { members } = useSelector((store) => store.boardModule.board);
-  const { groups } = useSelector((store) => store.boardModule.board);
-  console.log("groups:", groups);
+  const [filterToEdit, setFilterToEdit] = useState(boardService.getDefaultFilter())
+  const labels = useSelector(store => store.boardModule.board.labels)
+  const { members } = useSelector(store => store.boardModule.board)
 
-  console.log("members:", members);
   useEffect(() => {
-    filterBoard(filterToEdit);
-    setFilterToEdit(filterToEdit);
-  }, [filterToEdit]);
+    filterBoard(filterToEdit)
+    setFilterToEdit(filterToEdit)
+  }, [filterToEdit])
 
   function handleChange(ev) {
-    const type = ev.target.type;
-    const field = ev.target.name;
-    let value;
+    const type = ev.target.type
+    const field = ev.target.name
+    let value
 
     switch (type) {
-      case "text":
-      case "radio":
-      case "select-one":
-        value = field === "sortDir" ? +ev.target.value : ev.target.value;
-        if (!filterToEdit.sortDir) filterToEdit.sortDir = 1;
-        break;
-      case "number":
-        value = +ev.target.value || "";
-        break;
-      case "checkbox":
-        value = ev.target.checked;
-        break;
+      case 'text':
+      case 'radio':
+      case 'select-one':
+        value = field === 'sortDir' ? +ev.target.value : ev.target.value
+        if (!filterToEdit.sortDir) filterToEdit.sortDir = 1
+        break
+      case 'number':
+        value = +ev.target.value || ''
+        break
+      case 'checkbox':
+        value = ev.target.checked
+        break
     }
 
     setFilterToEdit({
       ...filterToEdit,
       [field]: value,
-    });
-  }
-
-  function clearFilter() {
-    setFilterToEdit({
-      ...filterToEdit,
-      txt: "",
-    });
+    })
   }
 
   function handlePopoverClick(ev) {
-    ev.stopPropagation();
+    ev.stopPropagation()
   }
 
   function handleChangeSelectMember(ev) {
-    const selectedMembers = ev.target.value;
+    const selectedMembers = ev.target.value
     setFilterToEdit({
       ...filterToEdit,
       selectMember: selectedMembers,
-    });
+    })
   }
 
   function handleChangeSelectLabel(ev) {
-    const name = ev.target.name;
-    const value = ev.target.checked;
+    const name = ev.target.name
+    const value = ev.target.checked
     if (value) {
       setFilterToEdit({
         ...filterToEdit,
         selectLabel: [...filterToEdit.selectLabel, name],
-      });
+      })
     } else {
-      const idx = filterToEdit.selectLabel.findIndex((label) => label === name);
-      filterToEdit.selectLabel.splice(idx, 1);
+      const idx = filterToEdit.selectLabel.findIndex(label => label === name)
+      filterToEdit.selectLabel.splice(idx, 1)
       setFilterToEdit({
         ...filterToEdit,
         selectLabel: filterToEdit.selectLabel,
-      });
+      })
     }
   }
-  console.log("labels:", labels);
-  const countMembers = filterToEdit.selectMember.length || 0;
+  const countMembers = filterToEdit.selectMember.length || 0
   return (
-    <section className="board-filter" onClick={handlePopoverClick}>
-      <h3 className="header">Filter</h3>
+    <section className='board-filter' onClick={handlePopoverClick}>
+      <h3 className='header'>Filter</h3>
       <h3>Keyword</h3>
       <input
-        type="text"
-        name="txt"
+        type='text'
+        name='txt'
         value={filterToEdit.txt}
-        placeholder="Enter a keyword"
+        placeholder='Enter a keyword'
         onChange={handleChange}
         required
       />
-      <div className="actions-members">
+      <div className='actions-members'>
         <h3>Members</h3>
         <label>
           <input
-            type="checkbox"
-            name="noMembers"
+            type='checkbox'
+            name='noMembers'
             value={filterToEdit.noMembers}
             onChange={handleChange}
           />
           <span>
             <HiMiniUserCircle
               style={{
-                height: "24px",
-                width: "24px",
-                marginTop: "5px",
+                height: '24px',
+                width: '24px',
+                marginTop: '5px',
               }}
             />
-          </span>{" "}
+          </span>{' '}
           No members
         </label>
 
         <Select
-          className="select-input"
-          name="selectMember"
+          className='select-input'
+          name='selectMember'
           onChange={handleChangeSelectMember}
           value={filterToEdit.selectMember}
           renderValue={() => `${countMembers} members select`}
-          multiple
-        >
-          {members.map((member) => (
+          multiple>
+          {members.map(member => (
             <MenuItem key={member._id} value={member._id}>
-              <Checkbox
-                checked={filterToEdit.selectMember?.includes(member._id)}
-              />
+              <Checkbox checked={filterToEdit.selectMember?.includes(member._id)} />
               {member.fullname}
             </MenuItem>
           ))}
         </Select>
       </div>
-      <div className="actions">
+      <div className='actions'>
         <h3>Due date</h3>
         <label>
           <input
-            type="checkbox"
-            name="noDueDate"
+            type='checkbox'
+            name='noDueDate'
             value={filterToEdit.noDueDate}
             onChange={handleChange}
           />
@@ -149,23 +133,23 @@ export function BoardFilter() {
         </label>
       </div>
 
-      <div className="actions">
+      <div className='actions'>
         <h3 style={{ gridRow: 1, gridColumn: 1 }}>Labels</h3>
         <label>
           <input
-            type="checkbox"
-            name="noLabels"
+            type='checkbox'
+            name='noLabels'
             value={filterToEdit.noLabels}
             onChange={handleChange}
           />
           No labels
         </label>
 
-        <div className="select-labels">
-          {labels?.map((label) => (
-            <div className="label-filter" key={label.id}>
+        <div className='select-labels'>
+          {labels?.map(label => (
+            <div className='label-filter' key={label.id}>
               <input
-                type="checkbox"
+                type='checkbox'
                 name={label.color}
                 onChange={handleChangeSelectLabel}
               />
@@ -174,16 +158,15 @@ export function BoardFilter() {
                 key={label.id}
                 style={{
                   backgroundColor: label.color,
-                }}
-              >
-                {label.title || ""}
+                }}>
+                {label.title || ''}
               </label>
             </div>
           ))}
         </div>
       </div>
     </section>
-  );
+  )
 }
 {
   /* <h3>Sort:</h3>

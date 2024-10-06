@@ -38,12 +38,10 @@ export function TaskPreview({
 
     const data = ev.dataTransfer.getData("text");
     const currDraggedMemberId = data;
-    console.log(data);
 
     const draggedMember = board.members.find(
       (member) => member._id === currDraggedMemberId
     );
-    console.log(draggedMember);
 
     if (
       !draggedMember ||
@@ -56,7 +54,6 @@ export function TaskPreview({
       ? [...task.members, draggedMember]
       : [draggedMember];
 
-    console.log(membersToUpdate);
     setMembers(membersToUpdate);
     onUpdated("members", membersToUpdate);
   }

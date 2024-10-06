@@ -9,6 +9,7 @@ import {
   ADD_BOARD_MSG,
   SET_FILTER,
   SET_LOADING,
+  SET_FILTER_BOARDS,
 } from '../reducers/board.reducer'
 
 export async function loadBoards(filterBy = {}) {
@@ -83,8 +84,13 @@ export async function addBoardMsg(boardId, txt) {
   }
 }
 
+export function filterBoards(filterBy) {
+  console.log('filterBy:', filterBy)
+  return store.dispatch({ type: SET_FILTER_BOARDS, filterBy })
+}
+
 export function filterBoard(filterBy) {
-  store.dispatch({ type: SET_FILTER, filterBy })
+  return store.dispatch({ type: SET_FILTER, filterBy })
 }
 
 // Command Creators:
