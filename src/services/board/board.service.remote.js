@@ -227,7 +227,7 @@ function getEmptyBoard() {
     title: '',
     isStarred: false,
     // archivedAt: 0,
-    createdBy: userService.getLoggedinUser(),
+    // createdBy: userService.getLoggedinUser(),
     style: {
       backgroundImage: '',
       backgroundColor: '',

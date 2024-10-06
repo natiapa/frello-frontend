@@ -39,15 +39,12 @@ async function update({ _id, score }) {
 }
 
 async function googleLogin(credential) {
-    console.log('credential:', credential)
     const user = await httpService.post('auth/google', { token: credential })
+    if (user) console.log('user:', user)
     if (user) return saveLoggedinUser(user)
 }
 
 async function login(userCred) {
-    // if (userCred.fullname === "yana") userCred.imgUrl = "https://res.cloudinary.com/dmdgdpxtu/image/upload/v1726413924/WhatsApp_Image_2024-08-28_at_23.31.20_dwuw0l.jpg"
-    // if (userCred.fullname === "avi") userCred.imgUrl = "https://res.cloudinary.com/dmdgdpxtu/image/upload/v1726415721/WhatsApp_Image_2024-09-15_at_18.54.43_jkgmah.jpg"
-    // if (userCred.fullname === "natia") userCred.imgUrl = "https://res.cloudinary.com/dmdgdpxtu/image/upload/v1726415931/WhatsApp_Image_2024-09-15_at_18.55.20_atp7ne.jpg"
     console.log('userCred:', userCred)
     const user = await httpService.post('auth/login', userCred)
     if (user) return saveLoggedinUser(user)
@@ -58,7 +55,6 @@ async function signup(userCred) {
     if (!userCred.imgUrl)
         userCred.imgUrl =
             'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
-    // if (userCred.username === 'natia') userCred.imgUrl = '../../assets/imgs/natia.png'
     userCred.score = 10000
     userCred.isAdmin = true
 

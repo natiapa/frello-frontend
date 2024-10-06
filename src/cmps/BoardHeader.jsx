@@ -151,6 +151,10 @@ export function BoardHeader({
         data-name='filter'
         onClick={handleFilterClick}
         style={{
+          padding: '6px 12px',
+          backgroundColor: isClearFilter ? '#f4f5f7' : 'transparent',
+          color: isClearFilter ? '#172b4d' : '#fff',
+          borderRadius: '3px',
           gridColumn: '2',
         }}>
         <p>
@@ -172,8 +176,13 @@ export function BoardHeader({
           )}
         </p>
         {isClearFilter && (
-          <button className='btn-clear' onClick={clearFilter}>
-            Clear
+          <button
+            className='btn-clear'
+            style={{
+              color: '#172b4d',
+            }}
+            onClick={clearFilter}>
+            Clear all
           </button>
         )}
       </div>
@@ -188,18 +197,18 @@ export function BoardHeader({
           }}>
           {members.map((member, idx) => (
             <li
-              key={member._id}
-              id={member._id}
+              key={member?._id}
+              id={member?._id}
               className='member'
               draggable={true}
               onDragStart={ev => drag(ev)}
               style={{
                 gridColumn: `${idx + 1}`,
                 marginLeft: idx * -0.1 + 'px',
-                zIndex: members.length - idx,
+                zIndex: members?.length - idx,
                 borderRadius: '50%',
-                backgroundImage: member.imgUrl ? `url(${member.imgUrl})` : 'none',
-                backgroundColor: !member.imgUrl ? member.color : 'transparent',
+                backgroundImage: member?.imgUrl ? `url(${member?.imgUrl})` : 'none',
+                backgroundColor: !member?.imgUrl ? member?.color : 'transparent',
                 backgroundSize: 'cover',
               }}></li>
           ))}
