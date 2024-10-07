@@ -71,7 +71,7 @@ Check out the live version of the project [here](https://frello-lion.onrender.co
 This project was developed collaboratively by:
 - [Yana Pletner](https://github.com/YanaPletner)
 - [Avi Friedman](https://github.com/avi-friedman-IL)
-- [Nati Apa](https://github.com/natiapa)
+- [Natia Cohen](https://github.com/natiapa)
 
 
 ## React + Vite
