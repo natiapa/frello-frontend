@@ -23,7 +23,20 @@ Frello is an interactive and user-friendly project management application inspir
 
 - Node.js installed on your machine.
 - A package manager like npm or yarn.
+  
 
+## Technologies and Libraries Used
+
+- React
+- Redux
+- SCSS for styling
+- Socket.IO for real-time updates
+- Axios for API requests
+- Vite for fast development
+- Date pickers: `react-datepicker`, `react-day-picker`
+- `styled-components` for component-level styling
+- `react-beautiful-dnd` for drag-and-drop functionality
+- 
 ### Installation
 
 1. Clone the repository:
