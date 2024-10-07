@@ -36,7 +36,7 @@ Frello is an interactive and user-friendly project management application inspir
 - Date pickers: `react-datepicker`, `react-day-picker`
 - `styled-components` for component-level styling
 - `react-beautiful-dnd` for drag-and-drop functionality
-- 
+  
 ### Installation
 
 1. Clone the repository:
